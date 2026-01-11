@@ -1,5 +1,5 @@
 ---
-description: 이 페이지에서는 MiniLibX와 함께 사용할 수 있는 몇 가지 Hook 예시를 보여드립니다.
+description: "이 페이지에서는 MiniLibX와 함께 사용할 수 있는 몇 가지 Hook 예시를 보여드립니다."
 ---
 
 # MiniLibX Hook 예시

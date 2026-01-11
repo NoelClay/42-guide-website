@@ -1,5 +1,5 @@
 ---
-description: 이 페이지에서는 Header 파일에서 사용되는 몇 가지 개념을 설명합니다.
+description: "이 페이지에서는 Header 파일에서 사용되는 몇 가지 개념을 설명합니다."
 ---
 
 # 🏁 Header 파일

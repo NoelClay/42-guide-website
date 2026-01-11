@@ -1,5 +1,5 @@
 ---
-description: 숫자를 정렬하게 만드는 프로젝트
+description: "숫자를 정렬하게 만드는 프로젝트"
 ---
 
 # push\_swap

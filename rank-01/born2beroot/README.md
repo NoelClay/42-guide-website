@@ -1,5 +1,5 @@
 ---
-description: 이 프로젝트의 목표는 "Virtual Box"를 사용하여 Virtual Machine을 생성하는 것입니다.
+description: "이 프로젝트의 목표는 \"Virtual Box\"를 사용하여 Virtual Machine을 생성하는 것입니다."
 ---
 
 # Born2beRoot
