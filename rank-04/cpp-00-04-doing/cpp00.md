@@ -1,12 +1,12 @@
 # CPP00
 
-This CPP module is here to make you learn the basics of C++ and the main principles of this programming language.
+이 CPP 모듈은 C++의 기본 사항과 이 프로그래밍 언어의 주요 원칙들을 학습하도록 돕기 위해 존재합니다.
 
-I'll do my best to guide you through every topics that is mentioned in this module.
+이 모듈에서 언급된 모든 주제에 대해 최선을 다해 안내해 드리겠습니다.
 
-### Main topics
+### 주요 주제
 
-Let's go over the main topics that are present on the first page of the subject :
+주제의 첫 페이지에 있는 주요 내용들을 살펴보겠습니다:
 
 ```
 Namespaces, classes, member functions, stdio streams,
@@ -16,18 +16,18 @@ stuff
 
 ### Namespaces
 
-A namespace is a way to scope a variable / method or anything else in your code.
+Namespace는 코드 내의 변수/메서드 또는 기타 모든 요소의 범위를 지정하는 방법입니다.
 
-Let's take a look at a simple example using a namespace in two different ways.
+두 가지 다른 방식으로 Namespace를 사용하는 간단한 예시를 살펴보겠습니다.
 
 ```cpp
 #include <iostream>
 using namespace std; 
-// this line sets the namespace to std
-// this means that we don't have to write std:: before 
-// using any of the functions / variables in the iostream header
+// 이 줄은 namespace를 std로 설정합니다.
+// 이는 iostream 헤더에 있는 함수/변수를 사용하기 전에 
+// std::를 작성할 필요가 없음을 의미합니다.
 
-// this code is an example of using a namespace globally
+// 이 코드는 namespace를 전역적으로 사용하는 예시입니다.
 int main(void)
 {
     cout << "Hello World!" << endl;
@@ -37,11 +37,11 @@ int main(void)
 
 ```cpp
 #include <iostream>
-// notice that this time we don't add the 
+// 이번에는 
 // using namespace std;
-// line
+// 줄을 추가하지 않았다는 점에 유의하십시오.
 
-// this code does exactly the same thing as the one above
+// 이 코드는 위 코드와 정확히 동일하게 작동합니다.
 int main(void)
 {
     std::cout << "Hello World!" << std::endl;
@@ -49,7 +49,7 @@ int main(void)
 }
 ```
 
-Those are two simple cases, to show you the difference between using a namespace globally and not using a namespace. In this case, that is not very interesting but take a look at the following code.
+이 두 가지는 Namespace를 전역적으로 사용하는 경우와 사용하지 않는 경우의 차이점을 보여주는 간단한 예시입니다. 이 예시 자체는 크게 흥미롭지 않지만, 다음 코드를 살펴보십시오.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -73,21 +73,19 @@ class SecondClass:
 
 int main(void)
 {
-    // now if you want to call the print function, you'll have to specify a namespace
-    // the namespace will correspond to the class of the print function 
-    // you want to call
-    // for example, to call the print(void) function, you'll have to write the following
+    // 이제 print 함수를 호출하려면 namespace를 명시해야 합니다.
+    // 이 namespace는 호출하고자 하는 print 함수의 class에 해당합니다.
+    // 예를 들어, print(void) 함수를 호출하려면 다음과 같이 작성해야 합니다.
     SecondClass::print(void);
-    // and if you want to call the print(std::string txt) function
+    // 그리고 print(std::string txt) 함수를 호출하려면 다음과 같이 작성합니다.
     FirstClass::print("My text");
     
-    // if you try to do the following
+    // 만약 다음과 같이 시도한다면
     FirstClass::print(void);
-    // it will not work, since the function FirstClass::print(void) does not
-    // exist in the FirstClass namespace
-    // the same goes for this
+    // 이 함수는 FirstClass namespace에 존재하지 않으므로 작동하지 않을 것입니다.
+    // 다음 코드도 마찬가지입니다.
     SecondClass::print("Text");
-    // for the same reason
+    // 이유는 동일합니다.
     
     return (0);
 }
@@ -95,50 +93,50 @@ int main(void)
 {% endcode %}
 
 {% hint style="warning" %}
-Note that the above code will not compile, but it gives you an idea.
+참고: 위의 코드는 컴파일되지 않지만, 개념을 이해하는 데 도움이 될 것입니다.
 {% endhint %}
 
-You can have multiple functions having the same name, then you can specify a namespace to call the correct function.
+동일한 이름을 가진 여러 함수를 가질 수 있으며, 이 경우 올바른 함수를 호출하기 위해 Namespace를 명시할 수 있습니다.
 
-Go search some the internet for more information and try to build small C++ projects to understand how it works precisely.
+인터넷에서 더 많은 정보를 검색하고 작은 C++ 프로젝트를 구축하여 이것이 정확히 어떻게 작동하는지 이해하도록 노력해 보십시오.
 
-Source: [https://learn.microsoft.com/en-us/cpp/cpp/namespaces-cpp?view=msvc-170](https://learn.microsoft.com/en-us/cpp/cpp/namespaces-cpp?view=msvc-170)
+출처: [Microsoft의 C++ Namespace 설명](https://learn.microsoft.com/en-us/cpp/cpp/namespaces-cpp?view=msvc-170)
 
 ### Constructor functions & initialization lists
 
-A constructor function is a special method inside a class that is automatically called whenever you create a new object of the class.
+Constructor function은 Class 내부에 있는 특별한 메서드로서, 해당 Class의 새 `object`를 생성할 때마다 자동으로 호출됩니다.
 
-A simple constructor could be implemented like this:
+간단한 Constructor는 다음과 같이 구현할 수 있습니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
-class Class {     // The class
-  public:           // Access specifier
+class Class {     // Class
+  public:           // 접근 지정자 (Access specifier)
     Class() {     // Constructor
       std::cout << "Hello World!";
     }
 };
 
 int main() {
-  Class Obj;    // Create an object of Class, this will automatically call the constructor
+  Class Obj;    // Class의 object를 생성합니다. 이렇게 하면 constructor가 자동으로 호출됩니다.
   return 0;
 }
 ```
 {% endcode %}
 
 {% hint style="warning" %}
-A constructor always has the same name as the class itself and does not return anything.
+Constructor는 항상 Class 자체와 동일한 이름을 가지며 아무것도 반환하지 않습니다.
 {% endhint %}
 
-Let's take another example.
+다른 예시를 살펴보겠습니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
 class Car
 {
     public:
-        Car(); // Constructor declaration
-        Car(std::string pbrand, std::string pmodel, int pyear); // second constructor
+        Car(); // Constructor 선언
+        Car(std::string pbrand, std::string pmodel, int pyear); // 두 번째 constructor
         std::string brand;
         std::string model;
         int year;
@@ -162,11 +160,11 @@ Car::Car(std::string pbrand, std::string pmodel, int pyear)
 }
 
 int main() {
-  // Create Car objects and call the constructor with different values
+  // Car object들을 생성하고 다른 값으로 constructor를 호출합니다.
   Car car1();
   Car car2("Ford", "Mustang", 1969);
 
-  // Print values
+  // 값 출력
   std::cout << car1.brand << " " << car1.model << " " << car1.year << std::endl;
   std::cout << car2.brand << " " << car2.model << " " << car2.year << std::endl;
   return 0;
@@ -174,15 +172,15 @@ int main() {
 ```
 {% endcode %}
 
-In the main function, both car will be created as car objects, but one of them will directly have all the properties set to correct values, the other one will have default values.
+`main` 함수에서 두 `car` 모두 `Car object`로 생성되지만, 그중 하나는 모든 속성이 올바른 값으로 직접 설정되고, 다른 하나는 기본값으로 설정될 것입니다.
 
-Since the constructor functions are called when you create a new object of a specific class, you could specify some default values to be set directly in the constructor so you're sure they are correct when you try to use them.
+Constructor function은 특정 Class의 새 `object`를 생성할 때 호출되므로, Constructor 내에서 직접 설정될 기본값을 지정할 수 있습니다. 이렇게 하면 사용하려고 할 때 해당 값들이 올바르다는 확신을 가질 수 있습니다.
 
-These are constructors that I used in one of the modules:
+다음은 제가 모듈 중 하나에서 사용했던 Constructor들입니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
-// Default constructor, everything is set by the callee
+// 기본 constructor, 모든 값은 호출자에 의해 설정됩니다.
 ClapTrap::ClapTrap(void) : _name("Default"), _hp(10), _ep(10), _ad(0)
 {
 	std::cout << "Default ClapTrap constructor called for ";
@@ -191,7 +189,7 @@ ClapTrap::ClapTrap(void) : _name("Default"), _hp(10), _ep(10), _ad(0)
 	return ;
 }
 
-// Named constructor, other values are set by the callee
+// 이름이 지정된 constructor, 다른 값들은 호출자에 의해 설정됩니다.
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0)
 {
 	std::cout << "Named ClapTrap constructor called for ";
@@ -200,7 +198,7 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0)
 	return ;
 }
 
-// Full constructor, everything is set by the caller
+// 전체 constructor, 모든 값은 호출자에 의해 설정됩니다.
 ClapTrap::ClapTrap(std::string name, uint hp, uint ep, uint ad) : _name(name), _hp(hp), _ep(ep), _ad(ad)
 {
 	std::cout << "Full ClapTrap Constructor called for ";
@@ -213,11 +211,11 @@ ClapTrap::ClapTrap(std::string name, uint hp, uint ep, uint ad) : _name(name), _
 ```
 {% endcode %}
 
-Why is there a semi-colon and properties name after the constructor parameters ?&#x20;
+왜 Constructor 매개변수 뒤에 세미콜론과 속성 이름이 붙어 있을까요?
 
-Well, there another term that is related to constructor functions : `initialization lists`.
+여기에 Constructor function과 관련된 또 다른 용어인 `initialization lists`가 있습니다.
 
-These are initialization lists, what it does is set the class attribute based on the value between the parentheses.
+이것이 바로 `initialization lists`이며, 괄호 안의 값을 기반으로 Class 속성을 설정하는 역할을 합니다.
 
 {% code overflow="wrap" %}
 ```cpp
@@ -225,7 +223,7 @@ ClapTrap::ClapTrap(std::string name, uint hp, uint ep, uint ad) : _name(name), _
 ```
 {% endcode %}
 
-This line is equivalent to the following code.
+이 줄은 다음 코드와 동일합니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -239,13 +237,13 @@ ClapTrap::ClapTrap(std::string name, uint hp, uint ep, uint ad)
 ```
 {% endcode %}
 
-It's an easier and better way to assign values inside the constructor function.
+이것은 Constructor function 내에서 값을 할당하는 더 쉽고 더 나은 방법입니다.
 
 ### Classes
 
-If you didn't read the **w3schools** C++ introduction guide linked above, go ahead and read it, there's a lot of detailed information about classes since it's a central part of C++ and OOP.
+위에 연결된 **w3schools** C++ 소개 가이드를 읽지 않았다면, 지금 가서 읽어보십시오. `Class`는 C++ 및 `OOP`의 핵심 부분이므로 이에 대한 많은 상세 정보가 있습니다.
 
-Here I'll give you the file structure of this module. 42 Norm and C++ good practices will make you have something looking like this for every C++ project you'll build.
+여기서는 이 모듈의 파일 구조를 보여드리겠습니다. 42 Norm과 C++ 모범 사례를 따르면 여러분이 만들 모든 C++ 프로젝트에서 다음과 유사한 구조를 갖게 될 것입니다.
 
 ```
 cpp00/
@@ -260,14 +258,14 @@ cpp00/
 │  ├─ Contact.hpp
 ```
 
-What you'll have at the end of projects using classes, is an `hpp` file containing the class definition, and a corresponding `cpp` file containing the class declaration.
+`Class`를 사용하는 프로젝트를 완성하면, Class 정의를 포함하는 `hpp` 파일과 그에 해당하는 Class 선언을 포함하는 `cpp` 파일을 가지게 될 것입니다.
 
 ### Member functions
 
-Member functions are operators or functions declared as members of a class.\
-In the code example for the [Namespaces](cpp00.md#namespaces), both `print` functions are member functions.
+Member function은 Class의 멤버로 선언된 `operator` 또는 함수입니다.
+[Namespaces](cpp00.md#namespaces)의 코드 예시에서 두 `print` 함수 모두 `Member function`입니다.
 
-You could have more than that, take a look at the following class declaration (it might be a bit scary now, but it's actually pretty simple):
+이보다 더 많은 `Member function`을 가질 수 있습니다. 다음 `Class` 선언을 살펴보십시오 (지금은 다소 복잡해 보일 수 있지만 실제로는 아주 간단합니다).
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -297,4 +295,4 @@ class	Bureaucrat
 ```
 {% endcode %}
 
-In this example, you can see that there are 9 member functions, 4 constructor functions, 1 destructor function and 1 operator member.
+이 예시에서는 9개의 `Member function`, 4개의 `Constructor function`, 1개의 `Destructor function`, 그리고 1개의 `operator member`가 있음을 확인할 수 있습니다.

@@ -1,24 +1,24 @@
 # CPP05
 
-### Main topics
+### 주요 주제
 
 ```
-Repetition and Exceptions (try, throw & catch
+반복문과 예외 (try, throw & catch)
 ```
 
-In this module, you'll learn how to create exceptions and then use them in your code.&#x20;
+이 모듈에서는 Exception을 생성하고 코드에서 사용하는 방법을 배우게 됩니다.
 
-First, let's talk FOOD (because i'm hungry): **Imagine you're baking a cake.**
+먼저, (배가 고프니) 음식 이야기를 해봅시다: **케이크를 굽는 상황을 상상해 보세요.**
 
-1. **Mixing Bowl:** This is where you combine ingredients, like mixing flour, eggs, and sugar. When you're blending things together, sometimes a small mistake can happen.
-2. **Eggshell:** If you accidentally drop an eggshell into your mix, you wouldn't want it in your cake, right? So, you remove the eggshell to keep the cake perfect. Similarly, in code, when something unexpected occurs, you "throw away" the issue by sending an error message.
-3. **Safety Net:** Now, picture having a safety net under your mixing bowl. If an eggshell falls in (an error occurs), the safety net catches it. Then you can decide what to do with the eggshell, like discarding it or acknowledging the mistake. In code, the safety net is like the "catch" block, helping you handle unexpected problems that occur during your program's execution.
+1.  **믹싱 볼(Mixing Bowl):** 밀가루, 계란, 설탕 등의 재료를 섞는 곳입니다. 재료를 섞는 동안 작은 실수가 발생할 수 있습니다.
+2.  **계란 껍데기(Eggshell):** 실수로 믹스에 계란 껍데기가 떨어졌다면, 케이크에 남아있는 것을 원하지 않으실 겁니다. 따라서 완벽한 케이크를 위해 계란 껍데기를 제거합니다. 이와 유사하게, 코드에서 예상치 못한 일이 발생하면 오류 메시지를 보내 문제를 '던져버립니다(throw away)'.
+3.  **안전망(Safety Net):** 이제 믹싱 볼 아래에 안전망이 있다고 상상해 보세요. 만약 계란 껍데기가 떨어지면(오류 발생), 안전망이 그것을 잡아냅니다. 그러면 그 계란 껍데기를 버리거나 실수를 인지하는 등 어떻게 처리할지 결정할 수 있습니다. 코드에서 안전망은 'catch' 블록과 같으며, 프로그램 실행 중 발생하는 예상치 못한 문제를 처리하는 데 도움을 줍니다.
 
-The metaphor may be a bit lame, but we're going to do exactly the same thing (well... almost) in C++.&#x20;
+이 비유가 다소 어설플 수도 있지만, C++에서는 정확히 똑같은 일(음... 거의 비슷하게)을 할 것입니다.
 
-Let's take a very easy example and see step by step what it does to better understand these new concepts :)
+이러한 새로운 개념들을 더 잘 이해하기 위해 매우 쉬운 예시를 단계별로 살펴보겠습니다 :)
 
-Here we have :
+다음 코드를 확인해 보세요:
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -37,7 +37,7 @@ int main() {
     {
         if (divisor == 0) 
         {
-            throw "Division by zero is not allowed!";  // Throw an exception
+            throw "Division by zero is not allowed!";  // Exception을 던집니다.
         }
 
         result = dividend / divisor;
@@ -53,24 +53,18 @@ int main() {
 ```
 {% endcode %}
 
-The code consists of **three main parts**. The "try" (miying bowl), "throw" (eggshell) & "catch"(safety net) blocks:
+이 코드는 **세 가지 주요 부분**으로 구성되어 있습니다. 바로 "try" (믹싱 볼), "throw" (계란 껍데기), "catch" (안전망) 블록입니다:
 
-1. `try` block (l. 12-19): This is where you put code that might generate an exception. In this case, it checks if the divisor is zero, which would result in division by zero.
-2. `throw (l.16 && also 14-17)`: If a condition inside the `try` block is met (in this case, if `divisor` is zero), the program throws an exception. This means it raises an error message ("Division by zero is not allowed!").
-3. `catch` block: This block "catches" the exception if it's thrown. It's like a safety net that handles the error. In this code, it catches exceptions of type `const char*`, which is a pointer to a string (the error message).
+1.  `try` 블록 (12-19행): Exception을 발생시킬 수 있는 코드를 넣는 곳입니다. 이 경우, 나누는 수(divisor)가 0인지 확인하는데, 이는 0으로 나누는 결과를 초래합니다.
+2.  `throw (16행, 그리고 14-17행 전체)`: `try` 블록 내의 조건이 충족되면 (이 경우 `divisor`가 0인 경우), 프로그램은 Exception을 던집니다(throws). 이는 오류 메시지("Division by zero is not allowed!")를 발생시킨다는 의미입니다.
+3.  `catch` 블록: 이 블록은 Exception이 던져지면 이를 '잡아냅니다(catches)'. 이는 오류를 처리하는 안전망과 같습니다. 이 코드에서는 `const char*` 타입의 Exception을 잡는데, 이는 문자열(오류 메시지)을 가리키는 Pointer입니다.
 
-So, in simple terms, if you try to divide by zero (which is not allowed in math), the code throws an exception with the error message. The `catch` block then catches this exception and displays the error message.
+간단히 말해, 수학적으로 허용되지 않는 0으로 나누기를 시도하면, 코드는 오류 메시지와 함께 Exception을 던집니다. 그리고 `catch` 블록이 이 Exception을 잡아내서 오류 메시지를 표시합니다.
 
-If you enter valid numbers, the division is performed, and no exception is thrown. In this case, the code displays the result.
+유효한 숫자를 입력하면 나눗셈이 수행되고 Exception은 던져지지 않습니다. 이 경우, 코드는 결과를 표시합니다.
 
-This mechanism helps you gracefully handle errors and prevent your program from crashing when unexpected issues occur.
+이 메커니즘은 예상치 못한 문제가 발생했을 때 프로그램이 비정상적으로 종료되는 것을 방지하고 오류를 우아하게(gracefully) 처리하도록 돕습니다.
 
+그리고... 이것이 전부입니다. CPP05의 모든 과제는 Exception을 다루는 것에 관한 것입니다.
 
-
-And... that's about it. All CPP05 exercises are about playing with exceptions.
-
-
-
-**You'll also have to create your own exceptions**: class exceptions. It won't be too complicated, so I'll let you find the answer you to search on Internet. (Spoiler: the exception you create must inherit from the class... Exception ;-) )
-
-\
+여러분은 또한 자신만의 Exception, 즉 클래스 형태의 Exception을 생성해야 합니다. 이는 그리 복잡하지 않으므로, 인터넷에서 답을 검색해 보시기 바랍니다. (스포일러: 여러분이 생성하는 Exception은 ... Exception 클래스를 상속받아야 합니다 ;-) )

@@ -1,24 +1,22 @@
 # fprime
 
-### Subject
+### 주제
 
 ```
-Assignment name  : fprime
-Expected files   : fprime.c
-Allowed functions: printf, atoi
+과제 이름      : fprime
+예상 파일      : fprime.c
+허용 함수      : printf, atoi
 --------------------------------------------------------------------------------
 
-Write a program that takes a positive int and displays its prime factors on the
-standard output, followed by a newline.
+양의 int를 입력받아 해당 숫자의 소인수를 표준 출력(standard output)에 표시하고, 그 뒤에 개행 문자(newline)를 출력하는 프로그램을 작성하십시오.
 
-Factors must be displayed in ascending order and separated by '*', so that
-the expression in the output gives the right result.
+소인수들은 오름차순으로 표시되어야 하며, 출력된 식이 올바른 결과를 제공하도록 '*' 문자로 구분되어야 합니다.
 
-If the number of parameters is not 1, simply display a newline.
+매개변수(parameter)의 개수가 1개가 아니라면, 단순히 개행 문자만 표시하십시오.
 
-The input, when there is one, will be valid.
+입력 값이 존재하는 경우, 해당 입력은 유효한 값이라고 가정합니다.
 
-Examples:
+예시:
 
 $> ./fprime 225225 | cat -e
 3*3*5*5*7*11*13$
@@ -37,7 +35,7 @@ $
 $> ./fprime 42 21 | cat -e
 $
 ```
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 

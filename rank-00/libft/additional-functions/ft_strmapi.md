@@ -1,46 +1,46 @@
 # ft\_strmapi
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
-FT_STRMAPI() (simplified)
+FT_STRMAPI() (간소화)
 
 NAME
-    ft_strmapi -- apply a function to each character of a string
+    ft_strmapi -- 문자열의 각 문자에 함수를 적용합니다
 SYNOPSIS
     char *ft_strmapi(const char *s, char (*f)(unsigned int, char));
 DESCRIPTION
-    Apply the function 'f' to each characters in the string 's' to create a new string (with malloc(3)) resulting of the successive applications of 'f'.
+    함수 'f'를 문자열 's'의 각 문자에 적용하여 'f'를 연속적으로 적용한 결과로 새로운 문자열을 생성합니다 (malloc(3)을 사용합니다).
 PARAMETERS
-    s: string over which to iterate
-    f: function to apply to each character
+    s: 반복할 문자열
+    f: 각 문자에 적용할 함수
 RETURN VALUES
-    ft_strmapi() returns a new string resulting of the successive applications of 'f'; NULL if the memory allocations failed.
+    ft_strmapi()는 'f'를 연속적으로 적용한 결과인 새로운 문자열을 반환합니다. 메모리 할당에 실패하면 NULL을 반환합니다.
 AUTHORIZED EXTERNAL FUNCTIONS
     malloc(3)
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-This functions takes two parameters, the first one is a string, and the second one is a function.
+이 함수는 두 개의 매개변수를 받습니다. 첫 번째는 문자열이고, 두 번째는 함수입니다.
 
-What `ft_strmapi` does is apply the function `f` to every character of the string `s`.
+`ft_strmapi`가 하는 일은 문자열 `s`의 모든 문자에 함수 `f`를 적용하는 것입니다.
 
-It passes the index of the character in the string, and the character to the function `f`.
+문자열 내 문자의 인덱스와 해당 문자가 함수 `f`에 전달됩니다.
 
-The result of the function `f` is placed in the new string at index `i`.
+함수 `f`의 결과는 새로운 문자열의 인덱스 `i`에 위치하게 됩니다.
 
-At the end, we return the new string resulting of the application of `f` on every character of the string.
+마지막으로, 문자열의 모든 문자에 `f`를 적용하여 생성된 새로운 문자열을 반환합니다.
 
-### Hints
+### 힌트
 
-First, we have to allocate enough memory for the whole string plus one for the NUL-terminating character.
+먼저, 전체 문자열 길이에 NUL-terminating character를 위한 공간 하나를 더하여 충분한 메모리를 할당해야 합니다.
 
-Then we can loop over the string `s`, and call the function `f` on each character of `s`.
+그런 다음, 문자열 `s`를 순회하면서 `s`의 각 문자에 함수 `f`를 호출할 수 있습니다.
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -55,23 +55,23 @@ char *ft_strmapi(const char *s, char (*f)(unsigned int, char))
     unsigned int i;
     char *res;
     
-    /* allocating the memory for the new string */
+    /* 새로운 문자열을 위해 메모리를 할당합니다 */
     res = malloc((ft_strlen(s) + 1) * sizeof(char));
     if (!res)
         return (NULL);
     i = 0;
-    /* looping over the whole string s */
+    /* 전체 문자열 s를 순회합니다 */
     while (i < ft_strlen(s))
     {
-        /* applying the function f to each character of s
-         * and storing the result in the new string res
+        /* s의 각 문자에 함수 f를 적용하고
+         * 그 결과를 새로운 문자열 res에 저장합니다
          */
         res[i] = (*f)(i, s[i]);
         i++;
     }
-    /* setting the NUL-terminating character */
+    /* NUL-terminating character를 설정합니다 */
     res[i] = 0;
-    /* finally, we return res */
+    /* 마지막으로, res를 반환합니다 */
     return (res);
 }
 ```

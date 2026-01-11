@@ -1,3 +1,3 @@
-# webserv (to-do)
+# webserv (진행 예정)
 
-This project is here to make you write your own HTTP server. You will be able to test it with a real browser. HTTP is one of the most used protocol on internet. Knowing its arcane will be useful, even if you won't be working on a website.
+이 프로젝트는 여러분이 자신만의 HTTP server를 직접 작성하도록 돕기 위해 마련되었습니다. 여러분은 실제 browser를 사용하여 이를 테스트할 수 있습니다. HTTP는 인터넷에서 가장 많이 사용되는 protocol 중 하나입니다. 여러분이 웹사이트 관련 작업을 하지 않더라도, 이 protocol의 깊은 원리를 아는 것은 매우 유용할 것입니다.

@@ -1,91 +1,88 @@
 ---
 description: >-
-  You will have to realize a communication program in the form of a client and a
-  server.
+  클라이언트와 서버 형태로 통신 프로그램을 구현해야 합니다.
 ---
 
-# ▪️ Understand minitalk
+# ▪️ Minitalk 이해하기
 
-### Goal
+### 목표
 
 <details>
 
-<summary>Project-specific guidelines (2023)</summary>
+<summary>프로젝트별 지침 (2023)</summary>
 
-You must create a communication program in the form of a client and a server.
+Client와 Server 형태의 통신 프로그램을 생성해야 합니다.
 
-* The server must be started first. After its launch, it has to print its PID.
-* The client takes two parameters: 1) The server PID 2) The string to send.
-* The client must send the string passed as a parameter to the server. Once the string has been received, the server must print it.
-* The server has to display the string pretty quickly. Quickly means that if you think it takes too long, then it is probably too long.
-* Your server should be able to receive strings from several clients in a row without needing to restart.
-* The communication between your client and your server has to be done only using UNIX signals.
-* You can only use these two signals: SIGUSR1 and SIGUSR2.
+*   Server가 먼저 시작되어야 하며, 실행 후 자신의 PID를 출력해야 합니다.
+*   Client는 두 가지 인자를 받습니다. 1) Server의 PID 2) 보낼 문자열입니다.
+*   Client는 인자로 전달된 문자열을 Server로 전송해야 합니다. 문자열을 수신한 후, Server는 이를 출력해야 합니다.
+*   Server는 문자열을 상당히 빠르게 표시해야 합니다. '빠르게'란 만약 너무 오래 걸린다고 생각된다면, 그것은 아마도 너무 느린 것임을 의미합니다.
+*   Server는 재시작할 필요 없이 여러 Client로부터 연속적으로 문자열을 수신할 수 있어야 합니다.
+*   Client와 Server 간의 통신은 오직 UNIX Signals만을 사용하여 이루어져야 합니다.
+*   사용할 수 있는 Signal은 SIGUSR1과 SIGUSR2, 단 두 가지뿐입니다.
 
 </details>
 
-The goal of the Minitalk project is to develop a simple program that allows processes (= programs running on a computer) to communicate with each other using a communication protocol called "minitalk". It corresponds to the protocol that you need to code.
+Minitalk 프로젝트의 목표는 'minitalk'이라는 통신 프로토콜을 사용하여 Process(= 컴퓨터에서 실행되는 프로그램)들이 서로 통신할 수 있도록 하는 간단한 프로그램을 개발하는 것입니다. 이 프로토콜이 바로 여러분이 코딩해야 할 프로토콜에 해당합니다.
 
-The minitalk communication protocol involves sending messages between two processes using a series of signals over a single wire.&#x20;
+minitalk 통신 프로토콜은 단일 와이어를 통해 일련의 Signals를 사용하여 두 Process 사이에 메시지를 전송하는 것을 포함합니다.
 
-* One process, called the "speaker/client" sends the message by transmitting a series of signals over the wire.&#x20;
-* The other process, called the "listener/server" receives the message by interpreting the series of signals as a message.
-
-{% hint style="info" %}
-**Signals are a form of communication between processes** used by Unix-like systems (e.g. MacOS or Linux) and those respecting the POSIX standards. **Signals can be defined as a message**, an event or an interrupt. When a process receives a signal, the process will stop what its doing and **take some action**.\
-\
-In the context of the Minitalk project, signals are used to transmit messages between processes using the minitalk communication protocol.
-{% endhint %}
-
-I am a visual person, so I tried to make this diagram for you to understand better:
-
-<figure><img src="../../.gitbook/assets/minitalk_scheme.png" alt=""><figcaption><p>minitalk explanatory scheme</p></figcaption></figure>
-
-As we can see, we have a client that wants to send a message to the server. The "Hello" (message) cannot be sent directly to the server. The client has to encrypt the message and the server has to decrypt/interpret it before it can be displayed.
-
-I'll keep it general here and go into more detail in the "[Building the thing](building-the-thing.md)" section.
-
-
-
-### Processes & signals
+*   "화자/Client"라고 불리는 한 Process는 와이어를 통해 일련의 Signals를 전송함으로써 메시지를 보냅니다.
+*   "청자/Server"라고 불리는 다른 Process는 일련의 Signals를 메시지로 해석함으로써 메시지를 수신합니다.
 
 {% hint style="info" %}
-We are going to go a little further than what is asked in the subject, but it is to better understand later what you do.
+**Signals는 Process 간 통신의 한 형태**로, Unix 계열 시스템(예: MacOS 또는 Linux) 및 POSIX 표준을 준수하는 시스템에서 사용됩니다. **Signals는 메시지**, 이벤트 또는 인터럽트로 정의될 수 있습니다. Process가 Signal을 수신하면, 진행 중이던 작업을 멈추고 **특정 조치(action)를 취합니다.**
+
+Minitalk 프로젝트의 맥락에서, Signals는 minitalk 통신 프로토콜을 사용하여 Process 간 메시지를 전송하는 데 사용됩니다.
 {% endhint %}
 
-**Processes and signals are the most important terms to know in this project.** I've already explained a bit about them above, but you may not have fully understood them yet - let's take another simple example to understand these new concepts.
+저는 시각적인 것을 선호하므로, 여러분의 이해를 돕기 위해 이 다이어그램을 만들었습니다.
 
-As i said before, in computer science, a signal is a message that is sent to a process to indicate a particular event has occurred or to request a particular action to be taken. A process is a program that is being executed by the computer.
+<figure><img src="../../.gitbook/assets/minitalk_scheme.png" alt=""><figcaption><p>minitalk 설명 체계</p></figcaption></figure>
 
-Let's take a simple example:
+보시다시피, Server에게 메시지를 보내고자 하는 Client가 있습니다. 'Hello'(메시지)는 Server로 직접 전송될 수 없습니다. Client는 메시지를 암호화해야 하며, Server는 이를 표시하기 전에 복호화/해석해야 합니다.
 
-Imagine you have a program that is running on your computer. This program is Google Chrome running in the background on your computer. When you have multiple windows open on your browser, you have multiple programs running. These programs are called processes.
+여기서는 일반적인 내용만 다루고, 더 자세한 내용은 "[구현하기](building-the-thing.md)" 섹션에서 설명하겠습니다.
+
+### Process 및 Signal
+
+{% hint style="info" %}
+요구 사항보다 조금 더 깊이 들어가겠지만, 이는 여러분이 나중에 수행할 작업을 더 잘 이해하기 위함입니다.
+{% endhint %}
+
+**Process와 Signal은 이 프로젝트에서 알아야 할 가장 중요한 용어입니다.** 위에서 이미 이에 대해 조금 설명했지만, 아직 완전히 이해하지 못하셨을 수 있습니다. 이 새로운 개념들을 이해하기 위해 간단한 다른 예시를 들어보겠습니다.
+
+앞서 말씀드렸듯이, 컴퓨터 과학에서 Signal은 특정 이벤트가 발생했음을 알리거나 특정 조치를 취하도록 요청하기 위해 Process로 전송되는 메시지입니다. Process는 컴퓨터에 의해 실행되고 있는 프로그램입니다.
+
+간단한 예를 들어보겠습니다.
+
+컴퓨터에서 실행 중인 프로그램이 있다고 상상해 보세요. 이 프로그램은 여러분의 컴퓨터 백그라운드에서 실행 중인 Google Chrome입니다. 브라우저에 여러 창을 열면, 여러 프로그램이 실행되는 것입니다. 이 프로그램들을 Process라고 부릅니다.
 
 <figure><img src="../../.gitbook/assets/image (22).png" alt=""><figcaption></figcaption></figure>
 
-Now, suppose that you want to stop these program. You can do this by simply closing the browser window in question. Easy. Or by sending a signal to the process. **Remember: a signal is just telling a process to do a certain thing!**
+이제, 이 프로그램을 중지시키고 싶다고 가정해 봅시다. 해당 브라우저 창을 닫아 간단히 중지할 수 있습니다. 쉽죠. 또는 Process에 Signal을 전송하여 중지할 수도 있습니다. **기억하세요. Signal은 단지 Process에게 특정 작업을 수행하라고 지시하는 것일 뿐입니다!**
 
-Here, we want to close the windows. That will be the signal that we want to send to the processes.
+여기서 우리는 창을 닫고 싶습니다. 이것이 우리가 Process에 보내고자 하는 Signal이 될 것입니다.
 
-For this, you might use the "kill" command in a terminal window to send a signal to the processes. This signal tells the process to terminate itself. So in this example, the signal (the "kill" command) is used to request a particular action (termination of the process) to be taken.
+이를 위해 터미널 창에서 "kill" 명령어를 사용하여 Process에 Signal을 보낼 수 있습니다. 이 Signal은 Process에게 스스로 종료하라고 지시합니다. 따라서 이 예시에서 Signal('kill' 명령어)은 특정 조치(Process의 종료)를 취하도록 요청하는 데 사용됩니다.
 
-To send a signal to a certain process **you need the PID** of it. They will be useful, because that's how you will know which signal to send to which process. It's like a computerized version of our passports. Example on how to dit it:
+특정 Process에 Signal을 보내려면 **PID가 필요합니다.** 이는 어떤 Signal을 어떤 Process에 보내야 할지 알 수 있게 해 주므로 유용합니다. 이는 컴퓨터화된 여권과 같습니다. 예시는 다음과 같습니다.
 
 `kill <PID>`
 
-If you use the above command you will have to kill one process after the other. As they are all part of Chrome, you could also use a single command instead, which will close all running programs (processes) related to chrome.
+위 명령어를 사용하면 Process를 하나씩 'kill'해야 합니다. 모두 Chrome의 일부이므로, 대신 실행 중인 Chrome 관련 프로그램(Process)을 모두 닫는 단일 명령어를 사용할 수도 있습니다.
 
 `killall chrome`
 
 <details>
 
-<summary>To go a bit bit further</summary>
+<summary>좀 더 깊이 알아보기 위해</summary>
 
-If you are curious, you can find all the "Google Chrome" programs currently running on your computer by typing this command:&#x20;
+궁금하다면, 다음 명령어를 입력하여 현재 컴퓨터에서 실행 중인 모든 'Google Chrome' 프로그램을 찾을 수 있습니다.
 
 `ps -Af | grep chrome`
 
-It will pull up a list of all Chrome processes. A bit like that:
+그러면 다음과 같이 모든 Chrome Process 목록이 나타날 것입니다.
 
 ```
 1000      2706     1  2 23:01 ?        00:00:52 /usr/bin/google-chrome-stable
@@ -100,11 +97,10 @@ It will pull up a list of all Chrome processes. A bit like that:
 1000      4505  4441  0 23:40 pts/0    00:00:00 grep --color=auto chromebash
 ```
 
-_Note: if you did not open google chrome but you still see a line appearing, it is by the simple fact of having called it with the command above (grep chrome)_
+_참고: Google Chrome을 열지 않았는데도 한 줄이 나타난다면, 이는 위 명령어(grep chrome)로 호출했기 때문입니다._
 
-The second column will contain the process identifier (PID) of the processes. So 2706, 2713 or 2720, all correspond to the PID of a certain process.
+두 번째 열에는 Process의 Process Identifier (PID)가 포함됩니다. 따라서 2706, 2713 또는 2720은 모두 특정 Process의 PID에 해당합니다.
 
 </details>
 
-Well, I hope you now have a better understanding of the basic concept! Now let's move on to the last theoretical part. To achieve this project, you will have to understand and use [new functions](functions-used.md) that allow to manage these computer signals: signal(), sigemptyset(), sigaddset(), sigaction(), kill(), pause() and sleep().&#x20;
-
+이제 기본 개념에 대해 더 잘 이해하셨기를 바랍니다! 이제 마지막 이론적 부분으로 넘어가겠습니다. 이 프로젝트를 완수하기 위해, 여러분은 이러한 컴퓨터 Signal을 관리하는 데 사용되는 [새로운 함수](functions-used.md)들을 이해하고 사용해야 합니다: `signal()`, `sigemptyset()`, `sigaddset()`, `sigaction()`, `kill()`, `pause()`, 그리고 `sleep()` 입니다.

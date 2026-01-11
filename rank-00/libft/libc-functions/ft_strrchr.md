@@ -4,22 +4,22 @@
 
 {% code overflow="wrap" %}
 ```
-STRRCHR(3) (simplified)
+STRRCHR(3) (단순화됨)
 
 NAME
-    strrchr -- locate character in string
+    strrchr -- 문자열 내에서 문자 위치 찾기
 SYNOPSIS
     char *strrchr(const char *s, int c);
 DESCRIPTION
-    The strrchr() function is identical to strchr(), except it locates the last occurence of c.
+    strrchr() 함수는 strchr() 함수와 동일하지만, c의 '마지막' 출현 위치를 찾습니다.
 RETURN VALUES
-    The function strrchr() returns a pointer to the located character, or NULL if the character does not appear in the string.
+    strrchr() 함수는 찾은 문자에 대한 Pointer를 반환하거나, 문자열에 문자가 존재하지 않는 경우 NULL을 반환합니다.
 ```
 {% endcode %}
 
 ### Understandable explanation
 
-This function is fairly easy to understand, it does the same thing as `strchr()`, but locates the last occurence of c.
+이 함수는 이해하기 상당히 쉽습니다. `strchr()`과 동일하게 동작하지만, `c`의 '마지막' 출현 위치를 찾는다는 점만 다릅니다.
 
 ### Hints
 
@@ -27,16 +27,16 @@ This function is fairly easy to understand, it does the same thing as `strchr()`
 ```c
 char *ft_strrchr(const char *s, int c)
 {
-    /* we can use basically the same code as ft_strchr() but not returning
-     * the value as soon as we find the character, just setting a variable
-     * each time, and returning it at the end of the function
+    /* 기본적으로 ft_strchr()와 동일한 코드를 사용할 수 있지만, 
+     * 문자를 찾았을 때 즉시 값을 반환하지 않고,
+     * 매번 변수를 설정한 다음 함수 끝에서 해당 변수를 반환합니다.
      */
-    /* loop over the whole string */
-    /* check if current character is equal to the one we have to find */
-    /* once we looped over the whole string, check again for the character
-     * in case the character we have to find is '\0'
+    /* 전체 문자열을 반복합니다. */
+    /* 현재 문자가 찾아야 하는 문자와 동일한지 확인합니다. */
+    /* 전체 문자열을 반복한 후, 찾아야 하는 문자가 '\0'인 경우를 대비하여
+     * 해당 문자를 다시 확인합니다.
      */
-    /* if we didn't find c in the string, return NULL */
+    /* 문자열 내에서 c를 찾지 못했다면 NULL을 반환합니다. */
 }
 ```
 {% endcode %}
@@ -57,41 +57,37 @@ char *ft_strrchr(const char *s, int c)
     char *res;
     char cc;
     
-    /* we convert c to a char as we got it as an int */
+    /* c는 int 형태로 전달되었으므로, char로 변환합니다. */
     cc = (char) c;
-    /* we set res as NULL at the beginning so if we don't find 
-     * any occurence of c, the function will return NULL
+    /* c의 출현을 전혀 찾지 못하는 경우 함수가 NULL을 반환하도록 
+     * 처음에 res를 NULL로 설정합니다.
      */
     res = NULL;
     i = 0;
-    /* looping over the whole string s */
+    /* 전체 문자열 s를 반복합니다. */
     while (s[i])
     {
-         /* if the current character is equal to cc 
-         * this means we found an occurence of cc in the string
-         * therefore, we set res as the address of the character
+         /* 현재 문자가 cc와 같다면, 
+         * 문자열에서 cc의 출현 위치를 찾았다는 의미입니다.
+         * 따라서, 해당 문자의 주소로 res를 설정합니다.
          */
         if (s[i] == cc)
             res = (char *) &s[i];
-        /* we then advance in the string to search for another
-         * occurence of cc
-         */
+        /* 그런 다음, cc의 다른 출현 위치를 찾기 위해 문자열에서 다음으로 진행합니다. */
         i++;
     }
-    /* once we looped over the whole string, if we didn't find an
-     * occurence of cc, we have to check if cc is equal to '\0'
-     * so we check once again if the current character is equal to cc
-     * if this is the case, we set res as the address of the '\0' char
+    /* 전체 문자열을 반복한 후, cc의 출현을 찾지 못했더라도 
+     * cc가 '\0'과 같은지 확인해야 합니다.
+     * 따라서 현재 문자가 cc와 같은지 다시 한번 확인합니다.
+     * 이 경우, res를 '\0' 문자의 주소로 설정합니다.
      */
     if (s[i] == c)
         res = (char *) &s[i];
-    /* when we reach the end of the function, we return res
-     * since we looped over the whole string and set res as the address
-     * of the last occurence of c we found, this will return a pointer 
-     * to the last occurence of c
-     * and if we didn't find any occurence of c, since res was set to 
-     * NULL at the very beginning of the function, the function will
-     * return NULL
+    /* 함수 끝에 도달하면 res를 반환합니다.
+     * 전체 문자열을 반복하면서 찾은 c의 마지막 출현 위치 주소로 res를 설정했으므로, 
+     * 이 값은 c의 마지막 출현 위치를 가리키는 Pointer를 반환하게 됩니다.
+     * 만약 c의 출현을 찾지 못했다면, 함수 시작 시 res가 NULL로 설정되었으므로
+     * 함수는 NULL을 반환합니다.
      */
     return (res);
 }

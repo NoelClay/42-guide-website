@@ -1,21 +1,20 @@
 # last\_word
 
-### Subject
+### 주제
 
 ```
-Assignment name  : last_word
-Expected files   : last_word.c
-Allowed functions: write
+과제 이름  : last_word
+요구되는 파일   : last_word.c
+허용되는 함수: write
 --------------------------------------------------------------------------------
 
-Write a program that takes a string and displays its last word followed by a \n.
+문자열을 인수로 받아 그 문자열의 마지막 단어를 표시하고 그 뒤에 \n을 붙여 출력하는 프로그램을 작성하십시오.
 
-A word is a section of string delimited by spaces/tabs or by the start/end of
-the string.
+단어는 공백/탭 또는 문자열의 시작/끝에 의해 구분되는 문자열의 일부입니다.
 
-If the number of parameters is not 1, or there are no words, display a newline.
+매개변수의 개수가 1이 아니거나 단어가 없는 경우, 개행 문자(\n)를 표시합니다.
 
-Example:
+예시:
 
 $> ./last_word "FOR PONY" | cat -e
 PONY$
@@ -30,7 +29,7 @@ lorem,ipsum$
 $>
 ```
 
-### Commented solution
+### 주석 처리된 솔루션
 
 <details>
 
@@ -46,17 +45,16 @@ int main (int ac, char **a)
 	{
 		int i = 0;
 
-		// getting to the end of the string
+		// 문자열의 끝으로 이동합니다.
 		while (a[1][i])
 			i++;
 		i--;
-		// looping over the whole string backwards
-		// until we found a space
+		// 전체 문자열을 뒤에서부터 반복합니다.
+		// (단어가 끝나는) 공백을 찾을 때까지
 		while (a[1][i] > 32)
 			i--;
 		i++;
-		// getting back to the end and writing the last word to
-		// the screen
+		// 단어의 시작 부분(i)부터 끝까지 마지막 단어를 화면에 write 합니다.
 		while (a[1][i])
 		{
 			write(1, &a[1][i], 1);
@@ -67,7 +65,5 @@ int main (int ac, char **a)
 }
 ```
 {% endcode %}
-
-
 
 </details>

@@ -1,45 +1,45 @@
 # ft\_isascii
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
-ISASCII(3) (simplified)
+ISASCII(3) (단순화된 설명)
 
-NAME
-    isascii -- test for ASCII character
-SYNOPSIS
+이름
+    isascii -- ASCII 문자를 테스트합니다
+개요
     int isascii(int c)
-DESCRIPTION
-    The isascii() function tests for an ASCII character, which is any character between 0 and octal 0177 inclusive.
+설명
+    isascii() 함수는 ASCII 문자를 테스트합니다. 이는 0부터 8진수 0177(포함) 사이의 모든 문자입니다.
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-For this function, the man is self-explanatory, even though it doesn't tell you what the return values are...
+이 함수에 대해서는 man 페이지가 자체적으로 설명하고 있지만, 반환 값이 무엇인지는 명시되어 있지 않습니다.
 
-The `isascii()` function returns a non-zero value if the character passed as an `int` parameter is an ASCII character between 0 and octal 0177, this means characters between 0 and decimal 127, all characters displayed when you type the `man ascii` command.
+`isascii()` 함수는 `int` 매개변수로 전달된 문자가 0과 8진수 0177 사이의 ASCII 문자일 경우 0이 아닌 값을 반환합니다. 이는 0과 10진수 127 사이의 문자, 즉 `man ascii` 명령어를 입력할 때 표시되는 모든 문자를 의미합니다.
 
-If the character is not an ASCII character between 0 and octal 0177, the `isascii()` function return `0`.
+문자가 0과 8진수 0177 사이의 ASCII 문자가 아닌 경우, `isascii()` 함수는 `0`을 반환합니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_isascii.c" overflow="wrap" lineNumbers="true" %}
 ```c
 int    ft_isascii(int c)
 {
-    if (/* c is between 0 and decimal 127 */)
-        return (/* non-zero value of your choice */);
+    if (/* c가 0과 10진수 127 사이인지 확인 */)
+        return (/* 원하는 0이 아닌 값 */);
     return (0);
 }
 ```
 {% endcode %}
 
-### Commente solution
+### 주석이 달린 해답
 
 {% hint style="warning" %}
-This works mostly like the 3 other ones we built, there's a little catch though.
+이 함수는 저희가 만들었던 다른 세 함수와 대부분 비슷하게 작동하지만, 약간의 주의 사항이 있습니다.
 {% endhint %}
 
 <details>
@@ -52,11 +52,11 @@ This works mostly like the 3 other ones we built, there's a little catch though.
 
 int    ft_isascii(int c)
 {
-    /* checking if c is between 0 and decimal 127 */
+    /* c가 0과 10진수 127 사이에 있는지 확인합니다 */
     if (c >= 0 && c <= 127)
         return (1);
-    /* Note that I didn't return c for this one */
-    /* why ? if the value of c is 0, this function as to return a non-zero value too, so we can't return c */
+    /* 이번에는 c를 반환하지 않았다는 점에 유의하십시오 */
+    /* 왜냐하면? c의 값이 0인 경우에도 이 함수는 0이 아닌 값을 반환해야 하므로 c를 직접 반환할 수 없기 때문입니다 */
     return (0);
 }
 ```

@@ -1,6 +1,6 @@
 # \*ft\_strlen
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -17,13 +17,13 @@ int	ft_strlen(char *str);
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해설
 
 <details>
 
 <summary>ft_strlen</summary>
 
-I don't think I need to add any explanation, you know how this works, at least I hope so.
+저는 추가적인 설명을 덧붙일 필요가 없다고 생각합니다. 최소한 여러분이 이것이 어떻게 작동하는지 알고 있기를 바랍니다.
 
 {% code title="ft_strlen.c" overflow="wrap" lineNumbers="true" %}
 ```c

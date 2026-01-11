@@ -1,2 +1,1 @@
-# 🔗 Linked Lists (todo)
-
+# 🔗 Linked Lists (작성 예정)

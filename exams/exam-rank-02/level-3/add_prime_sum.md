@@ -1,6 +1,6 @@
 # add\_prime\_sum
 
-### Subject
+### 주제
 
 ```
 Assignment name  : add_prime_sum
@@ -27,9 +27,30 @@ $>./add_prime_sum | cat -e
 $>
 ```
 
-### Commented solution
+과제 이름: add_prime\_sum
+필수 파일: add\_prime\_sum.c
+허용 함수: write, exit
+--------------------------------------------------------------------------------
 
-There's actually nothing really complicated in the fact of making a simple addition between some numbers, the real challenge is to build the supportive function, hope you remember how to build an `atoi` function.
+양의 정수를 인자로 받아, 그 숫자보다 작거나 같은 모든 소수(prime number)들의 합을 출력하고 개행(newline)하는 프로그램을 작성하십시오.
+
+만약 인자의 개수가 1이 아니거나, 인자가 양의 정수가 아니라면, 단순히 0을 출력하고 개행합니다.
+
+예제는 정확합니다.
+
+예제:
+
+$>./add\_prime\_sum 5
+10
+$>./add\_prime\_sum 7 | cat -e
+17$
+$>./add\_prime\_sum | cat -e
+0$
+$>
+
+### 주석이 달린 해답
+
+사실 몇몇 숫자 사이에서 단순한 덧셈을 수행하는 작업 자체는 그리 복잡하지 않습니다. 진짜 도전 과제는 보조 함수를 구현하는 것입니다. `atoi` 함수를 어떻게 구현하는지 기억하시기를 바랍니다.
 
 <details>
 
@@ -65,17 +86,18 @@ void ft_putnbr(int nbr)
     ft_putchar(nb % 10 + '0');
 }
 
-// checking if a number is a prime number
+// 숫자가 소수인지 확인합니다.
 int is_prime(int nbr)
 {
-    // first prime number is 3, if nbr smaller than that we
-    // can return 0 to say it's not prime
+    // nbr이 2보다 작다면 (소수 여부를 확인하기 위해, 2는 첫 소수입니다)
     if (nbr < 2)
         return (0);
-    // checking all factors up until half nbr
-    // going over nbr/2 is useless, let's take an example
-    // nbr = 10; nbr/2 = 5; If we check for 3, checking for 6
-    // will give the same result
+    // 소수가 아니라는 의미로 0을 반환할 수 있습니다.
+    
+    // nbr의 절반까지 모든 약수를 확인합니다.
+    // nbr/2를 초과하여 확인하는 것은 불필요합니다. 예를 들어 보겠습니다.
+    // nbr = 10; nbr/2 = 5입니다. 만약 3을 확인했다면, 6을 확인하는 것은
+    // 동일한 결과를 줄 것입니다.
     int i = 2;
     while (i <= nbr / 2)
     {
@@ -86,7 +108,7 @@ int is_prime(int nbr)
     return (1);
 }
 
-// You know how this works
+// 이것이 어떻게 작동하는지 알고 계실 겁니다. (ft_atoi 함수입니다.)
 int ft_atoi(char *str)
 {
     int res = 0, sign = 1, i = 0;
@@ -114,10 +136,9 @@ int main(int ac, char **av)
     }
     int n = ft_atoi(av[1]);
     
-    // The following is the actual logic for add_prime_sum
-    // we check every number up until what's given via the
-    // command line and if the number is prime, we add it
-    // to the whole sum.
+    // 다음은 add_prime_sum의 실제 로직입니다.
+    // 커맨드 라인을 통해 주어진 숫자까지 모든 숫자를 확인하고,
+    // 해당 숫자가 소수(prime)라면, 전체 합계에 더합니다.
     int sum = 0;
     while (n > 1)
     {

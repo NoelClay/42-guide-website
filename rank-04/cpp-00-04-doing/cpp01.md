@@ -1,18 +1,18 @@
 # CPP01
 
-### Main topics
+### 주요 주제
 
-Let's go over the main topics that are present on the first page of the subject :
+과제의 첫 페이지에 포함된 주요 주제들을 살펴보겠습니다:
 
 ```
 Memory allocation, pointers to members, references, switch statement
 ```
 
-### Memory allocation
+### Memory allocation (메모리 할당)
 
-Remember that C++ basically is an extension of C, yeah so memory allocation also exists in C++. It's mainly not done in the same way as in C.
+C++는 기본적으로 C의 확장이라는 점을 기억해야 합니다. 따라서 C++에도 Memory allocation(메모리 할당)이 존재합니다. 다만, C에서 사용하는 방식과는 다소 차이가 있습니다.
 
-In C we have `malloc` and `free`, in C++ we have `new` and `delete`. Let's take an example comparing C and C++ since you already know C memory management pretty well.
+C에서는 `malloc`과 `free`를 사용하지만, C++에서는 `new`와 `delete`를 사용합니다. 여러분이 이미 C의 메모리 관리를 잘 알고 있으므로, C와 C++를 비교하는 예시를 살펴보겠습니다.
 
 {% code title="C Code" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -21,12 +21,12 @@ In C we have `malloc` and `free`, in C++ we have `new` and `delete`. Let's take 
 
 int main(void)
 {
-    int *ptr; // declare the pointer
+    int *ptr; // Pointer를 선언합니다.
     
-    ptr = malloc(sizeof(int)); // allocate the memory
-    *ptr = 45; // assign a value
-    printf("ptr value: %d\n", *ptr); // print the value
-    free(ptr); // deallocate the memory
+    ptr = malloc(sizeof(int)); // 메모리를 할당합니다.
+    *ptr = 45; // 값을 할당합니다.
+    printf("ptr value: %d\n", *ptr); // 값을 출력합니다.
+    free(ptr); // 메모리를 해제합니다.
     return (0);
 }
 ```
@@ -38,18 +38,18 @@ int main(void)
 
 int main(void)
 {
-    int *ptr; // declare the pointer
+    int *ptr; // Pointer를 선언합니다.
     
-    ptr = new int; // allocate memory
-    *ptr = 45 // assign a value
-    std::cout << "ptr value: " << *ptr << std::endl; // print the value
-    delete ptr; // deallocate memory
+    ptr = new int; // 메모리를 할당합니다.
+    *ptr = 45 // 값을 할당합니다.
+    std::cout << "ptr value: " << *ptr << std::endl; // 값을 출력합니다.
+    delete ptr; // 메모리를 해제합니다.
     return (0);
 }
 ```
 {% endcode %}
 
-In this case, both codes are exactly the same, now let's look at how you would do that for a dynamically allocated array.
+이 경우, 두 코드는 기능적으로 완전히 동일합니다. 이제 동적으로 배열을 할당하는 방법을 살펴보겠습니다.
 
 {% code title="C Code" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -81,13 +81,13 @@ int main(void)
 ```
 {% endcode %}
 
-### Pointers to members
+### Pointers to members (멤버 Pointer)
 
-First of all, what are pointers to members ?
+우선, Pointers to members란 무엇일까요?
 
-Remember that in C, we have pointers to variable and pointers to functions. These also exists in C++ but there's also 2 new pointer types in C++ to introduce the class concept into pointers.
+C에서는 변수를 가리키는 Pointer와 함수를 가리키는 Pointer가 있다는 것을 기억하실 겁니다. 이들은 C++에도 존재하지만, C++에서는 Class 개념을 Pointer에 도입하기 위해 두 가지 새로운 Pointer 타입이 추가되었습니다.
 
-I'll put down here the code example from the intra video on pointers to members.
+여기에 Pointers to members에 대한 인트라 영상의 코드 예시를 첨부합니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -96,67 +96,67 @@ I'll put down here the code example from the intra video on pointers to members.
 
 int main()
 {
-    Sample instance; // instance of Sample class on the stack
-    Sample *instancep = &instance; // pointer to the instance of Sample
+    Sample instance; // Sample Class의 instance를 Stack에 생성합니다.
+    Sample *instancep = &instance; // Sample의 instance를 가리키는 Pointer입니다.
 
-    int Sample::*p = NULL; // pointer to member attribute of Sample class
-    // adding the Sample:: specifies that it will point to a member attribute of the Sample class
-    void (Sample::*f)(void) const; // pointer to member function of Sample class
+    int Sample::*p = NULL; // Sample Class의 멤버 Attribute(속성)를 가리키는 Pointer입니다.
+    // Sample::을 추가하면 Sample Class의 멤버 Attribute를 가리킬 것임을 명시합니다.
+    void (Sample::*f)(void) const; // Sample Class의 멤버 함수를 가리키는 Pointer입니다.
     
-    p = &Sample::foo; // Setting Sample::*p to be the address of the foo member attribute
+    p = &Sample::foo; // Sample::*p를 foo 멤버 Attribute의 주소로 설정합니다.
     
     std::cout << "Value of member foo: " << instance.foo << std::endl;
-    instance.*p = 21; // this line sets the value of the member attribute pointed to by *p in the instance `instance` to 21
+    instance.*p = 21; // 이 줄은 `instance` Instance에서 *p가 가리키는 멤버 Attribute의 값을 21로 설정합니다.
 
     std::cout << "Value of member foo: " << instance.foo << std::endl;
-    instancep->*p = 42; // this line sets the value of the member attribute pointed to by *p in the instance pointed to by the `instancep` pointer
+    instancep->*p = 42; // 이 줄은 `instancep` Pointer가 가리키는 Instance에서 *p가 가리키는 멤버 Attribute의 값을 설정합니다.
     std::cout << "Value of member foo: " << instance.foo << std::endl;
     
     f = &Sample::bar;
     
-    (instance.*f)(); // calling the member function Bar in the instance `instance` of the Sample class
-    (instancep->*f)(); // same thing as above, but this time with a pointer to the instance
+    (instance.*f)(); // Sample Class의 `instance` Instance에서 멤버 함수 Bar를 호출합니다.
+    (instancep->*f)(); // 위와 동일하지만, 이번에는 Instance에 대한 Pointer를 사용합니다.
 }
 ```
 {% endcode %}
 
-#### .\* operator
+#### .\* operator (연산자)
 
-> Refers to line 16 in the above example
+> 위의 예시에서 16행을 참조합니다.
 
-We set `Sample::*p` to point to a member `foo` in the `Sample` class. The thing is, we could have multiple instances of the `Sample` class, so we have to specify on which instance we want to use the pointer by using the following syntax: `instance.*pointerToMemberAttribute`.
+우리는 `Sample::*p`가 `Sample` Class 내의 멤버 `foo`를 가리키도록 설정했습니다. 문제는 `Sample` Class의 Instance가 여러 개 있을 수 있으므로, 어떤 Instance에서 이 Pointer를 사용할지 다음 구문을 사용하여 명시해야 한다는 점입니다: `instance.*pointerToMemberAttribute`.
 
-This is because the `foo` member attribute can exist in multiple class instances.
+이는 `foo` 멤버 Attribute가 여러 Class Instance에 존재할 수 있기 때문입니다.
 
-#### - >\* operator
+#### ->\* operator (연산자)
 
-> Refers to line 19 in the above example
+> 위의 예시에서 19행을 참조합니다.
 
-Here we are not using the `Sample` instance directly anymore, we have to use the `->*` operator instead of the `.*` operator. It works exactly the same way but it adds a level of dereference in between.
+여기서는 `Sample` Instance를 직접 사용하지 않고, `.*` operator 대신 `->*` operator를 사용해야 합니다. 작동 방식은 정확히 같지만, 그 사이에 Dereference(역참조) 단계가 하나 추가됩니다.
 
-This syntax: `instancePtr->*pointerToMemberAttribute` where `instancePtr` points to an `instance` of the `Sample` class, does the same thing as the `.*` operator used on instance variable directly.
+`instancePtr`이 `Sample` Class의 Instance를 가리킬 때, `instancePtr->*pointerToMemberAttribute` 구문은 Instance 변수에 직접 사용되는 `.*` operator와 동일하게 동작합니다.
 
-#### Call member function from pointer to member function
+#### 멤버 함수 Pointer를 통한 멤버 함수 호출
 
-> Refers to line 24 and 25 in the above example
+> 위의 예시에서 24행과 25행을 참조합니다.
 
-For pointers to member functions, it works in the same way as pointer to member attributes.
+멤버 함수를 가리키는 Pointer도 멤버 Attribute를 가리키는 Pointer와 동일한 방식으로 작동합니다.
 
-We first set to which member function we want the pointer to point, and when we want to call the function, we have to specify on which instance of the class we'll call the function.
+먼저 Pointer가 어떤 멤버 함수를 가리킬지 설정해야 하며, 함수를 호출할 때에는 해당 함수를 Class의 어떤 Instance에서 호출할 것인지 명시해야 합니다.
 
-In the same way as pointer to member attributes, we have the two operators, `.*` and `->*`.
+멤버 Attribute를 가리키는 Pointer와 마찬가지로, `.*`와 `->*` 두 operator를 사용합니다.
 
-The `.*` operator is used when we use the instance variable directly, and the `->*` is used when we have a pointer to an instance variable.
+`.*` operator는 Instance 변수를 직접 사용할 때 사용되며, `->*` operator는 Instance 변수를 가리키는 Pointer가 있을 때 사용됩니다.
 
-### References
+### References (참조)
 
-References are a new concept, that does not exist in `C`, it's close as what the pointers do in `C`.
+Reference(참조)는 C에는 존재하지 않는 새로운 개념이며, C의 Pointer가 하는 역할과 유사합니다.
 
-The more accurate definition of a reference is the following:
+Reference에 대한 더 정확한 정의는 다음과 같습니다:
 
-> A reference is a pointer that is constant and is always dereferenced, it can never be `void`\\
+> A reference is a pointer that is constant and is always dereferenced, it can never be `void`\
 
-Let's take the first example from the intra video
+인트라 비디오에 나오는 첫 번째 예시를 살펴보겠습니다.
 
 {% code title="c++ Refs UnCommented" overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -181,11 +181,11 @@ int main(void)
 ```
 {% endcode %}
 
-With just the definition given above, can you guess the output of the above code ?
+위에서 주어진 정의만으로 이 코드의 출력을 예상할 수 있으신가요?
 
 <details>
 
-<summary>Code result</summary>
+<summary>코드 결과</summary>
 
 ```sh
 $> 42 42 42
@@ -195,7 +195,7 @@ $> 84
 
 </details>
 
-Now, we'll take the same example, but this time, I'll comment it so that we can understand what is being done in this code.
+이제 동일한 예시를 가져와서 코드가 어떤 작업을 수행하는지 이해할 수 있도록 주석을 추가해 보겠습니다.
 
 {% code title="c++ Refs commented" overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -203,42 +203,42 @@ Now, we'll take the same example, but this time, I'll comment it so that we can 
 
 int main(void)
 {
-    int numberOfBalls = 42; // assigning 42 to the numberOfBalls variable
+    int numberOfBalls = 42; // numberOfBalls 변수에 42를 할당합니다.
     
-    int *ballsPtr = &numberOfBalls; // assigning the address of the numberOfBalls variable to the ballsPtr pointer
-    int &ballsRef = numberOfBalls; // assigning ballsRef to be a reference to the numberOfBalls variable
-    // note that for reference, we assign it directly another variable and not the adress of another variable
-    // Now that the reference is set, we cannot change what it is referencing.
-    // This means that I could not do this later on: ballsRef = otherIntValue;
+    int *ballsPtr = &numberOfBalls; // numberOfBalls 변수의 주소를 ballsPtr Pointer에 할당합니다.
+    int &ballsRef = numberOfBalls; // ballsRef를 numberOfBalls 변수에 대한 Reference로 할당합니다.
+    // Reference는 다른 변수의 주소가 아닌, 다른 변수를 직접 할당한다는 점에 주목하십시오.
+    // 일단 Reference가 설정되면, 그것이 참조하는 대상을 변경할 수 없습니다.
+    // 이는 나중에 다음과 같은 작업을 할 수 없음을 의미합니다: ballsRef = otherIntValue;
     
     std::cout << numberOfBalls << " " << *ballsPtr << " " << ballsRef << std::endl;
-    // The above line first prints the value of the numberOfBalls variable
-    // it then prints the value pointed to by ballsPtr by dereferencing the pointer using the * operator
-    // it then prints the value of ballsRef which is a reference to the numberOfBalls variable
+    // 위의 줄은 먼저 numberOfBalls 변수의 값을 출력합니다.
+    // 그 다음 * operator를 사용하여 Pointer를 Dereference하여 ballsPtr이 가리키는 값을 출력합니다.
+    // 그 다음 numberOfBalls 변수에 대한 Reference인 ballsRef의 값을 출력합니다.
     
     *ballsPtr = 21;
-    // dereference the pointer to modify the value pointed to by ballsPtr
+    // ballsPtr이 가리키는 값을 수정하기 위해 Pointer를 Dereference합니다.
     std::cout << numberOfBalls << std::endl;
-    // should print 21
+    // 21이 출력되어야 합니다.
     ballsRef = 84;
-    // modify the value referenced by ballsRef
+    // ballsRef가 참조하는 값을 수정합니다.
     std::cout << numberOfBalls << std::endl;
-    // should print 84
+    // 84가 출력되어야 합니다.
 
     return (0);
 }
 ```
 {% endcode %}
 
-#### Things to note about references in C++
+#### C++ Reference에 대해 주목할 사항
 
-* A reference is somehow like a dereferenced pointer
-* Once it's defined it will always be referencing the same value
-* You cannot declare a reference without assigning it a value directly
-* References are constant, you can't change what it references after the declaration
-* A reference cannot be `void`, unlike a pointer that can be void
+* Reference는 어느 정도 Dereference된 Pointer와 같습니다.
+* 일단 정의되면 항상 동일한 값을 참조합니다.
+* Reference를 직접 값을 할당하지 않고 선언할 수 없습니다.
+* Reference는 Constant(상수)이므로, 선언 후에는 참조하는 대상을 변경할 수 없습니다.
+* Pointer는 `void`일 수 있지만, Reference는 `void`일 수 없습니다.
 
-Some things of the above list in the form of code, as it can be better visualize by some:
+위 목록 중 일부 내용을 코드로 표현하여 시각적으로 이해를 돕겠습니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```cpp
@@ -249,14 +249,14 @@ int main(void)
     int intValue = 0;
     int secondValue = 10;
     
-    int &valRef = intValue; // Will always reference intValue
-    int &valRef2; // this will not work as references have to be directly assigned a variable to reference
-    valRef = secondValue; // this will not work as valRef was already set to reference intValue
-    int &valRef3 = NULL; // this will not work, first because references cannot be void, but also because we will not be able to set it to reference something else later since they are constant
+    int &valRef = intValue; // 항상 intValue를 참조할 것입니다.
+    int &valRef2; // Reference는 참조할 변수를 직접 할당해야 하므로 이 코드는 작동하지 않습니다.
+    valRef = secondValue; // valRef는 이미 intValue를 참조하도록 설정되었으므로 이 코드는 작동하지 않습니다.
+    int &valRef3 = NULL; // Reference는 void일 수 없으며, Constant이므로 나중에 다른 것을 참조하도록 설정할 수 없기 때문에 이 코드는 작동하지 않습니다.
 }
 ```
 {% endcode %}
 
-### Switch statement
+### Switch statement (Switch 문)
 
-There's already something about the `switch` statement that you can read [here](../../useful-tools/switch-statement.md).
+`switch` statement에 대한 내용은 이미 [여기](../../useful-tools/switch-statement.md)에서 읽어보실 수 있습니다.

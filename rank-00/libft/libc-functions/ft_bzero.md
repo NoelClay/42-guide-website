@@ -1,6 +1,6 @@
 # ft\_bzero
 
-### Subject
+### 주제 (Subject)
 
 {% code overflow="wrap" %}
 ```
@@ -15,27 +15,27 @@ DESCRIPTION
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명 (Understandable explanation)
 
-This function works the same way as the `memset()` function, except you don't have to specify what character to write, it'll always be `0` (`NUL` character).
+이 함수는 `memset()` 함수와 동일한 방식으로 작동합니다. 다만, 어떤 문자를 작성할지 지정할 필요가 없으며, 항상 `0` (`NUL` 문자)으로 설정됩니다.
 
-This function does not return anything and if the number of characters to write you passed as `size_t n` is `0`, `bzero` does nothing.
+이 함수는 아무것도 반환하지 않으며, `size_t n`으로 전달한 작성할 문자 수가 `0`인 경우 `bzero`는 아무 작업도 수행하지 않습니다.
 
-### Hints
+### 힌트 (Hints)
 
 {% code title="ft_bzero.c" overflow="wrap" lineNumbers="true" %}
 ```c
 void    ft_bzero(void *s, size_t n)
 {
-    /* declare a temporary pointer */
-    /* make the temporary pointer equal to *s converted to a char * */
-    /* loop on the temporary pointer while we didn't reach n characters */
-        /* in that loop, set the current byte equal to 0 */
+    /* 임시 포인터를 선언합니다. */
+    /* 임시 포인터를 char * 타입으로 변환된 *s와 같게 만듭니다. */
+    /* n개의 문자에 도달할 때까지 임시 포인터에서 반복합니다. */
+        /* 해당 반복문 내에서 현재 바이트를 0으로 설정합니다. */
 }
 ```
 {% endcode %}
 
-### Commented solution
+### 주석이 달린 해답 (Commented solution)
 
 <details>
 
@@ -47,17 +47,17 @@ void    ft_bzero(void *s, size_t n)
 
 void    ft_bzero(void *s, size_t n)
 {
-    /* declaring our temporary pointer */
+    /* 임시 포인터를 선언합니다. */
     char    *tmp_ptr;
     
-    /* making our temporary pointer equal to b converted to char * */
+    /* 임시 포인터를 char * 타입으로 변환된 s와 같게 만듭니다. */
     tmp_ptr = (char *) s;
-    /* looping on our temporary pointer while we didn't reach n */
+    /* n에 도달할 때까지 임시 포인터에서 반복합니다. */
     while (n > 0)
     {
-        /* assigning 0 to the current byte in our temporary pointer */
+        /* 임시 포인터의 현재 바이트에 0을 할당합니다. */
         *(tmp_ptr++) = 0;
-        /* reducing the n by one so we only set n bytes to 0 */
+        /* n 바이트만 0으로 설정하도록 n을 1씩 줄입니다. */
          n--;
     }
 }

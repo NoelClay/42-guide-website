@@ -1,21 +1,17 @@
 ---
-description: Reading a line from a fd is way too tedious
+설명: 파일 디스크립터(fd)에서 한 줄을 읽는 것은 너무 번거롭습니다
 ---
 
 # get\_next\_line
 
-This project is about programming a function that returns a line read from a file descriptor.
+이 프로젝트는 파일 디스크립터(file descriptor)에서 읽은 한 줄을 반환하는 함수를 프로그래밍하는 것에 관한 것입니다.
 
-This project will not only allow you to add a very convenient function to your collection, but it will also make you learn a highly interesting new concept in C programming: **static variables.**
+이 프로젝트는 여러분이 매우 편리한 함수를 자신의 컬렉션에 추가할 수 있게 해줄 뿐만 아니라, C 프로그래밍에서 매우 흥미로운 새로운 개념인 **static variables**을 학습하게 할 것입니다.
 
-
-
-Before starting, we recommend you to watch the video below to better understand the subject. It's in french but you can add english subtitles.
+시작하기 전에, 주제를 더 잘 이해하기 위해 아래 영상을 시청하는 것을 권장합니다. 영상은 프랑스어로 되어 있지만 영어 자막을 추가할 수 있습니다.
 
 {% embed url="https://www.youtube.com/watch?v=-Mt2FdJjVno" %}
 
-_The video lasts 20 minutes but it will be the most worthwhile minutes of your life ;)_
+_이 영상은 20분 길이이지만, 여러분의 인생에서 가장 가치 있는 시간이 될 것입니다 ;)_
 
-
-
-Well, now that you have an overview of what we ask you to do, let's get started :)
+이제 저희가 요청하는 내용에 대한 개요를 파악하셨으니, 시작해봅시다 :)

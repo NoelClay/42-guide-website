@@ -1,32 +1,32 @@
 # ft\_memmove
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
-```
-MEMMOVE(3) (simplified)
+```c
+MEMMOVE(3) (간소화)
 
 NAME
-    memmove -- copy byte string
+    memmove -- 바이트 문자열 복사
 SYNOPSIS
     void *memmove(void *dst, const void *src, size_t len);
 DESCRIPTION
-    The memmove() function copies len bytes from string src to string dst.
-    The two strings may overlap; the copy is always done in a non-destructive manner.
+    memmove() 함수는 src 문자열에서 dst 문자열로 len 바이트를 복사합니다.
+    두 문자열은 겹칠 수 있으며, 복사는 항상 비파괴적인(non-destructive) 방식으로 수행됩니다.
 RETURN VALUES
-    The memmove() function returns the original value of dst.
+    memmove() 함수는 dst의 원래 값을 반환합니다.
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-The `memmove()` function does the same thing as the `memcpy()` function but this time, the copy is made, as said in the man, in a non-destructive manner. This means that both strings (src and dst) can overlap in memory and this function does not overwrite part of, or the entirety of the string when making the copy.
+`memmove()` 함수는 `memcpy()` 함수와 동일하게 동작하지만, 이번에는 매뉴얼에서 언급된 대로 비파괴적인(non-destructive) 방식으로 복사가 이루어집니다. 이는 두 문자열(src와 dst)이 메모리에서 겹칠(overlap) 수 있으며, 복사를 수행할 때 이 함수가 문자열의 일부 또는 전체를 덮어쓰지(overwrite) 않음을 의미합니다.
 
-#### What is memory overlapping ?
+#### 메모리 겹침(Memory Overlapping)이란 무엇입니까?
 
-I found a really good explanation on [stackexchange.com](https://cs50.stackexchange.com/questions/14615/memory-overlap-in-c) so I'll copy it here to explain what is memory overlapping.
+[stackexchange.com](https://cs50.stackexchange.com/questions/14615/memory-overlap-in-c)에서 매우 좋은 설명을 찾았으므로, 메모리 겹침이 무엇인지 설명하기 위해 여기에 복사합니다.
 
-> Suppose we have an array of 5 chars, where each char is a byte long
+> 각 char가 1 바이트 길이인 5개의 char 배열이 있다고 가정해 보겠습니다.
 >
 > ```bash
 > +++++++++++++++++++++++++++++++
@@ -35,12 +35,12 @@ I found a really good explanation on [stackexchange.com](https://cs50.stackexcha
 >  0x100 0x101 0x102 0x103 0x104
 > ```
 >
-> Now according to the man page of `memcpy`, it takes 3 arguments, a pointer to the destination block of memory, a pointer to the source block of memory, and the size of bytes to be copied.
+> 이제 `memcpy`의 man 페이지에 따르면, 이 함수는 3개의 인자, 즉 대상(destination) 메모리 블록에 대한 Pointer, 원본(source) 메모리 블록에 대한 Pointer, 그리고 복사할 바이트 크기(`size_t`)를 받습니다.
 >
-> What if the destination is `0x102`, the source is `0x100` and the size is `3` ?\
-> Memory overlapping happens here. That is, `0x100` would be copied into `0x102`, `0x101` would be copied into `0x103` and `0x102` would be copied into `0x104`.
+> 만약 대상이 `0x102`, 원본이 `0x100`, 크기가 `3`이라면 어떻게 될까요?
+> 여기서 메모리 겹침(Memory overlapping)이 발생합니다. 즉, `0x100`이 `0x102`로 복사되고, `0x101`이 `0x103`으로 복사되며, `0x102`가 `0x104`로 복사됩니다.
 >
-> Notice that we first copied into `0x102` then we copied from `0x102` which means that the value which was originally in `0x102` was lost as we overwrote it with the value we copied into `0x102` before we copy from it. So we would end up with something like
+> 저희는 먼저 `0x102`로 복사한 다음, `0x102`에서 복사한다는 점에 주목하십시오. 이는 원래 `0x102`에 있던 값이 손실되었음을 의미하는데, 그 이유는 `0x102`에서 복사하기 전에 복사해 넣은 값으로 덮어썼기 때문입니다. 따라서 결과는 다음과 같을 것입니다.
 >
 > ```bash
 > +++++++++++++++++++++++++++++++
@@ -49,7 +49,7 @@ I found a really good explanation on [stackexchange.com](https://cs50.stackexcha
 >  0x100 0x101 0x102 0x103 0x104
 > ```
 >
-> Instead of
+> 다음 대신에요.
 >
 > ```bash
 > +++++++++++++++++++++++++++++++
@@ -58,15 +58,13 @@ I found a really good explanation on [stackexchange.com](https://cs50.stackexcha
 >  0x100 0x101 0x102 0x103 0x104
 > ```
 >
-> How does a function like `memmove` take care of memory overlapping ?
+> `memmove`와 같은 함수는 메모리 겹침을 어떻게 처리할까요?
 >
-> According to its man page, it first copies the bytes to be copied into a temporary array then pastes them into the destination block as oppose to a function like `memcpy` which copies directly from the source block to the destination block.
+> `memmove`의 man 페이지에 따르면, 이 함수는 원본 블록에서 대상 블록으로 직접 복사하는 `memcpy`와 같은 함수와 달리, 복사할 바이트를 임시 배열에 먼저 복사한 다음 대상 블록에 붙여넣습니다.
 
-That's for memory overlapping, it is also said that `memmove` copies the bytes to be copied into a temporary array then pastes them into the destination block. That's not the way I did it because as said in the subject of the LIBFT, we can't use `malloc()` for this function.
+이것이 메모리 겹침에 대한 설명입니다. 또한 `memmove`는 복사할 바이트를 임시 배열에 복사한 다음 대상 블록에 붙여넣는다고 설명되어 있습니다. 하지만 LIBFT의 주제에서 언급된 대로 이 함수에서는 `malloc()`을 사용할 수 없기 때문에 저는 이 방식을 사용하지 않았습니다. `malloc()`을 사용하지 않고 제가 구현한 방식은 먼저 두 메모리 블록이 겹치는지 아닌지를 확인하는 것입니다. 만약 겹치는 경우, 원본 메모리 블록의 끝에서 시작 지점까지 복사합니다. 겹치지 않는 경우, 시작부터 끝까지 "일반적으로" 복사합니다.
 
-The way I did it without using `malloc()`, is to first check if the 2 memory blocks are overlapping or not. If they are overlapping we'll copy from the end of the source memory block until the start. If they are not overlapping we'll copy "normally", from start to end.
-
-### Hints
+### 힌트
 
 ft\_memmove
 
@@ -74,21 +72,21 @@ ft\_memmove
 ```c
 void    *ft_memmove(void *dst, const void *src, size_t len)
 {
-    /* declare 2 temporary pointer for src and dst */
-    /* declare a counter */
-    /* check if both src and dst are NULL */
-    /* make dst tmp pointer equal to dst converted to char * */
-    /* make src tmp pointer equal to src converted to char * */
-    /* if src and dst are overlapping */
-        /* loop while len is greater than 0 and copy src into dst */
-    /* if src and dst are not overlapping */
-        /* loop while our counter is less than len and copy src into dst */
-    /* return dst */
+    /* src와 dst를 위한 임시 포인터 2개를 선언합니다 */
+    /* 카운터를 선언합니다 */
+    /* src와 dst가 모두 NULL인지 확인합니다 */
+    /* dst 임시 포인터를 char *로 변환된 dst와 같게 만듭니다 */
+    /* src 임시 포인터를 char *로 변환된 src와 같게 만듭니다 */
+    /* src와 dst가 겹치는 경우 */
+        /* len이 0보다 큰 동안 반복하여 src를 dst로 복사합니다 */
+    /* src와 dst가 겹치지 않는 경우 */
+        /* 카운터가 len보다 작은 동안 반복하여 src를 dst로 복사합니다 */
+    /* dst를 반환합니다 */
 }
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -100,29 +98,26 @@ void    *ft_memmove(void *dst, const void *src, size_t len)
 
 void    *ft_memmove(void *dst, const void *src, size_t len)
 {
-    /* declaring our 2 temporary pointers and our counter */
+    /* 2개의 임시 포인터와 카운터를 선언합니다 */
     char    *c_src;
     char    *c_dst;
     size_t    i;
     
-    /* if both src and dst are NULL, we directly return NULL */
+    /* src와 dst 둘 다 NULL인 경우, 즉시 NULL을 반환합니다 */
     if (!dst && !src)
         return (NULL);
-    /* assigning the converted values of src and dst to our temporary 
-     * pointers so that we don't touch the original values
-     */
+    /* 원본 값을 건드리지 않도록 src와 dst의 변환된 값을 임시 포인터에 할당합니다 */
     c_src = (char *) src;
     c_dst = (char *) dst;
     i = 0;
-    /* checking if the address of the destination is greater than the
-     * address of the source, if that's the case we'll copy from end to
-     * start
+    /* 대상(destination)의 주소가 원본(source)의 주소보다 큰지 확인합니다. 
+     * 이 경우, 끝에서 시작 지점으로 복사합니다.
      */ 
     if (c_dst > c_src)
         while (len-- > 0)
             c_dst[len] = c_src[len];
-    /* if the address of the destination is not greater than the address
-     * of the source, we'll copy from start to end, like we're used to
+    /* 대상의 주소가 원본의 주소보다 크지 않은 경우, 
+     * 평소처럼 시작부터 끝까지 복사합니다.
      */
     else
     {
@@ -133,7 +128,5 @@ void    *ft_memmove(void *dst, const void *src, size_t len)
 }
 ```
 {% endcode %}
-
-
 
 </details>

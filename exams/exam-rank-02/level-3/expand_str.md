@@ -1,24 +1,21 @@
 # expand\_str
 
-### Subject
+### 주제
 
 ```
-Assignment name  : expand_str
-Expected files   : expand_str.c
-Allowed functions: write
+과제 이름 : expand_str
+예상 파일 : expand_str.c
+허용 함수: write
 --------------------------------------------------------------------------------
 
-Write a program that takes a string and displays it with exactly three spaces
-between each word, with no spaces or tabs either at the beginning or the end,
-followed by a newline.
+문자열을 인자로 받아, 각 단어 사이에 정확히 세 개의 공백을 두고 출력하는 프로그램을 작성합니다.
+출력의 시작이나 끝에는 공백이나 탭이 없어야 하며, 뒤에는 개행 문자가 따라와야 합니다.
 
-A word is a section of string delimited either by spaces/tabs, or by the
-start/end of the string.
+단어는 공백/탭 또는 문자열의 시작/끝으로 구분된 문자열의 섹션입니다.
 
-If the number of parameters is not 1, or if there are no words, simply display
-a newline.
+만약 인자의 개수가 1이 아니거나 단어가 전혀 없다면, 단순히 개행 문자만 출력합니다.
 
-Examples:
+예시:
 
 $> ./expand_str "vous   voyez   c'est   facile   d'afficher   la   meme   chose" | cat -e
 vous   voyez   c'est   facile   d'afficher   la   meme   chose$
@@ -31,7 +28,7 @@ $
 $>
 ```
 
-### Commented solution
+### 주석이 달린 해설
 
 <details>
 
@@ -58,20 +55,19 @@ int main(int ac, char **av)
     if (ac == 2)
     {
         int i = 0, space = 0;
-        // skipping all leading blank chars
+        // 모든 선행 공백 문자들을 건너뜁니다.
         while (is_space(av[1][i]))
             i++;
         while (av[1][i])
         {
-            // if there is a blank char, make the space flag 1
-            // if there are multiple blank, it will be set
-            // to 1 each time
+            // 공백 문자가 있다면, space 플래그를 1로 설정합니다.
+            // 공백 문자가 여러 개 있더라도, 매번 1로 설정됩니다.
             if (is_space(av[1][i]))
                  space = 1;
-            // if current char is not a blank char
-            // write 3 spaces if flag is on
-            // set the space flag back to 0
-            // write current char
+            // 현재 문자가 공백 문자가 아니라면
+            // 플래그가 켜져 있을 때 3개의 공백을 출력합니다.
+            // space 플래그를 다시 0으로 설정합니다.
+            // 현재 문자를 출력합니다.
             if (!is_space(av[1][i]))
             {
                 if (space)

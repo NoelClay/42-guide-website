@@ -1,6 +1,6 @@
 # union
 
-### Subject
+### 과제
 
 ```
 Assignment name  : union
@@ -8,15 +8,13 @@ Expected files   : union.c
 Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that takes two strings and displays, without doubles, the
-characters that appear in either one of the strings.
+두 개의 문자열을 인자로 받아, 두 문자열 중 어느 하나에라도 나타나는 문자들을 중복 없이 출력하는 프로그램을 작성해야 합니다.
 
-The display will be in the order characters appear in the command line, and
-will be followed by a \n.
+출력은 명령줄에 문자들이 나타나는 순서대로 이루어져야 하며, 마지막에는 \n이 따라와야 합니다.
 
-If the number of arguments is not 2, the program displays \n.
+인자의 개수가 2개가 아닌 경우, 프로그램은 \n만을 출력합니다.
 
-Example:
+예시:
 
 $>./union zpadinton "paqefwtdjetyiytjneytjoeyjnejeyj" | cat -e
 zpadintoqefwjy$
@@ -32,11 +30,11 @@ $
 $>
 ```
 
-### Commented solution
+### 주석이 달린 솔루션
 
 <details>
 
-<summary>union.c</summary>
+<summary>[union.c](union.c)</summary>
 
 {% code title="union.c" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -44,25 +42,25 @@ $>
 
 int main(int ac, char **av)
 {
-    // create a lookup table for all chars in ascii table
+    // ASCII 테이블의 모든 문자를 위한 룩업 테이블을 생성합니다.
     int i = 0, lookup[256 = {0};
     
     if (ac == 3)
     {
-        // loop over the whole first string
-        // for each character, switch the value in
-        // the lookup table
+        // 첫 번째 문자열 전체를 순회합니다.
+        // 각 문자에 대해 룩업 테이블의 값을
+        // 전환(1로 설정)합니다.
         while(av[1][i])
         	lookup[(int)av[1][i++]] = 1;
         i = 0;
-        // do the same thing for the second string
+        // 두 번째 문자열에 대해서도 동일한 작업을 수행합니다.
         while(av[2][i])
         	lookup[(int)av[2][i++]] = 1;
         i = 0;
         
-        // loop over the first string to write the
-        // seen chars to the screen, switch back the
-        // value in the lookup table once printed
+        // 첫 번째 문자열을 순회하며
+        // 이전에 확인된 문자들을 화면에 작성(write)하고,
+        // 출력한 후에는 룩업 테이블의 값을 다시 전환(0으로 설정)합니다.
         while (av[1][i])
         {
             if (lookup[(int)av[1][i]])

@@ -1,6 +1,6 @@
 # ft\_isalnum
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -17,44 +17,44 @@ RETURN VALUES
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-For this function, the man is self-explanatory, but I'll still explain it in other words.
+이 함수에 대해서는 man 페이지가 이미 잘 설명하고 있지만, 다른 말로 다시 설명해 드리겠습니다.
 
-The `isalnum()` function returns a non-zero value if the character passed as an `int` parameter is alphabetical or a decimal digit character.
+`isalnum()` 함수는 `int` 매개변수로 전달된 문자가 알파벳 문자(alphabetical)이거나 10진수 숫자(decimal digit) 문자인 경우 0이 아닌 값을 반환합니다.
 
-If the character is not alphabetical nor a decimal digit character, the `isalnum()` function returns `0`.
+문자가 알파벳도 아니고 10진수 숫자 문자도 아닌 경우, `isalnum()` 함수는 `0`을 반환합니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_isalnum.c" overflow="wrap" lineNumbers="true" %}
 ```c
 int    ft_isalnum(int c)
 {
-    if (/* c isalpha or c isdigit */)
-        return (/* non-zero value of your choice */);
+    if (/* c가 알파벳이거나 c가 숫자인지 확인합니다 */)
+        return (/* 원하는 0이 아닌 값 */);
     return (0);
 }
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 {% hint style="danger" %}
-Come on ! You really need the code for that function ?
+이봐요! 정말 이 함수에 대한 코드가 필요하신가요?
 {% endhint %}
 
 <details>
 
-<summary>ft_isalnum (variant 1)</summary>
+<summary>ft_isalnum (버전 1)</summary>
 
 <pre class="language-c" data-title="ft_isalnum.c" data-overflow="wrap" data-line-numbers><code class="lang-c"><strong>#include "libft.h"
 </strong><strong>
 </strong><strong>int    ft_isalnum(int c)
 </strong>{
-    /* This checks makes use of the 2 preceeding functions we built */
+    /* 이 검사는 이전에 작성한 두 함수를 활용합니다 */
     if (ft_isalpha(c) || ft_isdigit(c))
-        return (c); //If we reach this point we can return c as it will be a non-zero value
+        return (c); // 이 지점에 도달했다면 c는 0이 아닌 값이므로 c를 반환할 수 있습니다
     return (0);
 }
 </code></pre>
@@ -63,7 +63,7 @@ Come on ! You really need the code for that function ?
 
 <details>
 
-<summary>ft_isalnum (variant 2)</summary>
+<summary>ft_isalnum (버전 2)</summary>
 
 {% code title="ft_isalnum.c" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -71,9 +71,9 @@ Come on ! You really need the code for that function ?
 
 int    ft_isalnum(int c)
 {
-    /* This check is the same as the variant one but without using the pre-existing functions, it's longer to write, it could be useful if you don't want to have it being dependant on other functions */
+    /* 이 검사는 버전 1과 동일하지만, 기존 함수를 사용하지 않습니다. 작성하기는 더 길지만, 다른 함수에 의존하는 것을 원치 않을 때 유용할 수 있습니다 */
     if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-        return (c); // If we reach thi point we can simply return c as it will be a non-zero value
+        return (c); // 이 지점에 도달했다면 c는 0이 아닌 값이므로 단순히 c를 반환할 수 있습니다
     return (0);
 }
 ```

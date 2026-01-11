@@ -1,22 +1,22 @@
 ---
-description: A tool to facilitate complex if ... else if statements.
+description: 설명: 복잡한 `if ... else if` 구문을 용이하게 하는 도구입니다.
 ---
 
-# 🔄 Switch statement
+# 🔄 Switch 문
 
-The `switch` and `case` statements cannot be used most of the time since they are not in the `Norm`.
+`switch` 및 `case` 구문은 대부분의 경우 `Norm`에 포함되어 있지 않으므로 사용할 수 없습니다.
 
-It could be useful in some exams, and you can use it there since there is no `Norm` during the exams.
+하지만 일부 시험에서는 유용할 수 있으며, 시험 중에는 `Norm`이 적용되지 않으므로 이때는 사용하실 수 있습니다.
 
-### Switch statement
+### Switch 문
 
-The `switch` and `case` statements help control complex conditional and branching operation.
+`switch` 및 `case` 구문은 복잡한 조건부 및 분기 작업을 제어하는 데 도움을 줍니다.
 
-### Examples
+### 예시
 
-I'll take as example one of the exercises of the `exam rank 02 - level 2`, the [`do_op`](../exams/exam-rank-02/level-2/do_op.md) one, go read the subject there, then come back here.
+저는 `exam rank 02 - level 2`의 연습 문제 중 하나인 [`do_op`](../exams/exam-rank-02/level-2/do_op.md) 문제를 예시로 들겠습니다. 해당 주제를 먼저 읽어보신 후 이리로 돌아와 주십시오.
 
-I'll first write it using if and else if statements, then I'll write the exact same thing using the `switch` statement.
+먼저 `if` 및 `else if` 구문을 사용하여 작성하고, 그다음에는 완전히 동일한 내용을 `switch` 구문을 사용하여 작성하겠습니다.
 
 #### If ... else if
 
@@ -57,8 +57,8 @@ swtich (av[2][0])
 ```
 {% endcode %}
 
-As you can see, both codes are pretty similar, but I personally think that the `switch` statement is clearer and easier to write.
+보시다시피 두 코드는 매우 유사하지만, 저는 개인적으로 `switch` 구문이 더 명확하고 작성하기 쉽다고 생각합니다.
 
-The switch statement takes a bit more place but could be useful in some cases.
+`switch` 구문은 공간을 약간 더 차지하지만, 특정 상황에서는 유용할 수 있습니다.
 
-You can find more details about it [here](https://www.w3schools.com/c/c_switch.php).
+이에 대한 자세한 내용을 [여기](https://www.w3schools.com/c/c_switch.php)에서 확인하실 수 있습니다.

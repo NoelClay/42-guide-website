@@ -1,7 +1,7 @@
-# CPP04 (doing)
+# CPP04 (진행 중)
 
-### Main topics
+### 주요 주제
 
 ```
-Subtype polymorphism, abstract classes, interfaces
+서브타입 다형성 (Subtype polymorphism), 추상 클래스 (abstract classes), 인터페이스 (interfaces)
 ```

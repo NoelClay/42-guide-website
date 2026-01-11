@@ -1,40 +1,40 @@
 # ft\_lstsize
 
-### Subject
+### 주제 (Subject)
 
 {% code overflow="wrap" %}
 ```
-FT_LSTSIZE (simplified)
+FT_LSTSIZE (요약)
 
 NAME
-    ft_lstsize -- returns the number of element in the list
+    ft_lstsize -- 리스트의 요소 개수를 반환합니다.
 SYNOPSIS
     int *ft_lstsize(t_list *lst);
 DESCRIPTION
-    Count the number of elements of the list
+    리스트의 요소 개수를 셉니다.
 PARAMETERS
-    lst: start of the list
+    lst: 리스트의 시작 부분입니다.
 RETURN VALUES
-    The size of the list
+    리스트의 크기입니다.
 AUTHORIZED EXTERNAL FUNCTIONS
     None
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명 (Understandable explanation)
 
-I think the subject is clear on what this function does, we have to return the number of element of the list.
+이 함수가 무엇을 하는지에 대해서는 주제가 명확하다고 생각합니다. 저희는 리스트의 요소 개수를 반환해야 합니다.
 
-### Hints
+### 힌트 (Hints)
 
 {% code overflow="wrap" %}
 ```c
-/* loop over the list */
-/* return the count */
+/* 리스트를 순회합니다 */
+/* 카운트를 반환합니다 */
 ```
 {% endcode %}
 
-### Commented solution
+### 주석이 달린 해답 (Commented solution)
 
 <details>
 
@@ -46,28 +46,26 @@ I think the subject is clear on what this function does, we have to return the n
 
 int ft_lstsize(t_list *lst)
 {
-    /* I used a tmp variable so that we don't modify the 
-     * existing list
-     */
+    /* 기존 리스트를 수정하지 않도록 임시(tmp) 변수를 사용했습니다. */
     t_list *tmp;
     int i;
     
     tmp = lst;
     i = 0;
-    /* we loop as long as tmp is not equal to null
-     * since the last element's next point to null
-     * we will be iterating over all the elements of the list
+    /* 마지막 요소의 next가 NULL을 가리키므로, tmp가 NULL이 아닐 때까지 반복합니다.
+     * 이렇게 하면 리스트의 모든 요소를 순회하게 됩니다.
      */
     while (tmp)
     {
-        /* set the tmp to be its 'next' element */
+        /* tmp를 다음(next) 요소로 설정합니다. */
         tmp = tmp->next;
         i++;
     }
-    /* returning the count */
+    /* 카운트를 반환합니다. */
     return (i);
 }
 ```
 {% endcode %}
 
 </details>
+```

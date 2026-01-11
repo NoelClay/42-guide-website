@@ -1,13 +1,12 @@
 ---
 description: >-
-  This project aims to make you code in C a library of usual functions that you
-  will be able to use for your next projects.
+  이 프로젝트는 향후 프로젝트에서 사용할 수 있는 일반적인 함수들로 구성된 C 라이브러리를 직접 코딩하는 것을 목표로 합니다.
 ---
 
 # Libft
 
-### Project description
+### 프로젝트 설명
 
-Since in most 42 projects we can't use any of the standard C library functions, the goal of this first project is to replicate some of the usual functions ourselves, as well as some additional functions.
+대부분의 42 프로젝트에서는 표준 C 라이브러리 함수(standard C library functions)를 사용할 수 없으므로, 이 첫 번째 프로젝트의 목표는 일반적인 함수 중 일부와 몇 가지 추가 함수를 직접 구현(replicate)하는 것입니다.
 
-We have to build a library that we will be able to use in our future projects.
+우리는 앞으로 진행할 프로젝트에서 활용할 수 있는 라이브러리(library)를 구축해야 합니다.

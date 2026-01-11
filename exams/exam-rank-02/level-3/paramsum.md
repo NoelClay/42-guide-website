@@ -1,19 +1,18 @@
 # paramsum
 
-### Subject
+### 주제
 
 ```
-Assignment name  : paramsum
-Expected files   : paramsum.c
-Allowed functions: write
+과제 이름      : paramsum
+필요한 파일    : paramsum.c
+허용 함수      : write
 --------------------------------------------------------------------------------
 
-Write a program that displays the number of arguments passed to it, followed by
-a newline.
+프로그램에 전달된 인자의 개수를 표시하고, 그 뒤에 개행 문자(newline)를 표시하는 프로그램을 작성해야 합니다.
 
-If there are no arguments, just display a 0 followed by a newline.
+인자가 없는 경우에는 0을 표시하고 그 뒤에 개행 문자를 표시합니다.
 
-Example:
+예시:
 
 $>./paramsum 1 2 3 5 7 24
 6
@@ -24,7 +23,7 @@ $>./paramsum | cat -e
 $>
 ```
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -34,8 +33,8 @@ $>
 ```c
 #include <unistd.h>
 
-// Simple putnbr function, we don't need negatives since there
-// will never be less than 0 arguments to a program
+// 간단한 putnbr 함수입니다. 프로그램에 전달되는 인자는 0개 미만일 수 없으므로 
+// 음수는 처리할 필요가 없습니다.
 void ft_putnbr(int nbr)
 {
     if (nbr >= 10)
@@ -46,12 +45,10 @@ void ft_putnbr(int nbr)
 
 int main(int ac, char **av)
 {
-    // Casting argv argument to void to get rid of it
-    // since we'll not use it
+    // av(argv) 인자를 사용하지 않을 것이므로 이를 무시하기 위해 (void)로 캐스팅합니다.
     (void) av;
-    // Writing the number of arguments from argc minus 1
-    // The first argument counted is the executable name so
-    // not an argument as for this subject
+    // argc에서 1을 뺀 값으로 인자의 개수를 출력합니다.
+    // 카운트된 첫 번째 인자는 실행 파일 이름이므로, 이 과제의 요구사항에 따른 인자가 아니기 때문입니다.
     ft_putnbr(ac - 1);
     write(1, "\n", 1);
     return (0);

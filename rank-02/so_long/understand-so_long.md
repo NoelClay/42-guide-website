@@ -1,72 +1,72 @@
-# ▪️ Understand so\_long
+# ▪️ so\_long 이해하기
 
-### Goal
+### 목표
 
 <details>
 
-<summary>Project-specific guidelines</summary>
+<summary>프로젝트별 지침</summary>
 
-You have to build a simple 2D game (top-down or platformer)
+간단한 2D 게임(Top-down 또는 Platformer)을 구축해야 합니다.
 
-* The goal of the game is to collect all objects present on the map to unlock an exit.
-* We have to be able to use W, A, S and D to move around.
-* The player can move in all four directions (up, down, right, left).
-* The player can't go through walls.
-* The total move count must be displayed at every move in the shell.
-* Pressing the ESC key must close the window and exit the program correctly.
-* Clicking on the red cross must close the window and exit the program correctly.
-* Using MiniLibX Images is mandatory.
+* 게임의 목표는 맵에 존재하는 모든 오브젝트를 수집하여 출구를 잠금 해제하는 것입니다.
+* W, A, S, D 키를 사용하여 움직일 수 있어야 합니다.
+* 플레이어는 네 방향(위, 아래, 오른쪽, 왼쪽) 모두로 움직일 수 있습니다.
+* 플레이어는 벽을 통과할 수 없습니다.
+* 셸에서 움직일 때마다 총 이동 횟수가 표시되어야 합니다.
+* ESC 키를 누르면 창이 닫히고 프로그램이 올바르게 종료되어야 합니다.
+* 창의 닫기 버튼(빨간색 엑스 표시)을 클릭하면 창이 닫히고 프로그램이 올바르게 종료되어야 합니다.
+* MiniLibX Images를 사용하는 것은 필수입니다.
 
 </details>
 
-In short, you'll have to create a simple 2D game, top-down or viewed from the side.
+요약하자면, Top-down 방식 또는 측면 시점의 간단한 2D 게임을 만들어야 합니다.
 
-The subject in itself is fairly clear on what you have to do, I'll take some time on the next page to explain some of the core concepts you'll have to know before starting to build your game.
+프로젝트 주제 자체는 해야 할 작업에 대해 명확하게 설명하고 있습니다. 다음 페이지에서 게임 제작을 시작하기 전에 알아야 할 몇 가지 핵심 개념을 설명하는 시간을 갖겠습니다.
 
-### Before Starting
+### 시작하기 전에
 
-Before starting to work on this project and read what I wrote, I encourage you to take some time and read the documentation of the MiniLibX [here](https://harm-smits.github.io/42docs/libs/minilibx), that's not the "official" documentation but it is still better explained there.
+이 프로젝트 작업을 시작하고 제가 작성한 내용을 읽기 전에, MiniLibX 문서를 [여기](https://harm-smits.github.io/42docs/libs/minilibx)에서 시간을 내어 읽어보시기를 권장합니다. 이는 "공식" 문서는 아니지만, 내용이 더 잘 설명되어 있습니다.
 
-There's also a [MiniLibX](broken-reference) section on this Gitbook where I put some helper functions that I used as well as some hooks that might be useful for this project.
+이 Gitbook에는 제가 사용했던 몇 가지 헬퍼 함수(Helper functions)와 이 프로젝트에 유용할 수 있는 몇 가지 후크(Hooks)를 정리해 둔 [MiniLibX](broken-reference) 섹션도 있습니다.
 
-You should also choose what type of games you want to build, a top-down view, or one that is viewed from the side (like a platformer).
+또한, 만들고 싶은 게임 유형을 선택해야 합니다. Top-down 시점인지, 아니면 측면에서 보는 방식(예: Platformer)인지 결정해야 합니다.
 
 {% hint style="info" %}
-A 2D top-down game is a type of video game that is played from a top-down perspective, meaning that the camera is positioned above the game world and the player views the game from an overhead perspective. In a 2D top-down game, the game world is typically represented in two dimensions, meaning that the game world is shown as a flat plane rather than a fully three-dimensional space.
+2D Top-down 게임은 Top-down 관점에서 플레이되는 비디오 게임 유형입니다. 즉, 카메라가 게임 세계 위에 위치하며 플레이어는 위에서 내려다보는 관점에서 게임을 보게 됩니다. 2D Top-down 게임에서 게임 세계는 일반적으로 2차원으로 표현됩니다. 이는 게임 세계가 완전히 3차원 공간이 아닌 평평한 평면으로 표시됨을 의미합니다.
 
-In a 2D top-down game, the player usually controls a character that is represented by a single sprite or 2D graphic, and moves the character around the game world by using the arrow keys or WASD keys on the keyboard, or by using a gamepad or joystick. The player typically interacts with the game world by moving the character around the game world, collecting items, solving puzzles, and defeating enemies.
+2D Top-down 게임에서 플레이어는 일반적으로 단일 Sprite 또는 2D 그래픽으로 표현되는 캐릭터를 제어하며, 키보드의 화살표 키나 WASD 키, 또는 게임 패드나 조이스틱을 사용하여 게임 세계를 돌아다닙니다. 플레이어는 일반적으로 캐릭터를 움직이고, 아이템을 수집하고, 퍼즐을 풀고, 적을 물리치는 방식으로 게임 세계와 상호 작용합니다.
 
-2D top-down games are often used to create a sense of nostalgia or retro style, as they were popular in the early days of video gaming. They are also well-suited for certain types of gameplay, such as turn-based strategy games or games that involve a lot of exploration and puzzle-solving.
+2D Top-down 게임은 비디오 게임 초창기에 인기가 있었기 때문에 향수나 레트로 스타일을 불러일으키는 데 자주 사용됩니다. 또한 턴제 전략 게임 또는 많은 탐험과 퍼즐 풀이가 필요한 게임과 같은 특정 유형의 게임 플레이에 적합합니다.
 {% endhint %}
 
 {% hint style="info" %}
-A 2D platformer game is a type of video game that involves navigating a character through a series of levels or environments by running, jumping, and avoiding obstacles and enemies. In a 2D platformer game, the game world is typically represented in two dimensions, meaning that the game world is shown as a flat plane rather than a fully three-dimensional space and is shown from a side (Mario is a good example of that).
+2D Platformer 게임은 달리고, 점프하고, 장애물과 적을 피하면서 일련의 레벨 또는 환경을 캐릭터가 탐색하는 방식의 비디오 게임 유형입니다. 2D Platformer 게임에서 게임 세계는 일반적으로 2차원으로 표현됩니다. 이는 게임 세계가 완전히 3차원 공간이 아닌 평평한 평면으로 표시되며 측면에서 보여짐을 의미합니다(Mario가 좋은 예입니다).
 
-In a 2D platformer game, the player usually controls a character that is represented by a single sprite or 2D graphic, and moves the character around the game world by using the arrow keys or WASD keys on the keyboard, or by using a gamepad or joystick. The player typically interacts with the game world by moving the character around the game world, collecting items, solving puzzles, and defeating enemies.
+2D Platformer 게임에서 플레이어는 일반적으로 단일 Sprite 또는 2D 그래픽으로 표현되는 캐릭터를 제어하며, 키보드의 화살표 키나 WASD 키, 또는 게임 패드나 조이스틱을 사용하여 게임 세계를 돌아다닙니다. 플레이어는 일반적으로 캐릭터를 움직이고, 아이템을 수집하고, 퍼즐을 풀고, 적을 물리치는 방식으로 게임 세계와 상호 작용합니다.
 
-2D platformer games often involve a series of levels that the player must progress through, with each level becoming increasingly difficult as the player advances. The player may also have the ability to earn power-ups or special abilities that can help them navigate through the levels more easily.
+2D Platformer 게임은 플레이어가 진행해야 하는 일련의 레벨을 포함하는 경우가 많으며, 플레이어가 진전함에 따라 각 레벨의 난이도는 점차 높아집니다. 플레이어는 레벨을 더 쉽게 탐색할 수 있도록 도와주는 Power-up이나 특수 능력을 얻을 수도 있습니다.
 
-2D platformer games are a popular genre of video game, and have been around since the early days of video gaming. They are often known for their fast-paced action and challenging gameplay, and have been a staple of the video game industry for many years.
+2D Platformer 게임은 인기 있는 비디오 게임 장르이며, 비디오 게임 초창기부터 존재해 왔습니다. 이 장르는 종종 빠른 속도의 액션과 도전적인 게임 플레이로 알려져 있으며, 수년 동안 비디오 게임 산업의 주요 장르로 자리매김해 왔습니다.
 {% endhint %}
 
-### Examples 2D games
+### 2D 게임 예시
 
-Here are three well known example of 2D games that exist and from which you can inspire if you need ideas.
+아이디어가 필요할 경우 영감을 얻을 수 있는 잘 알려진 2D 게임 세 가지 예시를 소개합니다.
 
 <figure><img src="../../.gitbook/assets/hotline_miami.avif" alt=""><figcaption><p>Hotline Miami</p></figcaption></figure>
 
 {% hint style="info" %}
-Learn more about Hotline Miami [here](https://en.wikipedia.org/wiki/Hotline_Miami)
+Hotline Miami에 대해 더 자세히 알아보시려면 [여기](https://en.wikipedia.org/wiki/Hotline_Miami)를 클릭하십시오.
 {% endhint %}
 
 <figure><img src="../../.gitbook/assets/super_mario_bros.jpg" alt=""><figcaption><p>Super Mario Bros.</p></figcaption></figure>
 
 {% hint style="info" %}
-I think you all know what Super Mario Bros. is but you can find information [here](https://en.wikipedia.org/wiki/Super_Mario_Bros.) and even play it online [here](https://supermario-game.com/).
+여러분 모두 Super Mario Bros.가 무엇인지 알고 계시겠지만, 정보는 [여기](https://en.wikipedia.org/wiki/Super_Mario_Bros.)에서 찾을 수 있으며, [여기](https://supermario-game.com/)에서 온라인으로 플레이할 수도 있습니다.
 {% endhint %}
 
 <figure><img src="../../.gitbook/assets/terraria.jpg" alt=""><figcaption><p>Terraria</p></figcaption></figure>
 
 {% hint style="info" %}
-You can find more information about Terraria [here](https://en.wikipedia.org/wiki/Terraria).
+Terraria에 대한 더 자세한 정보는 [여기](https://en.wikipedia.org/wiki/Terraria)에서 찾으실 수 있습니다.
 {% endhint %}

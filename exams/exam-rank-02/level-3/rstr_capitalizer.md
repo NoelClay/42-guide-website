@@ -1,6 +1,6 @@
 # rstr\_capitalizer
 
-### Subject
+### 주제
 
 ```
 Assignment name  : rstr_capitalizer
@@ -8,18 +8,15 @@ Expected files   : rstr_capitalizer.c
 Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that takes one or more strings and, for each argument, puts
-the last character that is a letter of each word in uppercase and the rest
-in lowercase, then displays the result followed by a \n.
+하나 이상의 문자열을 인자로 받는 프로그램을 작성합니다. 각 인자에 대해, 각 단어에서 글자인 마지막 문자를 대문자로, 나머지는 소문자로 바꾼 다음, 그 결과를 출력하고 이어서 \n을 표시합니다.
 
-A word is a section of string delimited by spaces/tabs or the start/end of the
-string. If a word has a single letter, it must be capitalized.
+단어는 공백/탭 또는 문자열의 시작/끝으로 구분된 문자열 섹션입니다. 단어가 한 글자로만 이루어져 있다면, 그 글자는 대문자여야 합니다.
 
-A letter is a character in the set [a-zA-Z]
+글자(letter)는 [a-zA-Z] 집합에 속하는 문자입니다.
 
-If there are no parameters, display \n.
+매개변수가 없다면, \n을 출력합니다.
 
-Examples:
+예시:
 
 $> ./rstr_capitalizer | cat -e
 $
@@ -32,7 +29,7 @@ seconD tesT A littlE biT   moaR compleX$
 $>
 ```
 
-### Commented solution
+### 주석이 달린 해답
 
 <details>
 
@@ -59,14 +56,14 @@ void r_capitalizer(char *s)
     int i = 0;
     while (s[i])
     {
-         // If the character is uppercase, make it lowercase
+         // 문자가 대문자라면, 소문자로 변경합니다.
          if (s[i] >= 'A' && s[i] <= 'Z')
              s[i] += 32;
-         // Now check for lowercase character and if the next char
-         // is a space character, make it uppercase again
+         // 이제 소문자인지 확인하고, 다음 문자가
+         // 공백 문자라면, 다시 대문자로 변경합니다.
          if ((s[i] >= 'a' && s[i] <= 'z') && ft_isspace(s[i + 1]))
              s[i] -= 32;
-         // Now print every char
+         // 이제 모든 문자를 출력합니다.
          ft_putchar(s[i++]);
     }
 }
@@ -78,8 +75,8 @@ int main(int ac, char **av)
         ft_putchar('\n');
     else
     {
-        // Loop over all params starting at 1 (we don't want the name of
-        // the executable to be written to the screen)
+        // 1부터 시작하는 모든 매개변수를 순회합니다 (우리는
+        // 실행 파일의 이름을 화면에 출력하는 것을 원하지 않습니다).
         while (i < ac)
         {
             r_capitalizer(av[i]);

@@ -1,40 +1,40 @@
 # ft\_lstadd\_back
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
-FT_LSTADD_BACK (simplified)
+FT_LSTADD_BACK (간소화)
 
 NAME
-    ft_lstadd_back -- adds a new node at the end of the list
+    ft_lstadd_back -- 리스트의 끝에 새로운 노드를 추가합니다
 SYNOPSIS
     void ft_lstadd_back(t_list **lst, t_list *new);
 DESCRIPTION
-    Add the 'new' element at the end of the list
+    리스트의 끝에 'new' 요소를 추가합니다
 PARAMETERS
-    lst: pointer address of the first element of the list
-    new: pointer address of the new element to add to the list
+    lst: 리스트의 첫 번째 요소의 Pointer 주소입니다
+    new: 리스트에 추가할 새 요소의 Pointer 주소입니다
 RETURN VALUES
-    None
+    없음
 AUTHORIZED EXTERNAL FUNCTIONS
-    None
+    없음
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-This function lets us add a new element to the end of an existing list.
+이 함수는 기존 리스트의 끝에 새로운 요소를 추가할 수 있도록 해줍니다.
 
-### Hints
+### 힌트
 
 ```c
-/* get the last element of the list */
-/* set the last->next variable to point to the new element */
-/* if last is NULL, make the list pointer point to the new element */
+/* 리스트의 마지막 요소를 가져옵니다 */
+/* last->next 변수가 새 요소를 가리키도록 설정합니다 */
+/* last가 NULL인 경우, 리스트 Pointer가 새 요소를 가리키도록 설정합니다 */
 ```
 
-### Commented solution
+### 주석이 달린 해결책
 
 <details>
 
@@ -48,15 +48,15 @@ void ft_lstadd_back(t_list **alst, t_list *new)
 {
     t_list *last;
     
-    /* using ft_lstlast to get the last element of the list
+    /* ft_lstlast를 사용하여 리스트의 마지막 요소를 가져옵니다
      */
     last = ft_lstlast(*alst);
-    /* if last is NULL, there is no list, so we set the list pointer
-     * to point to the new element
+    /* last가 NULL인 경우 리스트가 없다는 의미이므로, 리스트 Pointer가
+     * 새 요소를 가리키도록 설정합니다
      */
     if (!last)
         *alst = new;
-    /* we set the last's next variable to point to the new element
+    /* last의 next 변수가 새 요소를 가리키도록 설정합니다
      */
     last->next = new;
 }

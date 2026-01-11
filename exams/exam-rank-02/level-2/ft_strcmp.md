@@ -1,6 +1,6 @@
 # \*ft\_strcmp
 
-### Subject
+### 과제
 
 {% code overflow="wrap" %}
 ```
@@ -37,7 +37,7 @@ RETURN VALUES
  unsigned characters, so that ‘\200’ is greater than ‘\0’.
 ```
 
-### Commented solution
+### 주석이 달린 해답
 
 <details>
 
@@ -50,13 +50,13 @@ int ft_strcmp(char *s1, char *s2)
     int i;
     
     i = 0;
-    // looping over both string while both of them are equal
-    // and at least one of them is not finished
+    // 두 문자열이 모두 같고
+    // 둘 중 적어도 하나가 아직 끝나지 않은 동안 루프를 실행합니다.
     while ((s1[i] || s2[i]) && s1[i] == s2[i])
         i++;
-    // when we can't loop anymore, we return the substraction
-    // of the last compared characters in both string, this will
-    // result in either a negative, zero or positive value
+    // 더 이상 루프를 실행할 수 없을 때,
+    // 두 문자열에서 마지막으로 비교된 문자의 뺄셈 결과를 반환합니다.
+    // 이 결과는 음수, 0, 또는 양수 값이 됩니다.
     return (s1[i] - s2[i]);
 }
 ```

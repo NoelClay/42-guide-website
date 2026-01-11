@@ -1,30 +1,28 @@
 # ft\_rrange
 
-### Subject
+### 과제
 
 ```
-Assignment name  : ft_rrange
-Expected files   : ft_rrange.c
-Allowed functions: malloc
+과제 이름      : ft_rrange
+제출 예상 파일 : ft_rrange.c
+허용 함수      : malloc
 --------------------------------------------------------------------------------
 
-Write the following function:
+다음 함수를 작성합니다:
 
 int     *ft_rrange(int start, int end);
 
-It must allocate (with malloc()) an array of integers, fill it with consecutive
-values that begin at end and end at start (Including start and end !), then
-return a pointer to the first value of the array.
+이 함수는 (malloc()을 사용하여) 정수 배열을 할당해야 하며, end 값에서 시작하여 start 값으로 끝나는 연속적인 값으로 배열을 채워야 합니다 (start와 end 값을 모두 포함해야 합니다!). 그 후, 배열의 첫 번째 값에 대한 Pointer를 반환해야 합니다.
 
-Examples:
+예시:
 
-- With (1, 3) you will return an array containing 3, 2 and 1
-- With (-1, 2) you will return an array containing 2, 1, 0 and -1.
-- With (0, 0) you will return an array containing 0.
-- With (0, -3) you will return an array containing -3, -2, -1 and 0.
+- (1, 3)이 주어지면 3, 2, 1을 포함하는 배열을 반환합니다.
+- (-1, 2)이 주어지면 2, 1, 0, -1을 포함하는 배열을 반환합니다.
+- (0, 0)이 주어지면 0을 포함하는 배열을 반환합니다.
+- (0, -3)이 주어지면 -3, -2, -1, 0을 포함하는 배열을 반환합니다.
 ```
 
-### Commented solution
+### 주석이 달린 해답
 
 <details>
 
@@ -35,25 +33,25 @@ Examples:
 int *ft_rrange(int start, int end)
 {
     int i = 0;
-    // Defining the length of the range
-    // Since we don't have access to the abse function, we have
-    // to make a manual absolute value
+    // 범위의 길이를 정의합니다.
+    // abs 함수에 접근할 수 없으므로,
+    // 수동으로 절댓값을 계산해야 합니다.
     int len = (end - start) < 0 ? ((end - start) * -1) + 1 : (end - start) + 1;
-    // Allocating the range needed
+    // 필요한 범위를 할당합니다.
     int *range = (int *) malloc(len * sizeof(int));
     
-    // Fill in the range
+    // 범위에 값을 채웁니다.
     while (i < len)
     {
-        // Next lines are for numbers going up
+        // 다음 줄은 숫자가 증가하는 경우입니다.
         if (end < start)
             range[i] = end++;
-        // Next lines are for numbers going down
+        // 다음 줄은 숫자가 감소하는 경우입니다.
         else
             range[i] = end--;
         i++;
     }
-    // Returning the filled range
+    // 채워진 범위를 반환합니다.
     return (range);
 }
 ```

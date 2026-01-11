@@ -1,6 +1,6 @@
 # inter
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -9,15 +9,14 @@ Expected files   : inter.c
 Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that takes two strings and displays, without doubles, the
-characters that appear in both strings, in the order they appear in the first
-one.
+두 개의 문자열을 인수로 받아, 두 문자열 모두에 나타나는 문자를 중복 없이 표시하는 프로그램을 작성합니다.
+이때 문자는 첫 번째 문자열에 나타나는 순서대로 출력되어야 합니다.
 
-The display will be followed by a \n.
+출력 후에는 \n이 따라와야 합니다.
 
-If the number of arguments is not 2, the program displays \n.
+인수의 개수가 2개가 아닌 경우, 프로그램은 \n을 출력합니다.
 
-Examples:
+예시:
 
 $>./inter "padinton" "paqefwtdjetyiytjneytjoeyjnejeyj" | cat -e
 padinto$
@@ -30,7 +29,7 @@ $
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -45,32 +44,31 @@ int	ft_putchar(char c);
 int	main(int ac, char **av)
 {
 	int	i = 0, j;
-	// create an array of int that will act as a lookup table
-	// 256 is because of the ascii table, each one will
-	// correspond to a single character
+	// lookup table 역할을 할 int 배열을 생성합니다.
+	// ASCII 테이블 때문에 크기는 256이며, 각 요소는
+	// 단일 문자에 대응됩니다.
 	int	lookup[256] = {};
 
 	if (ac == 3)
 	{
-		// looping over the whole string
+		// 전체 문자열에 대해 반복합니다.
 		while (av[1][i])
 		{
 			j = 0;
-			// comparing against every character in the
-			// second string
+			// 두 번째 문자열의 모든 문자와
+			// 비교합니다.
 			while (av[2][j])
 			{
-				// checking if characters are the same
-				// as well as checking in the lookup
-				// table if the character not already
-				// found
+				// 문자들이 동일한지 확인하며
+				// 또한 lookup table에서 해당 문자가
+				// 이미 발견된 문자가 아닌지 확인합니다.
 				if (av[1][i] == av[2][j] && !lookup[(int)av[2][j]])
 				{
-					// marking the character found
-					// in the lookup table
+					// 해당 문자가 발견되었음을
+					// lookup table에 표시합니다.
 					lookup[(int)av[2][j]] = 1;
-					// writing the character
-					// to the screen
+					// 해당 문자를
+					// 화면에 출력합니다.
 					ft_putchar(av[2][j]);
 				}
 				j++;

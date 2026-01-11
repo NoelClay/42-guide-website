@@ -1,6 +1,6 @@
 # sort\_int\_tab
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -9,19 +9,18 @@ Expected files   : sort_int_tab.c
 Allowed functions:
 --------------------------------------------------------------------------------
 
-Write the following function:
+다음 함수를 작성합니다:
 
 void sort_int_tab(int *tab, unsigned int size);
 
-It must sort (in-place) the 'tab' int array, that contains exactly 'size'
-members, in ascending order.
+이 함수는 정확히 'size'개의 요소를 포함하는 'tab' int array를 오름차순으로 (in-place, 즉 제자리에서) 정렬해야 합니다.
 
-Doubles must be preserved.
+중복된 값(Doubles)은 보존되어야 합니다.
 
-Input is always coherent.
+입력은 항상 일관적입니다.
 
 ```
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 

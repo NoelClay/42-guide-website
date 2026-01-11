@@ -4,26 +4,26 @@
 
 {% code overflow="wrap" %}
 ```
-STRCHR(3) (simplified)
+STRCHR(3) (간소화됨)
 
 NAME
-    strchr -- locate character in string
+    strchr -- 문자열 내에서 문자 찾기
 SYNOPSIS
     char *strchr(const char *s, int c);
 DESCRIPTION
-    The strchr() function locates the first occurence of c (converted to a char) in the string pointed to by s. The terminating null character is considered to be part of the string; therefor if c is '\0', the function locate the terminating '\0'.
+    strchr() 함수는 s가 가리키는 문자열 내에서 c (char로 변환됨)의 첫 번째 발생 위치를 찾습니다. 종료 NULL 문자는 문자열의 일부로 간주됩니다. 따라서 c가 '\0'인 경우, 함수는 종료 '\0' 문자를 찾습니다.
 RETURN VALUES
-    The function strchr() return a pointer to the located character, or NULL if the character does not appear in the string.
+    strchr() 함수는 찾은 문자에 대한 Pointer를 반환하며, 문자열 내에 문자가 존재하지 않으면 NULL을 반환합니다.
 ```
 {% endcode %}
 
 ### Understandable explanation
 
-The `strchr()` function searches for one character in a string. If it finds the character, it returns a pointer to the first occurence of this specific character.
+`strchr()` 함수는 문자열 내에서 하나의 문자를 검색합니다. 해당 문자를 찾으면, 이 특정 문자의 첫 번째 발생 위치에 대한 Pointer를 반환합니다.
 
-If it don't find any occurence of this character, it returns `NULL`.
+이 문자가 문자열 내에 존재하지 않는다면, `NULL`을 반환합니다.
 
-We also have to return a pointer to the character if the character is `\0`.
+또한, 찾으려는 문자가 `\0`인 경우에도 해당 문자에 대한 Pointer를 반환해야 합니다.
 
 ### Hints
 
@@ -31,12 +31,11 @@ We also have to return a pointer to the character if the character is `\0`.
 ```c
 char *ft_strchr(const char *s, int c)
 {
-    /* loop over the whole string */
-    /* check if current character is equal to the one we have to find */
-    /* once we looped over the whole string, check again for the character
-     * in case the character we have to find is '\0'
+    /* 전체 문자열을 반복합니다. */
+    /* 현재 문자가 찾아야 하는 문자와 같은지 확인합니다. */
+    /* 전체 문자열을 반복한 후, 찾아야 하는 문자가 '\0'인 경우를 대비하여 해당 문자를 다시 확인합니다.
      */
-    /* if we didn't find c in the string, return NULL */
+    /* 문자열 내에서 c를 찾지 못했다면, NULL을 반환합니다. */
 }
 ```
 {% endcode %}
@@ -56,34 +55,32 @@ char *ft_strchr(const char *s, int c)
     unsigned int    i;
     char            cc,
     
-    /* we convert c to a char as we got it as an int */
+    /* c를 int로 받았으므로 char로 변환합니다. */
     cc = (char) c;
     i = 0;
-    /* looping over the whole string s */
+    /* 전체 문자열 s를 반복합니다. */
     while (s[i])
     {
-        /* if the current character is equal to cc 
-         * this means we found an occurence of c in the string
-         * therefore, we return the address of the char as a char pointer
+        /* 현재 문자가 cc와 같다면 
+         * 이는 문자열 내에서 c의 발생 위치를 찾았다는 의미입니다.
+         * 따라서, 해당 char의 주소를 char Pointer로 반환합니다.
          */
         if (s[i] == cc)
             return ((char *) &s[i]);
-        /* if the current character is not equal to cc
-         * we advance in the string
+        /* 현재 문자가 cc와 같지 않다면
+         * 문자열 내에서 다음 문자로 이동합니다.
          */
         i++;
     }
-    /* once we looped over the whole string, if we didn't find an
-     * occurence of cc, we have to check if cc is equal to '\0'
-     * so we check once again if the current character is equal to cc
-     * if this is the case, we return the address of '\0' as a char
-     * pointer
+    /* 전체 문자열을 반복한 후, cc의 발생 위치를 찾지 못했다면
+     * cc가 '\0'과 같은지 확인해야 합니다.
+     * 따라서 현재 문자가 cc와 같은지 다시 한번 확인합니다.
+     * 만약 같다면, '\0'의 주소를 char Pointer로 반환합니다.
      */
     if (s[i] == cc)
         return ((char *) &s[i]);
-    /* if we reach this point, this means we didn't find any
-     * occurence of cc in the string so we return NULL as
-     * stated in the man
+    /* 이 지점에 도달했다면, 문자열 내에서 cc의 어떤 발생 위치도 찾지 못했다는 의미이므로
+     * 매뉴얼에 명시된 대로 NULL을 반환합니다.
      */
     return (NULL);
 }

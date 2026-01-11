@@ -1,2 +1,1 @@
-# 📑 Bonus functions
-
+# 📑 보너스 함수

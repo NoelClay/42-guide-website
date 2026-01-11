@@ -1,21 +1,17 @@
-# What is this gitbook for?
+# 이 Gitbook은 무엇을 위한 것인가요?
 
-The goal is to explain (almost) each project of the 42 program and our reasoning from A-Z to find a solution. We still invite you to try to do the projects by yourself because that's how you will learn best.&#x20;
+목표는 42 프로그램의 (거의) 모든 프로젝트와 A부터 Z까지 해결책을 찾는 저희의 사고 과정을 설명하는 것입니다. 하지만 프로젝트를 직접 시도해 보시기를 권장합니다. 그것이 가장 잘 배울 수 있는 방법이기 때문입니다.
 
-Use this Gitbook only to understand some notions you are missing or when you are stuck ;) By copying and pasting a code you won't learn much.
+이 Gitbook은 여러분이 놓치고 있는 개념을 이해하거나 막혔을 때만 사용하십시오 ;) 코드를 복사하여 붙여넣는 방식으로는 많은 것을 배울 수 없습니다.
 
-
-
-PS: We started our cursus on October 24, 2022. **If something is out of date, wrong or unclear don't hesitate** [**to tell us**](team.md) **and we will change it in the next few days.**
+추신: 저희는 2022년 10월 24일에 과정을 시작했습니다. **만약 내용이 오래되었거나, 잘못되었거나, 불분명하다면 주저하지 마시고** [**저희에게 알려주십시오**](team.md). 저희가 며칠 내로 수정하겠습니다.
 
 **-----**
 
-**PSS : THANKS A LOT FOR YOUR FEEDBACKS <3**&#x20;
+**추신 2: 피드백에 진심으로 감사드립니다 <3**
 
-We receive dozens of messages every week on linkedin, github or by e-mail that make us really happy. So we wanted to so THANK YOU. Don't hesitate to let us know what you'd like to see in this gitbook and to leave a kind message to us, from all around the world.&#x20;
+저희는 매주 LinkedIn, GitHub 또는 이메일을 통해 저희를 정말 기쁘게 하는 수십 통의 메시지를 받고 있습니다. 그래서 감사의 말씀을 전하고 싶었습니다. 이 Gitbook에서 보고 싶은 내용이 무엇인지, 그리고 전 세계 어디에서든 저희에게 친절한 메시지를 남겨 주시는 것을 주저하지 마십시오.
 
+즐거운 시간 보내세요!
 
-
-Have fun !
-
-Laura & Simon, from Switzerland (42 Lausanne)
+Laura & Simon, 스위스 (42 Lausanne) 드림

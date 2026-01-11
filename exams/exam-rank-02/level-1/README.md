@@ -1,6 +1,6 @@
-# Level 1
+# 레벨 1
 
-Here are the 12 exercises of the level 1 :
+레벨 1의 12가지 과제 목록입니다:
 
 {% content-ref url="first_word.md" %}
 [first\_word.md](first_word.md)
@@ -15,15 +15,15 @@ Here are the 12 exercises of the level 1 :
 {% endcontent-ref %}
 
 {% content-ref url="ft_strcpy.md" %}
-[ft\_strcpy.md](ft_strcpy.md)
+[ft\_strcpy.md](ft\_strcpy.md)
 {% endcontent-ref %}
 
 {% content-ref url="ft_strlen.md" %}
-[ft\_strlen.md](ft_strlen.md)
+[ft\_strlen.md](ft\_strlen.md)
 {% endcontent-ref %}
 
 {% content-ref url="ft_swap.md" %}
-[ft\_swap.md](ft_swap.md)
+[ft\_swap.md](ft\_swap.md)
 {% endcontent-ref %}
 
 {% content-ref url="repeat_alpha.md" %}
@@ -50,4 +50,4 @@ Here are the 12 exercises of the level 1 :
 [ulstr.md](ulstr.md)
 {% endcontent-ref %}
 
-We already know some of the functions (the ones with \* in front of them).
+저희는 이미 몇몇 함수들(앞에 \* 표시가 붙은 함수들)에 대해 알고 있습니다.

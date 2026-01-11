@@ -1,54 +1,49 @@
 ---
 description: >-
-  FdF is a project in which we convert a file with a grid of height values into
-  a 3d wireframe using a simple graphics library called MiniLibX.
+  FdF는 높이 값의 격자를 담은 파일을 MiniLibX라는 간단한 그래픽 라이브러리를 사용하여 3D Wireframe으로 변환하는 프로젝트입니다.
 ---
 
 # FdF
 
-Well, if you are here it means that you have survived GNL and maybe already push swap... FdF is much less bad than these two projects. You will have to go back to math, but nothing too complicated, don't worry
+여기까지 오셨다면 GNL을 통과하셨고, 어쩌면 이미 push swap까지 완료하셨을 수도 있습니다. FdF는 이 두 프로젝트보다는 훨씬 덜 힘들 것입니다. 수학으로 돌아가야 하지만, 너무 복잡한 것은 없으니 걱정하지 마십시오
 
-### Goal
+### 목표
 
 <details>
 
-<summary>Project-specific guidelines</summary>
+<summary>프로젝트별 지침</summary>
 
-* The result should be displayed using an **isometric projection**.
-* Your program must display an image in a window.
-* The management of the window should remain smooth (change the window, minimize it, etc.).
-* Pressing the ESC key should close the window and exit the program cleanly.
-* Clicking on the cross at the top of the window should close the window and exit the program cleanly.
-* Using the MiniLibX images is mandatory.
+*   결과는 **Isometric projection**을 사용하여 표시되어야 합니다.
+*   프로그램은 창에 이미지를 표시해야 합니다.
+*   창 관리가 원활하게 유지되어야 합니다(창 변경, 최소화 등).
+*   ESC 키를 누르면 창이 닫히고 프로그램이 깔끔하게 종료되어야 합니다.
+*   창 상단의 닫기(X) 버튼을 클릭하면 창이 닫히고 프로그램이 깔끔하게 종료되어야 합니다.
+*   MiniLibX 이미지를 사용하는 것은 필수입니다.
 
 </details>
 
-Of course! FdF is the abbreviation of "Fil de Fer", which means "Wireframe" in French. The FdF project is one of the first graphics projects. The goal of the FdF project is to create a software that can read a file containing information about a 3D object and display it as a wireframe model on the screen.
+물론입니다! FdF는 프랑스어로 "Wireframe(철사 모형)"을 의미하는 "Fil de Fer"의 약자입니다. FdF 프로젝트는 첫 번째 그래픽 프로젝트 중 하나입니다. FdF 프로젝트의 목표는 3D 객체에 대한 정보가 담긴 파일을 읽고 이를 Wireframe 모델로 화면에 표시할 수 있는 소프트웨어를 만드는 것입니다.
 
-You have to go from a representation like this:
+다음과 같은 표현 방식에서 시작합니다.
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption><p>2D representation of the "42.fdf" map</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18.png" alt=""><figcaption><p>"42.fdf" 맵의 2D 표현</p></figcaption></figure>
 
-Where the rows represent the x-axis, the columns the y-axis and the values the z-axis (the altitude).
+여기서 행은 x축을, 열은 y축을, 값은 z축(고도)을 나타냅니다.
 
-To a graphic representation like this:
+다음과 같은 그래픽 표현 방식으로 전환해야 합니다.
 
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption><p>3D representation of the "42.fdf" map</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (29.png" alt=""><figcaption><p>"42.fdf" 맵의 3D 표현</p></figcaption></figure>
 
-The subject is simple and clear. In practice it is a bit more complicated than that because many new concepts are introduced. But by separating each step and looking at one element after the other, you will be able to do this project very easily.
+주제는 간단하고 명확합니다. 실제로는 많은 새로운 개념이 도입되기 때문에 이보다는 조금 더 복잡합니다. 하지만 각 단계를 분리하고 요소를 하나씩 살펴본다면, 이 프로젝트를 매우 쉽게 완료하실 수 있습니다.
 
+### 최종 시각적 예시
 
-
-### Visual Final Example
-
-To give you an idea, here is what the final project should look like:
+아이디어를 얻으실 수 있도록, 최종 프로젝트가 어떤 모습이어야 하는지 보여드립니다.
 
 {% embed url="https://www.youtube.com/watch?v=kH58QaKAPOU" %}
 
-Well, the guy is a genius and he did more things than requested in the project - but you get the general idea :-)
+음, 이 사람은 천재이고 프로젝트에서 요구된 것보다 더 많은 것을 구현했지만 — 전반적인 아이디어는 얻으셨을 것입니다 :-)
 
+이 프로젝트는 다른 프로젝트들보다 페이지가 더 많을 것입니다. 이 프로젝트에서 배워야 할 새로운 내용(그리고 모든 새 함수에 대한 설명)에 대한 이론적인 부분, 변환 과정을 이해하기 위한 수학적인 부분, 그리고 여러분이 배운 모든 것과 우리가 정의할 체크리스트 덕분에 FdF를 코딩하게 될 실용적인 부분으로 구성됩니다.
 
-
-This project will have more pages than the others. There will be a theoretical part about the new things you have to learn in this project (and an explanation of all the new functions), a mathematical part to understand the transformation process and a practical part, where you will code FdF thanks to everything you will have learned and to checklists we will define.
-
-Okay, let's get to the heart of the matter now
+자, 이제 본론으로 들어가 봅시다.

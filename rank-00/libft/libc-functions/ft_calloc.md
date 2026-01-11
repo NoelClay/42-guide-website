@@ -1,6 +1,6 @@
 # ft\_calloc
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -20,28 +20,28 @@ RETURN VALUES
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-By now you should have understand what the `malloc()` function does, at least I hope. Otherwise, understand how `malloc()` works and come back here.\
-I will mainly base my explanation on comparing `calloc()` to `malloc()`.
+지금까지 여러분은 `malloc()` 함수가 무엇을 하는지 이해했을 것입니다. 적어도 저는 그렇게 바랍니다. 그렇지 않다면, `malloc()`의 작동 방식을 이해하고 이 섹션으로 돌아오십시오.
+저는 주로 `calloc()`을 `malloc()`과 비교하여 설명하겠습니다.
 
-`calloc()` works in the same way as `malloc()` does, but the difference is that `calloc()` sets all the memory bytes are set to `0` instead of staying as the gibberish that was there in memory before we allocated it.
+`calloc()`은 `malloc()`과 동일하게 작동하지만, 차이점은 할당하기 전에 메모리에 남아 있던 알 수 없는(gibberish) 값 대신에 `calloc()`은 모든 메모리 바이트를 `0`으로 설정한다는 것입니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_calloc.c" overflow="wrap" lineNumbers="true" %}
 ```c
 void *ft_calloc(size_t count, size_t size)
 {
-    /* declare a tmp unsigned char pointer */
-    /* use malloc to allocate count * size in tmp */
-    /* loop over tmp and set each byte to 0 */
-    /* return tmp */
+    /* 임시 unsigned char Pointer를 선언합니다 */
+    /* tmp에 count * size를 할당하기 위해 malloc을 사용합니다 */
+    /* tmp를 순회하며 각 바이트를 0으로 설정합니다 */
+    /* tmp를 반환합니다 */
 }
 ```
 {% endcode %}
 
-### Commented  solution
+### 주석이 달린 해결책
 
 <details>
 
@@ -57,15 +57,15 @@ void *ft_calloc(size_t count, size_t size)
     size_t i;
     
     i = 0;
-    /* allocating count * size bytes in memory with malloc */
+    /* malloc을 사용하여 메모리에 count * size 바이트를 할당합니다 */
     tmp = malloc(count * size);
-    /* check if the memory was allocated */
+    /* 메모리가 할당되었는지 확인합니다 */
     if (!tmp)
         return (NULL);
-    /* loop over every allocated bytes and set it to 0 */
+    /* 할당된 모든 바이트를 순회하며 0으로 설정합니다 */
     while (i < count * size)
         tmp[i++] = 0;
-    /* return the allocated memory */
+    /* 할당된 메모리를 반환합니다 */
     return (tmp);
 }
 ```

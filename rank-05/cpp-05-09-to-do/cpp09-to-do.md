@@ -1,6 +1,6 @@
-# CPP09 (to-do)
+# CPP09 (진행 예정)
 
-### Main topics
+### 주요 주제
 
 ```
 STL

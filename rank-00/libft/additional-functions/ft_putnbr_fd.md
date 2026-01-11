@@ -1,38 +1,38 @@
 # ft\_putnbr\_fd
 
-### Subject
+### 주제 (Subject)
 
 {% code overflow="wrap" %}
 ```
 FT_PUTNBR_FD (simplified)
 
 NAME
-    ft_putnbr_fd -- write an int on a specified file descriptor
+    ft_putnbr_fd -- 지정된 파일 디스크립터에 int를 작성합니다.
 SYNOPSIS
     void ft_putnbr_fd(int n, int fd);
 DESCRIPTION
-    ft_putnbr_fd() writes the int n on the file descriptor fd
+    ft_putnbr_fd()는 파일 디스크립터 fd에 int n을 작성합니다.
 PARAMETERS
-    n: int to write
-    fd: file descriptor on which to write
+    n: 작성할 int
+    fd: 작성할 파일 디스크립터
 RETURN VALUES
-    ft_putnbr_fd() does not return anything
+    ft_putnbr_fd()는 아무것도 반환하지 않습니다.
 AUTHORIZED EXTERNAL FUNCTIONS
     write(2)
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명 (Understandable explanation)
 
-This function works the same way as the `ft_putnbr()` function you had to do during the Piscine, it also takes the `fd` parameter, like `ft_putchar_fd()`, `ft_putstr_fd()`, `ft_putendl_fd()`.
+이 함수는 Piscine 과정에서 작성했던 `ft_putnbr()` 함수와 동일하게 작동하며, `ft_putchar_fd()`, `ft_putstr_fd()`, `ft_putendl_fd()`와 마찬가지로 `fd` 매개변수를 받습니다.
 
-I think that going from here you should be able to build it.
+이 설명만으로도 함수를 구현할 수 있으리라 생각합니다.
 
-### Hints
+### 힌트 (Hints)
 
-Don't forget that the character `0` is not code `0` in the `ASCII` table, I think you can take a look at your Piscine code ([`C05 - Ex04`](https://github.com/Laendrun/piscine42/blob/main/c04/ex02/ft_putnbr.c)), it works the same.
+문자 `0`의 ASCII 코드가 숫자 `0`이 아니라는 점을 잊지 마십시오. Piscine 코드 ([`C05 - Ex04`](https://github.com/Laendrun/piscine42/blob/main/c04/ex02/ft_putnbr.c))를 확인해 보시면 도움이 될 것입니다. 작동 방식이 같습니다.
 
-### Commented solution
+### 주석이 달린 해결책 (Commented solution)
 
 <details>
 
@@ -44,17 +44,15 @@ Don't forget that the character `0` is not code `0` in the `ASCII` table, I thin
 
 void    ft_putnbr_fd(int n, int fd)
 {
-    /* this checks for INT_MIN as INT_MAX is not 
-     * just INT_MIN * -1, so if we have INT_MIN, we can
-     * directly write it out
+    /* INT_MIN은 INT_MAX * -1과 같지 않으므로, 이 코드는 INT_MIN을 확인합니다. 
+     * 따라서 INT_MIN인 경우 직접 값을 작성할 수 있습니다.
      */
     if (n == -2147483648)
         write(fd, "-2147483648", 11);
-    /* if the number is less than 0, we have to write a '-'
-     * followed by the number, so we write the '-'
-     * then we multiply the number by -1 to make it positive
-     * and we call the ft_putnbr_fd function with the positive
-     * number
+    /* 숫자가 0보다 작다면, 먼저 '-' 부호를 작성해야 합니다.
+     * 따라서 '-'를 작성한 다음,
+     * 숫자를 양수로 만들기 위해 -1을 곱합니다.
+     * 그리고 양수가 된 숫자를 가지고 ft_putnbr_fd 함수를 호출합니다.
      */
     else if (n < 0)
     {
@@ -64,19 +62,15 @@ void    ft_putnbr_fd(int n, int fd)
     }
     else
     {
-        /* here the number will be positive
-         * the first thing we have to do is transform the 
-         * number into each of its digit
-         * we do that by calling the function again with the
-         * number / 10, that removes one digit from the end 
-         * of it since its an integer division
-         * once we have done that, we can call the function
-         * with the number % 10 to get the remainder of the 
-         * itneger division, that way we get each digit.
-         * if the number we send to the function is still greater
-         * than zero, we make the same thing, call the function
-         * with the number divided by 10, then again with 
-         * with the number modulo 10
+        /* 여기서 숫자는 양수입니다.
+         * 가장 먼저 해야 할 일은 숫자를 각 자릿수로 변환하는 것입니다.
+         * 이를 위해 정수 나누기(integer division)를 사용하여 숫자를 10으로 나눈 값으로
+         * 함수를 다시 호출합니다. 이렇게 하면 끝에서 한 자릿수가 제거됩니다.
+         * 이 작업을 완료하면, 숫자를 10으로 모듈러(%) 연산한 값으로
+         * 함수를 호출하여 정수 나눗셈의 나머지를 얻을 수 있으며, 이 방법으로 각 자릿수를 얻습니다.
+         * 함수에 전달하는 숫자가 여전히 0보다 크다면,
+         * 숫자를 10으로 나눈 값으로 함수를 호출하고, 그 다음 10으로 모듈러 연산한 값으로
+         * 함수를 다시 호출하는 동일한 작업을 수행합니다.
          */
         if (n > 9)
         {
@@ -85,12 +79,10 @@ void    ft_putnbr_fd(int n, int fd)
         }
         else
         {
-            /* if we get here, this means n is only one digit
-             * when n is only one digit, we can convert it to 
-             * its corresponding character in the ASCII table
-             * and write it.
-             * as for the other functions, we set the first
-             * parameter of the write function to fd
+            /* 여기에 도달했다면, n은 한 자릿수임을 의미합니다.
+             * n이 한 자릿수일 때, 이를 ASCII 테이블의 해당 문자로 변환하여
+             * 작성할 수 있습니다.
+             * 다른 함수들과 마찬가지로, write 함수의 첫 번째 매개변수는 fd로 설정합니다.
              */
             digit = n + 48;
             write(fd, &digit, 1);

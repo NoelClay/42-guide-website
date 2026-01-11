@@ -1,31 +1,31 @@
-# ▪️ Building the thing
+# ▪️ 구현 작업
 
 {% hint style="warning" %}
-Draw the pipes on paper, this helps, a lot. Before writing to the outfile, make sure you read from the correct end of the correct pipe.
+파이프를 종이에 그려보십시오. 이것은 매우 큰 도움이 됩니다. outfile에 쓰기 전에, 반드시 올바른 파이프의 올바른 끝에서 읽고 있는지 확인하십시오.
 {% endhint %}
 
-Here I'll give you some checklist on what you have to do to achieve this project. All the code for my pipex is available on my [Github](https://github.com/Laendrun/42-pipex), if you have any question, don't hesitate to [contact](../../team.md) me (Simon), it'll be a pleasure to help you.
+여기서 이 프로젝트를 달성하기 위해 수행해야 할 작업에 대한 체크리스트를 제공하겠습니다. 제 pipex의 모든 코드는 [Github](https://github.com/Laendrun/42-pipex)에서 확인하실 수 있습니다. 질문이 있으시면 주저하지 마시고 저(Simon)에게 [연락](../../team.md)하십시오. 기꺼이 도와드리겠습니다.
 
-### Main checklist
+### 주요 체크리스트
 
-* [ ] Check the existence of `infile` and `outfile`
-  * [ ] be sure to understand what `>` does when the file does not exist
-* [ ] Create the necessary pipe (or pipes)
-* [ ] Create a child process for each command
-* [ ] Wait for all the processes to end before writing to the outfile
+* [ ] `infile`과 `outfile`의 존재 여부를 확인합니다.
+  * [ ] 파일이 존재하지 않을 때 `>`가 어떤 역할을 하는지 확실히 이해해야 합니다.
+* [ ] 필요한 pipe(또는 파이프들)를 생성합니다.
+* [ ] 각 command에 대해 child process를 생성합니다.
+* [ ] `outfile`에 쓰기 전에 모든 process가 종료되기를 기다립니다.
 
 {% hint style="warning" %}
-When using `here_doc`, the second argument is not a command ;)
+`here_doc`을 사용할 때, 두 번째 인수는 command가 아닙니다 ;)
 {% endhint %}
 
-### Execute checklist
+### 실행(Execute) 체크리스트
 
-Remember that the `execve()` function needs the path to a binary file as parameter, so you'll have to find where the commands binaries are stored on your computer. Before going further, you have to know how to find any command binary.
+`execve()` 함수는 매개변수로 바이너리 파일의 경로를 필요로 한다는 것을 기억하십시오. 따라서, command의 바이너리가 컴퓨터의 어디에 저장되어 있는지 찾아야 합니다. 더 나아가기 전에, 모든 command의 바이너리를 찾는 방법을 알아야 합니다.
 
-* [ ] Check in all possible locations if the binary (command) requested by the user exists.
-* [ ] "Build" the arguments array for the command.
-* [ ] Execute the command using `execve()`
+* [ ] 사용자가 요청한 바이너리(command)가 존재하는지 모든 가능한 위치에서 확인합니다.
+* [ ] command를 위한 인자 배열을 "빌드"합니다.
+* [ ] `execve()`를 사용하여 command를 실행합니다.
 
 {% hint style="info" %}
-I know this is pretty small, but you have the information you need, you have to search and try things by yourself or else you won't learn anything.
+내용이 다소 적다고 생각하실 수 있지만, 여러분에게 필요한 정보는 모두 제공되었습니다. 스스로 검색하고 직접 시도해야만 배울 수 있습니다.
 {% endhint %}

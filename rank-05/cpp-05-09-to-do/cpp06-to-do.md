@@ -1,6 +1,6 @@
-# CPP06 (to-do)
+# CPP06 (미완료)
 
-### Main topics
+### 주요 주제
 
 ```
 C++ casts

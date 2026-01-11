@@ -1,24 +1,23 @@
 # rot\_13
 
-### Subject
+### 과제
 
 {% code overflow="wrap" %}
 ```
-Assignment name  : rot_13
-Expected files   : rot_13.c
-Allowed functions: write
+Assignment name  : rot_13 (과제 이름: rot_13)
+Expected files   : rot_13.c (예상 파일: rot_13.c)
+Allowed functions: write (허용된 함수: write)
 --------------------------------------------------------------------------------
 
-Write a program that takes a string and displays it, replacing each of its
-letters by the letter 13 spaces ahead in alphabetical order.
+문자열을 인자로 받아, 알파벳 순서에서 13칸 앞에 있는 문자로 각각의 문자를 대체하여 출력하는 프로그램을 작성합니다.
 
-'z' becomes 'm' and 'Z' becomes 'M'. Case remains unaffected.
+'z'는 'm'이 되고 'Z'는 'M'이 됩니다. 대소문자는 영향을 받지 않고 유지됩니다.
 
-The output will be followed by a newline.
+출력 후에는 개행 문자가 따라옵니다.
 
-If the number of arguments is not 1, the program displays a newline.
+인자의 개수가 1개가 아닌 경우, 프로그램은 개행 문자를 출력합니다.
 
-Example:
+예시:
 
 $>./rot_13 "abc"
 nop
@@ -35,7 +34,7 @@ $>
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -52,24 +51,24 @@ int main(int ac, char *av[])
         int i;
         
         i = 0;
-        /* looping over the whole string
+        /* 전체 문자열을 순회합니다.
          */
         while (av[1][i])
         {
-            /* checking if the character is between Aa - Mm
-             * if it's the case, we can add 13 to it to get
-             * the character 13 places in front of it
+            /* 문자가 Aa - Mm 사이에 있는지 확인합니다.
+             * 이 경우, 13을 더하여
+             * 13칸 앞에 있는 문자를 얻을 수 있습니다.
              */
             if ((av[1][i] >= 65 && av[1][i] <= 77) || (av[1][i] >= 97 && av[1][i] <= 109))
                 av[1][i] += 13;
-            /* checking if the character is between Nn - Zz
-             * if it's the case, we can substract 13 to it to get
-             * the character 13 places in front of it
+            /* 문자가 Nn - Zz 사이에 있는지 확인합니다.
+             * 이 경우, 13을 빼서
+             * 13칸 앞에 있는 문자를 얻을 수 있습니다.
              */
             else if ((av[1][i] >= 78 && av[1][i] <= 90) || (av[1][i] >= 110 && av[1][i] <= 122))
                 av[1][i] -= 13;
-            /* finally, we can write the character and increment the
-             * counter
+            /* 마지막으로, 문자를 쓰고
+             * 카운터를 증가시킬 수 있습니다.
              */
             write(1, &av[1][i], 1);
             i++;

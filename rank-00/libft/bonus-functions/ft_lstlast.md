@@ -1,35 +1,35 @@
 # ft\_lstlast
 
-### Subject
+### 과제
 
 {% code overflow="wrap" %}
 ```
-FT_LSTLAST (simplified)
+FT_LSTLAST (간소화)
 
-NAME
-    ft_lstlast -- get the last element of the list
-SYNOPSIS
+이름
+    ft_lstlast -- 리스트의 마지막 요소를 가져옵니다
+개요
     t_list *ft_lstlast(t_list *lst);
-DESCRIPTION
-    Returns the last element of the list
-PARAMETERS
-    lst: the start of the list
-RETURN VALUES
-    Last element of the list
-AUTHORIZED EXTERNAL FUNCTIONS
-    None
+설명
+    리스트의 마지막 요소를 반환합니다
+매개변수
+    lst: 리스트의 시작 부분입니다
+반환 값
+    리스트의 마지막 요소
+허용된 외부 함수
+    없음
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-I think that for this one the subject is clear enough, we have to return a pointer to the last element of the list, it's pretty easy to understand.
+이번 과제는 주제가 충분히 명확하다고 생각합니다. 우리는 리스트의 마지막 요소에 대한 Pointer를 반환해야 하며, 이해하기 매우 쉽습니다.
 
-### Hints
+### 힌트
 
-For this one, we basically have to do the same thing as for the `ft_lstsize` function but we don't need to count how many elements are in the list nor return the count, but we directly return the `tmp` element.&#x20;
+이 함수는 기본적으로 `ft_lstsize` 함수와 동일하게 작동하지만, 리스트에 몇 개의 요소가 있는지 세거나 그 개수를 반환할 필요는 없습니다. 대신, `tmp` 요소를 직접 반환하면 됩니다.
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -46,11 +46,11 @@ t_list *ft_lstlast(t_list *lst)
     if (!lst)
         return (NULL);
     tmp = lst;
-    /* instead of looping directly over the element, we check if
-     * there is a next element in the list, if not, that means we
-     * reached the end and we have to return the current pointer
-     * if we looped over the element directly like for ft_lstsize
-     * we would be returning NULL every time
+    /* 요소를 직접 순회하는 대신, 다음 요소가 있는지 확인합니다.
+     * 다음 요소가 없다면, 리스트의 끝에 도달했다는 의미이므로
+     * 현재 Pointer를 반환해야 합니다.
+     * 만약 ft_lstsize처럼 요소를 직접 순회했다면
+     * 항상 NULL을 반환하게 될 것입니다.
      */
     while (tmp->next)
         tmp = tmp->next;

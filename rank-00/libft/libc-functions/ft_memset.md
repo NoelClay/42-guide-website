@@ -19,25 +19,25 @@ RETURN VALUES
 
 ### Understandable explanation
 
-As the man description says, this function writes `len` bytes of value `c` to the string `b`.
+Man 페이지 설명대로, 이 함수는 값 `c`를 `len` 바이트만큼 문자열 `b`에 기록합니다.
 
-The value of `c` will be converted to an `unsigned char`, so to set this value in the `b` string, we'll have to convert the `b` string to a pointer to `unsigned char`. But remember the return value, we have to return the first parameter of the function, the `void *b` string.&#x20;
+값 `c`는 `unsigned char`로 변환됩니다. 따라서 이 값을 `b` 문자열에 설정하려면, 우리는 `b` 문자열을 `unsigned char` Pointer로 변환해야 합니다. 하지만 반환 값을 기억해야 합니다. 우리는 함수의 첫 번째 매개변수인 `void *b` 문자열을 반환해야 합니다.
 
-So how do we convert this parameter without changing the original one ? Think about temporary variables.
+그렇다면 원본 매개변수를 변경하지 않고 어떻게 이 매개변수를 변환할 수 있을까요? 임시 변수에 대해 생각해 보십시오.
 
 ### Hints
 
-To build this function, we'll have to declare a temporary variable, an `unsigned char *`. We'll then make all our manipulation on this pointer, without touching the original `void *b` string.
+이 함수를 구현하려면, 우리는 임시 변수인 `unsigned char *`를 선언해야 합니다. 그리고 원래의 `void *b` 문자열을 건드리지 않고, 이 Pointer를 통해 모든 조작을 수행할 것입니다.
 
 {% code title="ft_memset.c" overflow="wrap" lineNumbers="true" %}
 ```c
 void    *ft_memset(void *b, int c, size_t len)
 {
-    /* declare a temporary unsigned char * */
-    /* make this temporary variable equals to void *b converted to unsigned char */
-    /* loop on the temporary variable while we didn't reach len */
-        /* in that loop, set the current byte equal to c converted to unsigned char */
-    /* return void *b */
+    /* 임시 unsigned char *를 선언합니다 */
+    /* 이 임시 변수를 unsigned char로 변환된 void *b와 같도록 설정합니다 */
+    /* len에 도달할 때까지 임시 변수에 대해 반복합니다 */
+        /* 해당 반복문 내에서, 현재 byte를 unsigned char로 변환된 c와 같도록 설정합니다 */
+    /* void *b를 반환합니다 */
 }
 ```
 {% endcode %}
@@ -54,20 +54,20 @@ void    *ft_memset(void *b, int c, size_t len)
 
 void    *ft_memset(void *b, int c, size_t len)
 {
-    /* declaring our temporary pointer */
+    /* 임시 Pointer를 선언합니다 */
     unsigned char    *tmp_ptr;
     
-    /* making our temporary pointer equal to b converted to unsigned char * */
+    /* 임시 Pointer를 unsigned char *로 형변환된 b와 같도록 만듭니다 */
     tmp_ptr = (unsigned char *) b;
-    /* looping on our temporary pointer while we didn't reach len */
+    /* len에 도달할 때까지 임시 Pointer에 대해 반복합니다 */
     while (len > 0)
     {
-    /* assigning the unsigned char value of c to the current byte in our temporary pointer */
+    /* c의 unsigned char 값을 임시 Pointer의 현재 byte에 할당합니다 */
         *(tmp_ptr++) = (unsigned char) c;
-        /* reducing the len by one so we only set len bytes */
+        /* len 바이트만 설정하도록 len을 1씩 줄입니다 */
         len--;
     }
-    /* return the function's first parameter, void *b */
+    /* 함수의 첫 번째 매개변수인 void *b를 반환합니다 */
     return (b);
 }
 ```

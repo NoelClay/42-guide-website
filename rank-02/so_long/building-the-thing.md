@@ -1,82 +1,80 @@
-# ▪️ Building the thing
+# ▪️ 프로젝트 구현하기
 
-Firstly, I have to say that I won't be able to comment all my code and explain all of my code on here, there's too much files and things linked to one another that it would be impossible to do.
+먼저, 제가 모든 코드를 여기에 주석 처리하고 설명할 수는 없다는 점을 말씀드려야 합니다. 파일과 상호 연결된 요소가 너무 많아서 그렇게 하는 것은 불가능합니다.
 
-What I'll do is create for you multiple checklists, that corresponds to different part of the project and that you can follow in order to build a complete game in C using [MiniLibX](../../minilibx/). All the code for my game is available on my [Github](https://github.com/Laendrun/42/tree/main/so_long), if you have any question on it, don't hesitate to [contact](../../team.md) me (Simon) and it would be a pleasure for me to answer all the questions you might have.
+제가 할 일은 프로젝트의 여러 부분에 해당하는 여러 체크리스트를 만들어 드리는 것입니다. 이 체크리스트를 따라 [MiniLibX](../../minilibx/)를 사용하여 C로 완전한 게임을 구축할 수 있습니다. 제 게임의 모든 코드는 [Github](https://github.com/Laendrun/42/tree/main/so_long)에서 확인할 수 있습니다. 코드에 대해 궁금한 점이 있다면 주저하지 마시고 저(Simon)에게 [연락](../../team.md) 주시면, 질문에 기꺼이 답변해 드리겠습니다.
 
-so\_long being a video game, that is something pretty personal, and you surely don't want to do exactly the same thing as I did (and I don't want you to neither), that's why, checklists is the best way to go. You'll have some ideas on where to start and what to do, and you still have to search for information and learn new things.
+so\_long은 비디오 게임이기 때문에 매우 개인적인 작업입니다. 여러분은 제가 했던 것과 똑같은 것을 하고 싶지 않을 것이며(저 역시 바라지 않습니다), 이것이 바로 체크리스트가 최선의 방법인 이유입니다. 어디서부터 시작하고 무엇을 해야 할지에 대한 아이디어를 얻게 되며, 새로운 정보를 검색하고 학습해야 합니다.
 
-Now that all that is said, let's get to work.
+이제 모든 설명을 마쳤으니, 작업을 시작해 봅시다.
 
-### Map checklist
+### 맵 체크리스트
 
-* [ ] Parse the map\
-  When parsing the map you can already check some errors, before even going further
-  * [ ] Does the map file exist ?
-  *   [ ] Is the map rectangular ?
+*   [ ] 맵을 Parse(파싱)합니다.
+    맵을 파싱할 때, 더 나아가기 전에 몇 가지 오류를 미리 확인할 수 있습니다.
+    *   [ ] 맵 파일이 존재합니까?
+    *   [ ] 맵이 직사각형 형태입니까?
+        모든 줄의 길이가 같아야 합니다.
+    *   [ ] 맵 파일에 내용이 있습니까?
+    *   [ ] 맵이 벽으로 둘러싸여 있습니까?
+        *   [ ] 첫 번째 및 마지막 행과 열을 확인합니다. 모두 `1`이어야 합니다.
+    *   [ ] Exit(출구)가 단 하나만 있습니까?
+        *   [ ] 맵에서 찾은 `E`의 개수를 세어 확인합니다.
+    *   [ ] 시작 위치가 단 하나만 있습니까?
+        *   [ ] 맵에서 찾은 `P`의 개수를 세어 확인합니다.
+    *   [ ] Collectible(수집품)이 최소한 하나 이상 있습니까?
+        *   [ ] 맵에서 찾은 `C`의 개수를 세어 확인합니다.
 
-      All the lines should be the same length.
-  * [ ] Is there something in the map file ?
-  * [ ] Is the map enclosed in walls ?
-    * [ ] Check the first and last lines and columns, they should all be `1`
-  * [ ] Is there only one exit ?
-    * [ ] Simply count how many `E` you find on the map.
-  * [ ] Is there only one start position ?
-    * [ ] Simply count how many `P` you find on the map.
-  * [ ] Is there at least one collectibles ?
-    * [ ] Simply count how many `C` you find on the map.
+이 모든 검사는 맵 파일을 파싱할 때 직접 수행할 수 있습니다. 이제 이 모든 검사가 통과되었다면, 맵에 대해 확인해야 할 두 가지가 더 있습니다. 바로 시작 위치에서 Exit에 접근할 수 있는지, 그리고 시작 위치에서 모든 Collectible에 접근할 수 있는지 확인하는 것입니다.
 
-All these checks can be made directly when you parse the map file. Now, if all these checks are ok, there's two more things you have to check on the map : is the exit accessible from the start position, and are all the collectibles accessible from the start position.
+Exit를 잠금 해제하려면 모든 Collectible을 수집해야 한다는 점을 기억하십시오. 따라서 모든 Collectible에 접근할 수 없다면 맵은 유효하지 않습니다.
 
-Remember that you have to collect all collectibles to unlock the exit, so if not all collectibles are accessible, the map is invalid.
+제 코드에서 이를 확인한 방법은 일종의 Flood Fill 알고리즘을 사용하여 시작 위치에서 시작하는 것입니다. 저는 모든 타일(tiles)과 그 유형을 확인하고, 타일의 유형이 Collectible일 때마다 카운터를 업데이트합니다. Exit에 대해서도 마찬가지입니다.
 
-The way that I checked that in my code is by using a sort of flood fill algorithm, starting on the start position. I check every tiles and what type they are, I update a counter each time the type of the tile is a collectible, same for the exit.
+최종적으로 Collectible 카운터가 맵을 파싱할 때 찾았던 Collectible 수와 동일한지 쉽게 확인할 수 있습니다. 만약 다르다면, 모든 Collectible에 접근할 수 없다는 의미이므로 맵은 유효하지 않습니다. Exit에 대해서도 같은 작업을 수행하여, Exit 카운터가 0이면 Exit에 접근할 수 없다는 의미이므로 맵은 유효하지 않습니다.
 
-At the end I can easily check if the collectibles counter is equal to the number of collectibles that I found when parsing the map, if they are different, not all collectibles are accessible, thus the map is invalid.\
-I do the same thing for the exit, if the exit counter is 0, this means the exit is inaccessible, thus the map is invalid.
+맵이 유효한지 확인하는 또 다른 방법은 Exit에서 시작 위치로, 그리고 모든 Collectible에서 시작 위치로 Backtracking 알고리즘을 사용하는 것입니다. 만약 그중 어느 하나라도 시작 위치에 도달할 수 없다면 맵은 유효하지 않습니다.
 
-An other way to check if the map is valid is to use a backtracking algorithm from the exit to the start position, and from all the collectibles to the start position. If any one of them couldn't reach the start position, the map is invalid.
+### 게임 체크리스트
 
-### Game checklist
+*   [ ] MiniLibX를 사용하여 윈도우를 생성합니다.
+    *   [ ] 필요한 모든 정보를 저장하기 위한 필수 구조체(Structure)를 생성합니다.
+*   [ ] 게임에 필요한 모든 Sprite(이미지)를 로드하고 메모리에 저장합니다.
+*   [ ] 다양한 Hook을 생성합니다.
+    *   [ ] `key_handler`
+    *   [ ] `mouse_handler` (필요한 경우)
+    *   [ ] `close_handler`: 빨간색 십자가(닫기 버튼)에 대한 Hook으로, 프로그램을 올바르게 종료합니다.
+    *   [ ] `loop_hook` (=> 게임 루프)
 
-* [ ] Create a window using MiniLibX
-  * [ ] Create the required structure to store all the necessary information
-* [ ] Load all the required sprites (images) for your game and store them into memory
-* [ ] Create the different hooks
-  * [ ] key\_handler
-  * [ ] mouse\_handler (if necessary)
-  * [ ] close\_handler, this is a hook on the red cross that closes the program correctly
-  * [ ] loop\_hook (=> you game loop)
+### 렌더링 체크리스트
 
-### Render checklist
+*   [ ] 배경을 그립니다.
+*   [ ] 맵의 움직이지 않는 부분을 그립니다.
+*   [ ] 플레이어를 그립니다.
 
-* [ ] Draw the background
-* [ ] Draw the not movable parts of the map
-* [ ] Draw the player
+### 키 핸들러 (Key handler)
 
-### Key handler
+키 핸들러는 (적어도 제 게임에서는) 주로 W, A, S, D가 눌렸을 때 `update_player_position` 함수를 호출하거나, ESC 키를 눌렀을 때 프로그램을 올바르게 종료하는 데 사용됩니다.
 
-The key handler (at least in my game), is mainly used to call the update\_player\_position function when W, A, S or D is pressed or to close the program correctly when we press the ESC key.
+플레이어 위치를 업데이트하기 전에 고려해야 할 몇 가지 사항이 있습니다.
 
-There's some things you have to think about before updating the player position.
+*   [ ] 요청된 새 위치가 Wall(벽)입니까?
+    *   [ ] 새 위치가 Wall이라면, 아무것도 하지 않습니다. 과제는 플레이어가 벽을 통과할 수 없어야 한다고 명시하고 있습니다.
+*   [ ] 요청된 새 위치가 맵 내부에 있습니까?
+    *   [ ] 새 위치가 맵 밖에 있다면, 아무것도 하지 않습니다. 맵이 벽으로 둘러싸여 있기 때문에 보통 이런 일은 발생하지 않지만, 만일을 위해 확인하는 것이 좋습니다.
+*   [ ] 요청된 새 위치가 Collectible입니까?
+    *   [ ] 그렇다면, 수집된 아이템 카운터를 업데이트하고 다음을 확인합니다.
+        *   [ ] 모든 Collectible이 수집되었는지 확인합니다.
+            *   [ ] 모두 수집되었다면, Exit를 잠금 해제합니다.
+        *   [ ] 맵 2D Array를 업데이트하고 Collectible을 "바닥(floor)" 타일로 대체하여 다음 게임 루프 반복 시 해당 Collectible이 그려지지 않도록 합니다.
+*   [ ] 요청된 새 위치가 Wall도 아니고, Collectible도 아니며, 맵 밖도 아니라면, 단순히 플레이어 위치를 요청된 새 위치로 설정합니다.
 
-* [ ] Is the requested new position a Wall ?
-  * [ ] if the new position is a Wall, don't do anything. The subject says that the player should not be able to go through walls
-* [ ] Is the requested new position inside the map ?
-  * [ ] if the new position is outside the map, don't do anything. Normally this shouldn't happen since the map is enclosed in walls but hey, never too sure.
-* [ ] Is the requested new position a Collectible ?
-  * [ ] if yes, update the collected items counter and check
-    * [ ] check if all collectibles have been collected
-      * [ ] if yes, unlock the exit
-    * [ ] update your map 2D array and replace the collectible by a "floor" tile so that it is not drawn in the next iteration of the game loop.
-* [ ] If the requested new position is not a wall, nor a collectible, nor outside the map, simply set the player position to the requested new position.
+### 마지막으로 드리는 말씀
 
-### Final word
+이 모든 체크리스트를 조합하여 게임이 작동하도록 해야 하며, 여러분의 코딩 스타일에 맞게 이를 적용해야 합니다. 앞에서 말씀드렸듯이, 코드가 궁금하시다면 제 Github를 확인하고 저에게 질문해 주십시오.
 
-You have to assemble all these checklist to get the game working, and adapt it to your style of coding. As said earlier, if you want to see some code, take a look at my Github and ask me questions.
+이것이 기본적으로 작동하는 게임을 만들기 위해 해야 할 모든 일이지만, 가장 큰 부분은 여러분이 원하는 테마에 맞는 Asset(자산)을 찾는 것입니다.
 
-That's basically all that you have to do to have a working game, but the big part is to find assets that fit the theme you want for your game.&#x20;
+(과제에 명시된 대로) [itch.io](https://itch.io/)에서 많은 무료 Asset을 찾을 수 있습니다. 또한 직접 그림을 그릴 수도 있습니다.
 
-You can find a lot of free assets on [itch.io](https://itch.io/) (as said in the subject). You can also draw them yourself.&#x20;
-
-You could use a program like [Aseprite](https://www.aseprite.org/) to draw some pixel art assets yourself, it's not free but it works great !
+[Aseprite](https://www.aseprite.org/)와 같은 프로그램을 사용하여 픽셀 아트 Asset을 직접 그릴 수도 있습니다. 이 프로그램은 무료는 아니지만 매우 훌륭하게 작동합니다!

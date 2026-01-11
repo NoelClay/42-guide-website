@@ -1,12 +1,11 @@
 ---
 description: >-
-  The purpose of this project is to code a small data exchange program using
-  UNIX signals. It is an introductory project for the bigger UNIX projects that
-  will appear later on in the cursus.
+  이 프로젝트의 목적은 UNIX signals을 사용하여 작은 데이터 교환 프로그램을 코딩하는 것입니다.
+  이것은 커리큘럼 후반에 등장할 더 큰 UNIX 프로젝트들을 위한 입문 프로젝트입니다.
 ---
 
 # minitalk
 
-Well... like almost all the first times I read the topics of the 42 projects, I didn't understand much of the terms used. I will try to make you understand all these terms to better carry out the project later.&#x20;
+음... 42 프로젝트의 주제(topics)를 처음 읽을 때 대부분의 경우와 마찬가지로, 저는 사용된 용어들을 거의 이해하지 못했습니다. 나중에 프로젝트를 더 잘 수행할 수 있도록 여러분이 이 모든 용어들을 이해하도록 돕겠습니다.&#x20;
 
-Okay. Here we go. Let's try to understand the subject first.
+좋습니다. 시작해 봅시다. 먼저 주제를 이해하도록 노력해 봅시다.

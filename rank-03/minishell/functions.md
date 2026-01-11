@@ -1,8 +1,6 @@
-# ▪️ Functions
+# ▪️ 함수
 
-We can use some function that we already know (like `printf`, `malloc`, `free`, etc) so I will not describe them here.
-
-You will probably not use all of these functions but at least you have somewhere where you can easily find links to the manual pages. And for some, an example on how to use them.
+이미 알고 있는 일부 함수(`printf`, `malloc`, `free` 등)는 여기서 설명하지 않겠습니다. 아마 이 함수들을 모두 사용하지는 않겠지만, 적어도 매뉴얼 페이지 링크를 쉽게 찾을 수 있는 곳을 제공합니다. 또한 일부 함수에 대해서는 사용 예시도 함께 제공합니다.
 
 ### readline()
 
@@ -10,11 +8,11 @@ You will probably not use all of these functions but at least you have somewhere
 char *readline (const char *prompt);
 ```
 
-The `readline()` function reads a line from the terminal and returns it, using `prompt` as a prompt. If no prompt is given as parameter, no prompt will be shown in the terminal. The line returned is allocated with `malloc` and we have to free it ourselves.
+`readline()` 함수는 `prompt`를 프롬프트로 사용하여 터미널에서 한 줄을 읽고 반환합니다. 프롬프트가 매개변수로 주어지지 않으면 터미널에 프롬프트가 표시되지 않습니다. 반환되는 줄은 `malloc`으로 할당되므로, 사용 후 직접 해제해야 합니다(`free`).
 
 <details>
 
-<summary>readline()</summary>
+<summary>readline() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -32,7 +30,7 @@ int main(void)
 ```
 {% endcode %}
 
-Compiling this programm and running will result in the following.
+이 프로그램을 컴파일하고 실행하면 다음과 같은 결과가 나타납니다.
 
 ```
 $> ./minishell
@@ -43,7 +41,7 @@ $>
 
 </details>
 
-You can find more information about `readline()` [here](https://man7.org/linux/man-pages/man3/readline.3.html).
+`readline()`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/readline.3.html)에서 찾을 수 있습니다.
 
 ### rl\_clear\_history()
 
@@ -51,7 +49,7 @@ You can find more information about `readline()` [here](https://man7.org/linux/m
 void rl_clear_history(void);
 ```
 
-The `rl_clear_line()` function clears the history list by deleting all of the entries. The `rl_clear_line()` function frees data that the `readline` library saves in the histroy list.
+`rl_clear_history()` 함수는 모든 항목을 삭제하여 히스토리 목록을 지웁니다. 이 함수는 `readline` 라이브러리가 히스토리 목록에 저장하는 데이터를 해제합니다.
 
 ### rl\_on\_new\_line()
 
@@ -59,11 +57,11 @@ The `rl_clear_line()` function clears the history list by deleting all of the en
 int rl_on_new_line(void);
 ```
 
-The `rl_on_new_line()` function tells the update routine that we have moved onto a new empty line, usually used after outputting a line.
+`rl_on_new_line()` 함수는 업데이트 루틴에 우리가 새롭고 비어 있는 줄로 이동했음을 알려주며, 일반적으로 줄을 출력한 후에 사용됩니다.
 
 ### rl\_replace\_line()
 
-I didn't find any information on that function.
+이 함수에 대한 정보는 찾지 못했습니다.
 
 ### rl\_redisplay()
 
@@ -71,7 +69,7 @@ I didn't find any information on that function.
 int rl_redisplay(void);
 ```
 
-The `rl_redisplay()` change what's displayed on the screen to reflect the current contents of `rl_line_buffer`.
+`rl_redisplay()` 함수는 화면에 표시되는 내용을 변경하여 현재 `rl_line_buffer`의 내용을 반영합니다.
 
 ### add\_history()
 
@@ -79,7 +77,7 @@ The `rl_redisplay()` change what's displayed on the screen to reflect the curren
 void add_history(char *s);
 ```
 
-The `add_history()` function saves the line passed as parameter in the history so it can be retrieved later in the terminal (like pressing the up arrow in bash).
+`add_history()` 함수는 매개변수로 전달된 줄을 히스토리에 저장하여, 나중에 터미널에서 검색할 수 있도록 합니다 (예: bash에서 위쪽 화살표를 누르는 것과 같이).
 
 ### getcwd()
 
@@ -87,11 +85,11 @@ The `add_history()` function saves the line passed as parameter in the history s
 </strong><strong>char *getcwd(char *buf, size_t size);
 </strong></code></pre>
 
-The `getcwd()` returns a null-terminated string containing the absolute pathname that is the current working directory of the calling process. The pathname is returned as the function result and via the argument `buf`.
+`getcwd()` 함수는 호출 프로세스의 현재 작업 디렉터리(current working directory)인 절대 경로명을 포함하는 널 종료(null-terminated) 문자열을 반환합니다. 경로명은 함수의 결과 및 `buf` 인수를 통해 반환됩니다.
 
 <details>
 
-<summary>getcwd() example</summary>
+<summary>getcwd() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -115,7 +113,7 @@ $> pwd: /Users/saeby/Documents/tmp
 
 </details>
 
-You can find more information about `getcwd()` [here](https://man7.org/linux/man-pages/man3/getcwd.3.html).
+`getcwd()`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/getcwd.3.html)에서 찾을 수 있습니다.
 
 ### chdir()
 
@@ -124,11 +122,11 @@ You can find more information about `getcwd()` [here](https://man7.org/linux/man
 int chdir(const char *path);
 ```
 
-`chdir()` changes the current working directory of the calling process to the directory specified in `path`.
+`chdir()` 함수는 호출 프로세스의 현재 작업 디렉터리를 `path`에 지정된 디렉터리로 변경합니다.
 
 <details>
 
-<summary>chdir() example</summary>
+<summary>chdir() 예시</summary>
 
 ```c
 #include <unistd.h>
@@ -154,7 +152,7 @@ $> pwd after chdir: /Users/saeby/Documents/42/minishell
 
 </details>
 
-You can find more information about `chdir()` [here](https://man7.org/linux/man-pages/man2/chdir.2.html).
+`chdir()`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man2/chdir.2.html)에서 찾을 수 있습니다.
 
 ### stat() & lstat() & fstat()
 
@@ -167,9 +165,9 @@ int fstat(int fd, struct stat *statbuf);
 ```
 {% endcode %}
 
-These functions return information about a file in the structure pointed to by `statbuf`.
+이 함수들은 `statbuf`가 가리키는 구조체에 파일에 대한 정보를 반환합니다.
 
-You can find more detailed information about these functions [here](../../exams/exam-rank-02/level-1/ft_swap.md).
+이 함수들에 대한 더 자세한 정보는 [여기](../../exams/exam-rank-02/level-1/ft_swap.md)에서 찾을 수 있습니다.
 
 ### opendir()
 
@@ -179,9 +177,9 @@ You can find more detailed information about these functions [here](../../exams/
 DIR *opendir(const char *name);
 ```
 
-The `opendir()` function opens a directory stream corresponding to the directory name, and returns a pointer to the directory stream. The stream is positioned at the first entry in the directory.
+`opendir()` 함수는 디렉터리 이름에 해당하는 디렉터리 스트림을 열고, 디렉터리 스트림에 대한 Pointer를 반환합니다. 스트림은 디렉터리의 첫 번째 항목에 위치합니다.
 
-You can find more information about the `opendir` function [here](https://man7.org/linux/man-pages/man3/opendir.3.html).
+`opendir` 함수에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/opendir.3.html)에서 찾을 수 있습니다.
 
 ### readdir()
 
@@ -192,9 +190,9 @@ struct dirent *readdir(DIR *dirp);
 ```
 {% endcode %}
 
-The `readdir()` function returns a pointer to a `dirent` structure representing the next directory entry in the directory stream pointed to by `dirp`. It returns `NULL` on reaching the end of the directory stream or if an error occured.
+`readdir()` 함수는 `dirp`가 가리키는 디렉터리 스트림에서 다음 디렉터리 항목을 나타내는 `dirent` 구조체에 대한 Pointer를 반환합니다. 디렉터리 스트림의 끝에 도달하거나 오류가 발생하면 `NULL`을 반환합니다.
 
-You can find more information about `readdir` [here](https://man7.org/linux/man-pages/man3/readdir.3.html).
+`readdir`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/readdir.3.html)에서 찾을 수 있습니다.
 
 ### closedir()
 
@@ -204,9 +202,9 @@ You can find more information about `readdir` [here](https://man7.org/linux/man-
 int closedir(DIR *dirp);
 ```
 
-The `closedir()` function closes the directory stream associated with `dirp`. A successful call to `closedir()` also closes the underlying file descriptor associated with `dirp`. The directory stream descriptor `dirp` is not available after this call.
+`closedir()` 함수는 `dirp`와 연결된 디렉터리 스트림을 닫습니다. `closedir()` 호출이 성공하면 `dirp`와 연결된 기본 파일 디스크립터(file descriptor)도 닫힙니다. 이 호출 후에는 디렉터리 스트림 디스크립터 `dirp`를 사용할 수 없습니다.
 
-You can find more information about `closedir` [here](https://man7.org/linux/man-pages/man3/closedir.3.html).
+`closedir`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/closedir.3.html)에서 찾을 수 있습니다.
 
 ### strerror()
 
@@ -215,9 +213,9 @@ You can find more information about `closedir` [here](https://man7.org/linux/man
 char *strerror(int errnum);
 ```
 
-The `strerror()` function returns a pointer to a string that describes the error code passed in the argument errnum. This string must not be modified by the application, but may be modified by a subsequent call to `strerror()` or `strerror_l()`. No other library function, including `perror()`, will modify this string.
+`strerror()` 함수는 `errnum` 인수로 전달된 오류 코드를 설명하는 문자열에 대한 Pointer를 반환합니다. 이 문자열은 애플리케이션에 의해 수정되어서는 안 되지만, 이후의 `strerror()` 또는 `strerror_l()` 호출에 의해 수정될 수 있습니다. `perror()`를 포함한 다른 라이브러리 함수는 이 문자열을 수정하지 않습니다.
 
-You can find more information about `strerror` [here](https://man7.org/linux/man-pages/man3/strerror.3.html).
+`strerror`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/strerror.3.html)에서 찾을 수 있습니다.
 
 ### perror()
 
@@ -226,9 +224,9 @@ You can find more information about `strerror` [here](https://man7.org/linux/man
 void perror(const char *s);
 ```
 
-The `perror()` function produces a message on standard error describing the last error encountered during a call to a system or library function.
+`perror()` 함수는 시스템 또는 라이브러리 함수 호출 중에 발생한 마지막 오류를 설명하는 메시지를 표준 오류(standard error)로 출력합니다.
 
-You can find more information about `perror` [here](../../exams/exam-rank-02/level-1/ft_swap.md).
+`perror`에 대한 더 자세한 정보는 [여기](../../exams/exam-rank-02/level-1/ft_swap.md)에서 찾을 수 있습니다.
 
 ### isatty()
 
@@ -237,9 +235,9 @@ You can find more information about `perror` [here](../../exams/exam-rank-02/lev
 int isatty(int fd);
 ```
 
-The `isatty` function tests wether `fd` is a terminal.
+`isatty` 함수는 `fd`가 터미널인지 테스트합니다.
 
-You can find more information about `isatty` [here](https://man7.org/linux/man-pages/man3/isatty.3.html).
+`isatty`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/isatty.3.html)에서 찾을 수 있습니다.
 
 ### ttyname()
 
@@ -248,9 +246,9 @@ You can find more information about `isatty` [here](https://man7.org/linux/man-p
 char **ttyname(int fd);
 ```
 
-The `ttyname()` function returns a pointer to the null-terminated pathname of the terminal device that is open on the file descriptor `fd`, or `NULL` on error.
+`ttyname()` 함수는 파일 디스크립터 `fd`에서 열려 있는 터미널 장치의 널 종료 경로명에 대한 Pointer를 반환하거나, 오류 발생 시 `NULL`을 반환합니다.
 
-You can find more information about `ttyname()` [here](https://man7.org/linux/man-pages/man3/ttyname.3.html).
+`ttyname()`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/ttyname.3.html)에서 찾을 수 있습니다.
 
 ### ttyslot()
 
@@ -259,7 +257,7 @@ You can find more information about `ttyname()` [here](https://man7.org/linux/ma
 int ttyslot(void);
 ```
 
-This is a legacy function with some backstory, you can read all about it and how it works [here](https://man7.org/linux/man-pages/man3/ttyslot.3.html).
+이것은 약간의 배경 스토리가 있는 레거시 함수입니다. 작동 방식 및 모든 내용에 대해 [여기](https://man7.org/linux/man-pages/man3/ttyslot.3.html)에서 읽을 수 있습니다.
 
 ### ioctl()
 
@@ -268,7 +266,7 @@ This is a legacy function with some backstory, you can read all about it and how
 int ioctl(int fd, unsigned long request, ...);
 ```
 
-The `ioctl()` system call manipulates the underlying device parameters of a special files. You can find more detailed information [here](https://man7.org/linux/man-pages/man2/ioctl.2.html).
+`ioctl()` 시스템 호출은 특수 파일의 기본 장치 매개변수를 조작합니다. 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man2/ioctl.2.html)에서 찾을 수 있습니다.
 
 ### getenv()
 
@@ -277,9 +275,9 @@ The `ioctl()` system call manipulates the underlying device parameters of a spec
 char *getenv(const char *name);
 ```
 
-The `getenv()` function searches the environment list to find the environment variable name, and returns a pointer to the corresponding value string.
+`getenv()` 함수는 환경 목록을 검색하여 환경 변수 `name`을 찾고, 해당 값 문자열에 대한 Pointer를 반환합니다.
 
-You can find more information about `getenv()` [here](https://man7.org/linux/man-pages/man3/getenv.3.html).
+`getenv()`에 대한 더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/getenv.3.html)에서 찾을 수 있습니다.
 
 ### tcsetattr()
 
@@ -288,7 +286,7 @@ You can find more information about `getenv()` [here](https://man7.org/linux/man
 int tcsetattr(int fildes, int optional_actions, const struct *termios_p);
 ```
 
-The `tcsetattr()` function shall set the parameters associated with the terminal referred to by the open file descriptor `fildes` from the `termios` structure referenced by `termios_p` as described [here](https://man7.org/linux/man-pages/man3/tcsetattr.3p.html).
+`tcsetattr()` 함수는 [여기](https://man7.org/linux/man-pages/man3/tcsetattr.3p.html)에 설명된 대로, `termios_p`에 의해 참조되는 `termios` 구조체에서 열린 파일 디스크립터 `fildes`가 참조하는 터미널과 관련된 매개변수를 설정합니다.
 
 ### tcgetattr()
 
@@ -297,9 +295,9 @@ The `tcsetattr()` function shall set the parameters associated with the terminal
 int tcgetattr(int fildes, struct termios *termios_p);
 ```
 
-The `tcgetattr()` function shall get the parameters associated with with the terminal reffered to by `fildes` and store them in the `termios` structure referenced by `termios_p`.
+`tcgetattr()` 함수는 `fildes`가 참조하는 터미널과 관련된 매개변수를 가져와서 `termios_p`가 참조하는 `termios` 구조체에 저장합니다.
 
-You can find more detailed information [here](https://man7.org/linux/man-pages/man3/tcgetattr.3p.html).
+더 자세한 정보는 [여기](https://man7.org/linux/man-pages/man3/tcgetattr.3p.html)에서 찾을 수 있습니다.
 
 ### tgetent()
 
@@ -314,4 +312,4 @@ char *tgoto(const char *cap, int col, int row);
 int tputs(const char *str, int affcnt, int (*putc)(int));
 ```
 
-These routines are included as a conversion aid for programs that use the `termcap` library. You can find more information about all of them [here](https://linux.die.net/man/3/tgetent).
+이 루틴들은 `termcap` 라이브러리를 사용하는 프로그램의 변환을 돕기 위해 포함됩니다. 이 모든 함수에 대한 더 자세한 정보는 [여기](https://linux.die.net/man/3/tgetent)에서 찾을 수 있습니다.

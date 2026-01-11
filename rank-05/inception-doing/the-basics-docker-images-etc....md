@@ -1,2 +1,1 @@
-# 🕓 The basics (Docker, Images, etc...)
-
+# 🕓 기본 개념 (Docker, Image 등)

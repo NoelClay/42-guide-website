@@ -1,24 +1,23 @@
 # wdmatch
 
-### Subject
+### 주제
 
 ```
 Assignment name  : wdmatch
 Expected files   : wdmatch.c
 Allowed functions: write
 --------------------------------------------------------------------------------
+```
 
-Write a program that takes two strings and checks whether it's possible to
-write the first string with characters from the second string, while respecting
-the order in which these characters appear in the second string.
+두 개의 문자열을 인수로 받아, 두 번째 문자열에 나타나는 문자의 순서를 존중하면서, 두 번째 문자열의 문자를 사용하여 첫 번째 문자열을 만들 수 있는지 확인하는 프로그램을 작성하십시오.
 
-If it's possible, the program displays the string, followed by a \n, otherwise
-it simply displays a \n.
+만들 수 있다면, 프로그램은 해당 문자열을 표시하고 그 뒤에 $\texttt{\n}$을 출력합니다. 그렇지 않다면 단순히 $\texttt{\n}$만 표시합니다.
 
-If the number of arguments is not 2, the program displays a \n.
+인수의 개수가 2개가 아니라면, 프로그램은 $\texttt{\n}$을 표시합니다.
 
-Examples:
+예시:
 
+```
 $>./wdmatch "faya" "fgvvfdxcacpolhyghbreda" | cat -e
 faya$
 $>./wdmatch "faya" "fgvvfdxcacpolhyghbred" | cat -e
@@ -31,7 +30,7 @@ $>./wdmatch | cat -e
 $
 ```
 
-### Commented solution
+### 주석이 달린 솔루션
 
 <details>
 
@@ -52,15 +51,14 @@ int main(int ac, char **av)
         while (s1[len])
             len++;
         
-        // checking all characters of s1 in s2
+        // s2에서 s1의 모든 문자를 확인합니다.
         while (i < len && *s2)
         {
-            // next line checks if current s1 char is
-            // equal to s2 char, after the comparison is
-            // done, we increment the s2 pointer
-            // even if the condition doesn't match
-            // if the condition match, we increment i to
-            // check for next s1 char
+            // 다음 줄은 현재 s1의 문자가
+            // s2의 문자와 같은지 확인합니다.
+            // 비교가 완료된 후, 조건이 일치하지 않더라도
+            // s2 Pointer를 증가시킵니다.
+            // 만약 조건이 일치하면, 다음 s1 문자를 확인하기 위해 i를 증가시킵니다.
             if (s1[i] == *s2++)
                 i++;
         }

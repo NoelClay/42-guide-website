@@ -1,2 +1,1 @@
-# 📑 LIBC functions
-
+# 📑 LIBC 함수들

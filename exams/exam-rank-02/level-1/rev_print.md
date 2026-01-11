@@ -1,6 +1,6 @@
 # rev\_print
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -25,7 +25,13 @@ $
 ```
 {% endcode %}
 
-### Commented solution
+문자열을 인수로 받아, 해당 문자열을 역순으로 출력하고 그 뒤에 개행 문자(newline)를 출력하는 프로그램을 작성하십시오.
+
+매개변수의 개수가 1이 아니라면, 프로그램은 개행 문자만 출력합니다.
+
+예시는 위 내용을 참고하시기 바랍니다.
+
+### 주석 처리된 해답
 
 <details>
 
@@ -42,12 +48,12 @@ int main(int ac, char *av[])
         int i;
         
         i = 0;
-        /* looping over the whole string to find its length
+        /* 문자열의 길이를 찾기 위해 전체 문자열을 반복합니다.
          */
         while (av[1][i])
             i++;
-        /* looping over the length of the string (length to 0)
-         * and writing each character one by one
+        /* 문자열의 길이만큼 (길이부터 0까지) 반복합니다.
+         * 그리고 각 문자를 하나씩 작성(write)합니다.
          */
         while (i--)
             write(1, &av[1][i], 1);

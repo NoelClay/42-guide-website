@@ -1,62 +1,55 @@
 ---
 description: >-
-  Now that you have understood the basics and how the function to be replicated
-  works, let's start building your own by following this guide.
+  이제 기본 사항과 복제해야 할 함수가 어떻게 작동하는지 이해했으니, 이 가이드를 따라 자신만의 함수를 구축하기 시작해 보겠습니다.
 ---
 
-# ▪️ Building the thing
+# ▪️ ft_printf 구축하기
 
-In this part, we will not give you the solution. We will try to describe the steps you need to go through to successfully write your own printf :)
+이 부분에서는 정답을 제공하지 않습니다. 자신만의 printf를 성공적으로 작성하기 위해 거쳐야 할 단계를 설명하려고 합니다 :)
 
 {% hint style="danger" %}
-The allowed functions for this project are: `malloc, free, write, va_start, va_arg, va_copy, va_end`. Any other function used will cause the project to fail
+이 프로젝트에서 허용되는 함수는 다음과 같습니다: `malloc, free, write, va_start, va_arg, va_copy, va_end`. 다른 함수를 사용하면 프로젝트가 실패하게 됩니다.
+
+또한 사용할 모든 함수가 포함된 Makefile과 헤더 파일을 생성해야 합니다.
 {% endhint %}
 
-You will also have to make a Makefile and a header file with all the functions you will use.
+## 일반적인 구성
 
+_코딩을 시작하기 전에 제가 가장 좋아하는 것은 종이에 문제를 먼저 명확하게 정의하는 것입니다. 끝없는 혼란에 빠지기 전에 각 단계를 정확하게 설명하십시오._ 이는 문제를 해결하는 여러 방법 중 하나이자 사고방식 중 하나입니다.
 
-
-## General Formulation
-
-_The thing I love to do before coding is to start by stating the problem on paper. Describe each step precisely before going on an endless madness._ This is one way of thinking and one way to solve the problem, among many others.
-
-1. The printf function will write each character of the intial string, one by one, until it finds a %.
-2. When it finds a %, it will look at the element in the next index/position. It will find the character that will define the type of the first variable argument.&#x20;
-3. Depending on what it finds, it will call a method that will display the argument of the particular type at output.\
-   -> if there is a "s" after the %, then you will need a function that displays strings.\
-   -> if there is a "d" after the %, then you will need a function that displays numbers.\
-   etc.
-4. Once the first variable argument has been written, you go back to step 1, until the string is finished (aka, until you find a null character (\0)).
+1. printf 함수는 초기 문자열의 각 문자를 '%'를 찾을 때까지 하나씩 작성합니다.
+2. '%'를 발견하면, 다음 인덱스/위치의 요소를 확인합니다. 여기서 첫 번째 가변 인수의 유형을 정의하는 문자를 찾게 됩니다.
+3. 찾은 유형에 따라, 해당 특정 유형의 인수를 출력에 표시하는 메서드를 호출하게 됩니다.
+   -> % 뒤에 "s"가 있다면, 문자열을 표시하는 함수가 필요합니다.
+   -> % 뒤에 "d"가 있다면, 숫자를 표시하는 함수가 필요합니다.
+   등등.
+4. 첫 번째 가변 인수가 작성되면, 문자열이 끝날 때까지 (즉, 널 문자(\0)를 찾을 때까지) 1단계로 돌아갑니다.
 
 {% hint style="warning" %}
-(1 - 4): Don't forget to count the number of characters printed each time, in order to return the final number of characters at the end of the function.
+(1 - 4): 함수가 끝날 때 최종 문자 수를 반환하기 위해, 매번 출력된 문자 수를 세는 것을 잊지 마십시오.
 {% endhint %}
 
+## 구체적인 예시
 
+이 예시를 자세히 살펴보고 <mark style="color:red;">**다음 문장들을 코드로 변환해 보도록**</mark> 하겠습니다.
 
-## Specific example
+<figure><img src="../../.gitbook/assets/process.PNG" alt=""><figcaption><p>시각적 예시</p></figcaption></figure>
 
-Let's take a closer look at this example and <mark style="color:red;">**try to translate the next sentences into code.**</mark>&#x20;
+1. 우리의 프로그램은 인덱스 0부터 16까지의 문자를 하나씩 작성하며 "count" 변수를 증가시킵니다.
+   -> _이 프로그램 단계에서 printf 함수는 "hello my name is "를 출력해야 하며, 함수가 반환하는 숫자는 17입니다._
+2. '%' 문자를 만나면 쓰기를 멈추고 한 위치 더 멀리 확인합니다.
+   -> _이 단계에서는 위치/인덱스 18을 가리키고 있습니다._
+3. 프로그램은 이제 이 위치(%' 뒤의 위치)에 있는 요소의 유형을 확인합니다. 우리의 경우, 첫 번째 동적 인수의 유형은 's' (%s)입니다.
+4. 프로그램이 방금 찾은 유형의 문자를 하나씩 출력해야 합니다. 문자열이므로, 각 문자를 출력하기 위해 "libft" 프로젝트에서 생성했던 "putstr" 함수를 사용할 수 있습니다. 이 문자열에서 출력될 문자 수를 세고 이를 초기 count에 추가하는 것도 잊지 마십시오.
+5. 첫 번째 동적 인수(%s에 해당하는 인수)가 표시되면, 초기 문장으로 돌아가서 작업을 계속할 수 있습니다.
+   -> _이 프로그램 단계에서 printf 함수는 "hello my name is Laura"를 출력해야 하며, 함수가 반환하는 숫자는 21입니다 (= 출력된 총 문자 수)._
+6. 우리의 프로그램은 다음으로 인덱스 20부터 27까지의 각 문자를 하나씩 다시 작성하면서 "count" 변수를 증가시킵니다.
+7. 프로그램은 다시 '%'를 발견하고 (위치 28), 쓰기를 멈춘 다음 다음 요소를 찾습니다.
+8. 프로그램은 이제 이 위치(%' 뒤의 위치)에 있는 요소의 유형을 확인합니다. 우리의 경우, 두 번째 동적 인수의 유형은 'd' (%d)입니다. 이는 숫자를 출력하는 함수를 호출해야 함을 의미합니다.
+   -> _이 프로그램 단계에서 printf 함수는 "hello my name is Laura and I'm 23"를 출력해야 합니다._
+9. 우리의 프로그램은 다음으로 인덱스 30부터 끝까지의 각 문자를 하나씩 다시 작성하며 "count" 변수를 증가시킵니다.
+   -> _이 프로그램 단계에서 printf 함수는 "hello my name is Laura and I'm 23 years old"를 출력해야 하며, 함수가 반환하는 숫자는 42입니다 (총 42개의 문자가 출력됨)._
 
-<figure><img src="../../.gitbook/assets/process.PNG" alt=""><figcaption><p>visual example</p></figcaption></figure>
+이것이 전부입니다! printf 프로젝트는 비교적 쉽게 완성할 수 있습니다! 직접 해보는 것이 항상 더 좋기 때문에 정답을 알려드리지 않겠습니다 (그리고 이 프로젝트는 그리 어렵지 않습니다) :) 위 단계들이 프로젝트의 80~90%를 성공적으로 완수하는 데 도움이 될 것이라고 생각합니다. 그 이후에는 여러분이 스스로 발견해야 할 몇 가지 미묘한 부분들이 있습니다 (스포일러: Pointer나 16진수를 표시하는 것은 단순히 문자를 표시하는 것보다 약간 더 어렵습니다).
 
-1. Our program will write the characters from index 0 to 16, one by one, while incrementing the "count" variable. \
-   &#xNAN;_-> At this stage of the program the printf function should have displayed "hello my name is " and the number the function returns is 17._
-2. Once it encounters the '%' character, it stops writing and it will look one position further. \
-   -_> At this stage we are pointing at the position/index 18._
-3. The program will now check the type of the element in this position (the position after the %). In our case, the type of the first dynamic argument is 's' (%s).
-4. You will have to print one by one, the characters of the type the program has just found. As it is a string, we can for example use the "putstr" function that we created in the "libft" project to print each character. Don't forget to also count the number of characters that will be printed from this string and to add it to the initial count.
-5. Once the first dynamic argument (the one corresponding to %s) has been displayed, you can come back to the initial sentence and continue the work.\
-   -_> At this stage of the program the printf function should have displayed "hello my name is Laura" and the number the function returns is 21 (= total of character displayed)._
-6. Our program will then write again each character, one by one, from index 20 to 27 while incrementing the "count" variable.
-7. The program will again find a % (position 28), stop writing and look for the next element.
-8. The program will now check the type of the element in this position (the position after the %). In our case, the type of the second dynamic argument is 'd' (%d). That means that you will call a function that prints the number. \
-   -_> At this stage of the program the printf function should have displayed "hello my name is Laura and I'm 23"._
-9. Our program will then write again each character, one by one, from index 30 to the end while incrementing the "count" variable.\
-   &#xNAN;_-> At this stage of the program the printf function should have displayed "hello my name is Laura and I'm 23 years old" and the number the function returns is 42 (42 characters printed in total)._
-
-
-
-And that's it ! The printf project is pretty easy to get right! I won't give you the answer because it's always better to do it yourself (and this one is not that hard) :) I think the steps above should help you to succeed 80-90% of the project. Then there are some subtleties that I'll let you discover (spoiler alert: display a pointer or hexadecimal is a bit harder than displaying just a character).
-
-Good luck with you printf... it will be a reallyyyy useful function for all the other projects that you will need to do&#x20;
+printf 프로젝트에 행운을 빕니다... 이 함수는 여러분이 앞으로 해야 할 다른 모든 프로젝트에서 정말 유용하게 사용될 것입니다.

@@ -1,23 +1,17 @@
 ---
-description: The goal of this project is to create a virtual machine using "Virtual Box".
+description: 이 프로젝트의 목표는 "Virtual Box"를 사용하여 Virtual Machine을 생성하는 것입니다.
 ---
 
 # Born2beRoot
 
-If you are like me and **you know nothing about computers**, <mark style="color:green;">welcome!</mark>&#x20;
+저처럼 **컴퓨터에 대해 아무것도 모르는** 분이라면, <mark style="color:green;">환영합니다!</mark>
 
-When I read the B2BR topic for the first time I was completely lost and didn't know where to start... lol. I will try my best to make sure you are not as lost as I was. And don't forget: try to understand what you are doing as much as possible :)&#x20;
+B2BR 주제를 처음 읽었을 때 저는 완전히 길을 잃었고 어디서부터 시작해야 할지 몰랐습니다... 여러분이 저만큼 길을 잃지 않도록 최선을 다해 돕겠습니다. 그리고 잊지 마십시오. 자신이 무엇을 하고 있는지 최대한 이해하려고 노력해야 합니다 :)
 
+**이제 C 프로그래밍과는 크게 관련이 없는 완전히 새로운 주제를 깊이 탐구해 보겠습니다.**
 
-
-**So... Let's dive into a brand new topic, which has not much to do with C programming anymore**
-
-
-
-We will first review all the (unknown) terms used in the subject. The goal is to understand what we are doing and be able to use this knowledge to build our virtual machine. We will then install our virtual machine and start by doing what is required in the subject.
-
-
+먼저 주제에서 사용되는 모든 (낯선) 용어들을 검토할 것입니다. 목표는 우리가 무엇을 하는지 이해하고 이 지식을 활용하여 Virtual Machine을 구축할 수 있게 되는 것입니다. 그런 다음 Virtual Machine을 설치하고 주제에서 요구하는 사항들을 수행하며 시작할 것입니다.
 
 {% hint style="warning" %}
-For this project you will not only be evaluated on the creation of your virtual machine, but you will also be evaluated on theoretical elements (definitions & concepts). So make sure you understand everything !
+이 프로젝트에서는 Virtual Machine 생성뿐만 아니라 이론적인 요소(정의 및 개념)에 대해서도 평가받게 됩니다. 따라서 모든 것을 이해하고 있는지 확인해야 합니다!
 {% endhint %}

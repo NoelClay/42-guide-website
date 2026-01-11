@@ -1,6 +1,6 @@
 # fizz\_buzz
 
-### Subject
+### 과제 내용
 
 {% code overflow="wrap" %}
 ```
@@ -45,7 +45,7 @@ $>
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -55,31 +55,31 @@ $>
 ```c
 #include <unistd.h>
 
-/* we need to have a simple putnbr function for this one
- * since we'll be working with and printing numbers 
+/* 이 과제에서는 숫자를 다루고 출력해야 하므로,
+ * 간단한 putnbr 함수가 필요합니다.
  */
 void ft_putnbr(int i)
 {
-    /* if the number is greater than 9, we call the function again
-     * with the number divided by 10 so that we remove one digit
-     * from the end of it (123 => 12)
+    /* 만약 숫자가 9보다 크다면, 숫자를 10으로 나눈 값으로
+     * 함수를 다시 호출합니다. 이렇게 하면 숫자 끝의 한 자리를
+     * 제거할 수 있습니다 (예: 123 => 12).
      */
     if (i > 9)
         ft_putnbr(i / 10);
-    /* then we can print the character at the index i % 10 (123 => 3)
-     * in a string containing all digits from 0-9
+    /* 그 다음, 0부터 9까지의 모든 숫자가 포함된 문자열에서
+     * i % 10 (예: 123 => 3)에 해당하는 인덱스의 문자를 출력합니다.
      */
     write(1, &"0123456789"[i % 10], 1);
-    /* I'll explain what I wrote above :
-     * in C, strings do not exist, when we store a string
-     * we store an array of character terminated by a NUL-character
-     * so what I did above, is writing a string, and then I did
-     * the same thing you'd do to select an array element with the
-     * square bracket to select a specific index
-     * the second argument of the write function is a char *
-     * that's why I added the & character in front of the string
-     * That way I give to write() a pointer to the specific
-     * character I want to write
+    /* 위에서 작성한 내용에 대해 설명하겠습니다:
+     * C에서 '문자열(string)'은 존재하지 않으며, 문자열을 저장할 때는
+     * NUL 문자로 끝나는 문자 배열을 저장합니다.
+     * 따라서 위에서 제가 한 일은 문자열을 작성한 다음,
+     * 대괄호([ ])를 사용하여 특정 인덱스를 선택함으로써
+     * 배열 요소를 선택하는 것과 동일한 작업을 수행한 것입니다.
+     * write 함수의 두 번째 인수는 char * 타입입니다.
+     * 이것이 제가 문자열 앞에 & 문자를 추가한 이유입니다.
+     * 이렇게 함으로써 write() 함수에 제가 출력하려는
+     * 특정 문자에 대한 Pointer를 제공하게 됩니다.
      */
 }
 

@@ -1,6 +1,6 @@
 # ft\_itoa
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -17,7 +17,16 @@ Your function must be declared as follows:
 char	*ft_itoa(int nbr);
 
 ```
-### Commented solution
+int 타입의 정수를 받아 null-terminated string으로 변환하는 함수를 작성하십시오.
+함수는 반드시 직접 할당(allocate)해야 하는 char 배열에 결과를 담아 반환해야 합니다.
+
+여러분의 함수는 다음과 같이 선언되어야 합니다:
+
+```c
+char	*ft_itoa(int nbr);
+```
+
+### 주석 처리된 해답
 
 <details>
 

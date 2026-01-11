@@ -1,6 +1,6 @@
 # ft\_is\_power\_2
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -19,7 +19,7 @@ int	    is_power_of_2(unsigned int n);
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -30,17 +30,17 @@ int	    is_power_of_2(unsigned int n);
 int	    is_power_of_2(unsigned int n)
 {
 
-// we will initialize a test variable to 1, and we will multiply it by 2 until it is equal to or greater than the variable we have been given as a parameter (n). If the two variables are equal it means that it is a power of 2 (since we have always multiplied this number by 2)
+// test 변수를 1로 초기화하고, 매개변수(n)로 받은 변수와 같거나 커질 때까지 2를 계속 곱합니다. 두 변수가 같다면 (계속 2를 곱해왔기 때문에) 이는 2의 거듭제곱임을 의미합니다.
 	
 	int test = 1;
 
 	while (test <= n)
 	{
 		if (test == n)
-			return  (1); // test is a power of 2
+			return  (1); // test는 2의 거듭제곱입니다.
 		test = test * 2;
 	}
-	// we will leave the loop if the test variable is greater than n. this means that it is not a power of 2 an we need to return 0.
+	// test 변수가 n보다 커지면 루프를 종료합니다. 이는 2의 거듭제곱이 아니라는 뜻이므로 0을 반환해야 합니다.
 	return (0);
 }
 

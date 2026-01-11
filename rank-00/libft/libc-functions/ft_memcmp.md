@@ -1,6 +1,6 @@
 # ft\_memcmp
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -19,41 +19,41 @@ RETURN VALUES
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-`memcmp()` compares byte strings. It works similarly to the `strncmp()` function.
+`memcmp()` 함수는 byte string을 비교합니다. 이 함수는 `strncmp()` 함수와 유사하게 작동합니다.
 
-The difference here is that `memcmp()` works with bytes strings so it take void pointers as parameter, plus a third character, representing, as said in the man, the assumed length of both strings. This means that `memcmp()` will not compare more than `n` bytes.
+여기서의 차이점은 `memcmp()`가 byte string을 다루기 때문에 매개변수로 void Pointer를 사용하며, 세 번째 매개변수(`n`)는 man 페이지에 명시된 것처럼 두 string의 가정된 길이를 나타냅니다. 이는 `memcmp()`가 `n` 바이트를 초과하여 비교하지 않음을 의미합니다.
 
-The return value depends on what difference is found.
+반환 값은 발견된 차이에 따라 달라집니다.
 
-If there is no difference between both strings, the return value will be 0.
+두 string 사이에 차이가 없다면, 반환 값은 0이 됩니다.
 
-If there is a difference, and the first different character in `s2` is greater than the character at the same place in `s1`, the returned result will be negative.
+차이가 발견되었고, `s1`의 첫 번째 다른 바이트가 `s2`의 같은 위치에 있는 바이트보다 작다면 (즉, `s1 - s2 < 0` 이라면), 반환 값은 음수가 됩니다.
 
-If there is a difference, and the first different character in `s2` is less than the character at the same place in `s1`, the returned result will be positive.
+차이가 발견되었고, `s1`의 첫 번째 다른 바이트가 `s2`의 같은 위치에 있는 바이트보다 크다면 (즉, `s1 - s2 > 0` 이라면), 반환 값은 양수가 됩니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_memcmp.c" overflow="wrap" lineNumbers="true" %}
 ```c
 int ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    /* loop over both strings until we reach n bytes */
-    /* check if current s1 byte is different than current
-     * s2 byte
+    /* n 바이트에 도달할 때까지 두 string을 순회합니다 */
+    /* 현재 s1의 바이트가 현재
+     * s2의 바이트와 다른지 확인합니다.
      */
-           /* if bytes are different, return the difference
-            * between both characters
+           /* 바이트가 다르다면, 두 문자 사이의 차이를
+            * 반환합니다.
             */
-     /* if we read both byte strings until n bytes and no difference
-      * were found, return 0 as there is no difference
+     /* n 바이트까지 두 byte string을 모두 읽었고 차이가
+      * 발견되지 않았다면, 차이가 없으므로 0을 반환합니다.
       */h2
 }
 ```
 {% endcode %}
 
-## Commented solution
+## 주석 달린 솔루션
 
 <details>
 
@@ -69,20 +69,20 @@ int ft_memcmp(const void *s1, const void *s2, size_t n)
     unsigned char *str2;
     size_t i;
  
-    /* converting s1 and s2 to unsigned char */   
+    /* s1과 s2를 unsigned char로 변환합니다 */   
     str1 = (unsigned char) *s1;
     str2 = (unsigned char) *s2;
     i = 0;
-    /* same loop as strcmp */
+    /* strcmp와 동일한 루프입니다 */
     while (i < n)
     {
-       /* check if current byte is different in both strings */
+       /* 두 string에서 현재 바이트가 다른지 확인합니다 */
         if ((unsigned char) str1[i] != (unsigned char) str2[i])
-            /* return the difference between both chars */
+            /* 두 문자 사이의 차이를 반환합니다 */
             return ((unsigned char) str1[i] - (unsigned char) str2[i]);
     }
-    /* if we read through both strings completely and there
-     * were no difference, we return 0
+    /* 만약 두 string 전체를 읽었고 차이가 없었다면,
+     * 0을 반환합니다.
      */
     return (0);
 }

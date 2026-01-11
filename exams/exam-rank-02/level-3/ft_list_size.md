@@ -1,22 +1,20 @@
 # ft\_list\_size
 
-## Subject
+## 주제
 
 ```
-Assignment name  : ft_list_size
-Expected files   : ft_list_size.c, ft_list.h
-Allowed functions:
+과제 이름       : ft_list_size
+제출 파일      : ft_list_size.c, ft_list.h
+허용 함수      :
 --------------------------------------------------------------------------------
 
-Write a function that returns the number of elements in the linked list that's
-passed to it.
+인자로 전달된 연결 리스트(linked list)의 요소(element) 개수를 반환하는 함수를 작성하십시오.
 
-It must be declared as follows:
+이 함수는 다음과 같이 선언되어야 합니다:
 
 int	ft_list_size(t_list *begin_list);
 
-You must use the following structure, and turn it in as a file called
-ft_list.h:
+다음 구조체를 사용해야 하며, 이를 ft_list.h라는 파일로 제출해야 합니다:
 
 typedef struct    s_list
 {
@@ -25,10 +23,10 @@ typedef struct    s_list
 }                 t_list;
 ```
 
-## Commented solution
+## 주석 처리된 해답
 
 {% hint style="warning" %}
-Don't forget to turn in your `ft_list.h` file as well
+`ft_list.h` 파일도 함께 제출하는 것을 잊지 마십시오.
 {% endhint %}
 
 <details>
@@ -43,15 +41,15 @@ int ft_list_size(t_list *begin_list)
 {
     int i = 0;
     
-    // Loop over list elements while the next element is not null
+    // 다음 요소가 null이 아닐 때까지 리스트 요소들을 순회합니다.
     while (begin_list->next)
     {
-        // set the original pointer equal to a pointer to the
-        // next element and increment our counter
+        // 원래의 Pointer를 다음 요소를 가리키는 Pointer와 같게 설정하고
+        // 카운터를 증가시킵니다.
         begin_list = begin_list->next;
         i++;
     }
-    // return the counter
+    // 카운터를 반환합니다.
     return (i);
 }
 ```

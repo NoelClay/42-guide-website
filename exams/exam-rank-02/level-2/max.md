@@ -1,6 +1,6 @@
 # max
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -22,7 +22,7 @@ If the array is empty, the function returns 0.
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 

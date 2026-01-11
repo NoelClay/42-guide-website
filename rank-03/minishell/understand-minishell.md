@@ -1,23 +1,23 @@
-# ▪️ Understand Minishell
+# ▪️ Minishell 이해하기
 
-### What is a shell ?
+### Shell이란 무엇입니까?
 
-We have to build a minimalist shell, I think the best thing to start with is to understand what a shell is.
+우리는 최소한의 Shell을 구축해야 합니다. 시작하기에 가장 좋은 것은 Shell이 무엇인지 이해하는 것이라고 생각합니다.
 
-This is a good definition of a shell I found on reddit (link to it below)
+이것은 제가 Reddit에서 찾은 Shell에 대한 좋은 정의이며 (아래 링크 참조) 제가 인용한 내용입니다.
 
 {% code overflow="wrap" %}
 ```
-A shell or command shell is a program which has a special purpose: it reads keystrokes from the keyboard and interprets the "commands" that it receives in this way. The general idea is to have a human user interact with the command shell in order to accomplish system or computer maintenance related tasks, such as manipulating files or altering the configuration settings for various subsystems.
+Shell 또는 command shell(명령 셸)은 특별한 목적을 가진 프로그램입니다. 이 프로그램은 키보드로부터 키 입력을 읽고, 이런 방식으로 수신된 "명령어"를 해석합니다. 일반적인 개념은 사용자가 파일 조작 또는 다양한 서브시스템의 구성 설정 변경과 같은 시스템 또는 컴퓨터 유지 관리 관련 작업을 수행하기 위해 command shell과 상호 작용하도록 하는 것입니다.
 
-One particular task of a command shell is to locate and start up other applications which have a specific task. For instance, you can start a web browser or a word processor program by typing in the appropriate name.
+command shell의 한 가지 특정 임무는 특정 작업을 수행하는 다른 애플리케이션을 찾아 시작하는 것입니다. 예를 들어, 적절한 이름을 입력하여 웹 브라우저나 워드 프로세서 프로그램을 시작할 수 있습니다.
 
-Shells also typically are able to execute "batch files" or "shell scripts" which are text files that contain a series of commands that you would otherwise type in one after another. In this way you can automate repetitive tasks such as making a backup of a particular directory, or checking that the amount of disk space left is adequate.
+Shell은 또한 일반적으로 "배치 파일(batch files)" 또는 "Shell 스크립트(shell scripts)"를 실행할 수 있습니다. 이는 사용자가 연속적으로 하나씩 입력했을 일련의 명령어를 포함하는 텍스트 파일입니다. 이러한 방식으로 특정 디렉터리를 백업하거나 남은 디스크 공간이 충분한지 확인하는 것과 같은 반복적인 작업을 자동화할 수 있습니다.
 
-Knowing shell commands (both the built in commands and the utility programs) comes in handy when you are a system administrator. In my own experience (I have been my own linux system administrator for almost fifteen years) I can accomplish certain tasks way more efficiently using the keyboard issuing commands than firing up an application and shoving the mouse around.
+Shell 명령어(내장 명령어와 유틸리티 프로그램 모두)를 아는 것은 시스템 관리자일 때 유용합니다. 저의 경험(저는 거의 15년 동안 리눅스 시스템 관리자였습니다)에 따르면, 애플리케이션을 실행하고 마우스를 움직이는 것보다 키보드로 명령어를 실행하는 것이 특정 작업을 훨씬 더 효율적으로 수행할 수 있습니다.
 
-Linux in particular has several sophisticated command shell programs, of which my personal preference is bash. Windows traditionally has not given much attention to being able to perform tasks using a command shell. An MS-DOS like solution has always been the default. OS/2 had a pretty nifty command shell, but no one is using that anymore (where is the other half? - guffaw). But these last few years I hear Windows has a command shell solution that aims to be at least as good at what linux has to offer. I have never worked with it, so I have no opinion to offer.
+특히 Linux에는 여러 정교한 command shell 프로그램이 있으며, 그중 제가 개인적으로 선호하는 것은 bash입니다. Windows는 전통적으로 command shell을 사용하여 작업을 수행하는 능력에 많은 관심을 기울이지 않았습니다. MS-DOS와 유사한 솔루션이 항상 기본값이었습니다. OS/2에는 꽤 훌륭한 command shell이 있었지만, 더 이상 아무도 사용하지 않습니다 (나머지 절반은 어디에 있을까요? - 껄껄). 하지만 최근 몇 년 동안 Windows가 Linux가 제공하는 것만큼 좋은 것을 목표로 하는 command shell 솔루션을 가지고 있다는 이야기를 들었습니다. 저는 그것을 사용해 본 적이 없으므로 의견을 제시할 수는 없습니다.
 ```
 {% endcode %}
 
-Source: [https://www.reddit.com/r/explainlikeimfive/comments/1vu6g7/eli5\_shell\_computing/](https://www.reddit.com/r/explainlikeimfive/comments/1vu6g7/eli5_shell_computing/)
+출처: [ELI5: Shell (computing)](https://www.reddit.com/r/explainlikeimfive/comments/1vu6g7/eli5_shell_computing/)

@@ -1,67 +1,67 @@
 ---
-description: I will describe some of the core concepts of making a simple video game
+description: 간단한 비디오 게임을 만드는 몇 가지 핵심 개념을 설명합니다.
 ---
 
-# ▪️ Core concepts
+# ▪️ 핵심 개념 (Core concepts)
 
 ### Game loop
 
-In most games, one of the core concept is the game loop. What is a game loop ?&#x20;
+대부분의 게임에서 핵심 개념 중 하나는 Game loop입니다. Game loop란 무엇일까요?
 
-Well, the game loop is... a loop... but like with more spiciness to it.
+Game loop는... 루프(loop)입니다... 하지만 좀 더 특별한 루프입니다.
 
-Seriously, a game loop is the part of the game that handles the logic for updating and rendering the game. It is a continuous loop that typically runs at a fixed rate (such as 60 frames per second) and is responsible for performing the following tasks:
+진지하게 말하자면, Game loop는 게임 업데이트 및 렌더링 로직을 처리하는 게임의 한 부분입니다. 이는 일반적으로 고정된 속도(예: 초당 60 frames per second)로 실행되는 연속적인 루프이며, 다음 작업을 수행하는 역할을 합니다:
 
-1. Processing input: The game loop retrieves and handles input from the player, such as keyboard or controller input.
-2. Updating the game state: The game loop updates the game's data and objects based on the input and any other events that have occurred.
-3. Rendering the game: The game loop generates graphics and audio output based on the updated game state.
-4. Pausing and sleeping: The game loop may pause or sleep between iterations to maintain a consistent frame rate or to save resources on the device.
+1. 입력 처리: Game loop는 키보드 또는 컨트롤러 입력과 같은 플레이어의 입력을 검색하고 처리합니다.
+2. 게임 상태 업데이트: Game loop는 입력 및 발생한 기타 이벤트를 기반으로 게임의 데이터와 객체를 업데이트합니다.
+3. 게임 렌더링: Game loop는 업데이트된 게임 상태를 기반으로 그래픽 및 오디오 출력을 생성합니다.
+4. 일시 중지 및 절전: Game loop는 일관된 framerate를 유지하거나 장치의 리소스를 절약하기 위해 반복 사이에 일시 중지되거나 절전 모드로 전환될 수 있습니다.
 
-The game loop is an essential part of a game's architecture, as it determines how the game responds to player input and how it presents itself to the player.
+Game loop는 게임 아키텍처의 필수적인 부분이며, 게임이 플레이어 입력에 어떻게 반응하고 플레이어에게 어떻게 보여지는지를 결정합니다.
 
-With `MiniLibX`, we can do almost everything a game loop does by using the `mlx_loop_hook()` function, but we still have some limitations, like the framerate, we can't (or I didn't find how) limit the framerate of the game. We can't play sounds with it neither. And all the other parts, we can build them ourselves using the different hooks that MLX gives us (key hooks and mouse hooks).
+`MiniLibX`를 사용하면 `mlx_loop_hook()` 함수를 이용하여 Game loop가 수행하는 거의 모든 작업을 수행할 수 있습니다. 하지만 framerate와 같은 몇 가지 제한 사항이 있습니다. 게임의 framerate를 제한할 수 없거나(혹은 방법을 찾지 못했거나), 사운드도 재생할 수 없습니다. 그 외의 모든 부분은 MLX가 제공하는 다양한 hook(key hooks 및 mouse hooks)을 사용하여 직접 구축할 수 있습니다.
 
-### Rendering the game
+### 게임 렌더링
 
-One way to render the game that is the easiest to build for a simple 2D game like what we have to build for so\_long, is to draw the game as multiple layers each time through the loop.
+`so_long`에서 만들어야 하는 것과 같은 간단한 2D 게임을 위해 가장 쉽게 구축할 수 있는 게임 렌더링 방법은 루프를 통해 매번 게임을 여러 레이어로 그리는 것입니다.
 
-For example, you could have a layer for the background that is the first one you draw.\
-Then you draw the non-moving part of the map (walls, starting position, exit position and collectibles).\
-And finally you draw the player at the player position.
+예를 들어, 가장 먼저 그리는 배경(Background) 레이어를 가질 수 있습니다.
+그다음에는 움직이지 않는 지도 부분(벽, 시작 위치, 출구 위치, 수집품)을 그립니다.
+마지막으로 플레이어 위치에 플레이어를 그립니다.
 
-By doing so, you basically have a clean canvas every time through the loop, and if something moved between two iterations, you don't have it all on screen.
+이렇게 하면 기본적으로 루프를 통과할 때마다 깨끗한 캔버스를 가지게 되며, 두 반복 사이에 무언가가 움직였더라도 화면에 잔상이 남지 않습니다.
 
-Let's take a look at what the game looks like when I only draw one or the other layer.
+각 레이어 중 하나만 그렸을 때 게임이 어떻게 보이는지 살펴보겠습니다.
 
-<figure><img src="../../.gitbook/assets/so_long_bg_only.png" alt=""><figcaption><p>This is what the game looks like when I only draw the background.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/so_long_bg_only.png" alt=""><figcaption><p>배경만 그렸을 때 게임이 보이는 모습입니다.</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/so_long_map_only.png" alt=""><figcaption><p>This is what the game looks like when I only draw the map.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/so_long_map_only.png" alt=""><figcaption><p>지도만 그렸을 때 게임이 보이는 모습입니다.</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/so_long_player_only.png" alt=""><figcaption><p>This is what the game looks like when I only draw the player.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/so_long_player_only.png" alt=""><figcaption><p>플레이어만 그렸을 때 게임이 보이는 모습입니다.</p></figcaption></figure>
 
-Now, let's draw all the layers in the correct order.
+이제 모든 레이어를 올바른 순서로 그려 보겠습니다.
 
-<figure><img src="../../.gitbook/assets/so_long_all_layers.png" alt=""><figcaption><p>This is what the game looks like when all layers are drawn in the correct order.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/so_long_all_layers.png" alt=""><figcaption><p>모든 레이어를 올바른 순서로 그렸을 때 게임이 보이는 모습입니다.</p></figcaption></figure>
 
-I won't make a screenshot of every way I can render the game (rendering only the background and player or only the map and player) because I'm sure you can easily make that up in your head what the game would look like in any of these way.
+게임 렌더링이 가능한 모든 방식(배경과 플레이어만 렌더링하거나 지도와 플레이어만 렌더링하는 등)의 스크린샷을 모두 만들지는 않겠습니다. 이러한 경우 게임이 어떻게 보일지 머릿속으로 쉽게 그려볼 수 있다고 확신하기 때문입니다.
 
-With the three layers I have put here, I'm sure you can already see why drawing them in the correct order is useful. You can see that the background draws the "floor" on the complete window, so if you drawn something before drawing the map or the player, everything will be invisible behind it.
+여기에 제시된 세 가지 레이어를 통해 올바른 순서로 그리는 것이 왜 유용한지 이미 알 수 있을 것입니다. 배경은 전체 창에 "바닥(floor)"을 그리므로, 지도나 플레이어를 그리기 전에 무언가를 그리면 모든 것이 배경 뒤에 가려져 보이지 않게 됩니다.
 
-Now, you might wonder why I draw the background for every game loop iteration. Well, take a look at the following screenshot. Now I won't draw the background each time and make 2 or 3 moves to move the player.
+이제 Game loop 반복마다 왜 배경을 그리는지 궁금할 수 있습니다. 다음 스크린샷을 살펴보시기 바랍니다. 이제 매번 배경을 그리지 않고 플레이어를 2~3번 이동시켜 보겠습니다.
 
-<figure><img src="../../.gitbook/assets/so_long_player_no_bg_update.png" alt=""><figcaption><p>This is what happens when I don't draw the background every time through the loop.</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/so_long_player_no_bg_update.png" alt=""><figcaption><p>루프를 통해 매번 배경을 그리지 않을 때 발생하는 현상입니다.</p></figcaption></figure>
 
-You can see that the player "multiplied" itself. I mean, it looks like it was multiplied, but actually, it's just that we see what was drawn during the previous loop iterations. We didn't drawn something over the background, and since it's not part of the map, it isn't redrawn every time. The player is drawn during each loop at its current position, but it once was on all these tiles.
+플레이어가 "증식"된 것을 볼 수 있습니다. 제 말은, 증식된 것처럼 보이지만, 실제로는 이전 루프 반복 동안 그려졌던 것이 보이는 것뿐입니다. 배경 위에 아무것도 그리지 않았고, 배경은 지도의 일부가 아니기 때문에 매번 다시 그려지지 않습니다. 플레이어는 매 루프마다 현재 위치에 그려지지만, 한때는 이 모든 타일 위에 있었습니다.
 
-By not rendering the background in every iterations, everything that was drawn on a tile where the background should be, will not be "overdrawn" and thus will still be visible even though the player moves around.
+모든 반복에서 배경을 렌더링하지 않으면, 배경이 있어야 할 타일에 그려졌던 모든 것이 "덮어 그려지지" 않으므로 플레이어가 움직이더라도 계속 볼 수 있게 됩니다.
 
-### Update player position
+### 플레이어 위치 업데이트
 
-Since this is a video game that we are building, there surely will be a player or at least a character controlled (directly or indirectly) by the person playing your game.
+우리가 구축하고 있는 것은 비디오 게임이므로, 분명 플레이어나 적어도 게임을 하는 사람이 (직접 또는 간접적으로) 제어하는 캐릭터가 있을 것입니다.
 
-The starting position for the player is known and can't be directly changed since it comes from the map that has to be parsed and checked by your program. That let's draw the player at the correct starting position but how could we update where the player should be showed on the window ?
+플레이어의 시작 위치는 알려져 있으며, 프로그램이 구문 분석하고 확인해야 하는 지도에서 가져오기 때문에 직접 변경할 수 없습니다. 그렇다면 플레이어를 올바른 시작 위치에 그려야 하는데, 창에 플레이어가 표시되어야 하는 위치를 어떻게 업데이트할 수 있을까요?
 
-Well, let's take an example map and how this could be working.
+예시 지도와 이것이 어떻게 작동하는지 살펴보겠습니다.
 
 ```
 1111111111111
@@ -71,15 +71,15 @@ Well, let's take an example map and how this could be working.
 1111111111111
 ```
 
-As we can see here, the starting point of the player, as coordinates (y; x) is (3; 1).
+여기서 볼 수 있듯이, 플레이어의 시작 지점은 coordinates (y; x)로 (3; 1)입니다.
 
-That means, the first time through the game loop, we can draw the player at position (3; 1), but now, the player presses the right arrow key, the player should move to the right, right ?
+이는 Game loop를 처음 통과할 때 플레이어를 위치 (3; 1)에 그릴 수 있음을 의미합니다. 하지만 이제 플레이어가 오른쪽 화살표 키를 누르면 플레이어는 오른쪽으로 이동해야 하겠죠?
 
-How can you change where the player is drawn ? That's actually pretty easy. You can simply update the player position, we had (3; 1) the first time through the loop, when the player presses the right arrow key, we have to add 1 to the `x` coordinate of the player position. If we do this, we have now (3; 2). The next time through the game loop, the player will be draw at the "player position" coordinates, that is now (3; 2).&#x20;
+플레이어가 그려지는 위치를 어떻게 변경할 수 있을까요? 사실 이것은 매우 쉽습니다. 단순히 플레이어 위치를 업데이트하면 됩니다. 루프를 처음 통과했을 때 (3; 1)이었는데, 플레이어가 오른쪽 화살표 키를 누르면 플레이어 위치의 `x` coordinate에 1을 더해야 합니다. 이렇게 하면 이제 (3; 2)가 됩니다. 다음 Game loop를 통과할 때 플레이어는 "플레이어 위치" coordinates인 (3; 2)에 그려지게 됩니다.
 
-To update the player position in other direction, we have to change the coordinates correctly depending on what key is pressed.&#x20;
+다른 방향으로 플레이어 위치를 업데이트하려면, 어떤 키가 눌렸는지에 따라 coordinates를 올바르게 변경해야 합니다.
 
-Here's an example:
+다음은 예시입니다:
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -98,6 +98,6 @@ int key_handler(int keycode, t_vars *vars)
 ```
 {% endcode %}
 
-I think that with these concepts you can already go a pretty long way in so\_long, if something is missing, don't hesitate to tell us and we'll update this page.
+이러한 개념들을 통해 `so_long`에서 이미 상당히 많은 부분을 진행할 수 있다고 생각합니다. 누락된 부분이 있다면 주저하지 마시고 알려주시면 이 페이지를 업데이트하겠습니다.
 
-If you read everything until here, Iet's move to the next section and start actually building the thing.
+여기까지 모두 읽으셨다면, 다음 섹션으로 이동하여 실제로 구축을 시작해 보겠습니다.

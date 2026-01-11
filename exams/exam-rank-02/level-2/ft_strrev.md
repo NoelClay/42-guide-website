@@ -1,6 +1,6 @@
 # ft\_strrev
 
-### Subject
+### 주제 (Subject)
 
 {% code overflow="wrap" %}
 ```
@@ -19,7 +19,19 @@ char    *ft_strrev(char *str);
 ```
 {% endcode %}
 
-### Commented solution
+과제 이름: ft\_strrev
+필요한 파일: ft\_strrev.c
+허용되는 함수:
+
+문자열을 (제자리에서, in-place) 뒤집는 함수를 작성하십시오.
+
+이 함수는 매개변수를 반환해야 합니다.
+
+귀하의 함수는 다음과 같이 선언되어야 합니다:
+
+`char *ft_strrev(char *str);`
+
+### 주석 처리된 해답 (Commented solution)
 
 <details>
 
@@ -57,7 +69,7 @@ char    *ft_strrev(char *str)
 	ft_strrev(s);
 	printf("%s\n", s);
 	return (0);
-}
+}*/
 ```
 {% endcode %}
 

@@ -1,6 +1,6 @@
 # \*ft\_strcpy
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -17,7 +17,7 @@ char    *ft_strcpy(char *s1, char *s2);
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -32,21 +32,20 @@ char    *ft_strcpy(char *s1, char *s2)
     unsigned int i;
     
     i = 0;
-    /* loop over the source string (s2)
-     * if the source is empty, we don't even have to enter the loop
+    /* 소스 문자열 (s2)을 순회합니다.
+     * 만약 소스가 비어있다면, 루프에 진입할 필요조차 없습니다.
      */
     while (s2[i])
     {
-        /* set the chracter at index i in the destination (s1) to be
-         * equal to the character at index i in the source (s2)
+        /* 목적지 (s1)의 i 인덱스에 있는 문자를
+         * 소스 (s2)의 i 인덱스에 있는 문자와 같도록 설정합니다.
          */
         s1[i] = s2[i];
         i++;
     }
-    /* set the character at index i in the destination (s1) to 0
-     * this is done to NUL-terminate the destination (s1) if we copied 
-     * something inside
-     * or to set the destination (s1) as empty if the source (s2) is empty
+    /* 목적지 (s1)의 i 인덱스에 있는 문자를 0으로 설정합니다.
+     * 이것은 복사된 내용이 있는 경우 목적지 (s1)를 NUL-terminate하기 위해 수행됩니다.
+     * 또는 소스 (s2)가 비어있는 경우 목적지 (s1)를 비어있도록 설정하기 위해 수행됩니다.
      */
     s1[i] = 0;
     return (s1);
@@ -57,5 +56,5 @@ char    *ft_strcpy(char *s1, char *s2)
 </details>
 
 {% hint style="success" %}
-Thanks Veronique for the correction :smile:
+수정을 도와준 Veronique에게 감사합니다 :smile:
 {% endhint %}

@@ -1,8 +1,7 @@
 ---
 description: >-
-  The purpose of this project is to build a small 2D video game using MiniLibX
-  and learn a bit about how a simple video game usually works.
+  이 프로젝트의 목적은 MiniLibX를 사용하여 작은 2D 비디오 게임을 구축하고,
+  간단한 비디오 게임이 일반적으로 어떻게 작동하는지에 대해 배우는 것입니다.
 ---
 
 # so\_long
-

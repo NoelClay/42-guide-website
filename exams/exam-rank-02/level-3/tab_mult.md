@@ -1,6 +1,6 @@
 # tab\_mult
 
-### Subject
+### 과제
 
 ```
 Assignment name  : tab_mult
@@ -8,14 +8,13 @@ Expected files   : tab_mult.c
 Allowed functions: write
 --------------------------------------------------------------------------------
 
-Write a program that displays a number's multiplication table.
+숫자의 구구단을 출력하는 프로그램을 작성하십시오.
 
-The parameter will always be a strictly positive number that fits in an int,
-and said number times 9 will also fit in an int.
+인자는 항상 int 자료형에 맞는 엄격한 양수여야 하며, 해당 숫자에 9를 곱한 값 역시 int 자료형에 맞아야 합니다.
 
-If there are no parameters, the program displays \n.
+만약 인자가 없다면, 프로그램은 \n을 출력합니다.
 
-Examples:
+예시:
 
 $>./tab_mult 9
 1 x 9 = 9
@@ -43,7 +42,7 @@ $
 $>
 ```
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -53,7 +52,7 @@ $>
 ```c
 #include <unistd.h>
 
-// Simple atoi since we'll always get a strictly positive integer
+// 항상 엄격한 양의 정수를 받을 것이므로 간단한 atoi 함수를 구현합니다
 int ft_atoi(char *s)
 {
     int res = 0, i = 0;
@@ -66,7 +65,7 @@ int ft_atoi(char *s)
     return (res);
 }
 
-// Simple putnbr since we'll always get a strictly positive integer
+// 항상 엄격한 양의 정수를 받을 것이므로 간단한 putnbr 함수를 구현합니다
 void ft_putnbr(int nbr)
 {
     if (nbr >= 10)
@@ -90,8 +89,8 @@ int main(int ac, char **av)
         return (0);
     }
     int i = 1, n = ft_atoi(av[1]);
-    // Loop from 1 to 9
-    // and print each line in the format [i x n = i*n]
+    // 1부터 9까지 반복합니다
+    // 각 줄을 [i x n = i*n] 형식으로 출력합니다
     while (i < 10)
     {
         ft_putnbr(i);

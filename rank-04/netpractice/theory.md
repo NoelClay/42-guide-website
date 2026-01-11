@@ -1,109 +1,97 @@
-# Theory
+# 이론
 
-Before we begin, we need to understand three important concepts: the TCP (Transmission Control Protocol), the IP and the TCP/IP
+시작하기 전에, 세 가지 중요한 개념인 TCP (Transmission Control Protocol), IP, 그리고 TCP/IP를 이해해야 합니다.
 
 ## TCP : Transmission Control Protocol
 
-It ensures reliable data transfer by breaking information into small packets, sending them across the network, and ensuring they arrive in the correct order at the destination.&#x20;
+TCP는 정보를 작은 Packet으로 분할하고, 네트워크를 통해 전송하며, 목적지에 올바른 순서로 도착하도록 보장하여 신뢰할 수 있는 데이터 전송을 보장합니다.
 
-It also handles error correction and congestion control, thus ensuring reliable data transmission.
-
-
+또한, 오류 수정 및 혼잡 제어를 처리하여 안정적인 데이터 전송을 보장합니다.
 
 ## IP : Internet Protocol
 
-For this project we only use IPv4 (so i will not explain IPv6) : An IPv4-adress is a 32-bit number divided into 4 "blocks", each 8 bits. i.e.:
+본 프로젝트에서는 IPv4만 사용합니다 (따라서 IPv6에 대해서는 설명하지 않겠습니다): IPv4 주소는 32비트 숫자로, 각각 8비트인 4개의 "블록"으로 나뉩니다. 예를 들어:
 
-Every device connected to the Internet is assigned a unique IP address, which is used to identify and locate it. It is responsible for addressing and routing data packets across the network.
+인터넷에 연결된 모든 장치에는 고유한 IP address가 할당되며, 이는 장치를 식별하고 위치를 찾는 데 사용됩니다. IP는 네트워크 전반에 걸쳐 데이터 Packet의 주소 지정 및 라우팅을 담당합니다.
 
-**An IP address is made up of two parts**:&#x20;
+**IP address는 두 부분으로 구성됩니다**:
 
-* one identifies the host, such as a computer or other device
-* the other identifies the network to which it belongs.&#x20;
+*   하나는 컴퓨터 또는 다른 장치와 같은 Host를 식별하는 부분입니다.
+*   다른 하나는 해당 Host가 속한 Network를 식별하는 부분입니다.
 
-\--> TCP/IP uses a subnet mask to separate the two (corresponds to the "mask" part under each device when doing an exercise)
+\--> TCP/IP는 이 두 부분을 분리하기 위해 Subnet Mask를 사용합니다 (이는 실습 시 각 장치 아래에 있는 "mask" 부분에 해당합니다).
 
-For example if the IP is 104.95.23.12, then the real representation in bits would be: 01101000.01011111.00010111.00001100 (the numbers can only go from 0 to 255).&#x20;
+예를 들어, IP가 104.95.23.12라면, 실제 비트 표현은 01101000.01011111.00010111.00001100이 됩니다 (숫자는 0부터 255까지만 가능합니다).
 
-### Private Networks
+### Private Networks (사설 네트워크)
 
-* Private network IP address ranges are reserved for internal use within organizations or home/small office networks.
-* The following address ranges are reserved for private networks:
-  * `10.0.0.0 - 10.255.255.255`
-  * `172.16.0.0 - 172.31.255.255`
-  * `192.168.0.0 - 192.168.255.255`
-* These ranges provide a large number of available IP addresses for private network infrastructure, allowing organizations to assign unique addresses to devices within their network without requiring public IP addresses.
+*   Private Network IP address 범위는 조직 내부 또는 가정/소규모 사무실 Network 내에서 사용하기 위해 예약되어 있습니다.
+*   다음 주소 범위는 Private Network용으로 예약되어 있습니다:
+    *   `10.0.0.0 - 10.255.255.255`
+    *   `172.16.0.0 - 172.31.255.255`
+    *   `192.168.0.0 - 192.168.255.255`
+*   이 범위는 Private Network 인프라를 위해 많은 수의 사용 가능한 IP address를 제공하므로, 조직은 공용 IP address 없이도 네트워크 내의 장치에 고유한 주소를 할당할 수 있습니다.
 
-### Loopback Addresses
+### Loopback Addresses (루프백 주소)
 
-* The loopback address range is reserved for internal testing and communication within a device.
-* The loopback IP range is represented by `127.0.0.0 - 127.255.255.255.`
-* The loopback address 127.0.0.1, often referred to as "localhost," is used to access the device itself. It allows network applications running on the device to communicate with each other without accessing the external network.
+*   Loopback address 범위는 장치 내에서 내부 테스트 및 통신을 위해 예약되어 있습니다.
+*   Loopback IP 범위는 `127.0.0.0 - 127.255.255.255`로 표현됩니다.
+*   일반적으로 "localhost"라고 불리는 Loopback address 127.0.0.1은 장치 자체에 액세스하는 데 사용됩니다. 이를 통해 장치에서 실행되는 네트워크 응용 프로그램은 외부 Network에 액세스하지 않고도 서로 통신할 수 있습니다.
 
-These reserved IP address ranges ensure that private networks can operate without conflicting with public IP addresses on the internet and provide convenient mechanisms for internal testing and communication within devices.
+이러한 예약된 IP address 범위는 Private Network가 인터넷상의 공용 IP address와 충돌하지 않고 작동하도록 보장하며, 장치 내에서 내부 테스트 및 통신을 위한 편리한 메커니즘을 제공합니다.
 
-There is some more special ip-ranges, but for this project, you only need to remember those above.
+더 많은 특수 IP 범위가 있지만, 본 프로젝트에서는 위에 언급된 내용만 기억하시면 됩니다.
 
+## TCP/IP
 
+TCP와 IP는 함께 작동하여 이메일을 보내거나, 웹을 탐색하거나, 파일을 다운로드하거나, 멀티미디어 콘텐츠를 스트리밍하는 등 인터넷에 연결된 장치 간에 데이터를 전송하는 표준화되고 신뢰할 수 있는 수단을 제공합니다.
 
-## TCP/IP&#x20;
-
-Together, TCP and IP provide a standardized and reliable means of transferring data between devices connected to the Internet, whether it's sending emails, browsing the web, downloading files, or streaming multimedia content.
-
-I recommend you to watch this small video (5min) just to understand better how everything works.
+모든 것이 어떻게 작동하는지 더 잘 이해하기 위해 이 짧은 동영상(5분)을 시청하시는 것을 추천합니다.
 
 {% embed url="https://www.youtube.com/watch?v=OTwp3xtd4dg" %}
-TCP/IP in a nutshell
+TCP/IP를 간략하게 설명
 {% endembed %}
 
-And here is a little scheme that shows how everything works:
+그리고 모든 것이 어떻게 작동하는지 보여주는 작은 도식이 여기에 있습니다:
 
-<figure><img src="../../.gitbook/assets/image (28).png" alt="" width="371"><figcaption><p>Source: <a href="https://www.internalpointers.com/post/introduction-tcp-ip-protocol">https://www.internalpointers.com/post/introduction-tcp-ip-protocol</a></p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (28).png" alt="" width="371"><figcaption><p>출처: <a href="https://www.internalpointers.com/post/introduction-tcp-ip-protocol">https://www.internalpointers.com/post/introduction-tcp-ip-protocol</a></p></figcaption></figure>
 
 ##
 
-## Masks (subnet masks)
+## Masks (Subnet Masks)
 
-A subnet mask, also known as subnetting mask or network mask, is a combination of bits used to divide an IP network into smaller subnets. It is used in conjunction with an IP address to determine the network address and the host address of a device on a network.
+Subnet Mask는 서브넷팅 마스크(Subnetting Mask) 또는 네트워크 마스크(Network Mask)라고도 불리며, IP Network를 더 작은 Subnet으로 나누는 데 사용되는 비트 조합입니다. 이는 IP address와 함께 사용되어 네트워크상의 장치의 네트워크 주소(Network Address)와 호스트 주소(Host Address)를 결정합니다.
 
-A subnet mask defines the portion of the IP address that represents the network and the portion that represents the hosts within that network.&#x20;
+Subnet Mask는 IP address에서 Network를 나타내는 부분과 해당 Network 내의 Host를 나타내는 부분을 정의합니다.
 
-\--> It is often represented as a series of numbers, typically in the form of four octets separated by periods, such as `255.255.255.0.` And as for IPs, we can represent this number in bits, which would give: 11111111.11111111.11111111.00000000
+\--> 이는 일반적으로 `255.255.255.0`과 같이 마침표로 구분된 4개의 옥텟(octet) 형태로 일련의 숫자로 표현됩니다. 그리고 IP와 마찬가지로 이 숫자를 비트로 표현할 수 있으며, 그 결과는 11111111.11111111.11111111.00000000이 됩니다.
 
-Through which `255.255.255.0` is a valid mask and `255.255.128.128` is **not** a valid mask.
+이로 인해 `255.255.255.0`은 유효한 Mask이지만, `255.255.128.128`은 유효한 Mask가 **아닙니다**.
 
-
-
-| CIDR |   Dot-decimal   | <p>Number of IP-addresses<br>per subnet</p> | <p>Usable IP-addresses<br>per subnet</p> | Number of subnets |
-| :--: | :-------------: | :-----------------------------------------: | :--------------------------------------: | :---------------: |
-|  /32 | 255.255.255.255 |                      1                      |                     0                    |        256        |
-|  /31 | 255.255.255.254 |                      2                      |                     0                    |        128        |
-|  /30 | 255.255.255.252 |                      4                      |                     2                    |         64        |
-|  /29 | 255.255.255.248 |                      8                      |                     6                    |         32        |
-|  /28 | 255.255.255.240 |                      16                     |                    14                    |         16        |
-|  /27 | 255.255.255.224 |                      32                     |                    30                    |         8         |
-|  /26 | 255.255.255.192 |                      64                     |                    62                    |         4         |
-|  /25 | 255.255.255.128 |                     128                     |                    126                   |         2         |
-|  /24 |  255.255.255.0  |                     256                     |                    254                   |         1         |
+| CIDR | Dot-decimal | Subnet당 IP address 개수 | Subnet당 사용 가능한 IP address | Subnet 개수 |
+| :--: | :-------------: | :----------------------: | :--------------------------: | :---------: |
+| /32 | 255.255.255.255 | 1 | 0 | 256 |
+| /31 | 255.255.255.254 | 2 | 0 | 128 |
+| /30 | 255.255.255.252 | 4 | 2 | 64 |
+| /29 | 255.255.255.248 | 8 | 6 | 32 |
+| /28 | 255.255.255.240 | 16 | 14 | 16 |
+| /27 | 255.255.255.224 | 32 | 30 | 8 |
+| /26 | 255.255.255.192 | 64 | 62 | 4 |
+| /25 | 255.255.255.128 | 128 | 126 | 2 |
+| /24 | 255.255.255.0 | 256 | 254 | 1 |
 
 \----------------------------------------------------------------------------
 
+## Switches (스위치)
 
+Switch는 여러 장치를 동일한 Network에 연결할 수 있게 해주는 네트워킹 장치입니다. 주된 기능은 들어오는 Network Packet을 수신하여 해당 Network 내의 적절한 목적지 장치로 전달하는 것입니다.
 
-## Switches
+여러 컴퓨터, 프린터 및 기타 장치가 있는 Network를 상상해 보십시오. 각 장치를 Router나 Modem에 직접 연결하는 대신, Switch에 연결할 수 있습니다. Switch는 중앙 연결 지점 역할을 하며, 장치들이 서로 통신할 수 있도록 합니다.
 
-A switch is a networking device that allows you to connect multiple devices to the same network. Its main function is to receive incoming network packets and forward them to the appropriate destination device within its network.
+장치가 파일이나 정보 요청과 같은 데이터 Packet을 전송하면, Switch는 해당 Packet을 수신하여 목적지 주소를 확인합니다. 이 정보를 바탕으로 Switch는 Packet이 전달되어야 할 적절한 Port를 결정합니다. 이는 Packet이 Network상의 불필요한 장치가 아닌 의도된 장치에 도달하도록 보장합니다.
 
-Imagine you have a network with multiple computers, printers, and other devices. Instead of connecting each device directly to the router or modem, you can connect them to a switch. The switch acts as a central point of connection, allowing devices to communicate with each other.
+Switch를 사용하면 네트워크 트래픽을 효율적으로 분배하고 장치 간 통신을 가능하게 할 수 있습니다. 이는 네트워크 혼잡을 줄이고 전반적인 네트워크 성능을 향상하는 데 도움이 됩니다.
 
-When a device sends a data packet, such as a file or a request for information, the switch receives the packet and examines its destination address. Based on this information, the switch determines the appropriate port to which the packet should be forwarded. This ensures that the packet reaches the intended device and not unnecessary devices on the network.
+작동하는 예시를 보려면 Level 3를 확인해 볼 수 있습니다.
 
-By using a switch, you can efficiently distribute network traffic and enable communication between devices. It helps to reduce network congestion and improve overall network performance.
-
-To see a working example, you can take a look at Level 3.
-
-
-
-
-
-Now that you know almost all the definitions, let's take a look at a few examples to help you get the hang of it! Click on the next page :)
+이제 거의 모든 정의를 알았으니, 익숙해지는 데 도움이 될 몇 가지 예시를 살펴보겠습니다! 다음 페이지를 클릭하십시오 :)

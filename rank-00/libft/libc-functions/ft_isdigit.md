@@ -1,6 +1,6 @@
 # ft\_isdigit
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -18,31 +18,31 @@ RETURN VALUES
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-For this function, the man is self-explanatory, but I'll still explain it in other words.
+이 함수에 대한 man 페이지는 스스로 충분히 설명하고 있지만, 저는 여전히 다른 말로 설명하겠습니다.
 
-The `isdigit()` function return a non-zero value if the character passed as an `int` parameter is a decimal digit character (0 - 9).
+`isdigit()` 함수는 `int` 매개변수로 전달된 문자가 10진수 숫자 문자(0 - 9)인 경우 0이 아닌 값을 반환합니다.
 
-If the character is not a decimal digit character, the `isdigit()` function return `0`.
+문자가 10진수 숫자 문자가 아닌 경우, `isdigit()` 함수는 `0`을 반환합니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_isdigit.c" overflow="wrap" lineNumbers="true" %}
 ```c
 int    ft_isdigit(int c)
 {
-    if (/* c value is one of the decimal digit characters in the ASCII table */)
-        return (/* non-zero value of your choice */);
+    if (/* c 값이 ASCII 테이블의 10진수 숫자 문자 중 하나인 경우 */)
+        return (/* 원하는 0이 아닌 값 */);
     return (0);
 }
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 {% hint style="danger" %}
-Come on ! You really need the code for that function ?
+정말로 이 함수에 대한 코드가 필요하신가요?
 {% endhint %}
 
 <details>
@@ -55,10 +55,10 @@ Come on ! You really need the code for that function ?
 
 int    ft_isdigit(int c)
 {
-    /* this checks the character against the ASCII table if c is a decimal digit */
+    /* c가 10진수 숫자인지 ASCII 테이블을 기준으로 문자를 검사합니다. */
     if (c >= 48 && c <= 57)
-        return (c); // here I'm returning c, as if it's a decimal digit it'll be non-zero
-    return (0); // if we reach this point, c isn't a decimal digit
+        return (c); // 여기서 c를 반환합니다. 10진수 숫자인 경우 0이 아닌 값이 됩니다.
+    return (0); // 여기에 도달하면 c는 10진수 숫자가 아닙니다.
 }
 ```
 {% endcode %}

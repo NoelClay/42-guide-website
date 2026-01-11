@@ -1,6 +1,6 @@
 # ft\_split
 
-### Subject
+### 주제 (Subject)
 
 {% code overflow="wrap" %}
 ```
@@ -20,7 +20,15 @@ Your function must be declared as follows:
 char    **ft_split(char *str);
 
 ```
-### Commented solution
+문자열(string)을 인자로 받아, 이를 단어들로 나눈 다음, NULL로 끝나는 문자열들의 배열(array) 형태로 반환하는 함수를 작성하십시오.
+
+"단어"는 공백(space), 탭(tab), 개행 문자(new line) 또는 문자열의 시작/끝에 의해 경계가 정해지는(delimited) 문자열의 일부로 정의됩니다.
+
+여러분의 함수는 다음과 같이 선언되어야 합니다.
+
+`char    **ft_split(char *str);`
+
+### 주석 처리된 해답 (Commented solution)
 
 <details>
 

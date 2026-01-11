@@ -1,22 +1,22 @@
-# ◾ Building the thing
+# ◾ 작업 구축
 
-### Introduction
+### 개요
 
-Minishell is a big project that requires a good communication between both of the group member and a good organization on how you divide the work that has to be done as to not do the same thing twice or not as the other expects it to work.
+Minishell은 팀원 간의 원활한 소통과 효율적인 작업 분배 조직력이 요구되는 큰 프로젝트입니다. 이는 중복 작업을 방지하고 서로 기대하는 방식대로 결과물이 나오게 하는 데 중요합니다.
 
-Start by laying down the majors steps of the project and talk about how you want to work together and all of that before starting.
+시작하기 전에 프로젝트의 주요 단계를 먼저 설정하고, 함께 협력할 방식 등에 대해 충분히 논의해 보시기 바랍니다.
 
-If you want to do the bonuses, think about how you'll implement them from the beginning, it will be very hard to implement them later without redoing everything from scratch.
+보너스 과제를 수행하고 싶다면, 프로젝트 초기에 보너스 구현 방식을 고려해야 합니다. 나중에 처음부터 모든 것을 재작업하지 않고 보너스를 구현하기는 매우 어려울 수 있습니다.
 
-### Checklist / documentation
+### 체크리스트 / 문서화
 
-Here I'll give you the way we divided our work, I'm not telling you that is THE way to do it but it gives you an idea.
+여기서는 저희가 작업을 분담했던 방식을 알려드립니다. 이것이 '유일한' 방법이라고 말씀드리는 것은 아니지만, 작업 분할에 대한 아이디어를 얻으시는 데 도움이 될 것입니다.
 
-We split the work in two main parts from the beginning, that were later splitted again into smaller parts :
+저희는 작업을 처음부터 두 가지 주요 부분으로 나누었으며, 이 두 부분은 나중에 다시 더 작은 단위로 분할되었습니다:
 
-* Lexing / parsing
-* Execution
+*   Lexing / Parsing
+*   Execution
 
-Take some time to read / watch things about lexing and parsing, these subjects may seem a little boring but are really interesting and it will help you to know what they are for and at what time you'll need to use them.
+Lexing과 Parsing에 관한 자료를 읽거나 시청하는 데 시간을 투자해 보시기 바랍니다. 이 주제들이 다소 지루하게 느껴질 수 있지만, 실제로는 매우 흥미로우며, 이들이 어떤 목적으로 존재하고 언제 사용해야 하는지를 이해하는 데 큰 도움이 될 것입니다.
 
-Some groups didn't do any lexing, take a look at what it is and decide if you want to use it or not.
+일부 그룹은 Lexing 단계를 전혀 수행하지 않았습니다. Lexing이 무엇인지 확인하시고 프로젝트에서 이를 사용할지 여부를 결정하시기 바랍니다.

@@ -1,41 +1,41 @@
-# ▪️ Building the thing
+# ▪️ 구현하기
 
-### Main checklist
+### 주요 체크리스트
 
-This is a checklist containing the main steps you have to do, I don't want to give you too much information, you still have to search things by yourself.
+이것은 여러분이 수행해야 할 주요 단계들을 담고 있는 체크리스트입니다. 너무 많은 정보를 제공하여 검색할 기회를 줄이고 싶지는 않습니다. 여러분 스스로 정보를 검색해야 합니다.
 
-* [ ] Create a data structure to store all required information about a philosopher
-* [ ] Create the correct number of philosopher
-* [ ] Create the correct number of threads
-* [ ] Create a routine
-  * [ ] What each philosopher has to do ? In which order ?
-* [ ] Initiate the threads with said routine
-
-{% hint style="info" %}
-Some variables have to be shared between all philosophers so take this into account when creating your data structures.
-{% endhint %}
-
-### Routine checklist
-
-* [ ] Create a loop that runs until any of your philosophers die
+* [ ] 철학자에 관한 모든 필수 정보를 저장할 데이터 구조를 생성합니다.
+* [ ] 올바른 수의 철학자를 생성합니다.
+* [ ] 올바른 수의 **Thread**를 생성합니다.
+* [ ] 루틴(routine)을 생성합니다.
+  * [ ] 각 철학자는 무엇을 해야 합니까? 어떤 순서로 해야 합니까?
+* [ ] 해당 루틴으로 **Thread**들을 초기화합니다.
 
 {% hint style="info" %}
-If you have to loop until any of your philosphers die, it might be a good idea to check in the routine if any of your philosopher has died.
+일부 변수들은 모든 철학자들 간에 공유되어야 하므로, 데이터 구조를 생성할 때 이 점을 고려하시기 바랍니다.
 {% endhint %}
 
-That's basically it. Your philosophers have to do the following things (in order) in the routine.
+### 루틴 체크리스트
 
-1. Eat
-2. Sleep
-3. Think
-4. Repeat
+* [ ] 철학자 중 누군가가 죽을 때까지 실행되는 루프를 생성합니다.
 
-The most complex thing in this project is to understand how threads work and how you can use mutexes to lock / unlock some values. Once you understood that, you "just" have to make each philosopher eat, sleep and think in a loop. Don't forget to print the logs when the state of your philosophers change.
+{% hint style="info" %}
+철학자 중 누군가가 죽을 때까지 루프를 실행해야 한다면, 루틴 내에서 어떤 철학자가 사망했는지 확인하는 것이 좋은 방법일 수 있습니다.
+{% endhint %}
 
-### Final word
+기본적으로 이것이 전부입니다. 여러분의 철학자들은 루틴에서 다음 사항들을 (순서대로) 수행해야 합니다.
 
-That's basically it, the things you have to do are not the most complicated, the most important part of this exercise is to understand everything about threads and mutexes and all. Also, if you do the bonuses, you'll have to understand semaphores and processes. We already used processes, in a way or another by doing [Minitalk](../../rank-02/minitalk/) or [pipex](../../rank-02/pipex/), but semaphores are an all new subject.
+1. 식사하기 (Eat)
+2. 잠자기 (Sleep)
+3. 생각하기 (Think)
+4. 반복하기 (Repeat)
 
-I don't want to add more details for this exercise, I want you to search information and really understand how everything works, this is the best I can do for you.
+이 프로젝트에서 가장 복잡한 부분은 **Thread**가 작동하는 방식과 **Mutex**를 사용하여 일부 값들을 잠그고(lock) 해제하는(unlock) 방법을 이해하는 것입니다. 이를 이해했다면, 여러분은 루프 내에서 각 철학자가 식사하고, 잠자고, 생각하도록 만들면 됩니다. 철학자들의 상태가 변경될 때 로그를 출력하는 것을 잊지 마십시오.
 
-But don't hesitate to [contact](../../team.md) us if you have any question, I'll be happy to help you with your project.
+### 마지막 한마디
+
+이것이 기본적으로 전부입니다. 여러분이 해야 할 일 자체는 가장 복잡한 부분은 아니며, 이 실습의 가장 중요한 부분은 **Thread**와 **Mutex** 등에 관한 모든 것을 이해하는 것입니다. 또한, 보너스 과제를 수행한다면, **Semaphore**와 **Process**에 대해서도 이해해야 합니다. 우리는 [Minitalk](../../rank-02/minitalk/) 또는 [pipex](../../rank-02/pipex/)를 수행하면서 이미 어떤 식으로든 **Process**를 사용했지만, **Semaphore**는 완전히 새로운 주제입니다.
+
+저는 이 실습에 더 많은 세부 사항을 추가하고 싶지 않습니다. 여러분이 정보를 검색하고 모든 것이 어떻게 작동하는지 실제로 이해하기를 바랍니다. 이것이 여러분을 위해 할 수 있는 최선입니다.
+
+하지만 궁금한 점이 있다면 [저희에게 연락](../../team.md)하는 것을 주저하지 마십시오. 여러분의 프로젝트를 기꺼이 도와드리겠습니다.

@@ -1,30 +1,30 @@
 # ft\_range
 
-## Subject
+## 주제
 
 ```
 Assignment name  : ft_range
 Expected files   : ft_range.c
 Allowed functions: malloc
 --------------------------------------------------------------------------------
-
-Write the following function:
-
-int     *ft_range(int start, int end);
-
-It must allocate (with malloc()) an array of integers, fill it with consecutive
-values that begin at start and end at end (Including start and end !), then
-return a pointer to the first value of the array.
-
-Examples:
-
-- With (1, 3) you will return an array containing 1, 2 and 3.
-- With (-1, 2) you will return an array containing -1, 0, 1 and 2.
-- With (0, 0) you will return an array containing 0.
-- With (0, -3) you will return an array containing 0, -1, -2 and -3.
 ```
 
-## Commented solution
+다음 함수를 작성해야 합니다:
+
+```c
+int     *ft_range(int start, int end);
+```
+
+이 함수는 `malloc()`을 사용하여 정수형 배열을 할당해야 하며, `start`에서 시작하여 `end`에서 끝나는 (start와 end를 포함하여!) 연속적인 값으로 채워야 합니다. 그리고 배열의 첫 번째 값에 대한 Pointer를 반환해야 합니다.
+
+예시:
+
+- (1, 3)의 경우 1, 2, 3을 포함하는 배열을 반환합니다.
+- (-1, 2)의 경우 -1, 0, 1, 2를 포함하는 배열을 반환합니다.
+- (0, 0)의 경우 0을 포함하는 배열을 반환합니다.
+- (0, -3)의 경우 0, -1, -2, -3을 포함하는 배열을 반환합니다.
+
+## 주석이 달린 해답
 
 <details>
 
@@ -35,25 +35,25 @@ Examples:
 int *ft_range(int start, int end)
 {
     int i = 0;
-    // Defining the lenght of the range
-    // Since we don't have access to the abs function, we have
-    // to make a manual absolute value
+    // 범위의 길이를 정의합니다.
+    // abs 함수를 사용할 수 없으므로,
+    // 수동으로 절대값을 계산해야 합니다.
     int len = (end - start) < 0 ? ((end - start) * -1) + 1 : (end - start) + 1;
-    // Allocating the range needed
+    // 필요한 범위만큼 메모리를 할당합니다.
     int *range = (int *) malloc(len * sizeof(int));
     
-    // Fill in the range
+    // 범위를 채워 넣습니다.
     while (i < len)
     {
-        // Next lines are for numbers going up
+        // 다음 줄은 숫자가 증가하는 경우에 해당합니다.
         if (start < end)
             range[i] = start++;
-        // Next lines are for numbers going down
+        // 다음 줄은 숫자가 감소하는 경우에 해당합니다.
         else
             range[i] = start--;
         i++;
     }
-    // Returning the filled range
+    // 채워진 범위(배열)를 반환합니다.
     return (range);
 }
 ```

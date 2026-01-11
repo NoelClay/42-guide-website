@@ -1,126 +1,108 @@
-# Understand MiniRT
+# MiniRT 이해하기
 
-This project was made by me ([Laura](https://github.com/thebrisly)) and my fabulous mate ([fgrasset](https://github.com/fgrasset))! If you have any questions, don't hesitate to contact me on LinkedIn for example :-) I will be happy to help you !
+이 프로젝트는 저([Laura](https://github.com/thebrisly))와 저의 멋진 동료([fgrasset](https://github.com/fgrasset))가 함께 만들었습니다! 궁금한 점이 있으시면 예를 들어 LinkedIn을 통해 주저하지 마시고 연락해 주십시오 :-) 기꺼이 도와드리겠습니다!
 
+저희는 프로젝트를 빠르게 진행하기 위해 보너스 요소 없이 매우, 매우 미니멀한 RT를 만들었습니다. 하지만 일단 감을 잡으시면 보너스를 구현하는 것이 그리 복잡하지 않을 것입니다.
 
+이제, 이 주제를 이해하기 위해 계속 진행해 보겠습니다!
 
-We made a very, very minimalist RT without any bonuses because we wanted to go fast on it. But the bonuses shouldn't be too complicated to implement once you've got the hang of it ^^.
+## Raytracing이란 무엇입니까?
 
-Anyway, let's get on with understanding the subject!
+Raytracing은 컴퓨터 그래픽스에서 사용되는 강력한 기술이며, 장면(scene) 내에서 빛이 물체와 상호 작용하는 방식을 시뮬레이션하여 사실적인 이미지를 생성하는 데 사용됩니다.
 
+단순하게 화면에 모양을 배치하는 대신, **Raytracing은 가상 빛(virtual light)처럼 작동합니다**. 가상의 카메라에서 광선(ray)을 쏘는 것처럼 작동하며, 이 광선들은 주변을 반사하며 닿는 모든 것을 비춥니다. 이를 통해 **빛이 실제로 어떻게 행동하는지를 복사하기 때문에 매우 사실적인 이미지를 만듭니다**. 다른 드로잉 방식들은 빛을 이 정도로 잘 복사하지 못하므로, **Raytracing은 주변 세계에서 보이는 것처럼 물체를 보이게 합니다**.
 
+Raytracing은 **고품질의 사실적인 이미지를 생성**하는 데 매우 효과적이지만, **상당한 계산 집약적 작업**이 될 수도 있습니다. 빛의 동작을 매우 정확하게 시뮬레이션하기 때문에 종종 많은 계산을 요구하며, 이로 인해 렌더링 과정이 느려질 수 있습니다.
 
-## What is raytracing ?
+비디오 게임에서는 이전에는 Rasterization이라는 더 빠른 드로잉 방식을 사용했습니다. 오늘날에는 Raytracing을 게임에 추가하여 기존 방식과 혼합하고 있습니다. 새로운 하드웨어는 이러한 혼합을 도와 속도를 희생하지 않고 비주얼을 개선합니다. 이 조합을 하이브리드 렌더링(hybrid rendering)이라고 부르며, 사실성과 속도를 모두 제공합니다.
 
-Raytracing is a powerful technique in computer graphics used to generate realistic images by simulating how light interacts with objects in a scene.&#x20;
+설명은 충분합니다. 이제 다이어그램을 통해 프로젝트가 어떻게 작동하는지 살펴보겠습니다.
 
-Instead of just putting shapes on a screen, **it acts like virtual light**. It pretends to shoot rays of light from a pretend camera, and these rays bounce around, lighting up everything they touch. By doing this, **it creates pictures that look super real because it copies how light really behaves**. Other drawing methods don't copy light as well, so **raytracing makes things look more like they do in the world around us**.
+## MiniRT 요약
 
-Raytracing is incredibly effective at **producing high-quality and realistic images**, but it can also be quite **computationally intensive**. Because it simulates the behavior of light so accurately, it often requires a lot of calculations, which can slow down the rendering process.
+### 렌더링 예시
 
-Video games used to use faster ways to draw, called rasterization. Nowadays, they're adding raytracing to games, mixing it with traditional methods. New hardware helps with this mix, improving how things look without sacrificing speed. This combo is called hybrid rendering, giving both realism and speed.
+구체적인 예시를 들어 보겠습니다.
 
-
-
-Enough discussion. Let's see how the project works with diagrams.
-
-
-
-## MiniRT in a nutshell
-
-### Rendering example
-
-Let's take a concrete example.
-
-Imagine your program receives this scene :&#x20;
+여러분의 프로그램이 다음과 같은 장면을 수신한다고 가정합니다:
 
 `A 0.2 255,255,255`\
 `C 0,0,0 0,0,1 70`\
 `L 0,0,-3 0.6`\
 `sp 0,0,10 7 0,0,255`
 
-This scene should show only one sphere (sp) with a light source (L) coming from below and one camera (C) capturing the scene from the zero position.
+이 장면은 아래에서 오는 광원(L)과 제로 위치에서 장면을 포착하는 카메라(C)가 있는 단 하나의 구체(sp)를 보여줘야 합니다.
 
-**The aim of the minirt project is to make a computer draw this scene in a realistic way.**
+**minirt 프로젝트의 목표는 컴퓨터가 이 장면을 사실적인 방식으로 그리도록 만드는 것입니다.**
 
-This is how it would look from our program:\
-\
-\[picture of our project]
+이것이 저희 프로그램에서 보이는 모습입니다:
 
+[저희 프로젝트의 그림]
 
+멋지죠? 하지만 저희는 이 작업을 위해 많은 노력을 했습니다. **성공하기 위해 저희가 따랐던 단계들을 소개합니다!**
 
-Sounds nice nooop ? But we went through a lot of shit to do this lol. **Here are the steps we followed in order to succeed !**
+### 목표 달성 단계
 
+이 작업을 수행하기 위해, 프로그램은 먼저 화면에 구체를 그리는 방법을 파악해야 합니다.
 
-
-### Steps to get there
-
-To do this, the program first needs to figure out how to draw the sphere on the screen.
-
-In a drawing, **it would look something like this**: (sorry for my poor drawing skills, but you've got a little representation at least)
+그림으로 표현하면 **다음과 같이 보일 것입니다**: (저의 부족한 그림 실력에 죄송하지만, 최소한의 표현은 제공합니다)
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-Imagine your computer screen divided into tiny squares, each representing a pixel. $
+여러분의 컴퓨터 화면이 픽셀(pixel)을 나타내는 작은 사각형들로 나뉘어 있다고 상상해 보십시오. $
 
-For every pixel, we imagine **launching a special ray of light from the camera's viewpoint**. This ray is like a question: "What's there?"
+모든 픽셀에 대해, 우리는 **카메라의 시점으로부터 특별한 광선을 발사**한다고 상상합니다. 이 광선은 "저기에 무엇이 있습니까?"라는 질문과 같습니다.
 
-As this ray travels, it might bump into objects in the scene, like the pink sphere you mentioned. If it hits the sphere, it's like the ray found an answer: "Ah, there's something here!"
+이 광선이 이동하면서, 여러분이 언급한 분홍색 구체와 같이 장면에 있는 물체와 충돌할 수 있습니다. 만약 구체에 맞으면, 광선은 "아, 여기에 무언가가 있습니다!"라는 답을 찾은 것과 같습니다.
 
 <details>
 
-<summary>Explanation based on the drawing</summary>
+<summary>그림을 바탕으로 한 설명</summary>
 
-In my superb drawing, you can see that I'm shooting three rays from my camera towards my stage. All 3 rays will hit the object, but at 3 different points of light. The first point will be neither in shadow nor in direct light. The 2nd point will be in shadow and hardly visible from the camera's point of view (but still a little) and the last point, point 3, will be in direct contact with diffuse light - meaning it will be a point visible from the camera!
+저의 멋진 그림에서, 저는 카메라에서 스테이지를 향해 세 개의 광선을 쏘고 있음을 볼 수 있습니다. 세 광선 모두 물체에 부딪히지만, 세 개의 다른 지점에 닿게 됩니다. 첫 번째 지점은 그림자 속에도, 직접적인 빛 속에도 있지 않을 것입니다. 두 번째 지점은 그림자 속에 있으며 카메라 시점에서 거의 보이지 않을 것입니다 (하지만 약간은 보입니다). 그리고 마지막 지점인 지점 3은 확산광(diffuse light)과 직접 접촉하게 됩니다. 이는 카메라에서 볼 수 있는 지점이 될 것임을 의미합니다!
 
 </details>
 
-Now, because we're not just interested in the object but also in how it's lit, we take another step. **We send a new ray from that point where the first ray hit the object, but this time towards the light** **source**. If this second ray reaches the light source, it's like saying, "Hey, can I see the light from here?" If it does, we know that light is reaching that point on the object.&#x20;
+이제, 우리는 물체뿐만 아니라 그것이 어떻게 조명되는지에도 관심이 있기 때문에, 다음 단계로 나아갑니다. **첫 번째 광선이 물체에 부딪힌 지점으로부터 새로운 광선을 발사하는데, 이번에는 광원을 향합니다**. 이 두 번째 광선이 광원에 도달하면, 이는 "이곳에서 빛을 볼 수 있습니까?"라고 묻는 것과 같습니다. 만약 도달한다면, 우리는 그 물체 지점에 빛이 닿고 있다는 것을 알게 됩니다.
 
-If it doesn't reach the light source, it's because it intersects another object (if there is more than one in the scene) before reaching the light or because it is in the shadow!
+만약 광원에 도달하지 못한다면, 그것은 빛에 도달하기 전에 다른 물체와 교차하기 때문이거나 (장면에 물체가 두 개 이상 있다면) 그림자 속에 있기 때문입니다!
 
-**When light touches that point, we color it using the object's color**. So, in the case of the blue sphere, we'd color that point blue.&#x20;
+**빛이 그 지점에 닿으면, 우리는 물체의 색상을 사용하여 그 지점을 채색합니다**. 따라서 파란색 구체의 경우, 우리는 그 지점을 파란색으로 채색할 것입니다.
 
-And remember something. The closer a point is to the light and in direct contact with it, the brighter it will be! On the contrary, the further away it is, the shadier and darker (or even non-existent) it is.
+그리고 한 가지를 기억하십시오. 빛에 가까울수록, 그리고 빛과 직접 접촉할수록 그 지점은 더 밝아질 것입니다! 반대로, 멀리 떨어져 있을수록 더 그늘지고 어두워지거나 (심지어는 존재하지 않을 수도 있습니다).
 
-By repeating this process for every pixel and every object, we create an image that looks realistic, with objects casting shadows and reflecting light just like they would in the real world. It's like painting with rays of light to capture the essence of the scene.
+모든 픽셀과 모든 물체에 대해 이 과정을 반복함으로써, 우리는 물체가 그림자를 드리우고 현실 세계와 마찬가지로 빛을 반사하는 사실적인 이미지를 만듭니다. 이는 장면의 본질을 포착하기 위해 빛의 광선으로 그림을 그리는 것과 같습니다.
 
+그리고... 그게 전부입니다 (정말입니다!). 하지만 올바른 교차(intersection), 행렬(matrix), 그리고 Raytracing 계산을 찾는 데 때로는 시간이 걸립니다! 그리고 그 과정에서 여러분의 프로그램에서 다른 오류들을 발견하게 될 것입니다. 이에 대해서는 아래에 나열해 놓겠습니다.
 
+또한, 장면을 표시하는 데 8시간이 걸리지 않도록 코드를 최적화하는 것에 대해서도 생각해야 합니다 :)
 
-And... that's it (I promise, it really is !). But finding the right intersection, matrix and ray-tracing calculations takes time sometimes ! And you'll undoubtedly find other errors in your program along the way, which I'll list below.
+## 흔한 오류
 
-You also need to think about optimizing your code so that it doesn't take 8 hours to display a scene :)
+매우 흔하게 마주치게 될 실수 중 하나는 다음과 같습니다:
 
-
-
-## Common error
-
-One very common mistake you're bound to encounter:&#x20;
-
-Your objects appear pixelated. Like this:
+여러분의 물체가 다음과 같이 픽셀화되어 나타납니다:
 
 <figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
-To solve this problem, I offer two suggestions :
+이 문제를 해결하기 위해 두 가지 제안을 드립니다:
 
 <details>
 
-<summary>Solution 1 </summary>
+<summary>해결책 1 </summary>
 
-Just read the answer on this blog and you will understand everything : [https://stackoverflow.com/questions/23417736/ray-tracing-noise](https://stackoverflow.com/questions/23417736/ray-tracing-noise)&#x20;
+이 블로그의 답변을 읽으시면 모든 것을 이해하실 수 있을 것입니다: [https://stackoverflow.com/questions/23417736/ray-tracing-noise](https://stackoverflow.com/questions/23417736/ray-tracing-noise)
 
 </details>
 
 <details>
 
-<summary>Solution 2</summary>
+<summary>해결책 2</summary>
 
-Once you've pinpointed where the ray hits the object and you're sending another ray towards the light source, it's important to check if any other objects in the scene get in the way. This means going through the list of all the objects.&#x20;
+광선이 물체에 부딪히는 지점을 정확히 파악하고 광원을 향해 또 다른 광선을 보낼 때, 장면에 있는 다른 물체들이 경로를 방해하는지 확인하는 것이 중요합니다. 이는 모든 물체 목록을 검토해야 함을 의미합니다.
 
-Remember to exclude the object you're currently dealing with – this prevents it from accidentally causing issues by calculating itself. This precaution can help you avoid potential problems in your calculations.
+현재 처리하고 있는 물체는 제외해야 함을 기억하십시오. 이는 해당 물체가 실수로 자신을 계산하여 문제를 일으키는 것을 방지합니다. 이러한 예방 조치는 계산상의 잠재적인 문제를 피하는 데 도움이 될 수 있습니다.
 
 </details>
 
-
-
-That's it ! There is nothing more to know about this project. Or at least, I'll let you experiment with your code :D&#x20;
+이것이 전부입니다! 이 프로젝트에 대해 더 알아야 할 것은 없습니다. 혹은 최소한, 여러분의 코드를 직접 실험해 보도록 맡기겠습니다 :D

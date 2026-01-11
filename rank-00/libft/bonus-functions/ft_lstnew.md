@@ -1,6 +1,6 @@
 # ft\_lstnew
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -21,27 +21,27 @@ AUTHORIZED EXTERNAL FUNCTIONS
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-This function allocates memory for a new element of type `t_list`, setting its `content` to be the `content` parameter, and setting the `next` variable to `NULL`.
+이 함수는 `t_list` 타입의 새로운 요소를 위한 메모리를 할당하고, 해당 요소의 `content`를 매개변수 `content`로 설정하며, `next` 변수를 `NULL`로 설정합니다.
 
-Then it returns the newly allocated / created element of the list.
+그런 다음 새로 할당/생성된 리스트 요소를 반환합니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_lstnew" overflow="wrap" lineNumbers="true" %}
 ```c
-/* declare a new list element */
-/* allocate memory for it */
-/* set the new element variables 
+/* 새로운 리스트 요소 선언 */
+/* 메모리를 할당합니다 */
+/* 새로운 요소 변수들을 설정합니다. 
  * new->content = content
  * new->next = NULL
  */
-/* return the new element */
+/* 새로운 요소를 반환합니다 */
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -53,22 +53,21 @@ Then it returns the newly allocated / created element of the list.
 
 t_list *ft_lstnew(void *content)
 {
-    /* declaring the new list element
+    /* 새로운 리스트 요소 선언
      */
     t_list *elem;
     
-    /* allocating the memory for the new element
+    /* 새로운 요소를 위한 메모리 할당
      */
     elem = malloc(sizeof(t_list));
     if (!elem)
         return (NULL);
-    /* setting the content of the new element
-     * to the 'content' parameter
-     * and setting the 'next' to NULL
+    /* 새로운 요소의 content를 'content' 매개변수로 설정하고
+     * 'next'를 NULL로 설정합니다
      */
     elem->content = content;
     elem->next = NULL;
-    /* finally, we return the created element
+    /* 마지막으로, 생성된 요소를 반환합니다
      */
     return (elem);
 }

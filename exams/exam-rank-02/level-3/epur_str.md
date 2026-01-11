@@ -1,24 +1,20 @@
 # epur\_str
 
-### Subject
+### 주제
 
 ```
-Assignment name  : epur_str
-Expected files   : epur_str.c
-Allowed functions: write
+과제 이름  : epur_str
+요구 파일   : epur_str.c
+허용 함수: write
 --------------------------------------------------------------------------------
 
-Write a program that takes a string, and displays this string with exactly one
-space between words, with no spaces or tabs either at the beginning or the end,
-followed by a \n.
+문자열을 인수로 받아, 단어 사이에 정확히 하나의 공백만을 두고, 문자열의 시작이나 끝에는 공백이나 탭이 없도록 이 문자열을 출력하는 프로그램을 작성해야 합니다. 출력 후에는 \n이 따라와야 합니다.
 
-A "word" is defined as a part of a string delimited either by spaces/tabs, or
-by the start/end of the string.
+"단어(word)"는 공백/탭, 또는 문자열의 시작/끝으로 구분되는 문자열의 일부로 정의됩니다.
 
-If the number of arguments is not 1, or if there are no words to display, the
-program displays \n.
+인수의 개수가 1이 아니거나, 출력할 단어가 없는 경우, 프로그램은 \n을 출력합니다.
 
-Example:
+예시:
 
 $> ./epur_str "vous voyez c'est facile d'afficher la meme chose" | cat -e
 vous voyez c'est facile d'afficher la meme chose$
@@ -31,7 +27,7 @@ $
 $>
 ```
 
-### Commented solution
+### 주석 처리된 솔루션
 
 <details>
 
@@ -58,20 +54,20 @@ int main(int ac, char **av)
     if (ac == 2)
     {
         int i = 0, space = 0;
-        // skipping all leading blank chars
+        // 모든 선행 공백 문자를 건너뜁니다.
         while (is_space(av[1][i]))
             i++;
         while (av[1][i])
         {
-            // if there is a blank char, make the space flag 1
-            // if there are multiple blank, it will be set
-            // to 1 each time
+            // 공백 문자가 있다면, space 플래그를 1로 설정합니다.
+            // 여러 개의 공백이 있더라도, 플래그는 매번 1로
+            // 설정될 것입니다.
             if (is_space(av[1][i]))
                 space = 1;
-            // if current char is not a blank char
-            // write a space if flag is on
-            // set the space flag back to 0
-            // write current char
+            // 현재 문자가 공백 문자가 아니라면
+            // 플래그가 켜져 있다면 공백을 출력합니다.
+            // space 플래그를 다시 0으로 설정합니다.
+            // 현재 문자를 출력합니다.
             if (!is_space(av[1][i]))
             {
                 if (space)

@@ -1,60 +1,59 @@
 ---
-description: What are C structures
+description: C 구조체란 무엇인가요
 ---
 
-# 🧱 C Structures
+# 🧱 C Structure
 
-### Introduction
+### 서론
 
-**Structures** are a way to group several related variables into one place.\
-Each variable in the structure is known as a **member** of the structure.
+**Structure**는 여러 관련 변수들을 한 곳에 모아 그룹화하는 방법입니다.
+Structure 내의 각 변수는 Structure의 **멤버**로 알려져 있습니다.
 
-To make it clearer, I will use the example of a library that wants to store information about books :
+더 명확히 설명하기 위해, 도서 정보를 저장하고자 하는 도서관의 예시를 사용하겠습니다:
 
-* Book title
-* Book author
-* Book ID
+*   도서 제목 (Book title)
+*   도서 저자 (Book author)
+*   도서 ID (Book ID)
 
-### Difference between array and structures
+### Array와 Structure의 차이점
 
-Arrays allow you to store multiple variables of the same data type, an array of `int`, an array of `char`, etc.
+Array는 `int` Array, `char` Array 등과 같이 동일한 자료형의 여러 변수를 저장할 수 있게 합니다.
 
-Structures allow you to store multiple variables of **different** data types. You could have one `int` member, one `char` member, multiple `double` members, etc.
+Structure는 **서로 다른** 자료형의 여러 변수를 저장할 수 있게 합니다. Structure 안에는 하나의 `int` 멤버, 하나의 `char` 멤버, 여러 개의 `double` 멤버 등을 가질 수 있습니다.
 
-### Create a Structure
+### Structure 생성하기
 
-Structures are generally declared in a header file so it is usable everywhere the header file is included.
+Structure는 일반적으로 헤더 파일에 선언되므로, 해당 헤더 파일이 포함된 모든 곳에서 사용할 수 있습니다.
 
-They are created using the **struct** keyword like this :
+Structure는 다음과 같이 **struct** 키워드를 사용하여 생성합니다.
 
 {% code title="main.h" lineNumbers="true" %}
 ```c
-struct [structure tag]
+struct [구조체 태그]
 {
-   member definition;
-   member definition;
+   멤버 정의;
+   멤버 정의;
    ...
-   member definition;
-} [one or more structure variables];
+   멤버 정의;
+} [하나 이상의 구조체 변수];
 ```
 {% endcode %}
 
-#### Using structure tag and variables
+#### Structure Tag와 변수 사용하기
 
-Structure tag and structure variables are concepts that are easily explained with examples.&#x20;
-
-I'll explain the difference between the two usage.
+Structure tag와 Structure 변수는 예시를 통해 쉽게 설명할 수 있는 개념입니다.
+두 사용법의 차이점을 설명해 드리겠습니다.
 
 {% code lineNumbers="true" %}
 ```c
-// With Structure Tag s_st1
+// Structure Tag s_st1을 사용하는 경우
 struct s_st1
 {
     int x;
     char c;
 } a = {100, 'a'}, b = {50, 'b'};
 
-// Without Structure Tag
+// Structure Tag가 없는 경우 (익명 구조체)
 struct
 {
     int x;
@@ -63,33 +62,33 @@ struct
 ```
 {% endcode %}
 
-`a` and `c` will have the same content, as expected.\
-`b` and `d` will also have the same content, as expected.
+예상대로 `a`와 `c`는 동일한 내용을 가집니다.
+`b`와 `d` 또한 예상대로 동일한 내용을 가집니다.
 
-The difference lies in the fact that you can create new variables based on the struct `s_st1` whenever you want in your code, but won't be able to do so for the anonymous structure.
+차이점은 Structure `s_st1`을 기반으로 하는 경우 코드의 어느 시점에서든 새로운 변수를 생성할 수 있지만, 익명 Structure의 경우에는 그렇게 할 수 없다는 사실에 있습니다.
 
-If you want to create a new variable based on the structure you'll have to do the following :
+해당 Structure를 기반으로 새로운 변수를 생성하려면 다음을 수행해야 합니다.
 
-<pre class="language-c" data-line-numbers><code class="lang-c">// Declaring new variable for the s_st1 structure.
-<strong>// You can do this whenever you want in your code.
-</strong><strong>struct s_st1 e;
+<pre class="language-c" data-line-numbers><code class="lang-c">// s_st1 Structure를 위한 새 변수를 선언합니다.
+// 이 작업은 코드 내에서 원할 때마다 수행할 수 있습니다.
+<strong>struct s_st1 e;
 </strong>e = {25, 'e'};
 <strong>
-</strong><strong>// Declaring new variable for the anonymous structure.
-</strong><strong>// => go to the original structure declaration
-</strong>struct
+</strong>// 익명 Structure를 위한 새 변수를 선언합니다.
+// => 원래 Structure 선언 부분으로 이동해야 합니다.
+struct
 {
     int x;
     char c;
 } c = {100, 'a'}, d = {50, 'b'}, f;
-// Add a new variable to the list (i.e. 'f')
-// once that's done you can assign values to the variable f
+// 목록에 새 변수('f')를 추가합니다.
+// 완료되면 변수 f에 값을 할당할 수 있습니다.
 f = {25, 'f'};
 </code></pre>
 
-As you can see, using a named structure can be easier if you need to declare a new variable later in your code.
+보시다시피, 코드에서 나중에 새로운 변수를 선언해야 하는 경우 이름을 지정한 Structure를 사용하는 것이 더 쉬울 수 있습니다.
 
-For example, our s\_book structure would be declared like this :
+예를 들어, 저희의 `s_book` Structure는 다음과 같이 선언됩니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -100,7 +99,7 @@ struct s_book
     int  book_id;
 };
 
-// later in the code we could use this line to declare new Books
+// 코드 내에서 나중에 이 라인을 사용하여 새로운 Book을 선언할 수 있습니다.
 struct s_book LOTR1 = {"The Lord of the Rings 1", "J.R.R. Tolkien", 44003415};
 struct s_book LOTR2;
 
@@ -111,14 +110,14 @@ LOTR2.book_id = 44003416;
 {% endcode %}
 
 {% hint style="info" %}
-Note that I named the structure since we would be using it to create multiple books in our code.
+코드에서 여러 Book을 생성하기 위해 이 Structure를 사용할 것이므로 이름을 지정했다는 점에 유의하십시오.
 {% endhint %}
 
-### Accessing structure members
+### Structure 멤버 접근하기
 
-To access a member of a structure, we have to use the **member access operator `.`.**
+Structure의 멤버에 접근하려면 **멤버 접근 연산자**인 `.`을 사용해야 합니다.
 
-To use it, we have to put a `.` between the structure variable name and the member we want to access. See the example below to find out how it's used in a program.
+이를 사용하려면 Structure 변수 이름과 접근하고자 하는 멤버 사이에 `.`을 넣어야 합니다. 프로그램에서 어떻게 사용되는지 알아보려면 아래 예시를 확인하십시오.
 
 {% code title="main.c" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -134,21 +133,21 @@ struct s_book
 
 int main(void)
 {
-    // declaring 2 new books
+    // 2개의 새로운 Book을 선언합니다.
     struct s_book book1;
     struct s_book book2;
 
-    // Setting book1 members
+    // book1 멤버를 설정합니다.
     strcpy(book1.title, "The Lord of the Rings 1");
     strcpy(book1.author, "J.R.R. Tolkien");
     book1.book_id = 44003415;
     
-    // Setting book2 members
+    // book2 멤버를 설정합니다.
     strcpy(book1.title, "The Lord of the Rings 2");
     strcpy(book1.author, "J.R.R. Tolkien");
     book1.book_id = 44003416;
     
-    // Printing books information
+    // Book 정보를 출력합니다.
     printf("%s - %s - %d\n", book1.title, book1.author, book1.book_id);
     printf("%s - %s - %d\n", book2.title, book2.author, book2.book_id);
     
@@ -157,7 +156,7 @@ int main(void)
 ```
 {% endcode %}
 
-When the above code is compiled and executed it produces the following result :
+위 코드가 컴파일되고 실행되면 다음과 같은 결과가 출력됩니다.
 
 {% code overflow="wrap" %}
 ```
@@ -166,11 +165,11 @@ The Lord of the Rings 2 - J.R.R. Tolkien - 44003416
 ```
 {% endcode %}
 
-### Accesing structure pointer members
+### Structure Pointer 멤버 접근하기
 
-To access a member of a structure pointer, we have to use another **member access operator `->`.**
+Structure Pointer의 멤버에 접근하려면, 또 다른 **멤버 접근 연산자**인 `->`를 사용해야 합니다.
 
-To use it, we have to put a `->` between the structure variable name and the member we want to access. See the example below to find out how it's used in a program.
+이를 사용하려면 Structure 변수 이름과 접근하고자 하는 멤버 사이에 `->`를 넣어야 합니다. 프로그램에서 어떻게 사용되는지 알아보려면 아래 예시를 확인하십시오.
 
 {% code title="main.c" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -188,16 +187,16 @@ void printBook(struct s_book *book);
 
 int main(void)
 {
-    // declaring 2 new books
+    // 2개의 새로운 Book을 선언합니다.
     struct s_book book1;
     struct s_book book2;
 
-    // Setting book1 members
+    // book1 멤버를 설정합니다.
     strcpy(book1.title, "The Lord of the Rings 1");
     strcpy(book1.author, "J.R.R. Tolkien");
     book1.book_id = 44003415;
     
-    // Setting book2 members
+    // book2 멤버를 설정합니다.
     strcpy(book1.title, "The Lord of the Rings 2");
     strcpy(book1.author, "J.R.R. Tolkien");
     book1.book_id = 44003416;
@@ -215,18 +214,18 @@ void printBook(struct s_book *book)
 ```
 {% endcode %}
 
-When the above code is compiled and executed it produces the following result :
+위 코드가 컴파일되고 실행되면 다음과 같은 결과가 출력됩니다.
 
 ```
 The Lord of the Rings 1 - J.R.R. Tolkien - 44003415
 The Lord of the Rings 2 - J.R.R. Tolkien - 44003416
 ```
 
-### Defining a type for your structure (typedef)
+### Structure의 타입 정의하기 (typedef)
 
-We use the `typedef` keyword to create an alias name for data types. It is commonly used with structures to simplify the syntax of declaring variables.
+저희는 자료형에 대한 별칭 이름(alias name)을 생성하기 위해 `typedef` 키워드를 사용합니다. 이는 변수를 선언하는 구문을 단순화하기 위해 Structure와 함께 흔히 사용됩니다.
 
-Look at the following example :
+다음 예시를 살펴보십시오.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -243,7 +242,7 @@ int main(void)
 ```
 {% endcode %}
 
-We can use `typedef` to write an equivalent with a simplified syntax :
+`typedef`를 사용하여 단순화된 구문으로 동등한 코드를 작성할 수 있습니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -260,37 +259,37 @@ int main(void)
 ```
 {% endcode %}
 
-### Naming convention
+### 네이밍 규칙 (Naming convention)
 
-To respect the 42 Norm, we have to name our `structures` and `typedef` in a certain way.
+42 Norm을 준수하기 위해 저희는 Structure와 `typedef`의 이름을 특정 방식으로 지정해야 합니다.
 
-This also makes it a lot easier to follow.
+이는 또한 코드를 훨씬 쉽게 이해할 수 있게 해줍니다.
 
-Structure names must start with `s_` and typedefs must start with `t_`.
+Structure 이름은 `s_`로 시작해야 하며, `typedef` 이름은 `t_`로 시작해야 합니다.
 
 ```c
-// incorrect structure
+// 올바르지 않은 Structure
 struct point_structure
 {
     int x;
     int y;
 };
 
-// correct structure
+// 올바른 Structure
 struct s_point
 {
     int x;
     int y;
 };
 
-// incorrect typedef
+// 올바르지 않은 typedef
 typedef struct s_point
 {
     int x;
     int y;
 } point;
 
-// correct typedef
+// 올바른 typedef
 typedef struct s_point
 {
     int x;
@@ -298,15 +297,15 @@ typedef struct s_point
 } t_point;
 ```
 
-### Why structs ?
+### Structure를 사용하는 이유
 
-Suppose you want to store information about, to keep the same example, a book : title, author, id. You can create different variables `title`, `author`, `id` to store this information.
+동일한 예시를 사용하여, Book에 대한 정보(제목, 저자, ID)를 저장하고 싶다고 가정해 보겠습니다. 이 정보를 저장하기 위해 `title`, `author`, `id`와 같은 개별 변수를 생성할 수 있습니다.
 
-What if you need to store information of more that one book ? Now, you need to create different variables for each informaiton per book : `title2`, `author2`, `id2`, etc.
+만약 두 권 이상의 Book 정보를 저장해야 한다면 어떻게 될까요? 이제 각 Book 정보마다 `title2`, `author2`, `id2` 등과 같은 개별 변수를 만들어야 합니다.
 
-A better approach would be to have a collection of all related information under a single named `s_book` structure and use it for every book.
+더 나은 접근 방식은 관련된 모든 정보를 단일 이름의 `s_book` Structure 아래에 모아 컬렉션으로 만들고 이를 모든 Book에 사용하는 것입니다.
 
-#### Sources
+#### 출처
 
 {% embed url="https://www.tutorialspoint.com/cprogramming/c_structures.htm" %}
 

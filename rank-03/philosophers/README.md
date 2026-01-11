@@ -1,28 +1,24 @@
 ---
 description: >-
-  The purpose of this project is to introduce you to threading and processes,
-  and how to work on shared memory space. You'll discover threads, mutex,
-  semaphores and shared memory
+  이 프로젝트의 목적은 여러분에게 threading과 processes를 소개하고, Shared Memory space에서 작업하는 방법을 알려주는 것입니다. 여러분은 threads, Mutex, Semaphores 그리고 Shared Memory를 경험하게 될 것입니다
 ---
 
-# Philosophers
+# 철학자들 (Philosophers)
 
-The "philosophers' dinner" problem is a classic thought experiment and a well-known problem in computer science and distributed systems.
+"철학자들의 만찬(philosophers' dinner)" 문제는 컴퓨터 과학 및 분산 시스템 분야에서 고전적인 사고 실험이자 잘 알려진 문제입니다.
 
-The problem is typically presented in the context of five philosophers who are sitting around a circular table, with a plate of spaghetti in front of each of them, and a single fork between each pair of adjacent philosophers. The goal of each philosopher is to eat the spaghetti, but in order to do so, they must each use two forks.
+이 문제는 일반적으로 원형 테이블 주위에 다섯 명의 철학자가 앉아 있고, 각 철학자 앞에는 스파게티 접시가 있으며, 인접한 두 철학자 사이에는 포크가 하나씩 놓여 있는 상황으로 제시됩니다. 각 철학자의 목표는 스파게티를 먹는 것이지만, 스파게티를 먹으려면 두 개의 포크를 사용해야만 합니다.
 
-I recommend you to watch this video to better understand the problem
+이 문제를 더 잘 이해하려면 다음 영상을 시청하는 것을 권장합니다.
 
 {% embed url="https://youtu.be/VSkvwzqo-Pk" %}
 
 {% hint style="danger" %}
-the subject of 42 changes a bit from what is on the video - always read the subject carefully
+42의 과제 내용은 영상에서 설명하는 내용과 약간 다를 수 있습니다. 과제 지침(subject)을 항상 주의 깊게 읽어주십시오.
 {% endhint %}
 
-The problem is to design a protocol that allows each philosopher to pick up the two forks to their sides without causing a deadlock, where every philosopher is waiting for a fork that is currently being held by their neighbor. The protocol must ensure that no philosopher goes hungry, and that no two adjacent philosophers hold the same fork at the same time.
+이 문제는 각 철학자가 양쪽에 있는 두 개의 포크를 Deadlock을 발생시키지 않고 집을 수 있도록 하는 프로토콜을 설계하는 것입니다. 여기서 Deadlock이란 모든 철학자가 이웃이 현재 쥐고 있는 포크를 기다리는 상황을 의미합니다. 이 프로토콜은 어떤 철학자도 굶주리지 않도록 보장해야 하며, 인접한 두 철학자가 동시에 같은 포크를 쥐고 있지 않도록 보장해야 합니다.
 
-The philosophers' dinner problem is an example of a concurrency problem in computer science and distributed systems, and it has been used as a case study in various fields, including operating systems, distributed algorithms, and concurrent programming. **It highlights the importance of designing protocols that can handle concurrent access to shared resources without causing deadlocks or other issues**.
+철학자들의 만찬 문제는 컴퓨터 과학 및 분산 시스템에서 발생하는 Concurrency 문제의 한 예이며, Operating Systems, 분산 알고리즘, Concurrent Programming을 포함한 다양한 분야에서 사례 연구로 사용되어 왔습니다. **이 문제는 Deadlocks이나 다른 문제를 일으키지 않으면서 Shared Resources에 대한 동시 접근(concurrent access)을 처리할 수 있는 프로토콜을 설계하는 것의 중요성을 강조합니다.**
 
-
-
-Now that you know the general idea, let's try to see together how we can solve this problem
+이제 전반적인 아이디어를 알았으니, 이 문제를 어떻게 해결할 수 있을지 함께 알아보겠습니다.

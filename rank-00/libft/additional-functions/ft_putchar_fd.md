@@ -1,38 +1,36 @@
 # ft\_putchar\_fd
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
-FT_PUTCHAR_FD (simplified)
+FT_PUTCHAR_FD (간소화됨)
 
 NAME
-    ft_putchar_fd -- write character c on a specified file descriptor
+    ft_putchar_fd -- 지정된 file descriptor에 문자 c를 작성합니다.
 SYNOPSIS
     void ft_putchar_fd(char c, int fd);
 DESCRIPTION
-    The ft_putchar_fd() function writes the character c on the file descriptor fd.
+    ft_putchar_fd() 함수는 file descriptor fd에 문자 c를 작성합니다.
 PARAMETERS
-    c: character to write
-    fd: file descriptor on which to write
+    c: 작성할 문자
+    fd: 문자를 작성할 file descriptor
 RETURN VALUES
-    ft_putchar_fd() does not return anything.
+    ft_putchar_fd()는 아무것도 반환하지 않습니다.
 AUTHORIZED EXTERNAL FUNCTIONS
     write(2)
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-This one is pretty straight forward, you already know how to write the `ft_putchar()` function, if you don't remember, look back at what you did during your Piscine.
+이 기능은 매우 간단합니다. 이미 `ft_putchar()` 함수를 어떻게 작성하는지 알고 계실 것입니다. 만약 기억나지 않으신다면, 피신(Piscine) 기간 동안 수행했던 내용을 다시 확인해 보십시오.
 
-### Hints
+### 힌트
 
-Take a look at the man for the `write(2)` function, the first parameter is... you guessed it ! A file descriptor, so I mean, do you really need to have the code for this ?
+`write(2)` 함수의 man 페이지를 확인해 보십시오. 첫 번째 매개변수는... 예상하셨듯이, file descriptor입니다! 따라서 이 코드 전체가 정말로 필요한지 생각해 보십시오. 스스로 해결할 수 있기를 바랍니다.
 
-I hope you can figure it out.
-
-### Commented solutions
+### 주석이 달린 해결책
 
 <details>
 
@@ -44,8 +42,8 @@ I hope you can figure it out.
 
 void    ft_putchar_fd(char c, int fd)
 {
-    /* first parameter is the file descriptor
-     * second parameter is the address to the character
+    /* 첫 번째 매개변수는 file descriptor입니다.
+     * 두 번째 매개변수는 문자의 주소입니다.
      */
     write(fd, &c, 1);
 }

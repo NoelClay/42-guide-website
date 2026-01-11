@@ -1,6 +1,6 @@
 # ft\_swap
 
-### Subject
+### 과제
 
 {% code overflow="wrap" %}
 ```
@@ -18,7 +18,13 @@ void	ft_swap(int *a, int *b);
 ```
 {% endcode %}
 
-### Commented solution
+매개변수로 주소가 전달된 두 개의 int형 정수 내용을 서로 바꾸는 함수를 작성하십시오.
+
+여러분의 함수는 다음과 같이 선언되어야 합니다:
+
+`void ft_swap(int *a, int *b);`
+
+### 주석 처리된 해답
 
 <details>
 
@@ -28,16 +34,16 @@ void	ft_swap(int *a, int *b);
 ```c
 void ft_swap(int *a, int *b)
 {
-    /* we have to declare a temporary variable
-     * to make a swap between 2 variables
+    /* 두 변수의 내용을 바꾸기 위해서는
+     * 임시 변수를 선언해야 합니다.
      */
     int x;
     
-    // set our temporary variable to be equal to the value of *a
+    // 임시 변수가 *a의 값과 같도록 설정합니다.
     x = *a;
-    // set the value of *a to be equal to the value of *b
+    // *a의 값이 *b의 값과 같도록 설정합니다.
     *a = *b;
-    // set the value of *b to be equal to the value of x
+    // *b의 값이 x의 값과 같도록 설정합니다.
     *b = x;
 }
 ```

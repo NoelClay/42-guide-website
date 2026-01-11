@@ -1,6 +1,6 @@
 # ft\_tolower
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -17,11 +17,11 @@ RETURN VALUES
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-I don't think I'll need to explain with more details what this function does, the man is pretty self-explanatory on this point.
+이 함수가 수행하는 작업에 대해 더 자세히 설명할 필요는 없을 것 같습니다. 매뉴얼 페이지(man)가 이 부분에 대해서는 매우 자명하게 설명하고 있습니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_tolower.c" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -34,7 +34,7 @@ int    ft_tolower(int c)
 ```
 {% endcode %}
 
-### Commented solution
+### 주석이 달린 해답
 
 <details>
 
@@ -46,19 +46,16 @@ int    ft_tolower(int c)
 
 int    ft_tolower(int c)
 {
-    /* this checks if the character is an upper-case letter
-     * with the decimal ASCII values (65 => A; 90 => Z)
+    /* 이 부분은 해당 문자가 십진수 ASCII 값(65 => A; 90 => Z)을 기준으로 
+     * 대문자인지 확인합니다.
      */
     if (c >= 65 && c <= 90)
-        /* In the ASCII table, upper-case letters are indexed 32
-         * less than lower-case letters, so to get the
-         * corresponding lower-case letter, we add 32 to the
-         * upper-case letter
+        /* ASCII 테이블에서 대문자는 소문자보다 인덱스가 32만큼 작습니다. 
+         * 따라서 해당하는 소문자를 얻으려면 대문자에 32를 더합니다.
          */
         return (c + 32);
-    /* As said in the man, if the character is not an upper-case
-     * letter, the argument is returned unchanged, that's why we 
-     * return c directly
+    /* 매뉴얼 페이지에 설명된 바와 같이, 해당 문자가 대문자가 아닌 경우 
+     * 인수는 변경되지 않고 그대로 반환됩니다. 따라서 c를 바로 반환합니다.
      */
     return (c);
 }
@@ -66,3 +63,4 @@ int    ft_tolower(int c)
 {% endcode %}
 
 </details>
+```

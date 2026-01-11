@@ -1,6 +1,6 @@
 # str\_capitalizer
 
-### Subject
+### 주제
 
 ```
 Assignment name  : str_capitalizer
@@ -32,7 +32,7 @@ __second Test A Little Bit   Moar Complex$
 $>
 ```
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -59,14 +59,13 @@ void capitalizer(char *s)
     int i = 0;
     while (s[i])
     {
-         // If the character is uppercase, make it lowercase
+         // 문자가 대문자라면 소문자로 만듭니다.
          if (s[i] >= 'A' && s[i] <= 'Z')
              s[i] += 32;
-         // Now check for lowercase character and if the previous char
-         // is a space character, make it uppercase again
+         // 이제 소문자인지 확인하고, 이전 문자가 공백 문자라면 다시 대문자로 만듭니다.
          if ((s[i] >= 'a' && s[i] <= 'z') && ft_isspace(s[i - 1]))
              s[i] -= 32;
-         // Now print every char
+         // 이제 모든 문자를 출력합니다.
          ft_putchar(s[i++]);
     }
 }
@@ -78,8 +77,7 @@ int main(int ac, char **av)
         ft_putchar('\n');
     else
     {
-        // Loop over all params starting at 1 (we don't want the name of
-        // the executable to be written to the screen)
+        // 1부터 시작하는 모든 매개변수를 순회합니다 (실행 파일의 이름이 화면에 출력되는 것을 원하지 않습니다).
         while (i < ac)
         {
             capitalizer(av[i]);

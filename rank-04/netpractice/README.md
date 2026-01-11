@@ -1,31 +1,29 @@
 # NetPractice
 
-Okay - let's put the code aside for a second and get down to something mystical: networks.
+좋습니다. 잠시 코드를 제쳐두고 신비로운 영역인 네트워크에 대해 알아보겠습니다.
 
-* How do two machines communicate with each other?
-* What is the Internet anyway?
-* Do you even know what an IP address is?
+* 두 대의 머신은 어떻게 서로 통신할까요?
+* 인터넷은 도대체 무엇일까요?
+* IP address가 무엇인지 알고 계신가요?
 
-All these network-related questions can be answered to perfection thanks to NetPractice, a project from 42.
+네트워크와 관련된 이러한 모든 질문들은 42의 프로젝트인 NetPractice 덕분에 완벽하게 답변될 수 있습니다.
 
+### NetPractice 요약
 
+수행해야 할 작업:
 
-### NetPractice in short
+* 인트라 사이트에서 파일을 다운로드합니다.
 
-What you'll have to do:
+이 작업이 완료되면, 몇 가지 문제 해결 게임을 통해 재미를 느끼실 수 있습니다:
 
-* Download a file from your intra site
+* 작은 네트워크를 구성해야 합니다. 이를 위해 TCP/IP protocol에서 주소 지정(addressing)이 어떻게 작동하는지 이해해야 합니다. (총 10개의 레벨이 있습니다.)
 
-Once that's done, you're going to have some fun with a few problem-solving games:
+다음은 예시입니다:
 
-* You'll need to configure small networks. To do this, you'll need to understand how addressing works with the TCP/IP protocol. (You'll have 10 levels)
+<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption><p>레벨 1의 예시</p></figcaption></figure>
 
-Here's an example:
+목표는 각 레벨에 있는 모든 머신을 연결하는 것입니다.
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt=""><figcaption><p>Example of level 1</p></figcaption></figure>
+충분히 쉬워 보일 수 있지만, 전문가가 아니라면 필요한 정보를 찾는 것이 어려울 수 있습니다.
 
-The aim is to link all the machines in each level.
-
-It sounds easy enough, but if you're not an expert, it can be hard to find the information you need.&#x20;
-
-So click on the next page and let's take a look at how it all works :)
+그러니 다음 페이지를 클릭하여 이 모든 것이 어떻게 작동하는지 함께 살펴보겠습니다 :)

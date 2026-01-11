@@ -1,3 +1,3 @@
-# ft\_transcendence (to-do)
+# ft\_transcendence (진행 예정)
 
-No more C! No more C++! This project is about doing something you’ve never done before. Remind yourself the beginning of your journey in computer science. Look at you now. Time to shine!
+더 이상 C가 아닙니다! 더 이상 C++도 아닙니다! 이 프로젝트는 이전에 여러분이 한 번도 해보지 않았던 무언가를 수행하는 것에 관한 것입니다. 컴퓨터 과학 분야에서 여러분의 여정이 시작되었던 때를 스스로 되새겨 보십시오. 지금의 여러분을 보십시오. 빛을 발할 시간입니다!

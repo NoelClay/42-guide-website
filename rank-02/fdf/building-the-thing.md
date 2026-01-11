@@ -1,77 +1,71 @@
-# 🗡️ Building the thing
+# 🗡️ 프로젝트 빌드하기 (Building the thing)
 
-What I'll do here is create for you multiple checklists, that corresponds to different part of the project and that you can follow in order to build it. All the code for my "FdF" is available on my [Github](https://github.com/thebrisly/42-Cursus-Piscine/tree/master/FdF). If you have any question on it, don't hesitate to [contact](../../team.md) me (Laura) and it would be a pleasure for me to answer all the questions you might have.
+여기서는 프로젝트의 여러 부분에 해당하는 체크리스트를 만들었으며, 여러분은 이 체크리스트를 따라 프로젝트를 빌드할 수 있습니다. 제 "FdF" 코드는 [Github](https://github.com/thebrisly/42-Cursus-Piscine/tree/master/FdF)에서 확인하실 수 있습니다. 만약 궁금한 점이 있다면 주저하지 마시고 저 (Laura)에게 [연락](../../team.md)해 주시면, 모든 질문에 기쁘게 답변해 드리겠습니다.
 
-To realize FdF I created 6 `.c` files:
+FdF를 구현하기 위해 저는 6개의 `.c` 파일을 만들었습니다:
 
-* `fdf.c`: the place where the `main` is located, error handling and memory allocation
-* `start.c`: the place where I initialize my graphic variables and where I do preliminary checks
-* `points.c`: the place where I create my three and two dimensional point tables
-* `limits.c`: the place where I define which point should connect to another point
-* `draw.c`: this is where I have all my formulas and functions that allow me to draw what I want
-* `hooks.c`: the place where I give instructions to interact with the mouse and keyboard
+*   `fdf.c`: `main`이 위치하고 에러 핸들링과 메모리 할당을 처리하는 파일입니다.
+*   `start.c`: 그래픽 변수를 초기화하고 예비 검사를 수행하는 파일입니다.
+*   `points.c`: 3차원 및 2차원 점 테이블을 생성하는 파일입니다.
+*   `limits.c`: 어떤 점이 다른 점과 연결되어야 하는지를 정의하는 파일입니다.
+*   `draw.c`: 원하는 것을 그릴 수 있도록 모든 공식과 함수가 포함된 파일입니다.
+*   `hooks.c`: 마우스와 키보드 상호작용 지침을 제공하는 파일입니다.
 
-and of course a `.h` called "`fdf.h`" where I have the most important and biggest structure.
+그리고 물론 가장 중요하고 큰 Structure가 포함된 "`fdf.h`"라는 `.h` 파일이 있습니다.
 
-We'll go through all these files via checklists so you can see what logic I applied.
+제가 적용한 로직을 확인하실 수 있도록 이 모든 파일을 체크리스트를 통해 살펴보겠습니다.
 
 {% hint style="danger" %}
-There must be NO leaks. Check that you free the allocated memory each time !
+NO leaks가 발생하지 않도록 해야 합니다. 할당된 메모리를 매번 해제하는지 확인하십시오!
 {% endhint %}
 
+물론 위에 제시된 방식과 다르게 구현할 수도 있습니다. 여기 프로젝트를 여러분의 것으로 만들고 최상의 결과물을 만들 수 있도록 도와주는 더 포괄적인 체크리스트가 있습니다.
 
+모든 것을 넣지는 않았습니다. 그렇지 않으면 이해하기 어려울 수 있으니까요. ^^ 도움이 되기를 바랍니다...
 
-Of course you can do otherwise than what I have shown you above. Here is a more global checklist to make the project your own and make it the best you can.
+### (일부) 체크리스트
 
-I didn't put everything otherwise it will not be understandable ^^ I hope it will be useful...
+#### 메인 체크리스트
 
+*   [ ] 인자가 2개만 존재하는지 확인합니다.
+*   [ ] 할당된 메모리를 해제합니다 (no leaks).
 
+#### 맵 체크리스트
 
-### (some) Checklists
+*   [ ] 맵 데이터를 어딘가에 가져와 저장합니다 (좌표, 높이, 길이 등...).
+*   [ ] 맵 에러 핸들링
+    *   [ ] 빈 맵 (주어지더라도 segfault가 발생해서는 안 됩니다.)
+    *   [ ] 직사각형이 아닌 맵 (주어지더라도 segfault가 발생해서는 안 됩니다.)
 
-#### Main Checklist
+#### 그래픽 프로그래밍 체크리스트
 
-* [ ] Check that there are only 2 arguments
-* [ ] Free the allocated memory (no leaks)
-
-#### Map Checklist
-
-* [ ] Get and store the map data somewhere (coordinates, height, length...)
-* [ ] Error handling of the map
-  * [ ] Empty map (should not segfault if given to you)
-  * [ ] Map not rectangular (should not segfault if given to you)
-
-#### Graphical Programmation Checklist
-
-* [ ] Initialize the display, the window and the image&#x20;
-* [ ] Initialize the infinite loop for your graphic environment&#x20;
+*   [ ] 디스플레이, 윈도우, 이미지를 초기화합니다.
+*   [ ] 그래픽 환경을 위한 무한 루프를 초기화합니다.
 
 ### fdf.c
 
-I created three functions in this file.&#x20;
+저는 이 파일에 세 가지 함수를 만들었습니다.
 
-One that handles errors (simply exit the program and display a message when called), one that frees the tables that I don't need any more and a main that can be defined by these tasks:
+하나는 에러를 핸들링하는 함수(호출되면 단순히 프로그램을 종료하고 메시지를 표시), 다른 하나는 더 이상 필요 없는 테이블을 해제하는 함수, 그리고 다음 작업들로 정의될 수 있는 `main` 함수입니다.
 
 ### points.c
 
-This file is very simple. It simply initializes my array with three-dimensional points (x,y,z) and another array with two-dimensional points (x,y) that I create from the three-dimensional points.
+이 파일은 매우 간단합니다. 3차원 점 (x,y,z)을 포함하는 배열과, 이 3차원 점들로부터 생성한 2차원 점 (x,y)을 포함하는 또 다른 배열을 단순히 초기화합니다.
 
-* [ ] From the the data stored in start.c (the map data), i created a single list with all 3D points
-* [ ] From the list containing all 3D points I created another single list with all 2D points
-  * [ ] Check that you use the correct formula to convert your points
+*   [ ] start.c에 저장된 데이터(맵 데이터)로부터 모든 3D 점을 포함하는 단일 리스트를 생성합니다.
+*   [ ] 모든 3D 점을 포함하는 리스트로부터 모든 2D 점을 포함하는 또 다른 단일 리스트를 생성합니다.
+    *   [ ] 점을 변환하기 위해 올바른 공식을 사용하는지 확인합니다.
 
-### hooks Checklist
+### hooks 체크리스트
 
-* [ ] The window and the program should close properly when...&#x20;
-  * [ ] You click on ESC&#x20;
-  * [ ] You close the window by clicking on the cross
-* [ ] **FdF BONUS**
-  * [ ] When you use the mouse cursor downwards you zoom the image&#x20;
-  * [ ] When you use the mouse cursor upwards you zoom out the image
-  * [ ] When you press w,a,s,d (or the arrows) you can move&#x20;
-  * [ ] When you click on another key you can rotate (change the angle of the image)
-  * [ ] Add another bonus you like
+*   [ ] 윈도우와 프로그램은 다음 경우에 적절하게 닫혀야 합니다...
+    *   [ ] ESC를 클릭했을 때
+    *   [ ] 닫기 버튼(X)을 클릭하여 윈도우를 닫았을 때
+*   [ ] **FdF BONUS**
+    *   [ ] 마우스 커서를 아래로 움직일 때 이미지가 확대(zoom)되도록 합니다.
+    *   [ ] 마우스 커서를 위로 움직일 때 이미지가 축소(zoom out)되도록 합니다.
+    *   [ ] w, a, s, d (또는 화살표)를 누를 때 이동할 수 있도록 합니다.
+    *   [ ] 다른 키를 클릭할 때 회전 (이미지의 각도 변경) 할 수 있도록 합니다.
+    *   [ ] 여러분이 좋아하는 다른 보너스를 추가합니다.
 
-
-
-I hope this helps! Let me know if you have any other questions.
+이 정보가 도움이 되기를 바랍니다! 다른 질문이 있으시면 언제든지 알려주십시오.

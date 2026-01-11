@@ -26,7 +26,26 @@ $
 ```
 {% endcode %}
 
-### Commented solution
+**과제 이름:** camel\_to\_snake
+**예상 파일:** camel\_to\_snake.c
+**허용 함수:** malloc, realloc, write
+--------------------------------------------------------------------------------
+
+단일 문자열을 lowerCamelCase 형식으로 받아서 snake\_case 형식의 문자열로 변환하는 프로그램을 작성합니다.
+
+lowerCamelCase 문자열은 첫 번째 단어를 제외하고 각 단어가 대문자로 시작하는 문자열입니다.
+
+snake\_case 문자열은 각 단어가 소문자이며 밑줄("_")로 구분된 문자열입니다.
+
+예시:
+$>./camel\_to\_snake "hereIsACamelCaseWord"
+here\_is\_a\_camel\_case\_word
+$>./camel\_to\_snake "helloWorld" | cat -e
+hello\_world$
+$>./camel\_to\_snake | cat -e
+$
+
+### 주석이 달린 솔루션
 
 <details>
 
@@ -43,30 +62,30 @@ int main(int ac, char *av[])
     if (ac == 2)
     {
         i = 0;
-        /* looping over the whole string
+        /* 전체 문자열을 순회합니다
          */
         while (av[1][i])
         {
-            /* if we encounter an upper-case letter
-             * we have to make it lower-case and write a _ before it
+            /* 대문자를 만나는 경우,
+             * 해당 문자를 소문자로 만들고 그 앞에 _를 작성해야 합니다
              */
             if (av[1][i] >= 65 && av[1][i] <= 90)
             {
-                /* here, we change the upper-case letter to its
-                 * corresponding lower-case letter
+                /* 여기서, 대문자를
+                 * 해당 소문자로 변경합니다
                  */
                 av[1][i] += 32;
-                /* we write a _ to the screen
+                /* 화면에 _를 작성합니다
                  */
                 write(1, "_", 1);
             }
-            /* then we can write the current character, changed or not
+            /* 그 다음, 변경되었든 아니든 현재 문자를 작성합니다
              */
             write(1, &av[1][i], 1);
             i++;
         }
     }
-    /* finally we can write the newline
+    /* 마지막으로, 개행 문자를 작성합니다
      */
     write(1, "\n", 1);
 }

@@ -1,31 +1,31 @@
-# CPP (00 - 04) (doing)
+# CPP (00 - 04) (진행 중)
 
-Before diving into the core of these five first C++ modules let's first understand the basics of what is C++ and more specifically what is _Object Oriented Programming_ (OOP).
+이 다섯 가지 첫 번째 C++ 모듈의 핵심으로 들어가기 전에, 먼저 C++가 무엇인지, 그리고 더 구체적으로 _Object Oriented Programming_ (OOP, 객체 지향 프로그래밍)이 무엇인지 기본 사항부터 이해해야 합니다.
 
-Also, I encourage you to look at the videos on the Intra before going further, each subject has its own video explaining it.
+또한, 더 나아가기 전에 인트라넷에 있는 비디오를 시청하는 것을 권장합니다. 각 주제는 해당 내용을 설명하는 자체 비디오를 가지고 있습니다.
 
-### What is object oriented programming ?
+### 객체 지향 프로그래밍(OOP)이란 무엇입니까?
 
-To start, I'll let you read [this](https://www.techtarget.com/searchapparchitecture/definition/object-oriented-programming-OOP) article from _TechTarget_.
+시작하기에 앞서, _TechTarget_의 [이 기사](https://www.techtarget.com/searchapparchitecture/definition/object-oriented-programming-OOP)를 읽어보시기를 권해드립니다.
 
-This article is a good starting point, but it's only a starting point, it contains a lot of words and topics that you can search to get a better understanding of everything.
+이 기사는 좋은 출발점이지만, 단지 시작점에 불과합니다. 여기에는 모든 것을 더 잘 이해하기 위해 검색해 볼 수 있는 많은 용어와 주제가 포함되어 있습니다.
 
-### What is C++ ?
+### C++이란 무엇입니까?
 
-First of all, watch [this](https://www.youtube.com/watch?v=MNeX4EGtR5Y) short video introduction of C++.&#x20;
+우선, C++에 대한 [이 짧은 비디오](https://www.youtube.com/watch?v=MNeX4EGtR5Y) 소개를 시청하십시오.
 
-[Here](https://www.w3schools.com/cpp/default.asp) is a complete introduction C++ guide / tutorial on **w3schools.**
+[여기](https://www.w3schools.com/cpp/default.asp) **w3schools**의 완전한 C++ 입문 가이드/튜토리얼이 있습니다.
 
-I encourage you to read through it, you don't need to remember all the details but at least read through it so you can store in your head the basic principles and ideas of C++ to go search for them in more details again when you need / encounter them when doing the different exercises.
+이 가이드를 꼼꼼히 읽어보시는 것을 권장합니다. 모든 세부 사항을 기억할 필요는 없지만, 적어도 C++의 기본적인 원칙과 개념을 머릿속에 저장하여 나중에 다양한 실습을 수행할 때 필요하거나 마주치게 될 경우 다시 자세히 검색할 수 있도록 하십시오.
 
-### C++ Modules
+### C++ 모듈
 
-C++ is composed of 10 modules, splitted on two circles, the five firsts modules are on this rank (00-04), and the five lasts are on the next rank (05-09).
+C++는 10개의 모듈로 구성되어 있으며, 두 개의 서클로 나뉘어 있습니다. 처음 다섯 개의 모듈(00-04)은 현재 랭크에 있으며, 나머지 다섯 개의 모듈(05-09)은 다음 랭크에 있습니다.
 
-All the C++ modules work the same way as the C modules did during your pisicine, each module is splitted into multiple exercises. Some of the modules can be validated by doing 80% of the module, and other require 100%, like in the piscine.
+모든 C++ 모듈은 피신 기간 동안의 C 모듈과 동일하게 작동하며, 각 모듈은 여러 연습 문제로 나뉘어 있습니다. 일부 모듈은 80%를 완료하여 검증될 수 있으며, 다른 모듈은 피신 때와 마찬가지로 100% 완료를 요구합니다.
 
-### C++ on this GitBook
+### 이 GitBook의 C++ 내용
 
-For most of the modules, I won't go into the details of each and every exercises in these modules. I'll go over the main topics that are present on the first page of the subjects.
+대부분의 모듈에 대해, 저는 이 모듈들의 모든 연습 문제들을 일일이 자세히 다루지는 않을 것입니다. 주제의 첫 페이지에 제시된 주요 토픽들만 다룰 예정입니다.
 
-Some of the modules, the more complex ones, will be a little more described with some examples and all, but that would do a lot to write if I described every exercises in details.
+더 복잡한 일부 모듈은 예시 등과 함께 좀 더 상세하게 설명될 것이지만, 모든 연습 문제를 자세히 설명하려면 작성해야 할 내용이 너무 많아집니다.

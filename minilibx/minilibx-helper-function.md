@@ -1,14 +1,14 @@
 ---
-description: This page will showcase some helper functions for the MiniLibX library.
+description: 이 페이지에서는 MiniLibX 라이브러리를 위한 몇 가지 헬퍼 함수를 소개합니다.
 ---
 
-# MiniLibX Helper Function
+# MiniLibX 헬퍼 함수
 
-### Simple put\_pixel function
+### 간단한 put\_pixel 함수
 
-This is a simple function to put a pixel to the screen by its `x` and `y` coordinates.
+이 함수는 `x` 및 `y` 좌표를 사용하여 화면에 픽셀을 그리는 간단한 함수입니다.
 
-I based this function on what I found [here](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#writing-pixels-to-a-image), and modified it a bit to make sure we only put a pixel that is inside the screen, without this check, the program could `segfault` if we try to set a value somewhere outside the window.
+저는 [여기](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#writing-pixels-to-a-image)에서 찾은 내용을 기반으로 이 함수를 만들었으며, 픽셀이 화면 내부에만 그려지도록 약간 수정했습니다. 이 검사 없이는 창 바깥쪽에 값을 설정하려고 시도할 경우 프로그램이 `segfault`를 일으킬 수 있습니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -27,7 +27,7 @@ void ft_put_pixel(t_data *data, int x, int y, int color)
 
 <details>
 
-<summary>Final code to draw a pixel</summary>
+<summary>픽셀을 그리는 최종 코드</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -73,17 +73,17 @@ int	main(void)
 ```
 {% endcode %}
 
-If you look closely, this will draw a red pixel at the very center of the window.
+자세히 살펴보시면, 이 코드는 창의 정중앙에 빨간색 픽셀을 그립니다.
 
 </details>
 
-### Draw Line function (\~Naive line algorithm)
+### 선 그리기 함수 (약간 단순한 선 알고리즘)
 
-There is no function in MiniLibX to draw a line between two points, but this will be particularly useful when you try to code `FdF`, you'll have to join all your points by lines, so, here you go.
+MiniLibX에는 두 점 사이에 선을 그리는 함수가 없습니다. 하지만 이 기능은 `FdF`를 코딩할 때 특히 유용하며, 모든 점들을 선으로 연결해야 하므로 이 함수를 제공합니다.
 
 {% hint style="warning" %}
-This function uses some function of the math library so make sure you can use it in your project and include it (`#include <math.h>`).\
-For `FdF`, `Fractol` and `so-long`, all the math library are authorized.
+이 함수는 math 라이브러리의 일부 함수를 사용하므로 프로젝트에서 이 라이브러리를 사용할 수 있는지 확인하고 포함해야 합니다(`\#include <math.h>`).
+`FdF`, `Fractol`, `so-long`의 경우 모든 math 라이브러리가 허용됩니다.
 {% endhint %}
 
 {% code overflow="wrap" lineNumbers="true" %}
@@ -120,5 +120,5 @@ void ft_draw_line(t_data *data, int x1, int y1, int x2, int y2, int color)
 {% endcode %}
 
 {% hint style="info" %}
-You will have to find a way to make it pass the Norm, you can check how I did this [here](https://github.com/Laendrun/42/blob/main/fdf/src/draw.c#L27).
+이 함수가 Norm을 통과하도록 방법을 찾아야 합니다. 제가 어떻게 했는지는 [여기](https://github.com/Laendrun/42/blob/main/fdf/src/draw.c#L27)에서 확인하실 수 있습니다.
 {% endhint %}

@@ -1,89 +1,77 @@
-# Building the thing
+# 프로젝트 구축
 
-This project was divided into 4 parts
+이 프로젝트는 네 부분으로 나누어져 있습니다.
 
-1. The first part concerns **parsing and reading input files**
-2. The second part is a little more mathematical and concerns **intersections and ray tracing**
-3. Then the **management of light, shadows and colors**
-4. And finally all the **graphic management** (windows, hooks, etc.). **with the minilibx**
+1.  첫 번째 부분은 **입력 파일 파싱(Parsing) 및 읽기**에 관한 내용입니다.
+2.  두 번째 부분은 수학적인 내용이 조금 더 포함된 **교차점(Intersection) 및 Raytracing**에 관한 내용입니다.
+3.  그다음은 **조명(Light), 그림자(Shadow) 및 색상 관리**입니다.
+4.  마지막으로 **minilibx**를 사용한 모든 **그래픽 관리** (창, Hook 등)입니다.
 
-Let's look at each of the 4 parts in detail
-
-
+네 가지 부분을 자세히 살펴보겠습니다.
 
 ## Parsing
 
-Parsing isn't very complicated, but it does take a long time... a very long time! Here is the list of almost everything that you need to check:
+**Parsing**은 그리 복잡하지는 않지만, 시간이 아주 오래 걸립니다! 확인해야 할 거의 모든 목록은 다음과 같습니다.
 
-* [ ] File management (non-existent, empty files, etc.)
-* [ ] The types correspond to the requested types and nothing else&#x20;
-* [ ] There is a MAXIMUM of one camera, one diffused light and one ambient light (there can be 0 or one, but no more!)
-* [ ] Each line corresponding to a type must have the right number of elements
-* [ ] If it's a color, it has to be in the right range (0 - 255) and the same goes for orientation vectors (-1,1), etc. Make sure all digits are in the correct range for each type.
-* [ ] For each object, you also need to pay attention to its specific characteristics (whether the diameter or height of a cylinder is non-negative, for example, or other things).
+*   [ ] 파일 관리 (존재하지 않는 파일, 빈 파일 등)를 처리합니다.
+*   [ ] Type은 요청된 유형과 정확히 일치해야 하며, 다른 것이 있어서는 안 됩니다.
+*   [ ] Camera, diffused light(분산광), ambient light(주변광)는 최대 하나만 존재해야 합니다 (0개 또는 1개만 허용되며 그 이상은 안 됩니다!).
+*   [ ] 각 Type에 해당하는 줄은 올바른 개수의 요소를 가져야 합니다.
+*   [ ] Color인 경우 올바른 범위(0 - 255)에 있어야 하며, Orientation Vector(-1, 1) 등도 마찬가지입니다. 모든 숫자가 각 Type에 대해 올바른 범위 내에 있는지 확인하십시오.
+*   [ ] 각 Object에 대해 특정 특성(예: Cylinder의 지름이나 높이가 음수가 아닌지 등)에도 주의를 기울여야 합니다.
 
-Visually it would look like this:
+시각적으로는 다음과 같이 보입니다.
 
 <figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-There are a LOT of parameters to take into account. Just try to make sure it doesn't segfault when you take a scene in the parameter of your program ! :)
-
-
+고려해야 할 매개변수가 *매우* 많습니다. 프로그램의 매개변수로 Scene을 가져올 때 **segfault**가 발생하지 않도록 확인해 주세요! :)
 
 ## Intersections and raytracing
 
-Here, the focus shifts to a core challenge: finding intersections. The goal is to determine where the rays cast from the camera hit different objects in the scene.&#x20;
+여기서 초점은 핵심 과제인 교차점(Intersection) 찾기로 옮겨집니다. 목표는 Camera에서 발사된 Ray가 Scene의 다양한 Object에 부딪히는 지점을 결정하는 것입니다.
 
-This process involves intricate steps to calculate intersections with various shapes like spheres, planes, and cylinders.&#x20;
+이 프로세스에는 Sphere, Plane, Cylinder와 같은 다양한 도형과의 **Intersection**을 계산하는 복잡한 단계가 포함됩니다.
 
-* For spheres, it requires solving quadratic equations to find the points where the ray and the sphere's surface meet.&#x20;
-* Planes involve straightforward geometric calculations to determine where the ray intersects the plane.&#x20;
-* Cylinders require a bit more complexity, involving calculations to find where the ray crosses the cylindrical surface.&#x20;
+*   Sphere의 경우, Ray와 Sphere 표면이 만나는 지점을 찾기 위해 2차 방정식을 풀어야 합니다.
+*   Plane은 Ray가 평면과 교차하는 지점을 결정하기 위해 간단한 기하학적 계산을 포함합니다.
+*   Cylinder는 Ray가 원통 표면을 가로지르는 지점을 찾는 계산이 포함되어 다소 복잡합니다.
 
-Successfully mastering these calculations is essential as it forms the foundation for accurately tracing rays and creating the visual representation of the scene.
+이러한 계산을 성공적으로 숙달하는 것은 Ray를 정확하게 추적하고 Scene의 시각적 표현을 생성하는 기반이 되므로 필수적입니다.
 
-To sum up, here's a little to-do list of what you can do:
+요약하자면, 수행할 수 있는 작은 To-Do 목록은 다음과 같습니다.
 
-
-
-* [ ] Send rays from the camera position to each pixel of the screen.
-* [ ] Determine where each ray intersects with the objects in the scene (spheres, planes, cylinders).
-* [ ] Calculate the precise points of intersection by solving equations or using geometric methods.
-  * [ ] Intersection with a sphere
-  * [ ] Intersection with a plane
-  * [ ] Intersection with a cylinder
-* [ ] Evaluate the distance between the camera and the intersection points to understand what's closest.
-* [ ] Decide which object the ray hits first by comparing distances to the intersection points
-* [ ] Once the closest object is identified we can try to find out what color the pixel will be and how bright it will be (next step)
-
-
+*   [ ] Camera 위치에서 화면의 각 Pixel로 Ray를 발사합니다.
+*   [ ] 각 Ray가 Scene의 Object(Sphere, Plane, Cylinder)와 교차하는 지점을 결정합니다.
+*   [ ] 방정식 해법 또는 기하학적 방법을 사용하여 정확한 Intersection 지점을 계산합니다.
+    *   [ ] Sphere와의 Intersection
+    *   [ ] Plane과의 Intersection
+    *   [ ] Cylinder와의 Intersection
+*   [ ] Camera와 Intersection 지점 사이의 거리를 평가하여 무엇이 가장 가까운지 파악합니다.
+*   [ ] Intersection 지점까지의 거리를 비교하여 Ray가 가장 먼저 도달하는 Object를 결정합니다.
+*   [ ] 가장 가까운 Object가 식별되면 해당 Pixel의 색상과 밝기가 어떻게 될지 알아낼 수 있습니다 (다음 단계).
 
 ## Lights and shadows
 
-In this step, we make things look real with light and shadows. We check if objects are lit or in shadow by sending rays to light sources. We use angles to decide how bright things should be. Background light and distance effects are also added.
+이 단계에서는 조명(Light)과 그림자(Shadow)를 사용하여 사물을 실제처럼 보이게 합니다. Light Source로 Ray를 보내 Object가 조명되는지 아니면 그림자 속에 있는지 확인합니다. 각도를 사용하여 사물이 얼마나 밝아야 하는지 결정합니다. 배경 조명(Background Light) 및 거리 효과도 추가됩니다.
 
-* [ ] Once the closest object is identified, cast new rays from the intersection point towards light sources.
-* [ ] If one of these rays intersects with another object before it reaches the light source, it's like catching the object casting a shadow on itself. This shadow indicates that the point is not directly illuminated by the light.
-* [ ] Conversely, if the ray reaches the light source without obstruction, the point basks in direct illumination – it's in the light.
-  * [ ] When a point is in the light, assess the angle at which the light strikes the object's surface. This angle helps determine how intense the light's effect should be on the point (or any other method if you find a better one)
-* [ ] Introduce the concept of ambient light, which mimics the soft, indirect illumination from all directions in the environment. This is like a gentle, uniform glow that helps prevent overly dark shadows.
-* [ ] Contemplate how light attenuates, growing weaker as it travels. Objects farther from the light source receive less light intensity, which influences their brightness.
-* [ ] Blend all these factors together, calculating how they contribute to the final color of the pixel at that point on the screen. This color is a result of intricate interactions between light and the object's characteristics.
+*   [ ] 가장 가까운 Object가 식별되면, **Intersection** 지점에서 **Light Source**를 향해 새로운 Ray를 발사합니다.
+*   [ ] 이 Ray 중 하나가 Light Source에 도달하기 전에 다른 Object와 교차한다면, 이는 Object 자체가 그림자를 드리우고 있는 것과 같습니다. 이 그림자는 해당 지점이 Light에 의해 직접적으로 조명되지 않음을 나타냅니다.
+*   [ ] 반대로, Ray가 방해받지 않고 Light Source에 도달하면, 해당 지점은 직접적인 조명을 받게 됩니다. 즉, 빛 속에 있습니다.
+    *   [ ] 지점이 빛을 받고 있을 때, 빛이 Object 표면에 부딪히는 각도를 평가합니다. 이 각도는 빛의 효과가 해당 지점에 얼마나 강해야 하는지를 결정하는 데 도움이 됩니다 (또는 더 좋은 방법을 찾으면 다른 방법을 사용합니다).
+*   [ ] 주변 환경의 모든 방향에서 오는 부드러운 간접 조명(Indirect Illumination)을 모방하는 **Ambient Light** 개념을 도입합니다. 이는 지나치게 어두운 그림자를 방지하는 데 도움이 되는 부드럽고 균일한 빛과 같습니다.
+*   [ ] 빛이 이동함에 따라 약해지는 **감쇠(Attenuation)** 현상을 고려합니다. Light Source에서 멀리 떨어진 Object는 더 적은 빛 강도를 받게 되며, 이는 밝기에 영향을 미칩니다.
+*   [ ] 이러한 모든 요소를 결합하여 화면의 해당 지점에서의 최종 Pixel 색상에 어떻게 기여하는지 계산합니다. 이 색상은 빛과 Object 특성 간의 복잡한 상호작용의 결과입니다.
 
 ## Graphic Management
 
-This part involves creating a graphical interface using the minilibx library to display the rendered image. The library provides tools to open windows, handle keyboard inputs, and interact with the user. Here's a breakdown of the steps:
+이 부분은 **minilibx** 라이브러리를 사용하여 렌더링된 이미지를 표시하는 그래픽 인터페이스를 만드는 것을 포함합니다. 이 라이브러리는 창을 열고, 키보드 입력을 처리하고, 사용자와 상호 작용할 수 있는 도구를 제공합니다. 단계별 내용은 다음과 같습니다.
 
+*   [ ] **minilibx**를 초기화합니다.
+*   [ ] 창을 생성합니다.
+*   [ ] 사용자 입력 / **Hook**을 처리합니다 (ESC를 누르거나 창 닫기 버튼으로 프로그램을 종료합니다).
+*   [ ] 이미지를 렌더링합니다 (**Raytracing** 함수를 호출합니다).
+*   [ ] 이미지를 표시합니다 (Pixel을 하나씩 출력합니다).
 
+이것으로 끝입니다! **Error Handling**과 **Leak** 관리를 포함하여 다른 기본 사항들도 잊지 마십시오 ;)
 
-* [ ] Initialize minilibx
-* [ ] Create a window
-* [ ] Handler user inputs / hooks (close the program/window with the cross or by pressing ESC)
-* [ ] Render the image (call your raytracing function)
-* [ ] Display the image (put your pixels one by one)
-
-
-
-And that's it ! Don't forget other basic things such as error handling and leaks management ;)\
-\
-I really hop that you'll have as much fun as we've had on this project! And we wish you good luck and a lovely adventure. don't forget that if you have any questions, you can come and [ask me](https://www.linkedin.com/in/laura-fabbiano/).
+여러분이 우리가 이 프로젝트에서 즐거웠던 만큼 재미있게 작업하시기를 진심으로 바랍니다! 행운과 멋진 모험을 기원합니다. 질문이 있으시면 언제든지 [저에게 질문해 보세요](https://www.linkedin.com/in/laura-fabbiano/).

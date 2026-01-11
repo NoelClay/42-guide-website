@@ -1,75 +1,75 @@
-# ◾ Building the thing
+# ◾ 프로젝트 구현하기
 
-Push\_swap is not a very difficult project in terms of code construction. You will see that it doesn't need many steps to finish it. The hardest part is to find a solution to the problem and to to construct its algorithm.&#x20;
+`push_swap`은 코드 구성 측면에서 매우 어려운 프로젝트는 아닙니다. 프로젝트를 완료하는 데 많은 단계가 필요하지 않다는 것을 알게 될 것입니다. 가장 어려운 부분은 문제에 대한 해법을 찾고 그 알고리즘을 설계하는 것입니다.
 
-As usual, in this page I will make checklists for you to succeed push swap at best
+늘 그렇듯이, 이 페이지에서는 카뎃 여러분이 `push_swap`을 최대한 성공적으로 완료할 수 있도록 체크리스트를 제공하겠습니다.
 
-### Main Checklist
+### 주요 체크리스트
 
-* [ ] Decide if you are going to do your project using chained lists or using tables
-* [ ] Handle the arguments you are given in input
-* [ ] (If you choose radix sort, normalize your data ! )
+* [ ] 프로젝트를 연결 리스트(chained lists)를 사용하여 구현할지, 아니면 배열(tables)을 사용하여 구현할지 결정해야 합니다.
+* [ ] 입력으로 주어진 인자들을 처리해야 합니다.
+* [ ] (Radix sort를 선택했다면, 데이터를 정규화(normalize)해야 합니다!)
 
-### Error Checklist
+### 오류 처리 체크리스트
 
-There are a lot of errors to handle in push\_swap. Don't forget any of them!
+`push_swap`에서 처리해야 할 오류가 많습니다. 하나도 놓치지 마십시오!
 
-* [ ] **The program must work with several numerical arguments**
+* [ ] **프로그램은 여러 개의 숫자 인자를 사용하여 작동해야 합니다.**
   * [ ] ./push\_swap 1 3 5 +9 20 -4 50 60 04 08
-* [ ] **The program also works if you receive a single character list as a parameter**
+* [ ] **단일 문자열 리스트를 인자로 받을 때도 프로그램은 작동해야 합니다.**
   * [ ] ./push\_swap "3 4 6 8 9 74 -56 +495"
-* [ ] **The program should NOT work if it encounters another character**
+* [ ] **프로그램은 다른 문자(숫자가 아닌 문자)를 만날 경우 작동해서는 안 됩니다.**
   * [ ] ./push\_swap 1 3 dog 35 80 -3
   * [ ] ./push\_swap a
   * [ ] ./push\_swap 1 2 3 5 67b778 947
   * [ ] .push\_swap " 12 4 6 8 54fhd 4354"
-  * [ ] ./push\_swap 1 --    45 32
-    * [ ] these examples should return "Error\n"
-* [ ] **The program should NOT work if it encounters a double number**
+  * [ ] ./push\_swap 1 -- 45 32
+    * [ ] 이러한 예시들은 "Error\n"를 반환해야 합니다.
+* [ ] **프로그램은 중복된 숫자(double number)를 만날 경우 작동해서는 안 됩니다.**
   * [ ] ./push\_swap 1 3 58 9 3
   * [ ] ./push\_swap 3 03
-  * [ ] ./push\_swap " 49 128     50 38   49"
-    * [ ] these examples should return "Error\n"
+  * [ ] ./push\_swap " 49 128 50 38 49"
+    * [ ] 이러한 예시들은 "Error\n"를 반환해야 합니다.
   * [ ] ./push\_swap "95 99 -9 10 9"
-    * [ ] this example should work because -9 & 9 are not equal
-* [ ] **The program should work with INT MAX & INT MIN**
+    * [ ] 이 예시는 -9와 9가 같지 않으므로 작동해야 합니다.
+* [ ] **프로그램은 INT MAX와 INT MIN에서 작동해야 합니다.**
   * [ ] ./push\_swap 2147483647 2 4 7
   * [ ] ./push\_swap 99 -2147483648 23 545
   * [ ] ./push\_swap "2147483647 843 56544 24394"
-    * [ ] these examples should work and sort your list
+    * [ ] 이러한 예시들은 작동해야 하며 리스트를 정렬해야 합니다.
   * [ ] ./push\_swap 54867543867438 3
   * [ ] ./push\_swap -2147483647765 4 5
   * [ ] ./push\_swap "214748364748385 28 47 29"
-    * [ ] these examples should return "Error\n"
-* [ ] **Nothing has been specified when strings and int are mixed.** It's up to you what you want to do
+    * [ ] 이러한 예시들은 "Error\n"를 반환해야 합니다.
+* [ ] **문자열과 정수가 혼합되어 제공될 때에 대한 명확한 사양은 없습니다.** 어떻게 처리할지는 여러분에게 달려 있습니다.
   * [ ] ./push\_swap "1 2 4 3" 76 90 "348 05
 
-### Instructions Checklist
+### 명령어 체크리스트
 
-This checklist will help you to verify that you have coded all the instructions (11) to use them in your algorithms (next step). If you don't understand what these functions do you can check the [main page of push\_swap](./) where you will be given a better explanation
+이 체크리스트는 알고리즘(다음 단계)에 사용할 모든 11가지 명령어들을 코딩했는지 확인하는 데 도움이 됩니다. 이 함수들이 무엇을 하는지 이해가 되지 않는다면, 더 나은 설명을 제공하는 [push\_swap 메인 페이지](./)를 확인해 보실 수 있습니다.
 
-* [ ] **sa (swap a)**: If there are 2 numbers, swap the first 2 elements at the top of the stack a.
-* [ ] **sb (swap b )** :  If there are 2 numbers, swap the first 2 elements at the top of the stack b.
-* [ ] **ss** : sa and sb at the same time.&#x20;
-* [ ] **pa (push a)**: If b is not empty it takes the first element on top of b and puts it on a.
-* [ ] **pb (push b)**: If a is not empty, it takes the first element on top of a and puts it on b.
-* [ ] **ra (rotate a)**: Shifts all the elements of the stack a up by one position. The first element becomes the last.&#x20;
-* [ ] **rb (rotate b)** : Shifts all the elements of the stack b one position upwards. The first element becomes the last one.&#x20;
-* [ ] **rr** : ra and rb at the same time.&#x20;
-* [ ] **rra (reverse rotate a)**: Shifts all elements of the stack down one position. the stack a. The last element becomes the first.&#x20;
-* [ ] **rrb (reverse rotate b)**: Shifts all the elements of the stack b one position downwards. the stack b. The last element becomes the first.&#x20;
-* [ ] **rrr** : rra and rrb at the same time
+* [ ] **sa (Stack a 교환)**: 2개 이상의 숫자가 있을 경우, Stack a의 맨 위에 있는 첫 두 요소를 교환합니다.
+* [ ] **sb (Stack b 교환)**: 2개 이상의 숫자가 있을 경우, Stack b의 맨 위에 있는 첫 두 요소를 교환합니다.
+* [ ] **ss**: sa와 sb를 동시에 수행합니다.
+* [ ] **pa (Stack a로 밀어넣기)**: Stack b가 비어있지 않다면, b의 맨 위에 있는 첫 번째 요소를 가져와서 Stack a 위에 놓습니다.
+* [ ] **pb (Stack b로 밀어넣기)**: Stack a가 비어있지 않다면, a의 맨 위에 있는 첫 번째 요소를 가져와서 Stack b 위에 놓습니다.
+* [ ] **ra (Stack a 회전)**: Stack a의 모든 요소를 한 위치 위로 이동시킵니다. 첫 번째 요소는 마지막 요소가 됩니다.
+* [ ] **rb (Stack b 회전)**: Stack b의 모든 요소를 한 위치 위로 이동시킵니다. 첫 번째 요소는 마지막 요소가 됩니다.
+* [ ] **rr**: ra와 rb를 동시에 수행합니다.
+* [ ] **rra (Stack a 역회전)**: Stack a의 모든 요소를 한 위치 아래로 이동시킵니다. 마지막 요소는 첫 번째 요소가 됩니다.
+* [ ] **rrb (Stack b 역회전)**: Stack b의 모든 요소를 한 위치 아래로 이동시킵니다. 마지막 요소는 첫 번째 요소가 됩니다.
+* [ ] **rrr**: rra와 rrb를 동시에 수행합니다.
 
-### Algorithm/Sort Checklist
+### 알고리즘/정렬 체크리스트
 
-* [ ] Check if the order of the list is correct or if it should be sorted
-* [ ] Make a small algorithm for small numbers (5 and less)
-  * [ ] Implement a condition for 2 numbers
-  * [ ] Create an algorithm for 3 numbers
-  * [ ] Create an algorithm for 4 numbers
-  * [ ] Create an algorithm for 5 numbers
-* [ ] Create another algorithm for all other numbers
+* [ ] 리스트의 순서가 올바른지, 아니면 정렬이 필요한지 확인해야 합니다.
+* [ ] 적은 개수의 숫자(5개 이하)를 위한 소규모 알고리즘을 만들어야 합니다.
+  * [ ] 2개의 숫자에 대한 조건을 구현해야 합니다.
+  * [ ] 3개의 숫자에 대한 알고리즘을 생성해야 합니다.
+  * [ ] 4개의 숫자에 대한 알고리즘을 생성해야 합니다.
+  * [ ] 5개의 숫자에 대한 알고리즘을 생성해야 합니다.
+* [ ] 나머지 모든 숫자에 대한 다른 알고리즘을 생성해야 합니다.
 
-And obviously at the end check if everything is correct ! **No leaks should be present**, remember to always free the allocated memory when you are not using it anymore.
+그리고 당연히, 마지막에는 모든 것이 올바른지 확인하십시오! **메모리 누수(No leaks)가 없어야 합니다.** 더 이상 사용하지 않는 할당된 메모리는 항상 해제(free)해야 한다는 것을 기억하십시오.
 
-And that's it... Good luck with the code! If you have any other questions don't hesitate to contact me (Laura), and I'll be happy to help you :)
+이제 끝입니다. 코딩에 행운이 있기를 바랍니다! 다른 질문이 있다면 주저하지 말고 저(Laura)에게 연락하십시오. 기꺼이 도와드리겠습니다 :)

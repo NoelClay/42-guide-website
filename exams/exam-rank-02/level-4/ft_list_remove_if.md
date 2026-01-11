@@ -1,25 +1,25 @@
 # ft\_list\_remove\_if
 
-### Subject
+### 과제
 
-{% code overflow="wrap" %}
 ```
-Assignment name  : ft_list_remove_if
-Expected files   : ft_list_remove_if.c
-Allowed functions: free
+과제 이름      : ft_list_remove_if
+요구 파일      : ft_list_remove_if.c
+허용 함수      : free
 --------------------------------------------------------------------------------
+```
 
-Write a function called ft_list_remove_if that removes from the
-passed list any element the data of which is "equal" to the reference data.
+전달된 리스트에서 참조 데이터와 "동일한" 데이터를 가진 모든 요소를 제거하는 `ft_list_remove_if`라는 함수를 작성하십시오.
 
-It will be declared as follows :
+이 함수는 다음과 같이 선언됩니다:
 
-void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+`void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());`
 
-cmp takes two void* and returns 0 when both parameters are equal.
+`cmp` 함수는 두 개의 `void*`를 인자로 받으며, 두 매개변수가 동일할 때 0을 반환합니다.
 
-You have to use the ft_list.h file, which will contain:
+다음과 같은 내용을 포함하는 `ft_list.h` 파일을 사용해야 합니다:
 
+```
 $>cat ft_list.h
 typedef struct      s_list
 {
@@ -28,7 +28,7 @@ typedef struct      s_list
 }                   t_list;
 $>
 ```
-### Commented solution
+### 주석 처리된 솔루션
 
 <details>
 
@@ -36,7 +36,7 @@ $>
 
 {% code title="ft_list_remove_if.c" overflow="wrap" lineNumbers="true" %}
 ```c
-// You have to use the ft_list.h file, which will contain: ft_list.h
+// 다음 내용을 포함하는 ft_list.h 파일을 사용해야 합니다: ft_list.h
 
 typedef struct      s_list
 {

@@ -1,42 +1,42 @@
 # ft\_strjoin
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
-FT_STRJOIN (simplified)
+FT_STRJOIN (간략화)
 
 NAME
-    ft_strjoin -- concatenate 2 strings in a new string
+    ft_strjoin -- 2개의 string을 새로운 string으로 연결합니다.
 SYNOPSIS
     char *ft_strjoin(const char *s1, const char *s2);
 DESCRIPTION
-    Allocate (with malloc(3)) and returns a new string resulting from the concatenation of s1 and s2.
+    s1과 s2의 연결 결과로 생성된 새로운 string을 (malloc(3)을 사용하여) 할당하고 반환합니다.
 PARAMETERS
-    s1: prefix string
-    s2: suffix string
+    s1: 접두사 string (prefix string)
+    s2: 접미사 string (suffix string)
 RETURN VALUES
-    ft_strjoin() returns the new string; NULL if the memory allocation failed.
+    ft_strjoin()은 새로운 string을 반환하며, 메모리 할당이 실패하면 NULL을 반환합니다.
 AUTHORIZED EXTERNAL FUNCTIONS
     malloc(3)
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-This function works basically the same way as `ft_strlcat` does, but instead of passing it a `destination` `string` that has to be correctly allocated as a parameter, we only pass two `strings` and `ft_strjoin` will allocate the required memory for both of them plus the NUL-terminating character.
+이 함수는 기본적으로 `ft_strlcat`와 유사하게 작동합니다. 하지만 `ft_strlcat`에 매개변수로 올바르게 할당되어야 하는 `destination` `string`을 전달하는 대신, `ft_strjoin`은 두 개의 `string`만 전달받으며, 두 string에 필요한 메모리와 NUL-terminating character를 위한 메모리를 직접 할당합니다.
 
-`s1` will be the first string in the result, `s2` the second one.
+결과 string에서 `s1`이 첫 번째 string이 되며, `s2`가 두 번째 string이 됩니다.
 
-### Hints
+### 힌트
 
-We have to get the length of both strings so we can allocate enough memory for both of them.
+두 string 모두에 충분한 메모리를 할당할 수 있도록 두 string의 길이를 얻어야 합니다.
 
-So that's the first thing to do. Then we can allocate enough memory for both string plus the NUL-terminating character.
+이것이 가장 먼저 해야 할 일입니다. 그런 다음, 두 string의 길이와 NUL-terminating character를 위한 충분한 메모리를 할당합니다.
 
-We then copy `s1` into our newly allocated string, then we copy `s2`, and finally we can set the last character as `NUL`.
+그 후, 새로 할당된 string에 `s1`을 복사하고, 이어서 `s2`를 복사합니다. 마지막으로, 마지막 문자를 `NUL`로 설정합니다.
 
-### Commented solution
+### 주석이 달린 해결책
 
 <details>
 
@@ -54,23 +54,23 @@ char *ft_strjoin(const char *s1, const char *s2)
     
     i = 0;
     j = 0;
-    /* allocating the required memory */
+    /* 필요한 메모리를 할당합니다 */
     res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
     if (!res)
         return (NULL);
-    /* copying s1 into our res string */
+    /* s1을 결과 res string으로 복사합니다 */
     while (s1[i])
         res[j++] = s1[i++];
-    /* we have to reset i to 0, otherwise we won't copy s2
-     * from the start
+    /* i를 0으로 재설정해야 합니다. 그렇지 않으면 s2를
+     * 처음부터 복사할 수 없습니다
      */
     i = 0;
-    /* copying s2 into our res string */
+    /* s2를 결과 res string으로 복사합니다 */
     while (s2[i])
-        res[j++] = s2[i];
-    /* !! don't forget to NUL-terminate the string !! */
+        res[j++] = s2[i++];
+    /* !! string을 NUL-terminate하는 것을 잊지 마세요 !! */
     res[j] = 0;
-    /* finallly, we can return the new string */
+    /* 마지막으로, 새로운 string을 반환합니다 */
     return (res);
 }
 ```

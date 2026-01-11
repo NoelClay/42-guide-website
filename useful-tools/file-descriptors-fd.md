@@ -1,179 +1,183 @@
 ---
 description: >-
-  I'll try to explain what is a file descriptor is since it's used in most
-  projects
+  파일 디스크립터(File Descriptor)가 무엇인지 설명합니다. 이는 대부분의 프로젝트에서 사용되기 때문입니다.
 ---
 
-# 🗃️ File descriptors (FD)
+# 🗃️ 파일 디스크립터 (File Descriptor, FD)
 
-### What is a File Descriptor ?
+### 파일 디스크립터란 무엇일까요?
 
-A file descriptor is an `int` variable that uniquely identifies an open file.
+File Descriptor는 열려 있는 파일을 고유하게 식별하는 `int` 변수입니다.
 
-### Terminology
+### 용어 (Terminology)
 
-Before going further with the explanation, I have to describe some terms that I will use on this page.
+설명을 진행하기 전에, 이 페이지에서 사용할 몇 가지 용어를 먼저 정의하겠습니다.
 
-<table><thead><tr><th width="281">Term</th><th>Description</th></tr></thead><tbody><tr><td>File Descriptor</td><td>This is the index of the File Table Entry in the file descriptor table.</td></tr><tr><td>File Descriptor Table</td><td>This is an array of File Table Entry, each process gets its own File Descriptor Table.</td></tr><tr><td>File Table Entry</td><td>A File Table Entry is a structure that contains informations about a file.</td></tr><tr><td>Global File Table</td><td>This is a system wide table containing all files.<br>(It can't contain all files at once but the operating system will automatically update the table if you request a file that's not in this table).</td></tr></tbody></table>
+| 용어 (Term) | 설명 (Description) |
+|---|---|
+| File Descriptor | File Descriptor Table 내 File Table Entry의 인덱스입니다. |
+| File Descriptor Table | File Table Entry의 배열이며, 각 Process는 자신만의 File Descriptor Table을 갖게 됩니다. |
+| File Table Entry | 파일에 대한 정보를 포함하는 구조체(structure)입니다. |
+| Global File Table | 시스템 전체(system wide)의 모든 파일을 포함하는 테이블입니다. (모든 파일을 한 번에 포함할 수는 없지만, 운영체제(Operating System)는 이 테이블에 없는 파일을 요청하면 자동으로 테이블을 업데이트합니다). |
 
-When you use a file descriptor, with the `read(2)` function for example, the following will happen :
+예를 들어, `read(2)` 함수와 같이 File Descriptor를 사용할 때 다음과 같은 일이 발생합니다.
 
-1. Search for the file in the Global file table
-   1. If the file is found, go to next step.
-   2. If the file is not found, the operating system will update the Global file table to make the requested file available, then go back to step 1.
-2. Create a File table entry in the File descriptor table for the requested file.
-3. Assign the first unused File descriptor to the created file table entry.
+1. Global File Table에서 파일을 검색합니다.
+   1. 파일을 찾으면 다음 단계로 이동합니다.
+   2. 파일을 찾지 못하면, 운영체제가 요청된 파일을 사용할 수 있도록 Global File Table을 업데이트한 다음, 1단계로 돌아갑니다.
+2. 요청된 파일에 대한 File Table Entry를 File Descriptor Table에 생성합니다.
+3. 생성된 File Table Entry에 사용되지 않은 첫 번째 File Descriptor를 할당합니다.
 
-<mark style="color:red;">// insert schema here</mark>
+<mark style="color:red;">// 여기에 스키마 삽입</mark>
 
-### Standard file descriptors
+### 표준 File Descriptor
 
-In C, like in most Unix systems, there are 3 standards file descriptors that are automatically added to the file descriptor table. These file descriptors are the standard input/output file descriptor and always have these values :
+대부분의 Unix 시스템과 마찬가지로 C 언어에서는 File Descriptor Table에 자동으로 추가되는 3가지 표준 File Descriptor가 있습니다. 이 File Descriptor들은 표준 입/출력 File Descriptor이며 항상 다음 값을 갖습니다.
 
-* 0 : this file descriptor represents the stdin (=> standard input, the terminal). This is the file descriptor used when reading user input from the terminal.
-* 1 : this file descriptor represents the stdout (=> standard output, the terminal). This is the file descriptor used when writing to the terminal.
-* 2 : this file descriptor represents the stderr (=> standard error output, the terminal). This is the file descriptor used when writing an error to the terminal, the information is written the same way, but a program which logs errors to a file can redirect everything written to the stderr file descriptor to a file. It's managed in another way by the operating system.
+* 0: 이 File Descriptor는 stdin (=> 표준 입력, 터미널)을 나타냅니다. 이는 터미널에서 사용자 입력을 읽을 때 사용되는 File Descriptor입니다.
+* 1: 이 File Descriptor는 stdout (=> 표준 출력, 터미널)을 나타냅니다. 이는 터미널에 데이터를 쓸 때 사용되는 File Descriptor입니다.
+* 2: 이 File Descriptor는 stderr (=> 표준 에러 출력, 터미널)을 나타냅니다. 이는 터미널에 에러를 쓸 때 사용되는 File Descriptor입니다. 정보는 동일한 방식으로 기록되지만, 에러를 파일에 기록하는 프로그램은 stderr File Descriptor에 기록된 모든 내용을 파일로 리다이렉션(redirection)할 수 있습니다. 이는 운영체제에 의해 다른 방식으로 관리됩니다.
 
-### Examples
+### 예시 (Examples)
 
-When you use the `write(2)` function, you're actually using a file descriptor.
+`write(2)` 함수를 사용할 때, 실제로는 File Descriptor를 사용하고 있는 것입니다.
 
-The prototype of the `write(2)` function is as follows :
+`write(2)` 함수의 원형(prototype)은 다음과 같습니다.
 
 ```c
  size_t write(int fd, const void *buf, size_t count);
 ```
 
-As you can see, the first parameter to this function is an `int` called fd, sounds familiar right ?
+보시다시피, 이 함수의 첫 번째 매개변수는 fd라고 불리는 `int`형입니다. 익숙하게 들리시나요?
 
-You can specify in which file to write with the first parameter, I'll make a quick example to show you how it could be used.
+첫 번째 매개변수를 사용하여 어느 파일에 쓸지 지정할 수 있습니다. 사용 방법을 보여주는 간단한 예시를 만들어 보겠습니다.
 
 {% code title="main.c" lineNumbers="true" %}
 ```c
-// Including the unistd header for the write(2) function
+// write(2) 함수를 위한 unistd 헤더 포함
 #include <unistd.h>
-// Including the fcntl header for the open(2) function
+// open(2) 함수를 위한 fcntl 헤더 포함
 #include <fcntl.h>
 
-// Prototypes of the functions declared under the main function
+// main 함수 아래에 선언된 함수들의 원형
 void ft_putchar_terminal(char c);
 void ft_putchar_test_file(char c);
 
-// main function
+// main 함수
 int main(void)
 {
-    // calling the ft_putchar_terminal function with character T
+    // 문자 T로 ft_putchar_terminal 함수 호출
     ft_putchar_terminal("T");
-    // calling the ft_putchar_test_file function with character F
+    // 문자 F로 ft_putchar_test_file 함수 호출
     ft_putchar_test_file("F");
     return (0);
 }
 
-/* This function will simply write one character to the terminal on the 
- * standard output. As explained above, the fd for stdout is 1, so we put
- * 1 as a first parameter to the write(2) function.
+/* 이 함수는 standard output을 통해 터미널에 간단히 하나의 문자를 작성합니다. 
+ * 위에서 설명했듯이, stdout을 위한 fd는 1이므로, 
+ * write(2) 함수의 첫 번째 매개변수로 1을 넣습니다.
  */
 void ft_putchar_terminal(char c)
 {
     write(1, &c, 1);
 }
 
-/* This function will open a file called "test.txt" with the open(2) function.
- * Once the file is opened, store the file descriptor in the fd variable.
- * I then check if there was an error opening the file.
- * If no error, I write the character F in the file test.txt
- * If there is an error, I write an error message to the standard error output.
+/* 이 함수는 open(2) 함수를 사용하여 "test.txt"라는 파일을 엽니다.
+ * 파일이 열리면, 파일 디스크립터를 fd 변수에 저장합니다.
+ * 그런 다음 파일을 여는 데 오류가 있었는지 확인합니다.
+ * 오류가 없으면, test.txt 파일에 문자 F를 작성합니다.
+ * 오류가 있으면, standard error output에 오류 메시지를 작성합니다.
  */
 void ft_putchar_test_file(char c)
 {
     int fd;
     
-    /* Opening the test.txt file in Read/Write mode with open(2) function
-     * then assigning the returned file descriptor value to the fd variable.
+    /* open(2) 함수를 사용하여 test.txt 파일을 읽기/쓰기(Read/Write) 모드로 열고
+     * 반환된 File Descriptor 값을 fd 변수에 할당합니다.
      */
     fd = open("test.txt", O_RDWR);
-    /* Checking if the file was correctly opened.
-     * The open function returns -1 if there is an error opening the file.
+    /* 파일이 올바르게 열렸는지 확인합니다.
+     * 파일을 여는 데 오류가 있으면 open 함수는 -1을 반환합니다.
      */
     if (fd > 0)
-        /* Writing the F character to the test.txt file by passing
-         * its file descriptor as first parameter to the write(2) function.
+        /* test.txt 파일의 File Descriptor를 write(2) 함수의 첫 번째
+         * 매개변수로 전달하여 문자 F를 작성합니다.
          */
         write(fd, &c, 1);
     else
-        /* If there was an error opening the file, the value of fd will be -1
-         * thus it won't go inside the previous condition so I write an error
-         * message to the stderr by passing the fd descriptor 2 as first parameter
-         * to the write(2) function.
+        /* 파일을 여는 데 오류가 있었다면, fd 값은 -1이 될 것이고
+         * 이전 조건문 안으로 들어가지 않을 것입니다. 따라서 write(2) 함수의
+         * 첫 번째 매개변수로 File Descriptor 2(stderr)를 전달하여
+         * 오류 메시지를 작성합니다.
          */
         write(2, "test.txt not found.\n", 20);
 }
 ```
 {% endcode %}
 
-### How it works
+### 작동 방식
 
-When you read bytes from a file descriptor, it remembers where in the file it was last time.
+File Descriptor에서 바이트를 읽을 때, 마지막으로 파일의 어느 위치까지 읽었는지 기억합니다.
 
-This means, if you read 20 bytes from a file, next time you'll read from the same file descriptor, it will start reading from byte 21. Take a look at the example below.
+즉, 파일에서 20바이트를 읽었다면, 다음에 같은 File Descriptor를 사용하여 읽을 때는 21번째 바이트부터 읽기 시작합니다. 아래 예시를 살펴보십시오.
 
 {% code title="main.c" lineNumbers="true" %}
 ```c
-// Including the unistd header for the write(2) & read(2) function
+// write(2) & read(2) 함수를 위한 unistd 헤더 포함
 #include <unistd.h>
-// Including the fcntl header for the open(2) function
+// open(2) 함수를 위한 fcntl 헤더 포함
 #include <fcntl.h>
 
-// Prototypes of the functions declared under the main function
+// main 함수 아래에 선언된 함수들의 원형
 void ft_putchar_terminal(char c);
 void ft_putchar_test_file(char c);
 
-// main function
+// main 함수
 int main(void)
 {
-    // calling the ft_putchar_terminal function with character T
+    // 문자 T로 ft_putchar_terminal 함수 호출
     ft_putchar_terminal("T");
-    // calling the ft_putchar_test_file function with character F
+    // 문자 F로 ft_putchar_test_file 함수 호출
     ft_putchar_test_file("F");
     return (0);
 }
 
-/* This function will simply write one character to the terminal on the 
- * standard output. As explained above, the fd for stdout is 1, so we put
- * 1 as a first parameter to the write(2) function.
+/* 이 함수는 standard output을 통해 터미널에 간단히 하나의 문자를 작성합니다. 
+ * 위에서 설명했듯이, stdout을 위한 fd는 1이므로, 
+ * write(2) 함수의 첫 번째 매개변수로 1을 넣습니다.
  */
 void ft_putchar_terminal(char c)
 {
     write(1, &c, 1);
 }
 
-/* This function will open a file called "test.txt" with the open(2) function.
- * Once the file is opened, store the file descriptor in the fd variable.
- * I then check if there was an error opening the file.
- * If no error, I write the character F in the file test.txt
- * If there is an error, I write an error message to the standard error output.
+/* 이 함수는 open(2) 함수를 사용하여 "test.txt"라는 파일을 엽니다.
+ * 파일이 열리면, 파일 디스크립터를 fd 변수에 저장합니다.
+ * 그런 다음 파일을 여는 데 오류가 있었는지 확인합니다.
+ * 오류가 없으면, test.txt 파일에 문자 F를 작성합니다.
+ * 오류가 있으면, standard error output에 오류 메시지를 작성합니다.
  */
 void ft_putchar_test_file(char c)
 {
     int fd;
     
-    /* Opening the test.txt file in Read/Write mode with open(2) function
-     * then assigning the returned file descriptor value to the fd variable.
+    /* open(2) 함수를 사용하여 test.txt 파일을 읽기/쓰기(Read/Write) 모드로 열고
+     * 반환된 File Descriptor 값을 fd 변수에 할당합니다.
      */
     fd = open("test.txt", O_RDWR);
-    /* Checking if the file was correctly opened.
-     * The open function returns -1 if there is an error opening the file.
+    /* 파일이 올바르게 열렸는지 확인합니다.
+     * 파일을 여는 데 오류가 있으면 open 함수는 -1을 반환합니다.
      */
     if (fd > 0)
-        /* Writing the F character to the test.txt file by passing
-         * its file descriptor as first parameter to the write(2) function.
+        /* test.txt 파일의 File Descriptor를 write(2) 함수의 첫 번째
+         * 매개변수로 전달하여 문자 F를 작성합니다.
          */
         write(fd, &c, 1);
     else
-        /* If there was an error opening the file, the value of fd will be -1
-         * thus it won't go inside the previous condition so I write an error
-         * message to the stderr by passing the fd descriptor 2 as first parameter
-         * to the write(2) function.
+        /* 파일을 여는 데 오류가 있었다면, fd 값은 -1이 될 것이고
+         * 이전 조건문 안으로 들어가지 않을 것입니다. 따라서 write(2) 함수의
+         * 첫 번째 매개변수로 File Descriptor 2(stderr)를 전달하여
+         * 오류 메시지를 작성합니다.
          */
         write(2, "test.txt not found.\n", 20);
 }

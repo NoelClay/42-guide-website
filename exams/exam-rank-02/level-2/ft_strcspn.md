@@ -1,6 +1,6 @@
 # ft\_strcspn
 
-### Subject
+### 과제
 
 {% code overflow="wrap" %}
 ```
@@ -18,7 +18,7 @@ size_t	ft_strcspn(const char *s, const char *reject);
 ```
 {% endcode %}
 
-### Man Page
+### Man 페이지
 
 ```
 STRCSPN(3) (simplified)
@@ -40,17 +40,17 @@ RETURN VALUES
     The strcspn() functions return the number of characters spanned.
 ```
 
-### Commented solution
+### 주석 처리된 해설
 
-For this one, I'll give you two different examples, one will be done using indexes in the string `s` and `reject`. And the second example will use pointers directly.
+이 문제에 대해서는 두 가지 다른 예시를 제공해 드립니다. 첫 번째는 문자열 `s`와 `reject`에서 index를 사용하는 방식이며, 두 번째 예시는 Pointer를 직접 사용하는 방식입니다.
 
 <details>
 
-<summary>Indexes</summary>
+<summary>Index 방식</summary>
 
 {% code title="ft_strcspn.c" overflow="wrap" lineNumbers="true" %}
 ```c
-// Needed for size_t
+// size_t 타입을 위해 필요합니다.
 #include <stdio.h>
 
 size_t ft_strcspn(const char *s, const char *reject)
@@ -59,20 +59,20 @@ size_t ft_strcspn(const char *s, const char *reject)
     size_t j;
     
     i = 0;
-    // Looping over the whole string
+    // 전체 문자열을 반복합니다.
     while(s[i++])
     {
         j = 0;
-        // Check the current string char against every char in charset
+        // 현재 문자열 문자를 charset의 모든 문자와 비교하여 확인합니다.
         while (reject[j])
         {
-            // If character found, return index in current string
+            // 문자를 찾으면, 현재 문자열의 index를 반환합니다.
             if (s[i] == reject[j++])
             	return (i);
         }
     }
-    // If we spanned the whole string, return i, in that case the
-    // rejected char found is the NULL-terminating one
+    // 만약 전체 문자열을 확장(span)했다면, i를 반환합니다. 
+    // 이 경우 찾은 거부 문자(rejected char)는 NULL 종료 문자입니다.
     return (i);
 }
 ```
@@ -82,7 +82,7 @@ size_t ft_strcspn(const char *s, const char *reject)
 
 <details>
 
-<summary>Pointers</summary>
+<summary>Pointer 방식</summary>
 
 {% code title="ft_strcspn.c" overflow="wrap" lineNumbers="true" %}
 ```c
@@ -90,29 +90,27 @@ size_t ft_strcspn(const char *s, const char *reject)
 
 size_t ft_strcspn(const char *s, const char *reject)
 {
-    // Save a pointer to the start of s
+    // s의 시작 부분에 대한 Pointer를 저장합니다.
     const char *og = s;
     const char *s2;
     
-    // Looping over the whole string 
+    // 전체 문자열을 반복합니다. 
     while (*s++)
     {
-        // Set s2 to be the start of reject
-        // that way we keep the reject pointer to its original position
-        // Then loop over the whole charset
+        // s2를 reject의 시작 위치로 설정합니다.
+        // 이렇게 하여 reject Pointer를 원래 위치에 유지합니다.
+        // 그 다음 전체 charset을 반복합니다.
         s2 = reject;
         while (*s2)
         {
-            // If current string charcter found in charset, return the
-            // number of characters spanned
+            // 만약 현재 문자열 문자가 charset에서 발견되면,
+            // 확장된 문자(span)의 개수를 반환합니다.
             if (*s == *s2++)
-                // Here we make use of the original pointer to calculate
-                // the number of char. spanned
+                // 여기서 우리는 확장된 문자 수를 계산하기 위해 원본 Pointer를 사용합니다.
                 return (s - og);
         }
     }
-    // Same as above, we use the original pointer to calculate the number
-    // of character spanned
+    // 위와 마찬가지로, 확장된 문자 수를 계산하기 위해 원본 Pointer를 사용합니다.
     return (s - og);
 }
 ```

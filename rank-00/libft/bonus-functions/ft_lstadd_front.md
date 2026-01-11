@@ -1,6 +1,6 @@
 # ft\_lstadd\_front
 
-### Subject
+### 주제 (Subject)
 
 {% code overflow="wrap" %}
 ```
@@ -22,22 +22,21 @@ AUTHORIZED EXTERNAL FUNCTIONS
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명 (Understandable explanation)
 
-This function lets us add a new element to the front of an existing list.
+이 함수는 기존 리스트의 맨 앞에 새 요소를 추가할 수 있도록 해줍니다.
 
-We receive the new element and the existing list.
+우리는 새 요소와 기존 리스트를 인자로 받습니다.
 
-### Hints
+### 힌트 (Hints)
 
-<pre class="language-c" data-title="ft_lstadd_front" data-overflow="wrap" data-line-numbers><code class="lang-c"><strong>/* set the new element's next address to point 
-</strong><strong> * to the start of the existing list
+<pre class="language-c" data-title="ft_lstadd_front" data-overflow="wrap" data-line-numbers><code class="lang-c"><strong>/* 새 요소의 다음 주소가 기존 리스트의 시작 부분을 가리키도록 설정합니다.
 </strong><strong> */
-</strong><strong>/* set the existing list pointer to point to the new element
+</strong><strong>/* 기존 리스트의 Pointer가 새 요소를 가리키도록 설정합니다.
 </strong><strong> */
 </strong></code></pre>
 
-### Commented solution
+### 주석이 달린 해답 (Commented solution)
 
 <details>
 
@@ -49,11 +48,11 @@ We receive the new element and the existing list.
 
 void ft_lstadd_front(t_list **alst, t_list *new)
 {
-    /* setting the new element's next address to point
-     * to the start of the existing list
+    /* 새 요소의 다음 주소가
+     * 기존 리스트의 시작 부분을 가리키도록 설정합니다.
      */
     new->next = *alst;
-    /* set the existing list pointer to point to the new element
+    /* 기존 리스트의 Pointer가 새 요소를 가리키도록 설정합니다.
      */
     *alst = new;
 }

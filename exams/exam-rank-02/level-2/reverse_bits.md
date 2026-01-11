@@ -1,23 +1,22 @@
 # reverse\_bits
 
-### Subject
+### 주제
 
 ```
-Assignment name  : reverse_bits
-Expected files   : reverse_bits.c
-Allowed functions:
+과제 이름      : reverse_bits
+제출 예상 파일 : reverse_bits.c
+허용 함수      :
 --------------------------------------------------------------------------------
 
-Write a function that takes a byte, reverses it, bit by bit (like the
-example) and returns the result.
+1 byte를 입력받아, 예시처럼 비트 단위로 뒤집어서(reverse) 그 결과를 반환하는 함수를 작성하십시오.
 
-Your function must be declared as follows:
+함수는 다음과 같이 선언되어야 합니다:
 
 unsigned char	reverse_bits(unsigned char octet);
 
-Example:
+예시:
 
-  1 byte
+  1 byte (1 바이트)
 _____________
  0010  0110
      ||
@@ -25,7 +24,7 @@ _____________
  0110  0100
 ```
 
-### Commented solution
+### 주석이 달린 솔루션
 
 <details>
 
@@ -41,29 +40,29 @@ unsigned char	reverse_bits(unsigned char octet)
 	i = 8;
 	while (i--)
 	{
-		// shift all the bits of res by 1 to the left
-		// i.e. res: 0000 0101 => 0000 1010
-		// perform a bitwise AND on LSB of octet AND 1
-		// Least Significant Bit is the right most one
-		// i.e octet: 0000 0101 => 1
-		// it then performs a bitwise OR between the 
-		// two LSB and stores the result in res
+		// res의 모든 비트를 왼쪽으로 1만큼 이동시킵니다.
+		// 예: res: 0000 0101 => 0000 1010
+		// octet의 LSB와 1에 대해 비트wise AND 연산을 수행합니다.
+		// LSB(Least Significant Bit)는 가장 오른쪽에 있는 비트입니다.
+		// 예: octet: 0000 0101 => 1
+		// 그런 다음, 두 LSB 사이에 비트wise OR 연산을 수행하고
+		// 그 결과를 res에 저장합니다.
 		// 0000 1010 | 0000 0001 => res: 0000 1011
 		res = (res << 1) | (octet & 1);
-		// shifting the original octet by 1 to the right
-		// so that in next iteration we have the next bit
+		// 원래 octet을 오른쪽으로 1만큼 시프트합니다.
+		// 이를 통해 다음 반복에서 다음 비트를 얻을 수 있습니다.
 		octet = octet >> 1;
 	}
 	return (res);
 }
 
-// If you want to test the code:
+// 코드를 테스트하려면:
 int	main(void)
 {
 	unsigned char bit = 0;
-	// by changing the number on the next line, you change
-	// the bits that are sent to the reverse_bits function
-	// 5 => 0000 0101, the result should be 1010 0000
+	// 다음 줄의 숫자를 변경하면 reverse_bits 함수로 전달되는
+	// 비트가 변경됩니다.
+	// 5 => 0000 0101 이며, 결과는 1010 0000이 되어야 합니다.
 	unsigned char res = reverse_bits((unsigned char)5);
 
 	int i = 8;

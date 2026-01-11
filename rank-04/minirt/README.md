@@ -1,20 +1,19 @@
 # MiniRT
 
-42's MiniRT project is a programming challenge that aims to model images using a technique called raytracing. The aim is to create realistic images representing a given scene, viewed from a specified angle.&#x20;
+42의 MiniRT 프로젝트는 Raytracing(광선 추적)이라는 기법을 사용하여 이미지를 모델링하는 것을 목표로 하는 프로그래밍 챌린지입니다. 이 프로젝트의 목표는 특정 각도에서 바라본 주어진 장면을 사실적으로 표현하는 이미지를 생성하는 것입니다.
 
-Here is an example:&#x20;
+여기 예시가 있습니다:
 
 {% embed url="https://www.youtube.com/watch?v=1JoTZg4Ulo0" %}
-Example of a MiniRT (try hard version)
+MiniRT 예시 (매우 노력한 버전)
 {% endembed %}
 
-Obviously, you can do it a little simpler. In the video above he did all the extras and really did a try-harder job (spoiler: mine will not be so great)
+물론, 조금 더 간단하게 구현할 수도 있습니다. 위 영상에서는 모든 추가 기능을 구현하며 매우 노력하여 완성한 것입니다. (스포일러: 제가 만든 버전은 저렇게 훌륭하지는 않을 것입니다.)
 
-To achieve this, **MiniRT uses a raytracing protocol**. Raytracing is a 3D image rendering method that simulates the behavior of light by tracing light rays from the virtual camera, and calculating the interaction of these rays with objects in the scene. _We will see it more in details later._
+이를 달성하기 위해 **MiniRT는 Raytracing 프로토콜을 사용합니다**. Raytracing은 가상의 카메라에서 광선을 추적하고, 이 광선이 장면에 있는 객체들과 상호 작용하는 방식을 계산하여 빛의 동작을 시뮬레이션하는 3D 이미지 렌더링 방법입니다. *이 내용은 나중에 더 자세히 살펴보겠습니다.*
 
-The scene modeled in MiniRT is made up of simple geometric objects such as spheres, planes or triangles. Each of these objects has its own properties, such as position, color and lighting system. Lighting systems can include ambient, diffuse or specular light sources, which contribute to the way objects are rendered.
+MiniRT에서 모델링되는 장면은 구(sphere), 평면(plane) 또는 삼각형(triangle)과 같은 단순한 기하학적 객체들로 구성됩니다. 이러한 객체들은 각각 위치, 색상 및 조명 시스템과 같은 고유의 속성을 가집니다. 조명 시스템에는 Ambient(주변광), Diffuse(확산광) 또는 Specular(반사광) 광원이 포함될 수 있으며, 이는 객체가 렌더링되는 방식에 영향을 미칩니다.
 
-MiniRT's ultimate goal is to produce realistic images that capture the effects of shadow, reflection and refraction of light in the scene. This requires the implementation of efficient raytracing algorithms to simulate these light interactions.
+MiniRT의 궁극적인 목표는 장면에 있는 빛의 그림자, 반사 및 굴절 효과를 포착하는 사실적인 이미지를 생성하는 것입니다. 이를 위해서는 이러한 빛의 상호 작용을 시뮬레이션하기 위한 효율적인 Raytracing 알고리즘을 구현해야 합니다.
 
-So... here we go. Now you are ready to dig into this big project. RayTracing will have no secrets for you in a few days ;)&#x20;
-
+그럼... 시작해 봅시다. 이제 이 거대한 프로젝트에 뛰어들 준비가 되셨습니다. Raytracing은 며칠 안에 여러분에게 비밀이 없는 영역이 될 것입니다. ;)

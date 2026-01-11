@@ -1,20 +1,20 @@
 # 🖌️ MiniLibX
 
-### Introduction
+### 소개 (Introduction)
 
-In this pages I will cover some information about MiniLibX, the library you'll be using for (at least) the three rank 2 graphical project (so\_long, FdF, Fract-ol).
+이 페이지에서는 MiniLibX에 대한 정보를 다룹니다. MiniLibX는 (최소한) 랭크 2의 세 가지 그래픽 프로젝트(so\_long, FdF, Fract-ol)에 사용될 라이브러리입니다.
 
-I found most of the information I needed to use MiniLibX on this [page](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html).
+MiniLibX를 사용하는 데 필요한 대부분의 정보는 이 [페이지](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)에서 찾았습니다.
 
-I didn't find much other documentation online, and this one has some examples on how to do the basics things but I'd like to improve some of their explanation a bit and add some more examples that I really missed when trying to understand better how MiniLibX works.&#x20;
+온라인에서 다른 문서를 많이 찾지 못했습니다. 이 문서에는 기본적인 작업을 수행하는 방법에 대한 몇 가지 예제가 포함되어 있지만, 저는 그 설명 중 일부를 약간 개선하고 MiniLibX 작동 방식을 더 잘 이해하려고 노력했을 때 정말 필요했던 몇 가지 예제를 더 추가하고 싶습니다.
 
-### Installation
+### 설치 (Installation)
 
 {% hint style="warning" %}
-I did a big part of the project using MiniLibX on the school computer, so if you're running Window or Linux, go check this [link](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation) to install it correctly on your machine.
+저는 학교 컴퓨터에서 MiniLibX를 사용하여 프로젝트의 상당 부분을 진행했습니다. 따라서 Windows나 Linux를 사용하고 계시다면, 여러분의 머신에 정확하게 설치하려면 이 [링크](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#installation)를 확인해 주십시오.
 {% endhint %}
 
-Here's the Makefile I used for my so\_long project (adapted a bit from the one I really used).
+다음은 제가 so\_long 프로젝트를 위해 사용했던 Makefile입니다 (실제로 사용했던 Makefile에서 약간 각색했습니다).
 
 {% code title="Makefile" overflow="wrap" lineNumbers="true" %}
 ```

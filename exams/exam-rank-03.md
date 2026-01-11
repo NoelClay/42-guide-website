@@ -1,12 +1,12 @@
-# Exam Rank 03
+# 시험 등급 03 (Exam Rank 03)
 
-This exam a little less complicated than the first one you did. Just do one of the two exercises you come across, and you're done.&#x20;
+이 시험은 여러분이 이전에 치른 첫 번째 시험보다 조금 덜 복잡합니다. 마주하게 되는 두 가지 연습 문제 중 하나만 완료하면 됩니다.
 
-Here are the two exercises you may be asked to do:
+여러분이 요청받을 수 있는 두 가지 연습 문제는 다음과 같습니다:
 
-* [ft\_printf](../rank-01/ft_printf/)
-  * This one is pretty simple, you need to implement only a part of the conversion from the original printf: `%x`, `%s` and `%d`. Pretty easy.
-* [get\_next\_line](../rank-01/get_next_line/)
-  * A while back, this exercise wasn't compile with the `-D BUFFER_SIZE` flag, so it could be done on three (3) lines of code. But the subject changed, and now you have to build a complete `get_next_line`.
+*   [ft\_printf](../rank-01/ft_printf/)
+    *   이 문제는 상당히 간단하며, 오리지널 printf 기능 중 일부 변환 지정자(conversion specifier)인 `%x`, `%s`, `%d`만을 구현하면 됩니다. 꽤 쉽습니다.
+*   [get\_next\_line](../rank-01/get_next_line/)
+    *   얼마 전까지만 해도, 이 연습 문제는 `-D BUFFER_SIZE` 플래그 없이 컴파일되었기 때문에 세 (3) 줄의 코드로 완료할 수 있었습니다. 그러나 주제가 변경되었으며, 이제는 완전한 `get_next_line`을 구축해야 합니다.
 
-Ant that's it ! Well... we won't lie to each other. If you get printf it's very fast and easy :smile:  But if you get `get_next_line`, good luck ;)
+이상입니다! 솔직히 말씀드리자면, printf 문제를 받게 된다면 매우 빠르고 쉽게 완료할 수 있습니다. :smile: 하지만 `get_next_line`을 받게 되신다면, 행운을 빕니다. ;)

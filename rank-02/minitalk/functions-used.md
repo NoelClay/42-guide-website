@@ -1,8 +1,6 @@
-# ▪️ Functions used
+# ▪️ 사용되는 함수
 
-You are allowed to use several functions in this project. You already know some of them like write, ft\_printf (<mark style="color:red;">yours!</mark>), malloc, free and all the functions from your libft. However, other important functions that have never been used before will be **essential** to the success of this project. Let's look at them together.
-
-
+이 프로젝트에서 여러 함수를 사용할 수 있습니다. `write`, `ft_printf` (여러분의 것!), `malloc`, `free`, 그리고 여러분의 `libft`에 있는 모든 함수는 이미 알고 계실 겁니다. 하지만, 이전에 사용되지 않았던 다른 중요한 함수들이 이 프로젝트의 성공에 **필수적**일 것입니다. 이 함수들을 함께 살펴보겠습니다.
 
 ### signal()
 
@@ -10,11 +8,11 @@ You are allowed to use several functions in this project. You already know some 
 sighandler_t signal(int signum, sighandler_t handler);
 ```
 
-The `signal` function in C is a way to specify a function, called a signal handler, to be called when a specific signal is received by a running program. A signal is a message from the operating system to a program indicating that some event has occurred. The `signal` function allows you to specify a function to be called when a particular signal is received, so that you can take some action in response to the signal.
+C 언어의 `signal` 함수는 실행 중인 프로그램이 특정 `signal`을 수신할 때 호출될 함수(이를 `signal handler`라고 합니다)를 지정하는 방법입니다. `Signal`은 어떤 이벤트가 발생했음을 나타내기 위해 운영 체제에서 프로그램으로 보내는 메시지입니다. `signal` 함수를 사용하면 특정 `signal`이 수신되었을 때 호출될 함수를 지정하여 해당 `signal`에 응답하여 어떤 조치를 취할 수 있습니다.
 
 <details>
 
-<summary>signal() example</summary>
+<summary>signal() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -30,14 +28,14 @@ void signal_handler(int signum)
 
 int main() 
 {
-  // Set the signal handler for the SIGINT and SIGTERM signals
-  // to the signal_handler function
+  // SIGINT 및 SIGTERM signal에 대한 signal handler를
+  // signal_handler 함수로 설정합니다.
   
   signal(SIGINT, signal_handler);
   signal(SIGTERM, signal_handler);
 
   while (1) {
-    // Do some work here...
+    // 여기에서 작업을 수행합니다...
   }
 
   return 0;
@@ -45,9 +43,9 @@ int main()
 ```
 {% endcode %}
 
-In this example, we've set the signal handler for both the `SIGINT` and `SIGTERM` signals to the `signal_handler` function. The `SIGINT` signal is generated when the user presses `CTRL+C`, and the `SIGTERM` signal is generated when the program is terminated by the operating system (e.g. by running the `kill` command). When either of these signals is received, the `signal_handler` function will be called, and it will print a message to the console and exit the program.
+이 예시에서는 `SIGINT` 및 `SIGTERM` 두 `signal`에 대한 `signal handler`를 `signal_handler` 함수로 설정했습니다. `SIGINT` `signal`은 사용자가 `CTRL+C`를 누를 때 생성되며, `SIGTERM` `signal`은 프로그램이 운영 체제에 의해 종료될 때(예: `kill` 명령 실행 시) 생성됩니다. 이 `signal` 중 하나가 수신되면 `signal_handler` 함수가 호출되고, 콘솔에 메시지를 출력한 후 프로그램을 종료합니다.
 
-This example also demonstrates a common use case for the `signal` function: setting a signal handler to gracefully terminate a program when a certain signal is received. By setting a signal handler for the `SIGINT` and `SIGTERM` signals, we can ensure that the program will exit cleanly when it is terminated, rather than leaving resources in an undefined state.
+이 예시는 `signal` 함수의 일반적인 사용 사례, 즉 특정 `signal`이 수신될 때 프로그램을 정상적으로 종료하도록 `signal handler`를 설정하는 방법을 보여줍니다. `SIGINT` 및 `SIGTERM` `signal`에 대한 `signal handler`를 설정함으로써, 프로그램이 종료될 때 자원을 정의되지 않은 상태로 남기지 않고 깔끔하게 종료되도록 보장할 수 있습니다.
 
 </details>
 
@@ -57,7 +55,7 @@ This example also demonstrates a common use case for the `signal` function: sett
 int sigemptyset(sigset_t *set);
 ```
 
-The `sigemptyset` function is used to initialize a signal set to the empty set, which means that it does not contain any signals. Signal sets are used by some functions, such as `sigaction`, to define the signals to be processed. The `sigemptyset` function takes a pointer to a set of signals as an argument and empties this set by adding no signal to it. This function is often used in conjunction with the `sigaddset` function, which adds a specified signal to a signal set.
+`sigemptyset` 함수는 `signal set`을 빈 Set으로 초기화하는 데 사용되며, 이는 Set에 어떤 `signal`도 포함되어 있지 않음을 의미합니다. `Signal set`은 `sigaction`과 같은 일부 함수에서 처리할 `signal`을 정의하는 데 사용됩니다. `sigemptyset` 함수는 `signal` Set에 대한 Pointer를 인수로 받고, 어떤 `signal`도 추가하지 않음으로써 이 Set을 비웁니다. 이 함수는 지정된 `signal`을 `signal set`에 추가하는 `sigaddset` 함수와 함께 자주 사용됩니다.
 
 ### sigaddset()
 
@@ -65,13 +63,13 @@ The `sigemptyset` function is used to initialize a signal set to the empty set, 
 int sigaddset(sigset_t *set, int signum);
 ```
 
-This function allows to add a signal to a set of signals. The `sigaddset` function takes two arguments: a pointer to a set of signals and the number of the signal to add to the set.&#x20;
+이 함수는 `signal` Set에 `signal`을 추가할 수 있도록 합니다. `sigaddset` 함수는 두 가지 인수를 취합니다. `signal` Set에 대한 Pointer와 Set에 추가할 `signal`의 번호입니다.
 
-Here is an example of using `sigaddset` to add the signal SIGINT to a set of signals and `sigemptyset`:
+`sigemptyset` 및 `sigaddset`을 사용하여 `SIGINT` `signal`을 `signal` Set에 추가하는 예시는 다음과 같습니다:
 
 <details>
 
-<summary>sigemptyset() &#x26; sigaddset() example</summary>
+<summary>sigemptyset() 및 sigaddset() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -81,10 +79,10 @@ int main(void)
 {
     sigset_t signal_set;
 
-    // Initialize an empty signal set
+    // 빈 signal set을 초기화합니다.
     sigemptyset(&signal_set);
 
-    // Add SIGINT to the signal set
+    // SIGINT를 signal set에 추가합니다.
     sigaddset(&signal_set, SIGINT);
 ```
 {% endcode %}
@@ -99,13 +97,13 @@ int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
 ```
 {% endcode %}
 
-The `sigaction` function in C is used to specify the action to be taken when a specific signal is received by a process. It is defined in the `signal.h` header file.
+C 언어의 `sigaction` 함수는 프로세스가 특정 `signal`을 수신했을 때 취해야 할 동작을 지정하는 데 사용됩니다. 이 함수는 `signal.h` 헤더 파일에 정의되어 있습니다.
 
-The `signum` argument specifies the signal for which the action is being specified. The `act` argument is a pointer to a `struct sigaction` that specifies the action to be taken when the signal is received. The `oldact` argument is a pointer to a `struct sigaction` that is used to retrieve the previous action for the specified signal.
+`signum` 인수는 동작이 지정되는 `signal`을 나타냅니다. `act` 인수는 `signal`이 수신될 때 취할 동작을 지정하는 `struct sigaction`에 대한 Pointer입니다. `oldact` 인수는 지정된 `signal`에 대한 이전 동작을 검색하는 데 사용되는 `struct sigaction`에 대한 Pointer입니다.
 
 <details>
 
-<summary>sigaction() example</summary>
+<summary>sigaction() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -126,7 +124,7 @@ int main(void) {
   sigaction(SIGINT, &action, NULL);
 
   while (1) {
-    // Do some work
+    // 작업을 수행합니다.
   }
 
   return 0;
@@ -134,11 +132,9 @@ int main(void) {
 ```
 {% endcode %}
 
-In this example, the `signal_handler` function is specified as the action to be taken when the `SIGINT` signal is received. When the signal is received, the `signal_handler` function will be called, which will print a message to the console. The `sigemptyset` function is used to initialize the signal mask, which specifies the signals that should be blocked while the signal handler is executing. The `sa_flags` field is set to 0, which specifies the default behavior for the signal action.
+이 예시에서는 `SIGINT` `signal`이 수신될 때 취할 동작으로 `signal_handler` 함수가 지정됩니다. `Signal`이 수신되면 `signal_handler` 함수가 호출되어 콘솔에 메시지를 출력합니다. `sigemptyset` 함수는 `signal mask`를 초기화하는 데 사용되며, 이는 `signal handler`가 실행되는 동안 차단되어야 하는 `signal`을 지정합니다. `sa_flags` 필드는 0으로 설정되어 `signal action`의 기본 동작을 지정합니다.
 
 </details>
-
-
 
 ### kill()
 
@@ -146,15 +142,15 @@ In this example, the `signal_handler` function is specified as the action to be 
 int kill(pid_t pid, int sig);
 ```
 
-In C, the `kill` function **is a system call that sends a signal to a process**. It is defined in the `signal.h` header file.
+C 언어에서 `kill` 함수는 **프로세스에 `signal`을 보내는 system call**입니다. 이 함수는 `signal.h` 헤더 파일에 정의되어 있습니다.
 
-The `pid` argument specifies the process ID of the process you want to communicate with. The `sig` argument specifies the signal to be sent to the process. There are various signals that can be sent, each corresponding to a different purpose. For example, the `SIGKILL` signal is used to terminate processes that are unresponsive or stuck in an infinite loop.
+`pid` 인수는 통신하려는 프로세스의 Process ID (`PID`)를 지정합니다. `sig` 인수는 프로세스로 보낼 `signal`을 지정합니다. 다양한 목적에 해당하는 여러 `signal`을 보낼 수 있습니다. 예를 들어, `SIGKILL` `signal`은 응답하지 않거나 무한 루프에 빠진 프로세스를 종료하는 데 사용됩니다.
 
 <details>
 
-<summary>kill() example</summary>
+<summary>kill() 예시</summary>
 
-Here is an example of using the `kill` function to terminate a process with the `SIGKILL` signal:
+다음은 `kill` 함수를 사용하여 `SIGKILL` `signal`로 프로세스를 종료하는 예시입니다.
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -163,8 +159,8 @@ Here is an example of using the `kill` function to terminate a process with the 
 #include <unistd.h>
 
 int main() {
-  pid_t pid = getpid();  // get the process ID of the current process
-  int result = kill(pid, SIGKILL);  // send the SIGKILL signal to the process
+  pid_t pid = getpid();  // 현재 프로세스의 Process ID를 가져옵니다.
+  int result = kill(pid, SIGKILL);  // 프로세스에 SIGKILL signal을 보냅니다.
   if (result == 0) {
     printf("Process terminated successfully.\n");
   } else {
@@ -175,7 +171,7 @@ int main() {
 ```
 {% endcode %}
 
-Note that using the `kill` function to terminate a process should generally be avoided, as it can leave resources allocated to the process in an undefined state. Instead, it is usually better to allow the process to terminate gracefully by providing it with an opportunity to clean up and release resources before exiting.
+`kill` 함수를 사용하여 프로세스를 종료하면 프로세스에 할당된 자원이 정의되지 않은 상태로 남을 수 있으므로, 일반적으로 `kill` 함수를 사용하여 프로세스를 종료하는 것은 피해야 한다는 점에 유의하십시오. 대신, 종료하기 전에 자원을 정리하고 해제할 기회를 제공함으로써 프로세스가 정상적으로 종료되도록 하는 것이 보통 더 좋습니다.
 
 </details>
 
@@ -185,28 +181,28 @@ Note that using the `kill` function to terminate a process should generally be a
 pid_t getpid(void);
 ```
 
-In C, the `getpid` function **returns the process ID of the current process**. It is declared in the `unistd.h` header file.&#x20;
+C 언어에서 `getpid` 함수는 **현재 프로세스의 Process ID를 반환합니다**. 이 함수는 `unistd.h` 헤더 파일에 선언되어 있습니다.
 
 <details>
 
-<summary>What are the process ID for?</summary>
+<summary>Process ID는 무엇입니까?</summary>
 
-In an operating system, a process is **an instance of a program that is being executed**. A process ID (PID) is a unique identifier assigned to each process by the operating system when it is created.
+운영 체제에서 프로세스는 **실행 중인 프로그램의 인스턴스**입니다. Process ID (`PID`)는 프로세스가 생성될 때 운영 체제에서 각 프로세스에 할당하는 고유 식별자입니다.
 
-Process IDs are useful for a variety of purposes in coding. Here are a few examples:
+Process ID는 코딩에서 다양한 목적으로 유용합니다. 몇 가지 예는 다음과 같습니다.
 
-1. Identifying and tracking processes: As mentioned earlier, the process ID is a unique identifier for a process, so it can be used to identify and track specific processes within the system.
-2. Sending signals to processes: The `kill` function in C allows you to send a signal to a process, and you can specify the process to send the signal to using the process ID. This can be useful for controlling and interacting with processes from your code.
-3. Process communication: Process IDs can be used as a way for processes to communicate with each other. For example, one process might create a new process using the `fork` function, and then pass the child process's ID back to the parent process so that the parent can communicate with the child.
-4. Debugging: Process IDs can be helpful in debugging, as they can be used to identify which processes are causing problems or behaving unexpectedly.
+1.  프로세스 식별 및 추적: 앞에서 언급했듯이, Process ID는 프로세스의 고유 식별자이므로 시스템 내의 특정 프로세스를 식별하고 추적하는 데 사용할 수 있습니다.
+2.  프로세스에 `signal` 보내기: C 언어의 `kill` 함수를 사용하면 프로세스에 `signal`을 보낼 수 있으며, Process ID를 사용하여 `signal`을 보낼 프로세스를 지정할 수 있습니다. 이는 코드에서 프로세스를 제어하고 상호 작용하는 데 유용할 수 있습니다.
+3.  프로세스 통신: Process ID는 프로세스가 서로 통신하는 수단으로 사용될 수 있습니다. 예를 들어, 한 프로세스가 `fork` 함수를 사용하여 새 프로세스를 생성한 다음, 부모 프로세스가 자식 프로세스와 통신할 수 있도록 자식 프로세스의 ID를 부모 프로세스에 다시 전달할 수 있습니다.
+4.  디버깅: Process ID는 어떤 프로세스가 문제를 일으키거나 예기치 않게 동작하는지 식별하는 데 사용할 수 있으므로 디버깅에 도움이 될 수 있습니다.
 
-Overall, process IDs are a useful tool for managing and interacting with processes in your code.
+전반적으로 Process ID는 코드에서 프로세스를 관리하고 상호 작용하기 위한 유용한 도구입니다.
 
 </details>
 
 <details>
 
-<summary>getpid() example</summary>
+<summary>getpid() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -224,7 +220,7 @@ int main(void) {
 ```
 {% endcode %}
 
-This program will print the process ID of the current process to the console. The process ID is a unique identifier assigned to each process by the operating system. It is used to identify and track processes within the system.
+이 프로그램은 현재 프로세스의 Process ID를 콘솔에 출력합니다. Process ID는 운영 체제에서 각 프로세스에 할당하는 고유 식별자입니다. 이 ID는 시스템 내의 프로세스를 식별하고 추적하는 데 사용됩니다.
 
 </details>
 
@@ -234,11 +230,11 @@ This program will print the process ID of the current process to the console. Th
 int pause(void);
 ```
 
-`pause()` is a function in the C standard library that causes the calling process to sleep until a signal is received. The process remains blocked until a signal handler is executed or the signal is ignored
+`pause()`는 호출하는 프로세스를 `signal`이 수신될 때까지 잠재우는(sleep) C 표준 라이브러리 함수입니다. 프로세스는 `signal handler`가 실행되거나 `signal`이 무시될 때까지 blocked 상태로 유지됩니다.
 
 <details>
 
-<summary>pause() example</summary>
+<summary>pause() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -251,7 +247,6 @@ int main(void) {
     printf("Exiting pause.\n");
     return 0;
 }
-
 ```
 {% endcode %}
 
@@ -263,11 +258,11 @@ int main(void) {
 unsigned int sleep(unsigned int seconds);
 ```
 
-`sleep()` is also a function in the C standard library that causes the calling process to sleep for a specified number of seconds.
+`sleep()` 또한 호출하는 프로세스를 지정된 초(seconds)만큼 잠재우는 C 표준 라이브러리 함수입니다.
 
 <details>
 
-<summary>sleep() example</summary>
+<summary>sleep() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -276,11 +271,10 @@ unsigned int sleep(unsigned int seconds);
 
 int main(void) {
     printf("Sleeping for 3 seconds...\n");
-    sleep(3); // The program waits 3 seconds
+    sleep(3); // 프로그램이 3초 동안 대기합니다.
     printf("Done sleeping.\n");
     return 0;
 }
-
 ```
 {% endcode %}
 
@@ -292,11 +286,11 @@ int main(void) {
 int usleep(useconds_t usec);
 ```
 
-`usleep()` is a function in the C standard library that causes the calling process to sleep for a specified number of microseconds.
+`usleep()`는 호출하는 프로세스를 지정된 마이크로초(microseconds)만큼 잠재우는 C 표준 라이브러리 함수입니다.
 
 <details>
 
-<summary>usleep() example</summary>
+<summary>usleep() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -309,7 +303,6 @@ int main(void) {
     printf("Done sleeping.\n");
     return 0;
 }
-
 ```
 {% endcode %}
 
@@ -321,11 +314,11 @@ int main(void) {
 void exit(int status);
 ```
 
-`exit()` is a function in the C standard library that terminates the calling process immediately. It takes an integer argument that specifies the exit status of the process. A value of 0 indicates successful termination, while non-zero values indicate an error.
+`exit()`는 호출하는 프로세스를 즉시 종료하는 C 표준 라이브러리 함수입니다. 이 함수는 프로세스의 종료 상태(exit status)를 지정하는 정수 인수를 취합니다. 값 0은 성공적인 종료를 나타내고, 0이 아닌 값은 오류를 나타냅니다.
 
 <details>
 
-<summary>exit() example</summary>
+<summary>exit() 예시</summary>
 
 {% code overflow="wrap" lineNumbers="true" %}
 ```c
@@ -336,12 +329,9 @@ int main(void) {
     printf("Exiting with status 0...\n");
     exit(0);
 }
-
 ```
 {% endcode %}
 
 </details>
 
-
-
-And... that's it. You should be able to make some tests alone right now ;) If you don't know how to do it, see you in the next step.
+그리고 이것이 전부입니다. 이제 혼자서 몇 가지 테스트를 해볼 수 있을 것입니다 ;) 어떻게 해야 할지 모르겠다면, 다음 단계에서 만나 뵙겠습니다.

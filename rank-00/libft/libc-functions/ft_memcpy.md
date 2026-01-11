@@ -1,6 +1,6 @@
 # ft\_memcpy
 
-### Subject
+### 주제
 
 {% code overflow="wrap" %}
 ```
@@ -17,34 +17,34 @@ RETURN VALUES
 ```
 {% endcode %}
 
-### Understandable explanation
+### 이해하기 쉬운 설명
 
-The `memcpy` function copies maximum n bytes from `src` to `dst`. The man talks about memory overlapping, I'll explain this with details on the `memmove` function page.
+`memcpy` 함수는 최대 $n$ 바이트를 `src`에서 `dst`로 복사합니다. man 페이지에서는 메모리 중첩(memory overlapping)에 대해 언급하고 있습니다. 이 내용은 `ft_memmove` 함수 페이지에서 더 자세히 설명해 드리겠습니다.
 
-As for `memset` and `bzero` we'll need some temporary pointers to manipulate our data.
+`memset` 및 `bzero`에서와 마찬가지로, 데이터를 조작하기 위해 임시 Pointer가 필요합니다.
 
-This functions works like the `strcpy` function, except that `memcpy` accepts `void *` as parameters, so we can give it any type of pointer we want to copy.
+이 함수는 `strcpy` 함수처럼 작동하지만, `memcpy`는 매개변수로 `void *`를 받기 때문에 복사하려는 모든 유형의 Pointer를 전달할 수 있다는 차이점이 있습니다.
 
-### Hints
+### 힌트
 
 {% code title="ft_memcpy.c" overflow="wrap" lineNumbers="true" %}
 ```c
 void    *ft_memcpy(void *dst, const void *src, size_t n)
 {
-    /* declare a temporary pointer for dst */
-    /* declare a temporary pointer for src */
+    /* dst를 위한 임시 Pointer를 선언합니다 */
+    /* src를 위한 임시 Pointer를 선언합니다 */
     
-    /* if src and dst are NULL, return dst */
-    /* make dst tmp pointer equal to dst converted to unsigned char * */
-    /* make src tmp pointer equal to src converted to unsigned char * */
-    /* loop over the dst tmp pointer while we didn't reach n */
-        /* set the current byte of dst tmp pointer equal to current byte of src tmp pointer */
-        /* return dst */
+    /* src와 dst가 NULL이면, dst를 반환합니다 */
+    /* dst 임시 Pointer를 unsigned char *로 변환된 dst와 같게 만듭니다 */
+    /* src 임시 Pointer를 unsigned char *로 변환된 src와 같게 만듭니다 */
+    /* n에 도달할 때까지 dst 임시 Pointer를 순회합니다 */
+        /* dst 임시 Pointer의 현재 바이트를 src 임시 Pointer의 현재 바이트와 같게 설정합니다 */
+        /* dst를 반환합니다 */
 }
 ```
 {% endcode %}
 
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 
@@ -56,33 +56,32 @@ void    *ft_memcpy(void *dst, const void *src, size_t n)
 
 void    *ft_memcpy(void *dst, const void *src, size_t n)
 {
-    /* declaring both our temporary pointers */
+    /* 두 임시 Pointer를 선언합니다 */
     unsigned char    *tmp_dst;
     unsigned char    *tmp_src;
     
-    /* if both dst and src are NULL pointers we can directly return
-     * dst since we won't do anything on it
+    /* dst와 src가 모두 NULL Pointer인 경우, 아무 작업도 수행하지 않으므로
+     * dst를 즉시 반환할 수 있습니다.
      */
     if (dst == (void *)0 && src == (void *)0)
         return (dst);
-    /* assigning both our temporary pointers to the converted
-     * values of the "real" pointers
+    /* 두 임시 Pointer에 "실제" Pointer의 변환된 값을
+     * 할당합니다.
      */
     tmp_dst = (unsigned char *) dst;
     tmp_src = (unsigned char *) src;
-    /* looping on both our temporary pointer until we reach 
-     * n bytes
+    /* n 바이트에 도달할 때까지 두 임시 Pointer를 순회합니다.
      */
     while (n > 0)
     {
-        /* making current byte of tmp_dst = current byte of
-         * tmp_src 
+        /* tmp_dst의 현재 바이트를 tmp_src의 현재 바이트와
+         * 같게 만듭니다.
          */
         *(tmp_dst++) = *(tmp_src++);
-        /* reducing n by one so we only copy n bytes */
+        /* n 바이트만 복사하도록 n을 1씩 줄입니다 */
         n--;
     }
-    /* returning original dst, not our temporary pointer */
+    /* 임시 Pointer가 아닌 원래의 dst를 반환합니다 */
     return (dst);
 }
 ```

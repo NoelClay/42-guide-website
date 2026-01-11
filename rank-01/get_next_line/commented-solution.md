@@ -1,28 +1,26 @@
 ---
 description: >-
-  We propose you here one of the solutions that works. However, we recommend you
-  to try not to look at the solution and read what we explained in part 3. Use
-  this part only in case of emergency.
+  여기서 작동하는 하나의 솔루션을 제안합니다. 하지만, 솔루션을 보지 않고 파트 3에서 설명한 내용을 먼저 읽어보시기를 권장합니다. 이 부분은 비상시에만 사용하십시오.
 ---
 
-# ▪️ Commented solution
+# ▪️ 주석이 달린 솔루션
 
-Below we will use my code (Simon) but you can also consult Laura's code, which is a little different from mine on some points. Here are our Github for this project:
+아래에서는 저(Simon)의 코드를 사용합니다. 하지만 일부 측면에서 제 코드와는 약간 다른 Laura의 코드도 참고하실 수 있습니다. 이 프로젝트에 대한 저희의 Github 링크는 다음과 같습니다:
 
-* [Simon's get\_next\_line](https://github.com/Laendrun/42/tree/main/get_next_line)
+* [Simon의 get\_next\_line](https://github.com/Laendrun/42/tree/main/get_next_line)
 
 {% hint style="danger" %}
-<mark style="color:red;">**And again: Try to do it on your own and only consult the solutions in case of ultimate trouble! And if you want to look at the answers, try to understand what you are doing ;)**</mark>
+<mark style="color:red;">**다시 한번 강조합니다. 스스로 해결해 보시고, 정말 최후의 문제가 생겼을 때만 솔루션을 참고하십시오! 그리고 만약 답을 보더라도, 자신이 무엇을 하고 있는지 이해하려고 노력하십시오 ;)**</mark>
 {% endhint %}
 
-I also made this project with the bonus, so you'll have both versions, I'll start with the normal version and you can try to find by yourself how to make the bonuses work.
+저는 이 프로젝트를 보너스까지 포함하여 만들었으므로, 두 가지 버전 모두를 제공합니다. 저는 일반 버전부터 시작할 것이며, 보너스를 어떻게 구현할 수 있는지 스스로 찾아보시기를 바랍니다.
 
 {% hint style="info" %}
-To make the bonus work I only had to add like 20 - 25 characters in total. The bonus for this project is easily achievable.
+보너스를 작동시키기 위해 총 20~25자 정도만 추가하면 되었습니다. 이 프로젝트의 보너스는 쉽게 달성할 수 있습니다.
 {% endhint %}
 
 {% hint style="warning" %}
-I won't be commenting the LIBFT functions, you have your own, I hope you know how they work.
+LIBFT 함수에는 주석을 달지 않겠습니다. 여러분은 자신만의 LIBFT 함수를 가지고 있으므로, 해당 함수들이 어떻게 작동하는지 알고 계시기를 바랍니다.
 {% endhint %}
 
 <details>
@@ -45,13 +43,13 @@ char    *get_next_line(int fd)
     
     buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
     /*
-     * fd < 0 : this means the file descriptor is invalid
-     * BUFFER_SIZE <= 0 : we'll read BUFFER_SIZE characters at a time,
-     * we can't read 0 or less character
-     * read(fd, 0, 0) < 0 : this check lets us see if the file exists and
-     * that it has some content to read from, or event that the file is 
-     * openable to read, maybe the file descriptor is more than 0, but it
-     * was open in 'modify only', that means we can't read it.
+     * fd < 0 : 이는 file descriptor가 유효하지 않음을 의미합니다.
+     * BUFFER_SIZE <= 0 : 한 번에 BUFFER_SIZE 개수만큼 문자를 읽으므로,
+     * 0개 이하의 문자를 읽을 수는 없습니다.
+     * read(fd, 0, 0) < 0 : 이 검사는 파일이 존재하는지, 읽을 내용이 있는지,
+     * 또는 파일을 읽기 위해 열 수 있는지 확인하게 해줍니다. 
+     * file descriptor가 0보다 크더라도 '쓰기 전용(modify only)'으로
+     * 열려 있다면 읽을 수 없습니다.
      */
     if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
     {
@@ -64,8 +62,8 @@ char    *get_next_line(int fd)
     if (!buffer)
         return (NULL);
     line = _fill_line_buffer(fd, left_c, buffer);
-    /* We have to free the buffer variable here since we'll not be using
-     * it later in the function, freeing it prevents memory leaks.
+    /* 이 함수에서 나중에 buffer 변수를 사용하지 않을 것이므로 여기서 free해야 합니다.
+     * free하는 것은 memory leaks를 방지합니다.
      */
     free(buffer);
     buffer = NULL;
@@ -81,20 +79,18 @@ static char *_set_line(char *line_buffer)
     ssize_t    i;
     
     i = 0;
-    /* This loop let's us find the end of the line
-     * either when we encounter a \n or a \0
+    /* 이 루프는 \n 또는 \0를 만났을 때 줄의 끝을 찾을 수 있도록 해줍니다.
      */
     while (line_buffer[i] != '\n' && line_buffer[i] != '\0')
         i++;
-    /* here we check if the current or next character is a \0
-     * if this is the case, this means that the line is empty so
-     * we return NULL, this is what the subject asks us, send NULL
-     * if there is no next line
+    /* 여기서 현재 또는 다음 문자가 \0인지 확인합니다.
+     * 만약 그렇다면, 이 줄은 비어 있다는 의미이므로 NULL을 반환합니다.
+     * 이는 다음 줄이 없을 경우 NULL을 반환하라는 과제의 요구사항입니다.
      */
     if (line_buffer[i] == 0 || line_buffer[1] == 0)
         return (NULL);
-    /* here we take a substring from the end of the line to the end
-     * of the whole line_buffer, that's what's left from our line
+    /* 여기서 줄의 끝부터 전체 line_buffer의 끝까지 substring을 취합니다.
+     * 이것이 우리 줄에서 남은 부분입니다.
      */
     left_c = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i);
     if (*left_c == 0)
@@ -102,8 +98,7 @@ static char *_set_line(char *line_buffer)
         free(left_c);
         left_c = NULL;
     }
-    /* don't forget to set the last character to \0 to NUL-terminate
-     * the line
+    /* 줄을 NUL-terminate하기 위해 마지막 문자를 \0로 설정하는 것을 잊지 마십시오.
      */    
     line_buffer[i + 1] = 0;
     return (left_c);
@@ -111,11 +106,10 @@ static char *_set_line(char *line_buffer)
 
 static char	*_fill_line_buffer(int fd, char *left_c, char *buffer)
 {
-        /* ssize_t type works the same way as siyze_t type, but it can be
-         * a negative number, something that size_t can't do.
-         * Since most of the system function we'll be using return -1 to
-         * signify errors, it could be useful to be able to store 
-         * negative numbers
+        /* ssize_t 타입은 size_t 타입과 비슷하게 작동하지만, 음수일 수 있습니다.
+         * size_t 타입은 음수가 될 수 없습니다. 
+         * 우리가 사용할 시스템 함수의 대부분은 오류를 나타내기 위해 -1을 반환하므로,
+         * 음수를 저장할 수 있는 것은 유용할 수 있습니다.
          */
 	ssize_t	b_read;
 	char	*tmp;
@@ -124,52 +118,46 @@ static char	*_fill_line_buffer(int fd, char *left_c, char *buffer)
 	while (b_read > 0)
 	{
 		b_read = read(fd, buffer, BUFFER_SIZE);
-		/* if b_read is -1, it means there was an error reading
-		 * the file descriptor, so we free left_c and return NULL.
+		/* 만약 b_read가 -1이라면, file descriptor를 읽는 동안 오류가
+		 * 발생했다는 의미이므로, left_c를 free하고 NULL을 반환합니다.
 		 */
 		if (b_read == -1)
 		{
 			free(left_c);
 			return (NULL);
 		}
-		/* if b_read is 0, this surely means we read the whole
-		 * file so there-s no need to stay in the loop
+		/* 만약 b_read가 0이라면, 파일을 모두 읽었음을 의미하므로
+		 * 루프에 머무를 필요가 없습니다.
+		 * 만약 아무것도 읽지 않았다면, 루프를 빠져나갈 수 있습니다.
 		 */
 		else if (b_read == 0)
-		/* if we didn't read anything, we can break out of the
-		 * loop
-		 */
 			break ;
-		/* don't forget to set the last character of the buffer
-		 * to 0 to NUL-terminate the string
+		/* 문자열을 NUL-terminate하기 위해 buffer의 마지막 문자를
+		 * 0으로 설정하는 것을 잊지 마십시오.
 		 */
 		buffer[b_read] = 0;
-		/* there we check if the left_c static char * is empty
-		 * because if it's empty, we can't use ft_strjoin on it
+		/* 여기서 left_c static char *가 비어 있는지 확인합니다.
+		 * 왜냐하면 비어 있다면 ft_strjoin을 사용할 수 없기 때문입니다.
 		 */
 		if (!left_c)
 			left_c = ft_strdup("");
 		tmp = left_c;
-		/* once we set left_c to be empty, if it was NUL
-		 * or just that something was left in it from the
-		 * last time we called get_next_line
-		 * we can join the buffer we just read to left_c
+		/* left_c를 비어 있도록 설정했거나, 지난번 get_next_line을 호출했을 때
+		 * 남은 무언가가 left_c에 있었다면, 방금 읽은 buffer를 left_c에 join할 수 있습니다.
 		 */
 		left_c = ft_strjoin(tmp, buffer);
 		free(tmp);
 		tmp = NULL;
-		/* we search in the buffer we just read if we read
-		 * a \n or not
-		 * if yes, we can break out of the loop
-		 * if not, we go in the loop once again to read more 
-		 * from the file.
+		/* 방금 읽은 buffer에서 \n을 읽었는지 여부를 검색합니다.
+		 * 만약 그렇다면, 루프를 빠져나갈 수 있습니다.
+		 * 그렇지 않다면, 파일에서 더 읽기 위해 루프를 다시 실행합니다.
 		 */
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
-	/* at the end of this function, we return the left_c string
-	 * it will contain everything we read and ensure there's is 
-	 * either a \0 or a \n within it.
+	/* 이 함수의 끝에서 left_c 문자열을 반환합니다.
+	 * 이 문자열에는 우리가 읽은 모든 내용이 포함되며,
+	 * 그 안에 \0 또는 \n이 있는지 확인합니다.
 	 */
 	return (left_c);
 }
@@ -314,12 +302,12 @@ void    fill_str(char *res, char *s1, char *s2);
 
 </details>
 
-### Bonus part
+### 보너스 부분
 
-As said before, I made the bonus for this project, so here under I'll put the code for the bonus part.&#x20;
+앞서 말씀드렸듯이, 저는 이 프로젝트의 보너스를 만들었으므로, 아래에 보너스 부분의 코드를 첨부합니다.
 
 {% hint style="danger" %}
-I encourage you to really try the bonus by yourself, they are easily achievable as said before.
+앞서 말했듯이, 보너스는 쉽게 달성할 수 있으므로, 스스로 보너스를 시도해 보시기를 강력히 권장합니다.
 {% endhint %}
 
 <details>
@@ -336,12 +324,10 @@ static char		*ft_strchr(char *s, int c);
 
 char	*get_next_line(int fd)
 {
-	/* There's only a minimal difference to make the bonus
-	 * work
-	 * It's basically transforming our static char * variable
-	 * to an array of char *
-	 * as you can see I set the number of elements of the array to 
-	 * the constant MAX_FD (see get_next_line.h to see what it is)
+	/* 보너스를 작동시키기 위한 최소한의 차이만 있습니다.
+	 * 기본적으로 static char * 변수를 char * 배열로 변환하는 것입니다.
+	 * 보시다시피 저는 배열의 요소 수를 상수 MAX_FD로 설정했습니다
+	 * (MAX_FD가 무엇인지 확인하려면 get_next_line.h를 참조하십시오).
 	 */
 	static char	*left_c[MAX_FD];
 	char		*line;
@@ -350,9 +336,9 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		/* as we changed our static char * to an array
-		 * we have to specify wich index we wanna work on
-		 * the easier thing to do is to set it to fd
+		/* static char *를 배열로 변경했기 때문에,
+		 * 우리가 작업하고자 하는 인덱스를 지정해야 합니다.
+		 * 가장 쉬운 방법은 이를 fd로 설정하는 것입니다.
 		 */
 		free(left_c[fd]);
 		free(buffer);
@@ -362,21 +348,21 @@ char	*get_next_line(int fd)
 	}
 	if (!buffer)
 		return (NULL);
-	/* again here, we want to store the left characters in 
-	 * the array at the index of the fd, so if we have another fd
-	 * we won't be overwriting what was left from the other fd
+	/* 여기에서도 마찬가지로, 남은 문자들을 fd의 인덱스에 있는 배열에 저장하기를 원합니다.
+	 * 따라서 다른 fd가 있는 경우, 해당 fd에서 남은 내용을 덮어쓰지 않게 됩니다.
 	 */
 	line = _fill_line_buffer(fd, left_c[fd], buffer);
 	free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	/* and here again, we have to switch from left_c to left_c[fd]
-	 * that's the last thing we have to change, all the other place
-	 * we use left_c (in all other functions), we use it as a string
-	 * therefore, because we are passing left_c[fd] as parameter
-	 * we basically are passing strings as parameter
-	 * so no problem there, and nothing to change.
+	/* 그리고 여기에서도 left_c를 left_c[fd]로 바꿔야 합니다.
+	 * 이것이 우리가 바꿔야 할 마지막 부분입니다.
+	 * 우리가 left_c를 사용하는 다른 모든 곳(다른 모든 함수에서)에서는,
+	 * 이를 문자열로 사용합니다.
+	 * 따라서 left_c[fd]를 매개변수로 전달하고 있기 때문에,
+	 * 기본적으로 문자열을 매개변수로 전달하는 것이므로 문제될 것이 없으며,
+	 * 변경할 필요도 없습니다.
 	 */
 	left_c[fd] = _set_line(line);
 	return (line);
@@ -538,7 +524,6 @@ void	fill_str(char *res, char *s1, char *s2)
 		res[i++] = s2[j++];
 	res[i] = '\0';
 }
-
 ```
 {% endcode %}
 
@@ -551,10 +536,9 @@ void	fill_str(char *res, char *s1, char *s2)
 {% code title="get_next_line_bonus.h" overflow="wrap" lineNumbers="true" %}
 ```c
 /*
- * The MAX_FD macro is defined based on the max number of file descriptors
- * based on my current OS and what I found online (MacOS Ventura 13.0)
- * (this information is particularly hard to find, or I just don't know 
- * what to search for on Google)
+ * MAX_FD 매크로는 현재 OS 및 온라인에서 찾은 정보(MacOS Ventura 13.0)를 기반으로
+ * 최대 file descriptor 수에 맞춰 정의되었습니다.
+ * (이 정보는 특히 찾기 어렵거나, Google에서 무엇을 검색해야 할지 제가 모를 수도 있습니다.)
  */
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H

@@ -1,28 +1,22 @@
 # rev\_wstr
 
-### Subject
+### 주제
 
-{% code overflow="wrap" %}
 ```
 Assignment name  : rev_wstr
 Expected files   : rev_wstr.c
 Allowed functions: write, malloc, free
 --------------------------------------------------------------------------------
 
-Write a program that takes a string as a parameter, and prints its words in
-reverse order.
+문자열을 매개변수로 받아 그 단어들을 역순으로 출력하는 프로그램을 작성하십시오.
 
-A "word" is a part of the string bounded by spaces and/or tabs, or the
-begin/end of the string.
+"단어(word)"란 공백(space) 및/또는 탭(tab), 혹은 문자열의 시작/끝으로 구분된 문자열의 일부를 의미합니다.
 
-If the number of parameters is different from 1, the program will display
-'\n'.
+매개변수의 개수가 1이 아닐 경우, 프로그램은 '\n'을 표시합니다.
 
-In the parameters that are going to be tested, there won't be any "additional"
-spaces (meaning that there won't be additionnal spaces at the beginning or at
-the end of the string, and words will always be separated by exactly one space).
+테스트될 매개변수에는 "추가적인" 공백은 없습니다(즉, 문자열의 시작이나 끝에 추가 공백이 없으며, 단어들은 항상 정확히 하나의 공백으로만 구분됨을 의미합니다).
 
-Examples:
+예시:
 
 $> ./rev_wstr "You hate people! But I love gatherings. Isn't it ironic?" | cat -e
 ironic? it Isn't gatherings. love I But people! hate You$
@@ -34,7 +28,7 @@ $> ./rev_wstr | cat -e
 $
 $>
 ```
-### Commented solution
+### 주석 처리된 해답
 
 <details>
 

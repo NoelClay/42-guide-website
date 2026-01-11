@@ -1,11 +1,11 @@
-# Exam Rank 02
+# 시험 Rank 02
 
-Here I will list every function that you can encounter during the Exam 02, their solutions, and as always, explanation of the code.
+여기서는 Exam 02를 치르는 동안 마주칠 수 있는 모든 함수와 해당 솔루션, 그리고 늘 그렇듯이 코드에 대한 설명을 나열합니다.
 
 {% hint style="warning" %}
-Some subject probably have changed since we took the exam.
+저희가 시험을 치른 이후로 일부 주제는 변경되었을 수 있습니다.
 {% endhint %}
 
-### Exam
+### 시험
 
-The exam is separated in 4 stages, at each stage you have one of many functions to code.
+시험은 4단계로 구분되며, 각 단계마다 여러 함수 중 하나를 코딩하게 됩니다.
