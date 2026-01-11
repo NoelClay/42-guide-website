@@ -25,3 +25,14 @@ Laura & Simon, 스위스 (42 Lausanne) 드림
 모든 원문 저작권은 원저작자에게 있으며, 본 번역본은 개인적인 학습 및 42 커뮤니티의 지식 공유를 목적으로 합니다.
 
 원저작자의 요청이 있을 경우 본 페이지는 즉시 삭제되거나 비공개로 전환될 수 있습니다.
+
+## To authors
+[repo link](https://github.com/NoelClay/42-guide-website)
+
+First, I would like to sincerely apologize for proceeding with the GitBook migration and Korean translation before seeking your formal permission. I was so deeply focused on my studies that I prioritized the technical migration process, which was entirely my oversight. I take full responsibility for this.
+
+I have no intention of engaging in any conflict regarding this matter. If you have any concerns or wish for the content to be removed, I will take it down immediately without hesitation. Even if no issues are raised, I may choose to close it at any time out of respect for your original work.
+
+When I was struggling to find my way in these studies, your GitBook was a truly inspiring resource—a "teacher of hope" for me. I wanted to share that same experience with others in my community.
+
+Once again, I am truly sorry for the lack of prior communication and for any inconvenience I may have caused.
