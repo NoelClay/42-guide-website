@@ -1,6 +1,5 @@
 ---
-description: ">-"
-  파일 디스크립터(File Descriptor)가 무엇인지 설명합니다. 이는 대부분의 프로젝트에서 사용되기 때문입니다.
+description: "파일 디스크립터(File Descriptor)가 무엇인지 설명합니다. 이는 대부분의 프로젝트에서 사용되기 때문입니다."
 ---
 
 # 🗃️ 파일 디스크립터 (File Descriptor, FD)
