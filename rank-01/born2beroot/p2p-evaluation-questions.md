@@ -1,7 +1,7 @@
 # 📠 P2P 평가 - 질문
 
 {% embed url="https://github.com/NoelClay/42-born2beroot_guide/blob/claude/add-korean-translation-7JHtm/EVALUATION_KR.md" %}
-아래의 질문들이 매우 간결하고 충분합니다. 하지만 사람마다 충분한지 아닌지는 전부 다릅니다. 만약 충분하지 않다면 추가로 제가 만든 가이드를 읽어보시는 것도 추천드립니다. 만약 충분하지 않다면 계속해서 다른 자료와 질문을 통해 극복하십시오. 화이팅 입니다.
+연습 자료
 {% endembed %}
 
 {% hint style="danger" %}
