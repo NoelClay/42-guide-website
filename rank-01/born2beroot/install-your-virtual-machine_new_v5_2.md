@@ -40,26 +40,28 @@ NoelClay의 Born2BeRoot 한국어 번역 가이드
 
 ## Part 1 - 하드웨어 리소스 할당의 근본적 설계
 
-리소스 할당은 **워크로드 계산**과 **하이퍼바이저의 스케줄링 메커니즘**에 근거해야 합니다.
+리소스 할당은 **워크로드 계산**과 **하이퍼바이저의 스케줄링 메커니즘**에 근거해야 합니다. (자세한 산출 근거와 실험적 고찰은 [심화 기술 보고서](./how_to_set_hardware_detailed_report.md)를 참조하십시오.)
 
-### 1. 메모리(RAM) 계산 근거 (Total: 4.4GiB)
+### 1. 메모리(RAM) 계산 근거 (Total: ~4.5GiB)
 서비스별 실점유량과 가변 영역을 합산한 후, 장애 대응을 위한 **안전 계수(Safety Factor) 2배**를 적용한 결과입니다.
 
 | 서비스 | 근거 데이터 (최소/권장 사양) | 합산 (MiB) |
 | :--- | :--- | :--- |
 | **OS (Kernel/Base)** | [Debian 12 최소 사양 (No Desktop)](https://www.debian.org/releases/stable/amd64/ch03s04.en.html) | 1,024 |
-| **MySQL (InnoDB)** | [Buffer Pool(128)](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size) + [Memory Use(max_connections)](https://dev.mysql.com/doc/refman/8.0/en/memory-use.html) | 860 |
+| **MySQL (InnoDB)** | [Buffer Pool(128)](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size) + [Memory Use(max_connections)](https://dev.mysql.com/doc/refman/8.0/en/memory-use.html) | 430 |
 | **PHP-FPM** | [memory_limit](https://www.php.net/manual/en/ini.core.php) * [pm.max_children(5)](https://github.com/php/php-src/blob/master/sapi/fpm/www.conf.in) | 640 |
 | **Netdata** | [Agent Resource Utilization](https://learn.netdata.cloud/docs/netdata-agent/resource-utilization/ram) | 200 |
-| **결합 합산** | (1024 + 860 + 640 + 200) * 2 | **~4,448 (4.4GiB)** |
+| **결합 합산** | (1024 + 430 + 640 + 200) * 2 | **~4,540 (4.5GiB)** |
+
+*결론:* 넉넉하게 **4GB ~ 5GB RAM**을 할당하는 것이 가장 안전합니다.
 
 ### 2. 스토리지(HDD) 계산 및 설정 (Total: 20GiB)
-*   **계산:** [OS(4GB)](https://www.debian.org/releases/stable/amd64/ch03s04.en.html) + [PHP binaries(365MB)](https://github.com/docker-library/php/issues/297) + [MySQL DB 데이터(Redo log 포함)](https://dev.mysql.com/blog-archive/dynamic-innodb-redo-log-in-mysql-80/) 등 실사용량 ~9.5GB 확보 후, 안전 계수 2배 적용 시 약 **19~20GiB**가 도출됩니다.
+*   **계산:** [OS(4GB)](https://www.debian.org/releases/stable/amd64/ch03s04.en.html) + [PHP binaries(365MB)](https://github.com/docker-library/php/issues/297) + MySQL 패키지 및 [Redo log(100MB)](https://dev.mysql.com/doc/refman/8.0/en/innodb-redo-log.html) + 예상 유저 데이터(1,800MB) + [Netdata(3GB)](https://learn.netdata.cloud/docs/netdata-agent/resource-utilization/disk-&-retention) 등 실사용량 ~9.7GB 확보 후, 안전 계수 2배 적용 시 약 **19.54GiB**가 도출됩니다.
 *   **Pre-allocate Full Size 체크 이유:** 동적 할당은 파일 시스템 단편화와 쓰기 시 호스트 OS에 공간을 요청하는 오버헤드를 유발합니다. **Pre-allocate(고정 크기)**는 물리 공간을 선점하여 I/O 성능을 최적화합니다.
 
-### 3. vCPU 할당 전략 (2 vCPU)
+### 3. vCPU 할당 전략 (3 vCPU)
 *   **CPU Co-scheduling 병목:** VM은 물리 CPU(pCPU)가 실제로 비어 있을 때만 스케줄링될 수 있습니다 [[6]](https://www.virtualbox.org/manual/ch03.html#settings-processor). vCPU를 너무 많이 할당하면 하이퍼바이저가 여러 pCPU가 동시에 비기를 기다리는 'Wait Time'이 급증하여 시스템이 오히려 멍청해집니다 [[7]](https://lonesysadmin.net/2008/04/22/why-my-two-vcpu-vm-is-slow/).
-*   **PHP Worker 최적화:** [PHP Is Single-Threaded](https://instawp.com/php-workers-vs-cpu-cores/)이므로, 설정한 5개의 PHP Worker가 원활히 동작하려면 물리 환경 부하를 고려한 **2 vCPU** 할당이 가장 합리적인 타협점입니다 [[8]](https://www.linkedin.com/pulse/more-less-vcpus-can-make-your-vm-slower-d-travis-brandel/).
+*   **PHP Worker 최적화:** [PHP Is Single-Threaded](https://instawp.com/php-workers-vs-cpu-cores/)이므로, 워커 수와 코어 수를 맞추는 것이 이상적입니다. 5개의 PHP 워커 부하와 OS 여유분(총 6개 상정)을 고려하여 절반인 **3 vCPU**를 할당하는 것이 동기화 오버헤드를 줄이는 최적의 타협점입니다 [[8]](https://www.linkedin.com/pulse/more-less-vcpus-can-make-your-vm-slower-d-travis-brandel/).
 
 > **[주석 6]** [VirtualBox Manual Ch. 3](https://www.virtualbox.org/manual/ch03.html#settings-processor)
 > **[주석 7]** [Why my two vCPU VM is slow](https://lonesysadmin.net/2008/04/22/why-my-two-vcpu-vm-is-slow/)
