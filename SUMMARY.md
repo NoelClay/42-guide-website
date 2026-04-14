@@ -66,7 +66,7 @@
 
 * [Born2beRoot](rank-01/born2beroot/README.md)
   * [📠 Virtual Machine이란 무엇인가요?](rank-01/born2beroot/whats-a-virtual-machine.md)
-  * [📠 Virtual Machine 설치하기](rank-01/born2beroot/install-your-virtual-machine.md)
+  * [📠 Virtual Machine 설치하기_v5.2](rank-01/born2beroot/install-your-virtual-machine_new_v5_2.md)
   * [📠 P2P 평가 - 질문](rank-01/born2beroot/p2p-evaluation-questions.md)
 * [ft\_printf](rank-01/ft_printf/README.md)
   * [▪️ Variadic functions](rank-01/ft_printf/variadic-functions.md)
