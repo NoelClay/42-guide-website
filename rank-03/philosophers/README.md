@@ -1,6 +1,5 @@
 ---
-description: >-
-  이 프로젝트의 목적은 여러분에게 threading과 processes를 소개하고, Shared Memory space에서 작업하는 방법을 알려주는 것입니다. 여러분은 threads, Mutex, Semaphores 그리고 Shared Memory를 경험하게 될 것입니다
+description: "이 프로젝트의 목적은 여러분에게 threading과 processes를 소개하고, Shared Memory space에서 작업하는 방법을 알려주는 것입니다. 여러분은 threads, Mutex, Semaphores 그리고 Shared Memory를 경험하게 될 것입니다"
 ---
 
 # 철학자들 (Philosophers)

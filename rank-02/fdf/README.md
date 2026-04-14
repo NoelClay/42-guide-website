@@ -1,6 +1,5 @@
 ---
-description: >-
-  FdF는 높이 값의 격자를 담은 파일을 MiniLibX라는 간단한 그래픽 라이브러리를 사용하여 3D Wireframe으로 변환하는 프로젝트입니다.
+description: "FdF는 높이 값의 격자를 담은 파일을 MiniLibX라는 간단한 그래픽 라이브러리를 사용하여 3D Wireframe으로 변환하는 프로젝트입니다."
 ---
 
 # FdF

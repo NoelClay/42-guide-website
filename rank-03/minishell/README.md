@@ -1,6 +1,5 @@
 ---
-description: >-
-  이 프로젝트의 목표는 최소한의 Shell을 구현하는 것입니다. File descriptor와 Process에 대해 많은 것을 배우게 될 것입니다.
+description: "이 프로젝트의 목표는 최소한의 Shell을 구현하는 것입니다. File descriptor와 Process에 대해 많은 것을 배우게 될 것입니다."
 ---
 
 # Minishell

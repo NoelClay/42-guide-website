@@ -1,5 +1,5 @@
 ---
-description: 이 페이지에서는 MiniLibX 라이브러리를 위한 몇 가지 헬퍼 함수를 소개합니다.
+description: "이 페이지에서는 MiniLibX 라이브러리를 위한 몇 가지 헬퍼 함수를 소개합니다."
 ---
 
 # MiniLibX 헬퍼 함수

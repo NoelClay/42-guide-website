@@ -1,5 +1,5 @@
 ---
-description: C 구조체란 무엇인가요
+description: "C 구조체란 무엇인가요"
 ---
 
 # 🧱 C Structure

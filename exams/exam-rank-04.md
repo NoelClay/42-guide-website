@@ -1,5 +1,5 @@
 ---
-description: 설명: Minihell 2부 (오 이런, 또?!)
+description: "설명: Minihell 2부 (오 이런, 또?!)"
 ---
 
 # 시험 등급 04

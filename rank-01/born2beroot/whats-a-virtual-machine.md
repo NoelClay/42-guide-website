@@ -1,5 +1,5 @@
 ---
-description: 지금 무엇을 하고 있는지 이해하기 위한 몇 가지 정의
+description: "지금 무엇을 하고 있는지 이해하기 위한 몇 가지 정의"
 ---
 
 # 📠 Virtual Machine이란 무엇인가요?
